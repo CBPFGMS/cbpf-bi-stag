@@ -1174,6 +1174,52 @@ a:hover.cd-ocha-dropdown__see-all {
     text-decoration: underline;
 }
 
+.cd-global-header__user-menu {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.cd-global-header__language-switcher, .cd-global-header__user-menu {
+    float: right;
+}
+
+.cd-global-header__user-menu .menu, .cd-user-menu, .region-header-top .menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.cd-global-header__user-menu .menu li, .cd-user-menu li, .region-header-top .menu li {
+    float: left;
+    position: relative;
+}
+
+.cd-global-header__user-menu .menu>li a, .cd-user-menu__item, .region-header-top .menu>li a {
+    background: transparent;
+    color: #fff;
+    display: block;
+    height: 35px;
+    line-height: 35px;
+    overflow: hidden;
+    padding: 0 15px;
+    position: relative;
+    text-decoration: none;    
+    transition: background .3s ease;
+    white-space: nowrap;
+}
+
+	.cd-global-header__user-menu .menu>li a:hover{text-decoration: underline;}
+
+.cd-global-header__user-menu .menu>li a:after, .cd-user-menu__item:after, .region-header-top .menu>li a:after {
+    color: #9ec5e2;
+    content: "|";
+    position: absolute;
+    right: -1px;
+    top: 0;
+}
+	
+.cd-global-header__user-menu .menu>li:last-child a:after{display: none;}
+
 .cd-footer {
     grid-row: 3/3;
     background: #026cb6;
