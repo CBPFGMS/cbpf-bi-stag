@@ -1,2 +1,2 @@
 # pfbi-unocha-org
-Pooled Funds Business Intelligence Platform Homepage
+Pooled Funds Business Intelligence (BI) Platform Homepage
