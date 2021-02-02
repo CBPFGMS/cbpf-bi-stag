@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>PFBI Bookmark Page | CBPF</title>
+    <title>CBPF Data Hub Bookmark Page | CBPF</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
@@ -25,17 +25,7 @@
     <script type="text/javascript" src="https://unpkg.com/d3-sankey@0"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-1884029-23"></script>
-    <script type="text/javascript">
-        if (document.location.hostname.search("cbpf.data.unocha.org") !== -1) {
-            window.dataLayer = window.dataLayer || [];
-
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-            gtag('js', new Date());
-            gtag('config', 'UA-1884029-23');
-        }
-    </script>
+    
     <style>
         .header {
             padding: 5px 15px;
@@ -68,7 +58,7 @@
 
 <body>
     <div class="header" id="myHeader">
-        <c><a id="notification" href="https://pfbi.unocha.org">This is PFBI Bookmark page. <b>Click here</b> to visit PFBI main page for more details</a></c>
+        <c><a id="notification" href="https://cbpf.data.unocha.org">This is CBPF Data Hub Bookmark page. <b>Click here</b> to visit CBPF Data Hub main page for more details</a></c>
     </div>
     <section class="marg-tb-30">
 	<div class="container">
@@ -508,6 +498,17 @@
             </symbol>
         </svg>
     </div>
+    <script type="text/javascript">
+        if (document.location.hostname.search("cbpf.data.unocha.org") !== -1) {
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', 'UA-1884029-23');
+        }
+    </script>
 </body>
 
 </html>
