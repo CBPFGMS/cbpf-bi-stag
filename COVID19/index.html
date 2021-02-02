@@ -60,7 +60,14 @@
         </div>
     </div>
 	<script src="../assets/js/jquery.min.js"></script>	
-	
+	<script type="text/javascript">
+		if (document.location.hostname.search("cbpf.data.unocha.org") !== -1) {
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'UA-1884029-23');
+		}
+		</script>
 	<script src="../assets/bootstrap/js/bootstrap.min.js"></script>
 	<script src="../assets/js/smoothproducts.min.js"></script>
     <script src="../assets/js/respond.js"></script>
