@@ -357,6 +357,11 @@ span[class*="tag-"] {
     border-right: 1px solid #cecece;
 }
 
+.info-pdf{
+	padding-left: 10px;
+	display: inline-block;
+}
+
 #anchor-1,
 #anchor-5,
 #anchor-2,
