@@ -438,43 +438,9 @@
             <div class="row">
                 <div class="col-12 justify-content-center align-content-center">
                     <h2 class="text-center" data-toc-skip style="margin: 25px 0; font-weight: 600;">CBPF Donors</h2>
-                    <ul class="donor-flags-list">
-                        <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/Australia.png" width="30px">Australia</li>
-                            <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/Azerbaijan.png" width="30px">Azerbaijan</li>
-                            <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/Belgium.png" width="30px">Belgium</li>
-                            <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/Canada.png" width="30px">Canada</li>
-                            <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/Cyprus.png" width="30px">Cyprus</li>
-                            <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/Czech Republic.png" width="30px">Czech Republic</li>
-                            <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/Denmark.png" width="30px">Denmark</li>
-                            <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/Estonia.png" width="30px">Estonia</li>
-                            <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/France.png" width="30px">France</li>
-                            <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/Germany.png" width="30px">Germany</li>
-                            <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/Iceland.png" width="30px">Iceland</li>
-                            <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/Ireland.png" width="30px">Ireland</li>
-                            <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/Italy.png" width="30px">Italy</li>
-                            <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/Japan.png" width="30px">Japan</li>
-                            <li><img src="/assets/img/Jersey.png" width="30px">Jersey</li>
-                            <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/Korea%2C%20Republic%20of.png" width="30px">Korea, Republic of</li>
-                            <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/Kuwait.png" width="30px">Kuwait</li>
-                            <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/Lithuania.png" width="30px">Lithuania</li>
-                            <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/Luxembourg.png" width="30px">Luxembourg</li>
-                            <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/Malaysia.png" width="30px">Malaysia</li>
-                            <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/Malta.png" width="30px">Malta</li>
-                            <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/Monaco.png" width="30px">Monaco</li>
-                            <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/Netherlands.png" width="30px">Netherlands</li>
-                            <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/New Zealand.png" width="30px">New Zealand</li>
-                            <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/Norway.png" width="30px">Norway</li>
-                            <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/Philippines.png" width="30px">Philippines</li>
-                            <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/Poland.png" width="30px">Poland</li>
-                            <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/Qatar.png" width="30px">Qatar</li>
-                            <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/Spain.png" width="30px">Spain</li>
-                            <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/Sweden.png" width="30px">Sweden</li>
-                            <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/Switzerland.png" width="30px">Switzerland</li>
-                            <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/Ukraine.png" width="30px">Ukraine</li>
-                            <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/United%20Kingdom.png" width="30px">United Kingdom</li>
-                            <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/United%20States.png" width="30px">United States</li>
-                            <div style="clear: both"></div>
-                    </ul>
+                    <h4 class="text-center" id="flags-total"></h4>
+                    <div class="donor-flags-list"></div>
+                    <div style="clear: both"></div>
                 </div>
             </div>
         </div>
@@ -900,6 +866,7 @@
 	    $.getScript("https://cbpfgms.github.io/pbinad/src/d3chartpbinad-stg.js", function() {});
         }
     </script>
+    <script type="text/javascript" src="assets/js/flags.js"></script>
 </body>
 
 </html>

@@ -61,27 +61,6 @@ td:nth-of-type(6) {
     font-weight: bold;
 }
 
-.donor-flags-list img {
-    display: block;
-    margin: 0 auto 5px auto;
-}
-
-.donor-flags-list li {
-    display: inline-block;
-    text-align: center;
-    margin: 0 5px 10px 0;
-    width: 70px;
-    min-height: 70px;
-    vertical-align: bottom;
-}
-
-.donor-flags-list {
-    list-style: none;
-    margin: 10px 0;
-    padding: 0;
-    font-size: 12px;
-}
-
 #container {
     max-width: 900px;
     margin-left: auto;
@@ -2027,3 +2006,62 @@ td:nth-of-type(6) {
     cursor: pointer;
 }
 .opacity-80p{opacity:0.8;}
+
+
+/*Flags section*/
+#flags-total {
+    margin-bottom: 16px;
+    font-size: 18px;
+}
+
+.donor-flags-list img {
+/*    display: block;
+    margin: 0 auto 5px auto;*/
+}
+
+.donor-flags-list li {
+/*    display: inline-block;
+    text-align: center;
+    margin: 0 5px 10px 0;
+    width: 70px;
+    min-height: 70px;
+    vertical-align: bottom;*/
+}
+
+.donor-flags-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px 0;
+    padding: 0;
+    font-size: 12px;
+}
+
+.flagDiv {
+    display: flex;
+    flex-direction: column;
+    width: 120px;
+    height: 120px;
+}
+
+.flagDivInner {
+    min-height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flagDivInner img {
+    height: 60px;
+    max-width: 100px;
+}
+
+.flagName {
+    text-align: center;
+    line-height: 1em;
+}
+
+.flagValue {
+    text-align: center;
+    font-size: 10px;
+    font-weight: 600;
+}
