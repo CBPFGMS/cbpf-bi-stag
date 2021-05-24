@@ -315,7 +315,7 @@
 			return acc;
 		}, []);
 		allDonors.sort(function(a, b) {
-			return b.amount - a.amount
+			return a.name.localeCompare(b.name);
 		});
 		totalContainer.html("Total contributions since inception: $" + formatMoney0Decimals(totalValue));
 		const div = flagsContainer.selectAll(null)
@@ -328,7 +328,9 @@
 			.attr("class", "flagDivInner")
 			.append("img")
 			.attr("src", function(d) {
-				if(!flagsData[d.isoCode.toLowerCase()])console.log(d.isoCode)
+				if (!flagsData[d.isoCode.toLowerCase()]) {
+					console.log("Flag for " + d.isoCode + " is missing")
+				};
 				return flagsData[d.isoCode.toLowerCase()];
 			});
 		div.append("div")
@@ -337,12 +339,14 @@
 			.html(function(d) {
 				return d.name;
 			});
-		div.append("div")
-			.attr("class", "flagValue")
-			.append("span")
-			.html(function(d) {
-				return "($" + formatMoney0Decimals(d.amount) + ")";
-			});
+
+		//No value for the time being
+		// div.append("div")
+		// 	.attr("class", "flagValue")
+		// 	.append("span")
+		// 	.html(function(d) {
+		// 		return "($" + formatMoney0Decimals(d.amount) + ")";
+		// 	});
 	};
 
 	//li example: <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/Australia.png" width="30px">Australia</li>
