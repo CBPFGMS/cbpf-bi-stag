@@ -349,7 +349,7 @@
 			.append("img")
 			.attr("src", function(d) {
 				if (!flagsData[d.isoCode.toLowerCase()]) {
-					console.warn("Flag for " + d.name + " (ISO code " + d.isoCode + ") is missing")
+					console.warn("Flag for " + d.name + " (ISO code '" + d.isoCode + "') is missing")
 				};
 				return flagsData[d.isoCode.toLowerCase()];
 			});
