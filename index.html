@@ -262,7 +262,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="d3chartcontainercbsank" data-title="CBPF BY YEAR" data-year="2021" data-fund="all" data-responsive="true" data-lazyload="true"></div><script type="text/javascript" src="https://cbpfgms.github.io/cbsank/src/d3chartcbsank-stg.js"></script>
+                                <div id="d3chartcontainercbsank" data-title="CBPF BY YEAR" data-year="2021" data-fund="all" data-responsive="true" data-lazyload="true"></div>
 			                </div>
                         </section>
 			<section class="clean-block slider">
@@ -845,6 +845,7 @@
             }
             gtag('js', new Date());
             gtag('config', 'UA-1884029-23');
+            $.getScript("https://cbpfgms.github.io/cbsank/src/d3chartcbsank.js", function() {});
             $.getScript("https://cbpfgms.github.io/pbiclc/src/d3chartpbiclc.js", function() {});
             $.getScript("https://cbpfgms.github.io/pbicli/src/d3chartpbicli.js", function() {});
             $.getScript("https://cbpfgms.github.io/pbialp/src/d3chartpbialp.js", function() {});
@@ -855,6 +856,7 @@
             $.getScript("https://cbpfgms.github.io/pbigam/src/d3chartpbigam.js", function() {});
 	    $.getScript("https://cbpfgms.github.io/pbinad/src/d3chartpbinad.js", function() {});
         } else {
+            $.getScript("https://cbpfgms.github.io/cbsank/src/d3chartcbsank-stg.js", function() {});
             $.getScript("https://cbpfgms.github.io/pbiclc/src/d3chartpbiclc-stg.js", function() {});
             $.getScript("https://cbpfgms.github.io/pbicli/src/d3chartpbicli-stg.js", function() {});
             $.getScript("https://cbpfgms.github.io/pbialp/src/d3chartpbialp-stg.js", function() {});
@@ -863,7 +865,7 @@
             $.getScript("https://cbpfgms.github.io/pbiobe/src/d3chartpbiobe-stg.js", function() {});
             $.getScript("https://cbpfgms.github.io/pbiuac/src/d3chartpbiuac-stg.js", function() {});
             $.getScript("https://cbpfgms.github.io/pbigam/src/d3chartpbigam-stg.js", function() {});
-	    $.getScript("https://cbpfgms.github.io/pbinad/src/d3chartpbinad-stg.js", function() {});
+	        $.getScript("https://cbpfgms.github.io/pbinad/src/d3chartpbinad-stg.js", function() {});
         }
     </script>
     <script type="text/javascript" src="assets/js/flags.js"></script>
