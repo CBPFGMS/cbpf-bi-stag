@@ -433,6 +433,4 @@
 		// 	});
 	};
 
-	//li example: <li><img src="https://www.unocha.org/sites/all/modules/custom/ocha_oct/flags/Australia.png" width="30px">Australia</li>
-
 }());
