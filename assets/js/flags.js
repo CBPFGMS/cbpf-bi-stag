@@ -276,6 +276,7 @@
 		formatMoney = d3.format(",.0s"),
 		formatMoney0Decimals = d3.format(",.0f"),
 		tooltipWidth = 300,
+		blankImg = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
 		dataUrl = "https://cbpfapi.unocha.org/vo2/odata/ContributionTotal?ShowAllPooledFunds=1&$format=csv";
 
 	const tooltip = flagsContainer.append("div")
@@ -350,6 +351,7 @@
 			.attr("src", function(d) {
 				if (!flagsData[d.isoCode.toLowerCase()]) {
 					console.warn("Flag for " + d.name + " (ISO code \"" + d.isoCode + "\") is missing")
+					return blankImg;
 				};
 				return flagsData[d.isoCode.toLowerCase()];
 			});
