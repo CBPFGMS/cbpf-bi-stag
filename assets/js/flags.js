@@ -389,7 +389,7 @@
 
 			titleNameDiv.append("strong")
 				.style("font-size", "16px")
-				.html(datum.name);
+				.html(datum.isoCode === "MK" ? "North Macedonia" : datum.name);
 
 			const tooltipContainer = innerTooltipDiv.append("div")
 				.style("margin", "0px")
