@@ -1,0 +1,453 @@
+/*styles for the bubble map at the GMS page. Class and id preffix: gmsbmc*/
+
+#gmsbmctooltipDiv {    
+	position: absolute;
+	text-align: left;
+	color: #333;
+	font-family: 'Roboto', sans-serif;
+	white-space: normal;	
+	line-height: 120%;
+	font-size: 14px;
+	padding: 8px;
+	background: #f8f8f8; 
+	border: 1px solid #418fde; 
+	border-radius: 4px;
+	pointer-events: none;
+	cursor: none;
+	z-index: 1500;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+svg.leaflet-zoom-animated {
+	pointer-events: all;
+}
+
+.gmsbmctopDiv {
+	width: 100%;
+	max-width: 100%;
+	height: 3vh;
+	display: flex;
+	margin-bottom: 0.5vh;
+	z-index: 1100;
+}
+
+.gmsbmcdropdownDiv {
+	width: 90%;
+	display: flex;
+}
+
+.gmsbmcfilterDiv {
+	width: 10%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.gmsbmcbuttonsDiv {
+	width: 100%;
+	height: 3.5vh;
+	display: flex;
+	flex-direction: row;
+}
+
+.gmsbmcradioTextDiv {
+	margin-right: 0.5em;
+	font-family: "Roboto", sans-serif;
+	font-size: 0.8em;
+	font-weight: 300;
+	display: flex;
+	align-items: center;
+}
+
+.gmsbmcradioDiv {
+	font-family: "Roboto", sans-serif;
+	font-size: 1em;
+	font-weight: 400;
+	display: flex;
+	align-items: center;
+}
+
+.gmsbmcoption {
+  background: #fff;
+  height: auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 0 0.2em;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0.2em 0.8em;
+  border: 1px solid lightgrey;
+  transition: all 0.3s ease;
+}
+
+.gmsbmcdot{
+  height: 1em;
+  width: 1em;
+  background: #d9d9d9;
+  border-radius: 50%;
+  position: relative;
+  margin-right: 0.5em;
+}
+.gmsbmcdot::before{
+  position: absolute;
+  content: "";
+  top: 0.2em;
+  left: 0.2em;
+  width: 0.6em;
+  height: 0.6em;
+  background: #0069d9;
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(1.5);
+  transition: all 0.3s ease;
+}
+.gmsbmcradioDiv input{
+  display: none;
+}
+#gmsbmcoption-1:checked:checked ~ .gmsbmcoption-1,
+#gmsbmcoption-2:checked:checked ~ .gmsbmcoption-2{
+  border-color: #0069d9;
+  background: #0069d9;
+}
+#gmsbmcoption-1:checked:checked ~ .gmsbmcoption-1 .gmsbmcdot,
+#gmsbmcoption-2:checked:checked ~ .gmsbmcoption-2 .gmsbmcdot{
+  background: #fff;
+}
+#gmsbmcoption-1:checked:checked ~ .gmsbmcoption-1 .gmsbmcdot::before,
+#gmsbmcoption-2:checked:checked ~ .gmsbmcoption-2 .gmsbmcdot::before{
+  opacity: 1;
+  transform: scale(1);
+}
+.gmsbmcoption span{
+  font-size: 0.9em;
+  color: #222;
+}
+#gmsbmcoption-1:checked:checked ~ .gmsbmcoption-1 span,
+#gmsbmcoption-2:checked:checked ~ .gmsbmcoption-2 span{
+  color: #eee;
+}
+
+#gmsbmcmapContainerDiv {
+	width: 100%;
+	aspect-ratio: 10/6;
+}
+
+.gmsbmcLegendDiv {
+	position: absolute;
+	bottom: 3%;
+	left: 2%;
+	z-index: 1050;
+}
+
+.gmsbmcLegendButtonsText {
+	font-family: "Roboto", sans-serif;
+	font-size: 11px;
+	font-weight: 700;
+}
+
+.gmsbmcLegendTitle {
+	font-family: "Roboto", sans-serif;
+	font-size: 10px;
+	font-weight: 700;
+}
+
+.gmsbmclegendColorTitle {
+	font-family: "Roboto", sans-serif;
+	font-size: 9px;
+	font-weight: 300;
+}
+
+.gmsbmcLegendCirclesText, .gmsbmcLegendColorTexts, .gmsbmcLegendSubLegendText {
+	font-family: "Arial", sans-serif;
+	font-size: 9px;
+	fill: darkslategray;	
+}
+
+.gmsbmcLegendColorTexts {
+	dominant-baseline: hanging;
+}
+
+.gmsbmcyearContainer, .gmsbmcfundContainer, .gmsbmcsectorContainer, .gmsbmcstatusContainer {
+	height: 100%;
+	position: relative;
+	margin-right: 0.8rem;
+	flex: 0 25%;
+	max-width: 24%;
+}
+
+.gmsbmcyearTitleDiv, .gmsbmcfundTitleDiv, .gmsbmcsectorTitleDiv, .gmsbmcstatusTitleDiv {
+	display: flex;
+	align-items: center;
+	height: 100%;
+	background: #f2f4f4; 
+	border: 1px solid #3189c9; 
+	border-radius: 4px;
+	padding: 2px 12px 2px 16px;
+	cursor: pointer;
+	box-sizing: border-box;
+}
+
+.gmsbmcyearTitle, .gmsbmcfundTitle, .gmsbmcsectorTitle, .gmsbmcstatusTitle {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	font-size: 0.9em;
+}
+
+.gmsbmcyearArrow, .gmsbmcfundArrow, .gmsbmcsectorArrow, .gmsbmcstatusArrow {
+	margin-left: 0.4rem;
+	font-weight: bold;
+	transition: transform 0.25s ease-in-out;
+}
+
+.gmsbmcyearDropdown, .gmsbmcfundDropdown, .gmsbmcsectorDropdown, .gmsbmcstatusDropdown {
+	position: absolute;
+	margin-top: 4px;
+	padding: 2px 16px 2px 16px;
+	background: #f2f4f4; 
+	border: 1px solid #3189c9; 
+	border-radius: 4px;
+	max-height: 400px;
+	overflow-y: scroll;
+	white-space: nowrap;
+	font-family: "Roboto", sans-serif;
+	font-size: 13px;
+	transform-origin: 50% 0;
+	transform: scale(1, 0);
+	transition: transform 0.25s ease-in-out;
+	z-index: 1100;
+}
+
+.gmsbmcyearContainer.active .gmsbmcyearDropdown, .gmsbmcfundContainer.active .gmsbmcfundDropdown, .gmsbmcsectorContainer.active .gmsbmcsectorDropdown, .gmsbmcstatusContainer.active .gmsbmcstatusDropdown {
+	transform: scale(1, 1);
+}
+
+.gmsbmcsectorDropdown{overflow-y: hidden !important;}
+
+.gmsbmcyearContainer.active .gmsbmcyearArrow, .gmsbmcfundContainer.active .gmsbmcfundArrow, .gmsbmcsectorContainer.active .gmsbmcsectorArrow, .gmsbmcstatusContainer.active .gmsbmcstatusArrow {
+	transform: rotate(180deg);
+}
+
+.gmsbmcyearCheckboxDiv label, .gmsbmcfundCheckboxDiv label, .gmsbmcsectorCheckboxDiv label, .gmsbmcstatusCheckboxDiv label {
+	margin-bottom: 0px;
+	display: flex;
+	align-items: center;
+}
+
+.gmsbmcyearCheckboxDiv input, .gmsbmcfundCheckboxDiv input, .gmsbmcsectorCheckboxDiv input, .gmsbmcstatusCheckboxDiv input {
+	/*vertical-align: text-top;*/
+}
+
+.gmsbmccheckboxText {
+	font-family: "Arial", sans-serif;
+	font-size: 12px;
+	color: #333;
+	margin-left: 4px;
+}
+
+.gmsbmccheckboxTextAllRegions, .gmsbmccheckboxTextAllFunds, .gmsbmccheckboxTextAllEmergencies, .gmsbmccheckboxTextAllAllocationTypes {
+	font-family: "Arial", sans-serif;
+	font-size: 12px;
+	font-weight: 700;
+	margin-left: 4px;
+	color: var(--unblue);
+}
+
+.gmsbmcfilterContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color:  #555;
+	cursor: pointer;
+}
+
+.gmsbmcNoDataText {
+	font-family: "Roboto", sans-serif;
+	font-size: 22px;
+	font-weight: 700;
+	fill: darkslategray;		
+}
+
+.gmsbmcNoDataTextBack {
+	font-family: "Roboto", sans-serif;
+	font-size: 22px;
+	font-weight: 700;
+	fill: white;
+	stroke-width: 2px;
+	stroke: white;		
+}
+
+.gmsbmcinfoDiv {
+	width: 100%;
+	margin-top: 0.8em;
+	border-radius: 4px;
+	border: 1px solid #0069d9;
+	color: #fff; 
+}
+
+.gmsbmcinfoDivTitle {
+	background-color: #0069d9;
+	color: white;
+	font-family: "Roboto", sans-serif;
+	font-size: 1em;
+	padding: 0.2em 1em;
+	font-weight: 500;
+}
+
+.gmsbmcinfoDivBody {
+	background-color: #fff;
+	color: #222;
+	font-family: "Roboto", sans-serif;
+	font-size: 0.8em;
+	padding: 0.5em 1em;
+	border-radius: 4px;
+}
+
+.gmsbmcinfoDivProjectCode {
+	font-weight: bold;
+	font-size: 1.2em;
+	font-family: "Arial", sans-serif;
+	margin-top: 0.5em;
+}
+
+.gmsbmcinfoDivProjectTitle {
+	color: #2f4f4f;
+	font-style: italic;
+	font-size: 1em;
+	margin-top: 0.5em;
+	margin-bottom: 1.2em;
+}
+
+.gmsbmcinfoDivProjectTotal, .gmsbmcinfoDivProjectStatus {
+	color: #2f4f4f;
+	font-size: 1em;
+	font-style: normal;
+}
+
+.gmsbmcinfoDivProjectTotal span, .gmsbmcinfoDivProjectStatus span {
+	color: #418fde;
+	font-weight: bold;
+	font-style: normal;
+	font-size: 1em;
+}
+
+.gmsbmcinfoDivSectorsTitle {
+	margin-top: 1em;
+	font-weight: bold;
+	font-size: 1.2em;
+	margin-bottom: 0.3em;
+	border-bottom: 1px solid #ccc;
+}
+
+.gmsbmcinfoDivRow {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	color: #2f4f4f;
+	font-size: 1em;
+	font-style: normal;
+}
+
+.gmsbmcinfoDivRowValue {
+	color: #418fde;
+}
+
+/*Loader???*/
+.gmsbmcroller {
+  display: inline-block;
+  position: absolute;
+  z-index: 1800;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+}
+.gmsbmcrollerText {
+	margin-top: 86px;
+	font-family: "Roboto", sans-serif;
+	color: #444;
+	font-size: 0.9em;
+	white-space: nowrap;
+	text-align: center;
+}
+.gmsbmcroller .gmsbmcrollerDots {
+  animation: gmsbmcroller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  transform-origin: 40px 40px;
+}
+.gmsbmcroller .gmsbmcrollerDots:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #1f69b3;
+  margin: -4px 0 0 -4px;
+}
+.gmsbmcroller .gmsbmcrollerDots:nth-child(1) {
+  animation-delay: -0.036s;
+}
+.gmsbmcroller .gmsbmcrollerDots:nth-child(1):after {
+  top: 63px;
+  left: 63px;
+}
+.gmsbmcroller .gmsbmcrollerDots:nth-child(2) {
+  animation-delay: -0.072s;
+}
+.gmsbmcroller .gmsbmcrollerDots:nth-child(2):after {
+  top: 68px;
+  left: 56px;
+}
+.gmsbmcroller .gmsbmcrollerDots:nth-child(3) {
+  animation-delay: -0.108s;
+}
+.gmsbmcroller .gmsbmcrollerDots:nth-child(3):after {
+  top: 71px;
+  left: 48px;
+}
+.gmsbmcroller .gmsbmcrollerDots:nth-child(4) {
+  animation-delay: -0.144s;
+}
+.gmsbmcroller .gmsbmcrollerDots:nth-child(4):after {
+  top: 72px;
+  left: 40px;
+}
+.gmsbmcroller .gmsbmcrollerDots:nth-child(5) {
+  animation-delay: -0.18s;
+}
+.gmsbmcroller .gmsbmcrollerDots:nth-child(5):after {
+  top: 71px;
+  left: 32px;
+}
+.gmsbmcroller .gmsbmcrollerDots:nth-child(6) {
+  animation-delay: -0.216s;
+}
+.gmsbmcroller .gmsbmcrollerDots:nth-child(6):after {
+  top: 68px;
+  left: 24px;
+}
+.gmsbmcroller .gmsbmcrollerDots:nth-child(7) {
+  animation-delay: -0.252s;
+}
+.gmsbmcroller .gmsbmcrollerDots:nth-child(7):after {
+  top: 63px;
+  left: 17px;
+}
+.gmsbmcroller .gmsbmcrollerDots:nth-child(8) {
+  animation-delay: -0.288s;
+}
+.gmsbmcroller .gmsbmcrollerDots:nth-child(8):after {
+  top: 56px;
+  left: 12px;
+}
+@keyframes gmsbmcroller {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

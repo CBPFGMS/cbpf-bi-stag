@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link href="https://fonts.googleapis.com/css?family=Crimson+Text|Roboto" rel="stylesheet">
+		<meta charset="UTF-8">
+		<meta name="robots" content="noindex,nofollow"/>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.6.1/d3.min.js" integrity="sha512-MefNfAGJ/pEy89xLOFs3V6pYPs6AmUhXJrRlydI/9wZuGrqxmrdQ80zKHUcyadAcpH67teDZcBeS6oMJLPtTqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<link rel="stylesheet" type="text/css" href="./css/gmsbmc.css">
+		<title>New GMS test</title>
+		<style type="text/css">	
+
+			body { 
+				background-color: #fff;
+				font-family: "Arial";
+				margin: 0px;
+			}
+
+			.container {
+				max-width: 660px;
+				margin-left: auto;
+				margin-right: auto;
+				background-color: white;
+			}
+
+			#headertitle {
+				height: 120px;
+				background-color: #5392cb;
+			}
+
+			#ochalogo {
+				float: left;
+				margin-left: 10px;
+				margin-top: 15px;
+			}
+
+			h1 {
+				font-weight: 300;
+				color: #418fde;
+				font-family: "Roboto", sans-serif;
+				font-size: 36px;
+				margin-top: 20px;
+				margin-bottom: 10px;
+				margin-left: 10px;
+				}
+
+			h2 {
+				font-weight: 300;
+				color: darkslategray;
+				font-family: "Roboto", sans-serif;
+				font-size: 28px;
+				margin-bottom: 10px;
+				margin-top: -8px;
+				}
+
+			h3 {
+				font-weight: 300;
+				color: darkslategray;
+				font-family: "Roboto", sans-serif;
+				font-size: 24px;
+				margin-bottom: 0px;
+				margin-top: -10px;
+				text-align: center;
+				}
+
+			.containertext {
+				font-size: 16px;
+				margin-bottom: 6px;
+				margin-top: 0px;
+				margin-left: 10px;
+				margin-right: 10px;
+				color: #555;
+				line-height: 1.4;
+			}
+
+			a {
+				color: #418fde;
+			}
+
+			a:hover {
+				color: darkblue;
+			}
+
+			#d3chartcontainerconthm {
+				margin: auto;
+			}
+
+			.pbigcaTopDiv {
+				display: flex;
+				width: 100%;
+			}
+
+			.pbigcaChartTitle {
+				font-size: 26px !important;
+				font-family: "Arial", sans-serif !important;
+				margin-left: 16px !important;
+				color: #418fde !important;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div id="headertitle">
+				<div id="ochalogo">
+					<img width="556px" height="90px" src="https://github.com/CBPFGMS/cbpfgms.github.io/raw/master/img/assets/OCHAlogo2.png">
+				</div>
+			</div>
+			<div class="content">
+				<br>
+				<h1>New GMS test</h1>		
+				<p class="containertext">This is the prototype for the bubble map at the new GMS.</p>
+				<br>
+				<div id="d3chartcontainernewgms">
+				<br>
+			</div>
+		</div>
+		<script type="module" src="./src/main.js"></script>
+		<script type="module">
+			//control buble map script
+			import { createBubbleMap } from "./src/main.js";
+
+			//parameters used to draw the bubble map
+			//'container' has the ID of the div that contains the chart
+			//'dataUrl' contains the relative path of the data
+			const parameters = {
+				containerDivId: "d3chartcontainernewgms",
+				dataUrl: "./data/dataversion2.csv",
+				colors: ["#1b9e77","#d95f02","#7570b3"]
+			};
+
+			//creates the bubble map
+			createBubbleMap(parameters);
+		</script>
+	</body>
+</html>

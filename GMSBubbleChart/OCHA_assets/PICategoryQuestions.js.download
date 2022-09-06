@@ -1,0 +1,906 @@
+﻿$(document).ready(function () {
+    $('select[id*="ddlOptionsList"]').change(function () {
+        //CalculatePITotal();
+
+        if ($(this).closest('td').find('input[id*="hdnIsMandatory"]').val() == "TRUE") {
+            if ($(this).val() == '') {
+                $(this).addClass('red_borderPI');
+            }
+            else {
+                $(this).removeClass('red_borderPI');
+            }
+        }
+        else {
+            $(this).closest('td').find('#spnMandatory').each(function () {
+                $(this).hide();
+            });
+        }
+    });
+    //CalculatePITotal();
+    ValidatePIQuestions();
+
+    $('textarea[id*="txtQuestionCommments"]').change(
+       function () {
+           if ($(this).closest('td').find('input[id*="hdnIsMandatory"]').val() == "TRUE") {
+               $(this).find('tr').find('.mandatory').show();
+               if ($(this).val() == '') {
+                   $(this).addClass('red_borderPI');
+               }
+               else {
+                   $(this).removeClass('red_borderPI');
+               }
+           }
+           else {
+               $(this).closest('td').find('#spnMandatory').each(function () {
+                   $(this).hide();
+               });
+           }
+       });
+
+    if ($("#tblPreviousQuestions").find('#tblPIQuestions').length == 0) {
+        if ($('.headerPIQuestion') != undefined) {
+            $('.headerPIQuestion').hide();
+        }
+    }
+
+
+    if ($("#tblPICurrentQuestionParent").find('#tblCurrentPIQuestion').length == 0) {
+        if ($('.containerPICurrentQuestion') != undefined) {
+            $('.containerPICurrentQuestion').hide();
+        }
+
+        if ($("#tblPreviousQuestions").find('#tblPIQuestions').length > 0)
+            $(".ClickEventLabel").click();
+    }
+    else {
+        if ($('.containerPICurrentQuestion') != undefined) {
+            $('.containerPICurrentQuestion').show();
+        }
+    }
+
+    var hdnPendingInstances = $('input[id*="hdnPendingInstances"]').val();
+    var pendingInstancesLoad = '';
+    if (hdnPendingInstances != '')
+    {
+        pendingInstancesLoad = GetPendingInstances(hdnPendingInstances);
+    }
+                        
+
+    if (pendingInstancesLoad == '') {
+        $('#spnOutPendingInstancs').hide();
+    }
+    else {
+        $('#spnOutPendingInstancs').show();
+        $('#spnPendingInstances').attr("title", pendingInstancesLoad);
+    }
+
+    SetTotalPIScore($('input[id*="hdnTotalPIScore"]').val());
+
+
+
+});
+
+function GetPendingInstances(pendingInstances) {
+    var strPendingInstances = '';
+    if (pendingInstances != undefined && pendingInstances != '') {
+        var myArray = pendingInstances.split(',');
+
+        strPendingInstances = 'Questions for the listed instances need to be answered and Final Financial Report & Final Narrative Report must be approved for a valid PI Score to be considered. The instances are &#x0A; <ul style="font-weight:bold;">';
+
+        $.each(myArray, function (key, value) {
+            if (value != '' && value != undefined && value != null) {
+                strPendingInstances += '<li>' + value + '</li>';
+            }
+        });
+    }
+    if (strPendingInstances != '')
+        strPendingInstances += '</ul>'
+    return strPendingInstances;
+}
+function ValidatePIQuestions() {
+    var optionsSelected = true, questionCommentsAvailable = true;
+    $('select[id*="ddlOptionsList"]').each(
+        function () {
+            if ($(this).closest('td').find('input[id*="hdnIsMandatory"]').val() == "TRUE") {
+                if ($(this).val() == '') {
+                    $(this).addClass('red_borderPI');
+
+                }
+                else {
+                    $(this).removeClass('red_borderPI');
+                }
+            }
+            else {
+                $(this).closest('td').find('#spnMandatory').each(function () {
+                    $(this).hide();
+                });
+            }
+        });
+
+    $('textarea[id*="txtQuestionCommments"]').each(
+        function () {
+            if ($(this).closest('td').find('input[id*="hdnIsMandatory"]').val() == "TRUE") {
+                if ($(this).val() == '') {
+                    $(this).addClass('red_borderPI');
+
+                }
+                else {
+                    $(this).removeClass('red_borderPI');
+                }
+            }
+            else {
+                $(this).closest('td').find('#spnMandatory').each(function () {
+                    $(this).hide();
+                });
+            }
+        });
+}
+
+function SavePICategoryAnswers(setLogForEachQuestion) {
+    ValidatePIQuestions();
+    EncodeText();
+    var previousQuestions = GetPreviousQuestionsWithAnswers(setLogForEachQuestion);
+    var currentQuestions = GetCurrentQuestionWithAnswer(setLogForEachQuestion);
+    var PIQuestions = previousQuestions.concat(currentQuestions);
+    DecodeText();
+    return SavePIQuestionAnswers(PIQuestions);
+}
+
+function GetPreviousQuestionsWithAnswers(setLogForEachQuestion) {
+    var PIPreviousQuestion = [];
+
+    var chfId = $('input[id*="hdnCurrentProjectId"]').val() == '' || $('input[id*="hdnCurrentProjectId"]').val() == undefined ? "0" : $('input[id*="hdnCurrentProjectId"]').val();
+    var totalPIScore = $('input[id*="hdnTotalPIScore"]').val() == '' || $('input[id*="hdnTotalPIScore"]').val() == undefined || isNaN($('input[id*="hdnTotalPIScore"]').val()) ? "0" : $('input[id*="hdnTotalPIScore"]').val();
+
+    var piScoreCardDetailId = $('input[id*="hdnPIScorecardDetailId"]').val() == '' || $('input[id*="hdnPIScorecardDetailId"]').val() == undefined || isNaN($('input[id*="hdnPIScorecardDetailId"]').val()) ? "0" : $('input[id*="hdnPIScorecardDetailId"]').val();
+    var globalScorecardId = $('input[id*="hdnGlobalScorecardId"]').val() == '' || $('input[id*="hdnGlobalScorecardId"]').val() == undefined || isNaN($('input[id*="hdnGlobalScorecardId"]').val()) ? "0" : $('input[id*="hdnGlobalScorecardId"]').val();
+
+    var CurrentProjectInstanceId = $('input[id*="hdnCurrentProjectInstanceId"]').val();
+
+    $("#tblPreviousQuestions").find('#tblPIQuestions tr').each(function () {
+        $this = $(this)
+
+        var categoryId = $this.find('input[id*="hdnCategoryId"]').val();
+        var questionId = $this.find('input[id*="hdnQuestionId"]').val();
+        var optionId = $this.find('select[id*="ddlOptionsList"]').val();
+        var instanceTypeId = $this.find('input[id*="hdnPIInstanceTypeId"]').val();
+        var instanceId = $this.find('input[id*="hdnPIInstanceId"]').val();
+        var selectedOptionId = $this.find('input[id*="hdnSelectedOptionId"]').val() == '0' || $this.find('input[id*="hdnSelectedOptionId"]').val() == '' ? '' : $this.find('input[id*="hdnSelectedOptionId"]').val();
+        var questionComments = $this.find('textarea[id*="txtQuestionCommments"]').val();
+
+        var previousComments = $this.find('input[id*="hdnQuestionComments"]').val();
+
+        var isMandatory = $this.find('input[id*="hdnIsMandatory"]').val();
+        if (optionId == '' || optionId == undefined)
+            optionId = '0';
+
+        if (categoryId != undefined && questionId != undefined && optionId != undefined && instanceTypeId != undefined && optionId != "0" && (selectedOptionId != optionId || previousComments != questionComments || setLogForEachQuestion === true)) {
+            var questions = {
+                "CategoryId": categoryId,
+                "QuestionId": questionId,
+                "SelectedOptionId": optionId,
+                "CHFId": chfId,
+                "InstanceId": instanceId,
+                "InstanceTypeId": instanceTypeId,
+                "QuestionComments": questionComments,
+                "TotalPIScore": totalPIScore,
+                "GlobalScorecardId": globalScorecardId,
+                "PIScoreCardDetailId": piScoreCardDetailId,
+                "CurrentInstanceTypeId": CurrentProjectInstanceId,
+                "SourceData": $('input[id*="hdnWorkflowMovement"]').val()
+            };
+            PIPreviousQuestion.push(questions);
+
+        }
+
+    });
+
+    return PIPreviousQuestion;
+}
+
+function GetCurrentQuestionWithAnswer(setLogForEachQuestion) {
+    var PIQuestion = [];
+    var chfId = $('input[id*="hdnCurrentProjectId"]').val() == '' || $('input[id*="hdnCurrentProjectId"]').val() == undefined ? "0" : $('input[id*="hdnCurrentProjectId"]').val();
+    var instanceId = $('input[id*="hdnCurrentInstanceId"]').val() == '' || $('input[id*="hdnCurrentInstanceId"]').val() == undefined || isNaN($('input[id*="hdnCurrentInstanceId"]').val()) ? "0" : $('input[id*="hdnCurrentInstanceId"]').val();
+    var totalPIScore = $('input[id*="hdnTotalPIScore"]').val() == '' || $('input[id*="hdnTotalPIScore"]').val() == undefined || isNaN($('input[id*="hdnTotalPIScore"]').val()) ? "0" : $('input[id*="hdnTotalPIScore"]').val();
+
+    var piScoreCardDetailId = $('input[id*="hdnPIScorecardDetailId"]').val() == '' || $('input[id*="hdnPIScorecardDetailId"]').val() == undefined || isNaN($('input[id*="hdnPIScorecardDetailId"]').val()) ? "0" : $('input[id*="hdnPIScorecardDetailId"]').val();
+    var globalScorecardId = $('input[id*="hdnGlobalScorecardId"]').val() == '' || $('input[id*="hdnGlobalScorecardId"]').val() == undefined || isNaN($('input[id*="hdnGlobalScorecardId"]').val()) ? "0" : $('input[id*="hdnGlobalScorecardId"]').val();
+
+    var CurrentProjectInstanceId = $('input[id*="hdnCurrentProjectInstanceId"]').val();
+
+    $("#tblCurrentPIQuestion").find('tr').each(function () {
+        $this = $(this)
+
+        var categoryId = $this.find('input[id*="hdnCategoryId"]').val();
+        var questionId = $this.find('input[id*="hdnQuestionId"]').val();
+        var optionId = $this.find('select[id*="ddlOptionsList"]').val();
+        var selectedOptionId = $this.find('input[id*="hdnSelectedOptionId"]').val() == '0' || $this.find('input[id*="hdnSelectedOptionId"]').val() == '' ? '' : $this.find('input[id*="hdnSelectedOptionId"]').val();
+        var instanceTypeId = $this.find('input[id*="hdnPIInstanceTypeId"]').val();
+        var questionComments = $this.find('textarea[id*="txtQuestionCommments"]').val();
+        var isMandatory = $this.find('input[id*="hdnIsMandatory"]').val();
+        var previousComments = $this.find('input[id*="hdnQuestionComments"]').val();
+
+        if (optionId == '' || optionId == undefined)
+            optionId = '0';
+
+        if (categoryId != undefined && questionId != undefined && optionId != "0" && (selectedOptionId != optionId || previousComments != questionComments || setLogForEachQuestion === true)) {
+            var questions = {
+                "CategoryId": categoryId,
+                "QuestionId": questionId,
+                "SelectedOptionId": optionId,
+                "CHFId": chfId,
+                "InstanceId": instanceId,
+                "InstanceTypeId": instanceTypeId,
+                "QuestionComments": questionComments,
+                "TotalPIScore": totalPIScore,
+                "GlobalScorecardId": globalScorecardId,
+                "PIScoreCardDetailId": piScoreCardDetailId,
+                "CurrentInstanceTypeId": CurrentProjectInstanceId,
+                "SourceData": $('input[id*="hdnWorkflowMovement"]').val()
+            };
+
+            PIQuestion.push(questions);
+
+        }
+    });
+    return PIQuestion;
+}
+
+function ShowWorkflowBlockPIUI() {
+    $("#dvUserControlPICategoryQuestions").block({
+        message: $("#divLoading"),
+        overlayCSS: {
+            backgroundColor: "#aaaaaa",
+            opacity: "0.3"
+        }
+    });
+}
+
+function SavePIQuestionAnswers(obj) {
+    
+    if (obj.length > 0) {
+        var url = "../CommonWorkflowAjax.aspx/SavePIQuestionAnswers";
+        var data = JSON.stringify({ PIQuestions: obj });
+        $.ajax({
+            type: "POST",
+            url: url,
+            async:false,
+            data: data,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (jsonData) {
+
+                if (jsonData != null && jsonData != "" && jsonData["d"] != "") {
+                    var detail = JSON.parse(jsonData["d"]);
+                    UpdateActionDetails(detail);
+                    UpdatePartnerRisk(detail[0])
+                }
+            },
+            error: function (xhr, status, error) {
+                //alert('1');
+                //alert(error);
+                $("#dialogComment").unblock();
+                return false;
+            },
+            complete: function () {
+                $("#dialogComment").unblock();
+            }
+        });
+    }
+}
+
+function UpdatePartnerRisk(data)
+{
+    if (data !=undefined) {
+       
+        var riskUpdated = data.RiskUpdated
+        if (riskUpdated == 'TRUE' && $('div[id*="dvPartnerRiskAlert"]') != null && $('div[id*="dvPartnerRiskAlert"]') !=undefined)
+        {
+            $('div[id*="dvPartnerRiskAlert"]').show();
+            $('span[id*="spnRunningPartnerRisk"]').text(data.RunningRiskLevel);
+            $('span[id*="spnCalculatedPartnerRisk"]').text(data.CalculatedRiskLevel);
+            $('span[id*="spnRunningPartnerRisk"]').attr('class', data.RunningRiskCSS);
+            $('span[id*="spnCalculatedPartnerRisk"]').attr('class', data.CalculatedRiskCSS);
+        }
+        else
+        {
+            $('div[id*="dvPartnerRiskAlert"]').hide();
+            $('span[id*="spnRunningPartnerRisk"]').text(data.RunningRiskLevel);
+            $('span[id*="spnCalculatedPartnerRisk"]').text(data.CalculatedRiskLevel);
+
+            $('span[id*="spnRunningPartnerRisk"]').attr('class', data.RunningRiskCSS);
+            $('span[id*="spnCalculatedPartnerRisk"]').attr('class', data.CalculatedRiskCSS);
+
+        }
+    }
+}
+
+function UpdateActionDetails(data) {
+    if (data.length > 0) {
+        var PITotal = 0.00;
+        var pendingInstances = '';
+        $("#tblPreviousQuestions").find('#tblPIQuestions tr').each(function () {
+            $this = $(this)
+
+            var categoryId = $this.find('input[id*="hdnCategoryId"]').val();
+            var questionId = $this.find('input[id*="hdnQuestionId"]').val();
+            var instanceTypeId = $this.find('input[id*="hdnPIInstanceTypeId"]').val();
+            var instanceId = $this.find('input[id*="hdnPIInstanceId"]').val();
+            var hdnOption = $this.find('input[id*="hdnSelectedOptionId"]');
+            if (instanceId == undefined || instanceId == '')
+                instanceId = 0;
+
+            var obj = $this.find('.pi_user');
+            if (categoryId != undefined && questionId != undefined && instanceTypeId != undefined) {
+                var title = '';
+
+                var found_InstanceTypeId = $.grep(data, function (v) {
+                    return v.InstanceTypeId == parseInt(instanceTypeId) && v.QuestionId == parseInt(questionId) && v.InstanceId == parseInt(instanceId) && v.CategoryId == (categoryId);
+                });
+
+                if (found_InstanceTypeId.length > 0 && found_InstanceTypeId != null && found_InstanceTypeId != undefined) {
+                    title = found_InstanceTypeId[0].UpdateMessage
+                    PITotal = found_InstanceTypeId[0].TotalPIScore;
+                    pendingInstances = found_InstanceTypeId[0].PendingInstances;
+                    if (obj != undefined && title != '') {
+                        obj.attr('title', title);
+                        if (hdnOption != undefined)
+                            hdnOption.val(found_InstanceTypeId[0].SelectedOptionId);
+                        if ($this.find('input[id*="hdnQuestionComments"]') != undefined)
+                            $this.find('input[id*="hdnQuestionComments"]').val(found_InstanceTypeId[0].QuestionComments)
+                    }
+                }
+            }
+
+        });
+
+        $("#tblCurrentPIQuestion").find('tr').each(function () {
+            $this = $(this)
+            var instanceId = $('input[id*="hdnCurrentInstanceId"]').val() == '' || $('input[id*="hdnCurrentInstanceId"]').val() == undefined || isNaN($('input[id*="hdnCurrentInstanceId"]').val()) ? "0" : $('input[id*="hdnCurrentInstanceId"]').val();
+            var categoryId = $this.find('input[id*="hdnCategoryId"]').val();
+            var questionId = $this.find('input[id*="hdnQuestionId"]').val();
+            var instanceTypeId = $this.find('input[id*="hdnPIInstanceTypeId"]').val();
+            var hdnOption = $this.find('input[id*="hdnSelectedOptionId"]');
+
+            if (instanceId == undefined || instanceId == '')
+                instanceId = 0;
+
+            var obj = $this.find('.pi_user');
+            if (categoryId != undefined && questionId != undefined && instanceTypeId != undefined) {
+                var titleCurrentPIUpdate = '';
+
+                var found_UpdateMessage = $.grep(data, function (v) {
+                    return v.InstanceTypeId == parseInt(instanceTypeId) && v.QuestionId == parseInt(questionId) && v.InstanceId == parseInt(instanceId) && v.CategoryId == (categoryId);
+                });
+
+                if (found_UpdateMessage.length > 0 && found_UpdateMessage != null && found_UpdateMessage != undefined) {
+                    titleCurrentPIUpdate = found_UpdateMessage[0].UpdateMessage
+                    pendingInstances = found_UpdateMessage[0].PendingInstances;
+
+                    if (obj != undefined && titleCurrentPIUpdate != '') {
+                        obj.attr('title', titleCurrentPIUpdate);
+                        if (hdnOption != undefined)
+                            hdnOption.val(found_UpdateMessage[0].SelectedOptionId);
+                        if ($this.find('input[id*="hdnQuestionComments"]') != undefined)
+                            $this.find('input[id*="hdnQuestionComments"]').val(found_UpdateMessage[0].QuestionComments)
+
+                        PITotal = found_UpdateMessage[0].TotalPIScore;
+                    }
+                }
+            }
+
+        });
+
+        SetTotalPIScore(PITotal);
+
+        var instancesString = '';
+        instancesString = GetPendingInstances(pendingInstances);
+
+        if (instancesString == '') {
+            $('#spnOutPendingInstancs').hide();
+        }
+        else {
+            $('#spnOutPendingInstancs').show();
+            $('#spnPendingInstances').attr("title", instancesString);
+        }
+    }
+}
+
+function SetTotalPIScore(PITotal) {
+    $('input[id*="hdnTotalPIScore"]').val(PITotal);
+    jsonDataRange = $('input[id*="hdnPIRangeJson"]').val();
+    if ($("#tblPreviousQuestions").find('#tblPIQuestions').length > 0) {
+        $('#dvPIScore').show();
+        $('#spnPIScoreTotal').text(PITotal);
+        GetPIScoreColorCSS(PITotal, jsonDataRange);
+    }
+    else {
+        $('#dvPIScore').hide();
+    }
+}
+var jsonDataRange;
+function CalculatePITotal() {
+    var totalScore = 0;
+    var categoryWeightage = 0;
+    var questionWeightageSum = 0;
+    var actualQuestionWeightage = 0;
+    var maxOptionValue = 0;
+    var selectedOptionValue = 0;
+    var selectedOptionWeightageOnBaseHundred = 0;
+    var instanceTypeId;
+
+    var previousQuestionPIOutput = GetPreviousQuestionsPIOutput();
+    var currentQuestionPIOutput = GetCurrentQuestionPIOutput();
+    var questionsOutput = previousQuestionPIOutput.concat(currentQuestionPIOutput);
+
+    jsonDataRange = $('input[id*="hdnPIRangeJson"]').val();
+    var totalWeightageCategory = $('input[id*="hdnTotalCategoryWeightage"]').val();
+
+    var scoreArray = [];
+
+    $.each(questionsOutput, function (index, value) {
+        categoryWeightage = value.CategoryWeightage;
+        questionWeightageSum = value.TotalQuestionWeightage;
+        maxOptionValue = value.MaxOptionValue;
+        selectedOptionValue = value.SelectedValue;
+
+        if (selectedOptionValue != -1) { // to exclude if select option is selected in dropdown
+            actualQuestionWeightage = value.QuestionWeightage * 100 / questionWeightageSum;
+            var categorySore = parseFloat((selectedOptionValue * actualQuestionWeightage / maxOptionValue) * ((categoryWeightage * 100) / totalWeightageCategory) / 100);
+
+            instanceTypeId = value.InstanceTypeId;
+            if (instanceTypeId == 2 || instanceTypeId == 8 || instanceTypeId == 17) {
+                instanceTypeId = 2;
+            }
+
+            if (instanceTypeId == 3 || instanceTypeId == 6 || instanceTypeId == 7) {
+                instanceTypeId = 6;
+            }
+
+            var scoreCard = {
+                "Score": categorySore,
+                "InstanceTypeId": instanceTypeId,
+                "Count": 1,
+                "CategoryWeightage": categoryWeightage
+            };
+
+            var found_InstanceTypeId = $.grep(scoreArray, function (v) {
+                return v.InstanceTypeId === instanceTypeId;
+            });
+            if (found_InstanceTypeId.length > 0 && found_InstanceTypeId != null && found_InstanceTypeId != undefined) {
+                var tempScore = (parseFloat(found_InstanceTypeId[0].Score) + categorySore);
+                var count = found_InstanceTypeId[0].Count + 1;
+
+                tempScore = (+(Math.round(+(parseFloat(tempScore) + 'e' + 2)) + 'e' + -2));
+
+                found_InstanceTypeId[0].Score = tempScore;
+                found_InstanceTypeId[0].Count = count;
+            }
+            else {
+                scoreArray.push(scoreCard);
+            }
+        }
+
+    });
+
+    var categoryWeightageTotal = 0;
+    $.each(scoreArray, function (i, e) {
+        categoryWeightageTotal = parseFloat(parseFloat(categoryWeightageTotal) + parseFloat(e.CategoryWeightage));
+    });
+
+    $.each(scoreArray, function (i, e) {
+        totalScore = totalScore + (e.Score / e.Count);
+    });
+
+    if (isNaN(totalScore) || totalScore == undefined) {
+        totalScore = 0.00;
+    }
+
+    var i = parseFloat(totalScore);
+    totalScore = (+(Math.round(+(parseFloat(i) + 'e' + 2)) + 'e' + -2));
+
+
+    $('input[id*="hdnTotalPIScore"]').val(totalScore);
+
+    if ($("#tblPreviousQuestions").find('#tblPIQuestions').length > 0) {
+        $('#dvPIScore').show();
+        $('#spnPIScoreTotal').text(totalScore);
+        GetPIScoreColorCSS(totalScore, jsonDataRange);
+    }
+    else {
+        $('#dvPIScore').hide();
+    }
+
+}
+
+function GetPreviousQuestionsPIOutput() {
+    var PIPreviousQuestion = [];
+
+    var chfId = $('input[id*="hdnCurrentProjectId"]').val() == '' || $('input[id*="hdnCurrentProjectId"]').val() == undefined ? "0" : $('input[id*="hdnCurrentProjectId"]').val();
+
+    $("#tblPreviousQuestions").find('#tblPIQuestions tr').each(function () {
+        $this = $(this)
+
+        var categoryId = $this.find('input[id*="hdnCategoryId"]').val();
+        var questionId = $this.find('input[id*="hdnQuestionId"]').val();
+        var optionId = $this.find('select[id*="ddlOptionsList"]').val();
+        var instanceTypeId = $this.find('input[id*="hdnPIInstanceTypeId"]').val();
+        var instanceId = $this.find('input[id*="hdnPIInstanceId"]').val();
+
+        var categoryWeightage = $this.find('input[id*="hdnCategoryWeightage"]').val();
+        var questionWeightage = $this.find('input[id*="hdnQuestionWeightage"]').val();
+        var maxOptionValue = $this.find('input[id*="hdnMaxOptionValue"]').val();
+        var totalQuestionWeightage = $this.find('input[id*="hdnTotalQuestionWeightage"]').val();
+
+        var isMandatory = $this.find('input[id*="hdnIsMandatory"]').val();
+
+
+        var selectedOptionValue = $this.find('select[id*="ddlOptionsList"]').find('option:selected').attr("optionvalue");
+
+        if (selectedOptionValue == undefined || selectedOptionValue == '')
+            selectedOptionValue = -1; // to identify if (select) is selected in dropdownlist
+
+        if (optionId == '' || optionId == undefined)
+            optionId = '0';
+
+        if (categoryId != undefined && questionId != undefined && optionId != undefined && instanceTypeId != undefined) {
+            var questions = {
+                "CategoryId": categoryId,
+                "QuestionId": questionId,
+                "SelectedOptionId": optionId,
+                "CHFId": chfId,
+                "InstanceId": instanceId,
+                "InstanceTypeId": instanceTypeId,
+                "CategoryWeightage": categoryWeightage,
+                "QuestionWeightage": questionWeightage,
+                "MaxOptionValue": maxOptionValue,
+                "TotalQuestionWeightage": totalQuestionWeightage,
+                "SelectedValue": selectedOptionValue,
+                "SourceData": $('input[id*="hdnWorkflowMovement"]').val()
+            };
+            PIPreviousQuestion.push(questions);
+        }
+
+    });
+
+    return PIPreviousQuestion;
+}
+
+function GetCurrentQuestionPIOutput() {
+    var PIQuestion = [];
+    var chfId = $('input[id*="hdnCurrentProjectId"]').val() == '' || $('input[id*="hdnCurrentProjectId"]').val() == undefined ? "0" : $('input[id*="hdnCurrentProjectId"]').val();
+    var instanceId = $('input[id*="hdnCurrentInstanceId"]').val() == '' || $('input[id*="hdnCurrentInstanceId"]').val() == undefined || isNaN($('input[id*="hdnCurrentInstanceId"]').val()) ? "0" : $('input[id*="hdnCurrentInstanceId"]').val();
+
+    $("#tblCurrentPIQuestion").find('tr').each(function () {
+        $this = $(this)
+
+        var categoryId = $this.find('input[id*="hdnCategoryId"]').val();
+        var questionId = $this.find('input[id*="hdnQuestionId"]').val();
+        var optionId = $this.find('select[id*="ddlOptionsList"]').val();
+        var instanceTypeId = $this.find('input[id*="hdnPIInstanceTypeId"]').val();
+
+        var categoryWeightage = $this.find('input[id*="hdnCategoryWeightage"]').val();
+        var questionWeightage = $this.find('input[id*="hdnQuestionWeightage"]').val();
+        var maxOptionValue = $this.find('input[id*="hdnMaxOptionValue"]').val();
+        var totalQuestionWeightage = $this.find('input[id*="hdnTotalQuestionWeightage"]').val();
+        var isMandatory = $this.find('input[id*="hdnIsMandatory"]').val();
+
+        var selectedOptionValue = $this.find('select[id*="ddlOptionsList"]').find('option:selected').attr("optionvalue");
+
+        if (selectedOptionValue == undefined || selectedOptionValue == '')
+            selectedOptionValue = -1;
+
+        if (categoryId != undefined && questionId != undefined && optionId != undefined) {
+            var questions = {
+                "CategoryId": categoryId,
+                "QuestionId": questionId,
+                "SelectedOptionId": optionId,
+                "CHFId": chfId,
+                "InstanceId": instanceId,
+                "InstanceTypeId": instanceTypeId,
+                "CategoryWeightage": categoryWeightage,
+                "QuestionWeightage": questionWeightage,
+                "MaxOptionValue": maxOptionValue,
+                "TotalQuestionWeightage": totalQuestionWeightage,
+                "SelectedValue": selectedOptionValue,
+                "SourceData": $('input[id*="hdnWorkflowMovement"]').val()
+            };
+
+            PIQuestion.push(questions);
+        }
+    });
+    return PIQuestion;
+}
+
+function GetPIScoreColorCSS(piValue, jsonDataRange) {
+    $('#spnPIScorePI').text('');
+    $('#spnPIScorePI').removeAttr('class');
+    $('#spnPIScoreTotal').removeAttr('class');
+    var css = '';
+    var value;
+    if (jsonDataRange != undefined) {
+        var jsonDataRangeObject = JSON.parse(jsonDataRange);
+        var matchedCSS = $.grep(jsonDataRangeObject, function (v) {
+            return NumbersBetweenRange(v.StartRange, v.EndRange, piValue) == true;
+        });
+        if (matchedCSS.length > 0 && matchedCSS != null && matchedCSS != undefined) {
+            css = matchedCSS[0].CSS;
+            value = matchedCSS[0].Value;
+        }
+
+        $('#spnPIScoreTotal').attr("class", css);
+        $('#spnPIScorePI').attr("class", css);
+        $('#spnPIScorePI').text(value);
+
+    }
+    else {
+        $('#spnPIScoreTotal').attr("class", 'cssPoor');
+        $('#spnPIScorePI').attr("class", 'cssPoor');
+        $('#spnPIScorePI').text('0');
+    }
+}
+
+function NumbersBetweenRange(startRange, endRange, number) {
+    var startstatus = false, endStatus = false;
+    if (number >= startRange)
+        startstatus = true;
+    if (number <= endRange)
+        endStatus = true;
+    if (startstatus == true && endStatus == true)
+        return true;
+    else
+        return false;
+
+}
+function ResetCurrentQuestion(obj){
+    var resetStatus = $(obj).closest('#dvInstanceQuestion').find('input[id*="hdnQuestionResetStatus"]').val();
+    if (resetStatus === 'YES') {
+        ResetQuestion(obj, false, resetStatus);
+    }
+    else {
+        ResetQuestion(obj, true, resetStatus);
+    }
+ }
+
+function ResetQuestion(obj, flag, resetStatus) {
+
+        var finalStatus, classToImplement;
+
+        var selectedOptionId = $(obj).closest('#dvInstanceQuestion').find('input[id*="hdnSelectedOptionId"]').val() == '0' || $(obj).closest('#dvInstanceQuestion').find('input[id*="hdnSelectedOptionId"]').val() == '' ? '' : $(obj).closest('#dvInstanceQuestion').find('input[id*="hdnSelectedOptionId"]').val();
+        var previousComments = $(obj).closest('#dvInstanceQuestion').find('input[id*="hdnQuestionComments"]').val();
+
+        var confirmFlag = false;
+
+        if (flag == true) {
+            confirmFlag = confirm('Do you want to reset the current PI Instance question ?');
+        }
+    
+        if (confirmFlag == true || flag == false) {
+            if (resetStatus === 'YES') {
+                finalStatus = 'NO';
+                classToImplement = '';
+            }
+            if (resetStatus === 'NO') {
+                finalStatus = 'YES';
+                classToImplement = 'lhtgrey_clr';
+            }
+            if (resetStatus === '') {
+                finalStatus = 'YES';
+                classToImplement = 'lhtgrey_clr';
+            }
+            $(obj).closest('div[id="dvInstanceQuestion"]').find('input[id*="hdnQuestionResetStatus"]').val(finalStatus);
+        }
+
+        if (finalStatus === 'YES' && confirmFlag == true) {
+            $(obj).closest('div[id="dvInstanceQuestion"]').find('select[id*="ddlOptionsList"] option').removeAttr('selected');
+            $(obj).closest('div[id="dvInstanceQuestion"]').find('textarea[id*="txtQuestionCommments"]').val('');
+            $(obj).closest('div[id="dvInstanceQuestion"]').find('.pi_quest_reset_btn').text('Undo');
+            //$(obj).closest('div[id="dvInstanceQuestion"]').css('background-color', '#D3D3D3');
+            $(obj).closest('td').css('background-color', '#D3D3D3');
+
+        }
+        if (finalStatus == 'NO')
+        {
+            $(obj).closest('div[id="dvInstanceQuestion"]').find('select[id*="ddlOptionsList"]').val(selectedOptionId).change();
+            $(obj).closest('div[id="dvInstanceQuestion"]').find('textarea[id*="txtQuestionCommments"]').val(previousComments);
+            //$(obj).closest('div[id="dvInstanceQuestion"]').css('background-color', '');
+            $(obj).closest('td').css('background-color', '');
+            $(obj).closest('div[id="dvInstanceQuestion"]').find('.pi_quest_reset_btn').text('Reset');
+        }
+
+        if (flag == true && confirmFlag == true) {
+            alert('Please click on Save Score button if you would like to update the PI score.');
+        }
+ }
+
+function GetPartnerPIScore() {
+    var partnerPooledFundId = $('input[id*="hdnPartnerPooledFundId"]') != null ? $('input[id*="hdnPartnerPooledFundId"]').val() : string.Empty;
+    var PIQuestionData = [];
+    var chfId = $('input[id*="hdnCurrentProjectId"]').val() == '' || $('input[id*="hdnCurrentProjectId"]').val() == undefined ? "0" : $('input[id*="hdnCurrentProjectId"]').val();
+    var totalPIScore = $('input[id*="hdnTotalPIScore"]').val() == '' || $('input[id*="hdnTotalPIScore"]').val() == undefined || isNaN($('input[id*="hdnTotalPIScore"]').val()) ? "0" : $('input[id*="hdnTotalPIScore"]').val();
+    var piScoreCardDetailId = $('input[id*="hdnPIScorecardDetailId"]').val() == '' || $('input[id*="hdnPIScorecardDetailId"]').val() == undefined || isNaN($('input[id*="hdnPIScorecardDetailId"]').val()) ? "0" : $('input[id*="hdnPIScorecardDetailId"]').val();
+    var globalScorecardId = $('input[id*="hdnGlobalScorecardId"]').val() == '' || $('input[id*="hdnGlobalScorecardId"]').val() == undefined || isNaN($('input[id*="hdnGlobalScorecardId"]').val()) ? "0" : $('input[id*="hdnGlobalScorecardId"]').val();
+    
+    $('#tblPIQuestions tr').each(function () {
+        $this = $(this)
+        
+        var categoryId = $this.find('input[id*="hdnCategoryId"]').val();
+        var questionId = $this.find('input[id*="hdnQuestionId"]').val();
+        var optionId = $this.find('select[id*="ddlOptionsList"]').val();
+        var selectedOptionId = $this.find('input[id*="hdnSelectedOptionId"]').val() == '0' || $this.find('input[id*="hdnSelectedOptionId"]').val() == '' ? '' : $this.find('input[id*="hdnSelectedOptionId"]').val();
+        var instanceTypeId = $this.find('input[id*="hdnPIInstanceTypeId"]').val();
+        var instanceId = $this.find('input[id*="hdnPIInstanceId"]').val(); 
+        var questionComments = $this.find('textarea[id*="txtQuestionCommments"]').val();
+        var isMandatory = $this.find('input[id*="hdnIsMandatory"]').val();
+        var previousComments = $this.find('input[id*="hdnQuestionComments"]').val();
+        var deleteQuestionOption = $this.find('input[id*="hdnQuestionResetStatus"]').val();
+
+        if (optionId == '' || optionId == undefined)
+            optionId = '0';
+
+        if (selectedOptionId == '' || selectedOptionId == undefined)
+            selectedOptionId = '0';
+
+        if (categoryId != undefined && questionId != undefined && (selectedOptionId != optionId || previousComments != questionComments || deleteQuestionOption === 'YES')) {
+            if (optionId != '0' || selectedOptionId != '0') {
+                var questions = {
+                    "CategoryId": categoryId,
+                    "QuestionId": questionId,
+                    "SelectedOptionId": (optionId == '' || optionId == undefined) ? selectedOptionId : optionId,
+                    "CHFId": chfId,
+                    "InstanceId": instanceId,
+                    "InstanceTypeId": instanceTypeId,
+                    "QuestionComments": questionComments == '' ? previousComments : questionComments,
+                    "TotalPIScore": totalPIScore,
+                    "GlobalScorecardId": globalScorecardId,
+                    "PIScoreCardDetailId": piScoreCardDetailId,
+                    "CurrentInstanceTypeId": 0,
+                    "SourceData": 'PI Management module',
+                    "PartnerPooledFundId": partnerPooledFundId,
+                    "DeleteQuestionOption": $this.find('input[id*="hdnQuestionResetStatus"]').val() == '' ? 'NO' : $this.find('input[id*="hdnQuestionResetStatus"]').val()
+                };
+
+                PIQuestionData.push(questions);
+            }
+
+        }
+    });
+    return PIQuestionData;
+}
+
+function SavePartnerPIScore() {
+    if (ValidatePartnerPIScore() == true) {
+        $.blockUI({
+            message: $("#dvLoading"), overlayCSS:
+            { backgroundColor: "#aaaaaa", opacity: "0.3" }
+        });
+        EncodeText();
+        var piData = GetPartnerPIScore();
+        SavePIScore(piData);
+    }
+    else {
+        alert('Options or Comments cannot be left blank if already answered.');
+    }
+}
+
+function ValidatePartnerPIScore() {
+    var IsValid = true;
+    $('#tblPIQuestions tr').each(function () {
+        $this = $(this)
+
+        var categoryId = $this.find('input[id*="hdnCategoryId"]').val();
+        var questionId = $this.find('input[id*="hdnQuestionId"]').val();
+        var optionId = $this.find('select[id*="ddlOptionsList"]').val();
+        var selectedOptionId = $this.find('input[id*="hdnSelectedOptionId"]').val() == '0' || $this.find('input[id*="hdnSelectedOptionId"]').val() == '' ? '' : $this.find('input[id*="hdnSelectedOptionId"]').val();
+        var questionComments = $this.find('textarea[id*="txtQuestionCommments"]').val();
+        var previousComments = $this.find('input[id*="hdnQuestionComments"]').val();
+        var deleteQuestionOption = $this.find('input[id*="hdnQuestionResetStatus"]').val();
+
+        if (previousComments == null || previousComments == undefined)
+            previousComments = '';
+
+        if (optionId == '' || optionId == undefined)
+            optionId = '0';
+
+        if (selectedOptionId == '' || selectedOptionId == undefined)
+            selectedOptionId = '0';
+
+        if (categoryId != undefined && questionId != undefined && (selectedOptionId != optionId || previousComments != questionComments || deleteQuestionOption === 'YES')) {
+            if (optionId == '0' && selectedOptionId != '0') {
+                if (deleteQuestionOption != 'YES') {
+                    IsValid = false;
+                    $this.find('select[id*="ddlOptionsList"]').val(selectedOptionId);
+                    $this.find('select[id*="ddlOptionsList"]').removeClass('red_borderPI');
+                }
+            }
+            if (previousComments != '' && questionComments.trim() == '') {
+                if (deleteQuestionOption != 'YES') {
+                    IsValid = false;
+                    $this.find('textarea[id*="txtQuestionCommments"]').val(previousComments);
+                    $this.find('textarea[id*="txtQuestionCommments"]').removeClass('red_borderPI');
+                }
+            }
+        }
+    });
+
+    return IsValid;
+}
+
+function SavePIScore(obj) {
+
+    if (obj.length > 0) {
+        var url = window.location.pathname + "/SavePIScore";
+        var data = JSON.stringify({ PIQuestions: obj, });
+        $.ajax({
+            type: "POST",
+            url: url,
+            async: true,
+            data: data,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (jsonData) {
+                location.reload();
+            },
+            error: function (xhr, status, error) {
+                $.unblockUI();
+                DecodeText();
+                alert(error);
+                return false;
+            },
+            complete: function () {
+               
+            }
+        });
+    }
+    else {
+        DecodeText();
+        $.unblockUI();
+        alert('No changes are done on the selected PI score');
+    }
+}
+
+function OpenProjectDataInNewTab() {
+    
+    var projectId = $('input[id*="hdnPartnerProjectId"]') != null ? $('input[id*="hdnPartnerProjectId"]').val() : string.Empty;
+    var currentFund = $('input[id*="hdnPartnerPooledFundId"]') != null ? $('input[id*="hdnPartnerPooledFundId"]').val() : 0;
+    var authCode = GenerateAuthCode(currentFund);
+    var siteURL = $('input[id*="hdnSiteURL"]') != null ? $('input[id*="hdnSiteURL"]').val()  : string.Empty;
+    var redirectURL = '//' + siteURL + '/home/ValidateAuth.aspx?authcode=' + authCode + '&target_inst=1&id=' + projectId + '&subid=&pageCode=ORG_RSK';
+    window.open(redirectURL, '_blank');
+}
+
+function ValidateProjectSelection()
+{
+    var partnerId = $("select[id*='ddlOrganizations']");
+
+    if (partnerId != null && partnerId != undefined) {
+        if ($(partnerId).val() == '' || $(partnerId).val() == '0') {
+            alert('You need to select a Partner first to see the Projects list.');
+            return false;
+        }
+    }
+    else {
+        alert('partner is not defined.');
+        return false;
+    }
+
+    var projectDropdown = $('select[id="cboProjectDetail"]');
+    if (projectDropdown != null && projectDropdown != undefined) {
+        if ($(projectDropdown).val() == '' || $(projectDropdown).val() == '0') {
+            alert('You need to select a project to see the PI score.');
+            return false;
+        }
+    }
+    else {
+        alert('project is not defined.');
+        return false;
+    }
+
+    EncodeText();
+    $.blockUI({
+        message: $("#dvLoading"), overlayCSS:
+        { backgroundColor: "#aaaaaa", opacity: "0.3" }
+    });
+    return true;
+}

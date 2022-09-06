@@ -1,0 +1,34 @@
+﻿#top-bar
+{
+    /*border-color: #2a6ab4;
+    border-width: 0px 0px 15px 0px;
+    border-style: solid;
+    background-position: 5px bottom;*/
+   background: #d3ebf6 url("../images/ocha_logo_new.png") no-repeat 10px center;
+   height: 62px;
+}
+
+#top-bar h4 {
+	/*margin-top: 20px;*/
+	text-align: right;
+	margin-right: 10px;
+	vertical-align:middle;
+}
+
+
+#container { /*width:1004px;*/width: 100%; background-color:#fff; }
+
+.content-box01, .content-box02 { /*width:405px;*/width: 46% !important; border:1px solid #d1d1d1; min-height:164px; background-color:#ededed; padding:10px; }
+
+.titleBg { /*background: #3070b0 url("../images/unocha_logo_02.jpg") no-repeat 0px 0px;*/ background: transparent url("../images/top_banner_map.png") no-repeat right 0px !important; height:62px}
+
+.Control { font-family: Arial, Helvetica, sans-serif; font-size: 10px; border: solid 1px #008899; }
+
+/* Landing Page - Start */
+.logout_btn{background:#f5fcff url('../images/logout_blue_icon.png') 6px center no-repeat !important; border: 1px solid #9dcce2 !important; border-radius:3px; font-family: Verdana, Geneva, sans-serif !important; color: #1295d2; font-size: 11px !important; font-weight: bold; height: 26px; text-indent: 26px; text-transform: uppercase; cursor:pointer; padding: 0 5px 0 0 !important; margin: 0;}
+.logout_btn:hover{background:#fff url('../images/logout_blue_icon.png') 6px center no-repeat !important; color:#18b6ff}
+.fund_home_btn{background:#f5fcff url('../images/fund_home_blue_icon.png') 7px center no-repeat !important; border: 1px solid #9dcce2 !important; border-radius:3px; font-family: Verdana, Geneva, sans-serif !important; color: #1295d2; font-size: 11px !important; font-weight: bold; height: 26px; text-indent: 26px; text-transform: uppercase; cursor:pointer; padding: 0 5px 0 0 !important; margin: 0 5px 0 0;}
+.fund_home_btn:hover{background:#fff url('../images/fund_home_blue_icon.png') 7px center no-repeat !important; color:#18b6ff}
+
+
+
