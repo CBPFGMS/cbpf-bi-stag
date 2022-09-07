@@ -8,7 +8,7 @@ import { isoAlpha2to3 } from "./alpha2to3.js";
 const padding = [4, 4, 4, 4],
 	legendSvgWidth = 90,
 	legendSvgHeightColor = 38,
-	legendSvgHeightSize = 90,
+	legendSvgHeightSize = 98,
 	legendSvgPadding = [4, 4, 4, 4],
 	legendTitlePadding = 10,
 	duration = 1000,
@@ -31,7 +31,7 @@ const padding = [4, 4, 4, 4],
 	mapInitialLongitude = 10,
 	mapInitialZoom = 1.75,
 	minCircleRadius = 1,
-	maxCircleRadius = 26,
+	maxCircleRadius = 32,
 	disabledOpacity = 0.4,
 	legendCirclePadding = 26,
 	legendColorPadding = 20,
@@ -40,6 +40,8 @@ const padding = [4, 4, 4, 4],
 	legendLineHeight = 6,
 	legendRectPadding = 10,
 	legendSizeGroupPadding = 36,
+	strokeOpacityValue = 0.8,
+	fillOpacityValue = 0.5,
 	circleColor = "#E56A54",
 	circleGlobalColor = "#418FDE",
 	unBlue = "#1F69B3",
@@ -105,6 +107,17 @@ const colorScale = d3.scaleOrdinal();
 
 const radiusScale = d3.scaleSqrt()
 	.range([minCircleRadius, maxCircleRadius]);
+
+const arcGenerator = d3.arc()
+	.innerRadius(0);
+
+const arcGeneratorEnter = d3.arc()
+	.innerRadius(0)
+	.outerRadius(0);
+
+const pieGenerator = d3.pie()
+	.value(d => d.value)
+	.sort(null);
 
 function createBubbleMap({ containerDivId, dataUrl, colors }) {
 
@@ -460,8 +473,6 @@ function createRadioButtons(container, tooltip) {
 
 function drawBubbleMap(data, mapSvg, legendSvg, leafletMap, buttons, infoDivTitle, infoDivBody) {
 
-	console.log(data);
-
 	const mapCenter = leafletMap.getCenter();
 
 	const noDataGroup = mapSvg.selectAll(`.${classPrefix}noDataGroup`)
@@ -487,11 +498,11 @@ function drawBubbleMap(data, mapSvg, legendSvg, leafletMap, buttons, infoDivTitl
 		.attr("text-anchor", "middle")
 		.text("No data for the current selection");
 
-	const maxValue = d3.max(data, d => d.value);
+	const maxValue = d3.max(data, d => d.totalValue);
 
 	for (const status in colorScales) {
 		const allValues = data.reduce((acc, curr) => {
-			if (curr.status === status) acc.push(curr.value)
+			if (curr.status === status) acc.push(curr.totalValue)
 			return acc;
 		}, []);
 		allValues.sort((a, b) => a - b);
@@ -530,22 +541,111 @@ function drawBubbleMap(data, mapSvg, legendSvg, leafletMap, buttons, infoDivTitl
 			.attr("class", classPrefix + "SizeMapGroup")
 			.merge(sizeMapGroup);
 
-		let sizeMarkers = sizeMapGroup.selectAll(`.${classPrefix}SizeMarkers`)
+		let pieGroup = sizeMapGroup.selectAll("." + classPrefix + "pieGroup")
 			.data(data, d => d.key);
 
-		const sizeMarkersExit = sizeMarkers.exit().remove();
+		const pieGroupExit = pieGroup.exit();
 
-		const sizeMarkersEnter = sizeMarkers.enter()
-			.append("circle")
-			.attr("class", classPrefix + "SizeMarkers")
-			.style("stroke", circleStroke);
+		pieGroupExit.each((_, i, n) => {
+			const thisGroup = d3.select(n[i]);
+			thisGroup.selectAll("." + classPrefix + "slice")
+				.transition()
+				.duration(duration)
+				.attrTween("d", (d, j, m) => {
+					const finalObject = !j ? {
+						startAngle: 0,
+						endAngle: 0,
+						outerRadius: 0
+					} : {
+						startAngle: Math.PI * 2,
+						endAngle: Math.PI * 2,
+						outerRadius: 0
+					};
+					const interpolator = d3.interpolateObject(localVariable.get(m[j]), finalObject);
+					return t => arcGenerator(interpolator(t));
+				})
+				.on("end", () => thisGroup.remove())
+		});
 
-		sizeMarkers = sizeMarkersEnter.merge(sizeMarkers);
+		const pieGroupEnter = pieGroup.enter()
+			.append("g")
+			.attr("class", classPrefix + "pieGroup");
 
-		sizeMarkers.attr("r", d => radiusScale(d.value))
-			.style("fill", d => colorScale(d.status));
+		pieGroup = pieGroupEnter.merge(pieGroup);
 
-		sizeMarkers.on("mouseover", (_, d) => populateInfoDiv(d, infoDivTitle, infoDivBody))
+		pieGroup.order();
+
+		let slices = pieGroup.selectAll("." + classPrefix + "slice")
+			.data(d => pieGenerator(d.values.filter(e => e.value !== 0)), d => d.data.status);
+
+		const slicesRemove = slices.exit()
+			.transition()
+			.duration(duration)
+			.attrTween("d", (d, i, n) => {
+				const parentDatum = d3.select(n[i].parentNode).datum();
+				const thisTotal = radiusScale(parentDatum.totalValue);
+				const finalObject = !i ? {
+					startAngle: 0,
+					endAngle: 0,
+					outerRadius: thisTotal
+				} : {
+					startAngle: Math.PI * 2,
+					endAngle: Math.PI * 2,
+					outerRadius: thisTotal
+				};
+				const interpolator = d3.interpolateObject(localVariable.get(n[i]), finalObject);
+				return t => arcGenerator(interpolator(t));
+			})
+			.on("end", (_, i, n) => d3.select(n[i]).remove())
+
+		const slicesEnter = slices.enter()
+			.append("path")
+			.attr("class", classPrefix + "slice")
+			.style("pointer-events", "all")
+			.style("fill", d => colorScale(d.data.status))
+			.style("stroke", "#666")
+			.style("stroke-width", "1px")
+			.style("stroke-opacity", strokeOpacityValue)
+			.style("fill-opacity", fillOpacityValue)
+			.each((d, i, n) => {
+				let siblingRadius = 0;
+				const siblings = d3.select(n[i].parentNode).selectAll("path")
+					.each((_, j, m) => {
+						const thisLocal = localVariable.get(m[j])
+						if (thisLocal) siblingRadius = thisLocal.outerRadius;
+					});
+				if (!i) {
+					localVariable.set(n[i], {
+						startAngle: 0,
+						endAngle: 0,
+						outerRadius: siblingRadius
+					});
+				} else {
+					localVariable.set(n[i], {
+						startAngle: Math.PI * 2,
+						endAngle: Math.PI * 2,
+						outerRadius: siblingRadius
+					});
+				};
+			})
+
+		slices = slicesEnter.merge(slices);
+
+		slices.transition()
+			.duration(duration)
+			.attrTween("d", pieTween);
+
+		function pieTween(d) {
+			const i = d3.interpolateObject(localVariable.get(this), {
+				startAngle: d.startAngle,
+				endAngle: d.endAngle,
+				outerRadius: radiusScale(d.data.total)
+			});
+			localVariable.set(this, i(1));
+			return t => arcGenerator(i(t));
+		};
+
+		pieGroup.on("mouseover", (_, d) => populateInfoDiv(d, infoDivTitle, infoDivBody))
 			.on("mouseout", () => clearInfoDiv(infoDivTitle, infoDivBody));
 
 	};
@@ -576,7 +676,7 @@ function drawBubbleMap(data, mapSvg, legendSvg, leafletMap, buttons, infoDivTitl
 
 		colorMarkers = colorMarkersEnter.merge(colorMarkers);
 
-		colorMarkers.style("fill", d => colorScales[d.status](d.value));
+		colorMarkers.style("fill", d => colorScales[d.status](d.totalValue));
 
 		colorMarkers.on("mouseover", (_, d) => populateInfoDiv(d, infoDivTitle, infoDivBody))
 			.on("mouseout", () => clearInfoDiv(infoDivTitle, infoDivBody));
@@ -783,7 +883,7 @@ function populateInfoDiv(datum, infoDivTitle, infoDivBody) {
 		.html("Project: " + datum.projectCode);
 	infoDivBody.append("div")
 		.attr("class", classPrefix + "infoDivProjectTitle")
-		.html(datum.projectTitle );
+		.html(datum.projectTitle);
 	infoDivBody.append("div")
 		.attr("class", classPrefix + "infoDivProjectTotal")
 		.html("Total allocated: ")
@@ -815,7 +915,7 @@ function clearInfoDiv(infoDivTitle, infoDivBody) {
 
 function redrawMap(mapSvg, leafletMap) {
 
-	const selectedClass = chartState.displayMode === "size" ? `.${classPrefix}SizeMarkers` : `.${classPrefix}ColorMarkers`;
+	const selectedClass = chartState.displayMode === "size" ? `.${classPrefix}pieGroup` : `.${classPrefix}ColorMarkers`;
 
 	const scaleValue = chartState.displayMode === "size" ? 1 : 0.75;
 
@@ -910,8 +1010,6 @@ function processData(rawAllocationsData) {
 
 	rawAllocationsData.forEach(row => {
 
-		//IMPORTANT: ask if the data should be aggregated by 'key'
-
 		let aggregatedObject = {};
 		const aggregatedData = (+row.ClstAgg !== +row.ClstAgg) || (+row.AdmLocClustBdg1 !== +row.AdmLocClustBdg1);
 		if (aggregatedData) {
@@ -950,6 +1048,8 @@ function processData(rawAllocationsData) {
 				if (chartState.selectedSector.length !== inAllDataLists.sectorsInAllData.length && !chartState.selectedSector.includes(prop)) delete aggregatedObject[prop];
 			};
 
+			const aggregatedObjectSum = d3.sum(Object.values(aggregatedObject));
+
 			//populates the 'inSelectionList'
 			yearsInCurrentSelectionSet.add(row.AYr);
 			fundsInCurrentSelectionSet.add(row.PFId);
@@ -958,22 +1058,48 @@ function processData(rawAllocationsData) {
 
 			const latLong = row.AdmLocCord1.split(",").map(e => +e);
 
-			const copiedRow = {
-				year: row.AYr,
-				fund: row.PFId,
-				projectCode: row.PrjCode,
-				projectTitle: row.PrjTitle,
-				adminLoc: row.AdmLoc1,
-				lat: latLong[0],
-				lon: latLong[1],
-				status: row.PrjCycleStatus,
-				value: d3.sum(Object.values(aggregatedObject)),
-				sectorsList: aggregatedObject,
-				key: row.AdmLoc1 + latLong[0] + latLong[1],
-				coordinates: new L.LatLng(latLong[0], latLong[1])
-			};
+			const thisKey = row.AdmLoc1 + Math.abs(Math.floor(latLong[0] * 1000)) + Math.abs(Math.floor(latLong[1] * 1000));
 
-			data.push(copiedRow);
+			const foundObject = data.find(e => e.key === thisKey);
+
+			if (foundObject) {
+				foundObject.projectList.push({
+					projectCode: row.PrjCode,
+					projectTitle: row.PrjTitle,
+					status: row.PrjCycleStatus,
+					value: aggregatedObjectSum,
+					sectorsList: aggregatedObject,
+				});
+				foundObject.totalValue += aggregatedObjectSum;
+				const foundStatus = foundObject.values.find(e => e.status === row.PrjCycleStatus);
+				if (foundStatus) {
+					foundStatus.value += aggregatedObjectSum;
+				} else {
+					foundObject.values.push({ value: aggregatedObjectSum, status: row.PrjCycleStatus });
+				};
+			} else {
+				const valuesArray = [{ value: aggregatedObjectSum, status: row.PrjCycleStatus }];
+				const copiedRow = {
+					year: row.AYr,
+					fund: row.PFId,
+					projectList: [{
+						projectCode: row.PrjCode,
+						projectTitle: row.PrjTitle,
+						status: row.PrjCycleStatus,
+						value: aggregatedObjectSum,
+						sectorsList: aggregatedObject,
+					}],
+					adminLoc: row.AdmLoc1,
+					lat: latLong[0],
+					lon: latLong[1],
+					totalValue: aggregatedObjectSum,
+					values: valuesArray,
+					key: thisKey,
+					coordinates: new L.LatLng(latLong[0], latLong[1])
+				};
+
+				data.push(copiedRow);
+			};
 
 		};
 
@@ -984,7 +1110,15 @@ function processData(rawAllocationsData) {
 	inSelectionLists.sectorsInCurrentSelection.push(...sectorsInCurrentSelectionSet);
 	inSelectionLists.statussInCurrentSelection.push(...statussInCurrentSelectionSet);
 
+	data.forEach(row => {
+		row.values.sort((a, b) => a.value - b.value);
+		row.values.forEach(valuesObj => valuesObj.total = row.totalValue);
+		row.status = row.values[row.values.length - 1].status;
+	})
+
 	data.sort((a, b) => b.value - a.value);
+
+	console.log(data);
 
 	return data;
 
