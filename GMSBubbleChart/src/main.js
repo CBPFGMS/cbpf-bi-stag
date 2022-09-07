@@ -876,35 +876,52 @@ function drawBubbleMap(data, mapSvg, legendSvg, leafletMap, buttons, infoDivTitl
 };
 
 function populateInfoDiv(datum, infoDivTitle, infoDivBody) {
+	console.log(datum)
 	infoDivTitle.html(datum.adminLoc + " (" + lists.fundNamesList[datum.fund] + ")");
 	infoDivBody.html(null);
-	infoDivBody.append("div")
-		.attr("class", classPrefix + "infoDivProjectCode")
-		.html("Project: " + datum.projectCode);
-	infoDivBody.append("div")
-		.attr("class", classPrefix + "infoDivProjectTitle")
-		.html(datum.projectTitle);
-	infoDivBody.append("div")
-		.attr("class", classPrefix + "infoDivProjectTotal")
-		.html("Total allocated: ")
-		.append("span")
-		.html("$" + formatMoney0Decimals(datum.value));
-	infoDivBody.append("div")
-		.attr("class", classPrefix + "infoDivProjectStatus")
-		.html("Status: ")
-		.append("span")
-		.html(datum.status);
-	infoDivBody.append("div")
-		.attr("class", classPrefix + "infoDivSectorsTitle")
-		.html("Sectors");
-	Object.entries(datum.sectorsList).forEach(sector => {
-		const rowDiv = infoDivBody.append("div")
-			.attr("class", classPrefix + "infoDivRow");
-		const sectorName = rowDiv.append("div")
-			.html(lists.sectorNamesList[sector[0]] + " (" + (formatPercentage(sector[1] / datum.value)) + "): ");
-		const sectorValue = rowDiv.append("div")
-			.attr("class", classPrefix + "infoDivRowValue")
-			.html("$" + formatMoney0Decimals(sector[1]));
+	if (datum.projectList.length > 1) {
+		infoDivBody.append("div")
+			.attr("class", classPrefix + "infoDivProjectTotal")
+			.html("Total allocated: ")
+			.append("span")
+			.html("$" + formatMoney0Decimals(datum.totalValue));
+		infoDivBody.append("div")
+			.attr("class", classPrefix + "projectListHeader")
+			.html("List of Projects");
+	};
+	datum.projectList.forEach((project, index) => {
+		infoDivBody.append("div")
+			.attr("class", classPrefix + "infoDivProjectCode")
+			.html("Project: " + project.projectCode);
+		infoDivBody.append("div")
+			.attr("class", classPrefix + "infoDivProjectTitle")
+			.html(project.projectTitle);
+		infoDivBody.append("div")
+			.attr("class", classPrefix + "infoDivProjectTotal")
+			.html("Total allocated: ")
+			.append("span")
+			.html("$" + formatMoney0Decimals(project.value));
+		infoDivBody.append("div")
+			.attr("class", classPrefix + "infoDivProjectStatus")
+			.html("Status: ")
+			.append("span")
+			.html(project.status);
+		infoDivBody.append("div")
+			.attr("class", classPrefix + "infoDivSectorsTitle")
+			.html("Sectors");
+		Object.entries(project.sectorsList).forEach(sector => {
+			const rowDiv = infoDivBody.append("div")
+				.attr("class", classPrefix + "infoDivRow");
+			const sectorName = rowDiv.append("div")
+				.html(lists.sectorNamesList[sector[0]] + " (" + (formatPercentage(sector[1] / project.value)) + "): ");
+			const sectorValue = rowDiv.append("div")
+				.attr("class", classPrefix + "infoDivRowValue")
+				.html("$" + formatMoney0Decimals(sector[1]));
+		});
+		if(datum.projectList.length > 1 && index < datum.projectList.length - 1){
+			infoDivBody.append("div")
+				.attr("class", classPrefix + "divider");
+		};
 	});
 };
 
