@@ -50,6 +50,8 @@ const padding = [4, 4, 4, 4],
 	markerStroke = "#555",
 	markerAttribute = "M0,0l-8.8-17.7C-12.1-24.3-7.4-32,0-32h0c7.4,0,12.1,7.7,8.8,14.3L0,0z",
 	minValueColor = "#eee",
+	highlightedBubbleColor = "darkred",
+	bubbleStrokeColor = "#666",
 	stickHeight = 2,
 	lollipopRadius = 3,
 	formatSIaxes = d3.format("~s"),
@@ -97,10 +99,14 @@ const padding = [4, 4, 4, 4],
 	colorScales = {},
 	// masterFundsUrl = "https://cbpfgms.github.io/pfbi-data/mst/MstCountry.json",
 	masterFundsUrl = "https://cbpfapi.unocha.org/vo2/odata/MstPooledFund", //IMPORTANT: CHANGE THIS FOR THE UNIFIED ID SYSTEM, LINK ABOVE
-	masterSectorTypesUrl = "https://cbpfgms.github.io/pfbi-data/mst/MstCluster.json";
+	masterSectorTypesUrl = "https://cbpfgms.github.io/pfbi-data/mst/MstCluster.json",
+	htmlBody = d3.select("body");
 
 let cerfPooledFundId,
 	frozenChartState,
+	infoDivDisclaimer,
+	groupClicked = false,
+	activeGroup = null,
 	lastFilterClicked = null;
 
 const colorScale = d3.scaleOrdinal();
@@ -569,7 +575,8 @@ function drawBubbleMap(data, mapSvg, legendSvg, leafletMap, buttons, infoDivTitl
 
 		const pieGroupEnter = pieGroup.enter()
 			.append("g")
-			.attr("class", classPrefix + "pieGroup");
+			.attr("class", classPrefix + "pieGroup")
+			.each(d => d.clicked = false);
 
 		pieGroup = pieGroupEnter.merge(pieGroup);
 
@@ -603,7 +610,7 @@ function drawBubbleMap(data, mapSvg, legendSvg, leafletMap, buttons, infoDivTitl
 			.attr("class", classPrefix + "slice")
 			.style("pointer-events", "all")
 			.style("fill", d => colorScale(d.data.status))
-			.style("stroke", "#666")
+			.style("stroke", bubbleStrokeColor)
 			.style("stroke-width", "1px")
 			.style("stroke-opacity", strokeOpacityValue)
 			.style("fill-opacity", fillOpacityValue)
@@ -645,8 +652,44 @@ function drawBubbleMap(data, mapSvg, legendSvg, leafletMap, buttons, infoDivTitl
 			return t => arcGenerator(i(t));
 		};
 
-		pieGroup.on("mouseover", (_, d) => populateInfoDiv(d, infoDivTitle, infoDivBody))
-			.on("mouseout", () => clearInfoDiv(infoDivTitle, infoDivBody));
+		pieGroup.on("mouseover", (event, d) => {
+				if (activeGroup) return;
+				d3.select(event.currentTarget).selectAll("path")
+					.style("stroke", highlightedBubbleColor)
+					.style("stroke-width", "2px");
+				populateInfoDiv(d, infoDivTitle, infoDivBody);
+			})
+			.on("mouseout", (event, d) => {
+				if (activeGroup) return;
+				if (!d.clicked) {
+					d3.select(event.currentTarget).selectAll("path")
+						.style("stroke", bubbleStrokeColor)
+						.style("stroke-width", "1px");
+					clearInfoDiv(infoDivTitle, infoDivBody);
+				};
+			})
+			.on("click", (event, d) => {
+				event.stopPropagation();
+				groupClicked = true;
+				infoDivDisclaimer.remove();
+				d.clicked = !d.clicked;
+				if (activeGroup !== event.currentTarget) {
+					pieGroup.selectAll("path")
+						.style("stroke", (_, i, n) => n[i].parentNode === event.currentTarget ? highlightedBubbleColor : bubbleStrokeColor)
+						.style("stroke-width", (_, i, n) => n[i].parentNode === event.currentTarget ? "2px" : "1px");
+					populateInfoDiv(d, infoDivTitle, infoDivBody);
+				};
+				activeGroup = d.clicked ? event.currentTarget : null;
+			});
+
+		htmlBody.on("click", () => {
+			activeGroup = null;
+			pieGroup.each(d => d.clicked = false)
+				.selectAll("path")
+				.style("stroke", bubbleStrokeColor)
+				.style("stroke-width", "1px");
+			clearInfoDiv(infoDivTitle, infoDivBody);
+		});
 
 	};
 
@@ -877,52 +920,65 @@ function drawBubbleMap(data, mapSvg, legendSvg, leafletMap, buttons, infoDivTitl
 
 function populateInfoDiv(datum, infoDivTitle, infoDivBody) {
 	console.log(datum)
+
 	infoDivTitle.html(datum.adminLoc + " (" + lists.fundNamesList[datum.fund] + ")");
+
+	if (!groupClicked) {
+		infoDivDisclaimer = infoDivTitle.append("span")
+			.html(" - (click the marker for freezing this panel)");
+	};
+
 	infoDivBody.html(null);
-	if (datum.projectList.length > 1) {
-		infoDivBody.append("div")
-			.attr("class", classPrefix + "infoDivProjectTotal")
-			.html("Total allocated: ")
-			.append("span")
-			.html("$" + formatMoney0Decimals(datum.totalValue));
+
+	infoDivBody.append("div")
+		.attr("class", classPrefix + "infoDivProjectTotal")
+		.html("Total allocated: ")
+		.append("span")
+		.html("$" + formatMoney0Decimals(datum.totalValue));
+
+	//show number of projects only if n > 1
+
+	function generateProjectsList() {
+
 		infoDivBody.append("div")
 			.attr("class", classPrefix + "projectListHeader")
 			.html("List of Projects");
-	};
-	datum.projectList.forEach((project, index) => {
-		infoDivBody.append("div")
-			.attr("class", classPrefix + "infoDivProjectCode")
-			.html("Project: " + project.projectCode);
-		infoDivBody.append("div")
-			.attr("class", classPrefix + "infoDivProjectTitle")
-			.html(project.projectTitle);
-		infoDivBody.append("div")
-			.attr("class", classPrefix + "infoDivProjectTotal")
-			.html("Total allocated: ")
-			.append("span")
-			.html("$" + formatMoney0Decimals(project.value));
-		infoDivBody.append("div")
-			.attr("class", classPrefix + "infoDivProjectStatus")
-			.html("Status: ")
-			.append("span")
-			.html(project.status);
-		infoDivBody.append("div")
-			.attr("class", classPrefix + "infoDivSectorsTitle")
-			.html("Sectors");
-		Object.entries(project.sectorsList).forEach(sector => {
-			const rowDiv = infoDivBody.append("div")
-				.attr("class", classPrefix + "infoDivRow");
-			const sectorName = rowDiv.append("div")
-				.html(lists.sectorNamesList[sector[0]] + " (" + (formatPercentage(sector[1] / project.value)) + "): ");
-			const sectorValue = rowDiv.append("div")
-				.attr("class", classPrefix + "infoDivRowValue")
-				.html("$" + formatMoney0Decimals(sector[1]));
-		});
-		if(datum.projectList.length > 1 && index < datum.projectList.length - 1){
+
+		datum.projectList.forEach((project, index) => {
 			infoDivBody.append("div")
-				.attr("class", classPrefix + "divider");
-		};
-	});
+				.attr("class", classPrefix + "infoDivProjectCode")
+				.html("Project: " + project.projectCode);
+			infoDivBody.append("div")
+				.attr("class", classPrefix + "infoDivProjectTitle")
+				.html(project.projectTitle);
+			infoDivBody.append("div")
+				.attr("class", classPrefix + "infoDivProjectTotal")
+				.html("Total allocated: ")
+				.append("span")
+				.html("$" + formatMoney0Decimals(project.value));
+			infoDivBody.append("div")
+				.attr("class", classPrefix + "infoDivProjectStatus")
+				.html("Status: ")
+				.append("span")
+				.html(project.status);
+			infoDivBody.append("div")
+				.attr("class", classPrefix + "infoDivSectorsTitle")
+				.html("Sectors");
+			Object.entries(project.sectorsList).forEach(sector => {
+				const rowDiv = infoDivBody.append("div")
+					.attr("class", classPrefix + "infoDivRow");
+				const sectorName = rowDiv.append("div")
+					.html(lists.sectorNamesList[sector[0]] + " (" + (formatPercentage(sector[1] / project.value)) + "): ");
+				const sectorValue = rowDiv.append("div")
+					.attr("class", classPrefix + "infoDivRowValue")
+					.html("$" + formatMoney0Decimals(sector[1]));
+			});
+			if (datum.projectList.length > 1 && index < datum.projectList.length - 1) {
+				infoDivBody.append("div")
+					.attr("class", classPrefix + "divider");
+			};
+		});
+	};
 };
 
 function clearInfoDiv(infoDivTitle, infoDivBody) {
@@ -1133,9 +1189,7 @@ function processData(rawAllocationsData) {
 		row.status = row.values[row.values.length - 1].status;
 	})
 
-	data.sort((a, b) => b.value - a.value);
-
-	console.log(data);
+	data.sort((a, b) => b.totalValue - a.totalValue);
 
 	return data;
 
