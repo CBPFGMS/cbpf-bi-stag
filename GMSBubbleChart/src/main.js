@@ -19,7 +19,6 @@ const padding = [4, 4, 4, 4],
 	currentYear = currentDate.getFullYear(),
 	localStorageTime = 3600000,
 	localVariable = d3.local(),
-	heightFactor = 0.6,
 	adminLocLevels = 6,
 	classPrefix = "gmsbmc",
 	formatMoney0Decimals = d3.format(",.0f"),
@@ -131,7 +130,6 @@ function createBubbleMap({ containerDivId, dataUrl, colors }) {
 	containerDiv.style("position", "relative");
 	const containerDivSize = containerDiv.node().getBoundingClientRect();
 	const width = containerDivSize.width;
-	const height = width * heightFactor;
 
 	const loader = createLoader(containerDiv);
 
@@ -925,7 +923,7 @@ function populateInfoDiv(datum, infoDivTitle, infoDivBody) {
 
 	if (!groupClicked) {
 		infoDivDisclaimer = infoDivTitle.append("span")
-			.html(" - (click the marker for freezing this panel)");
+			.html("&nbsp;- click the marker for freezing this panel");
 	};
 
 	infoDivBody.html(null);
@@ -936,36 +934,87 @@ function populateInfoDiv(datum, infoDivTitle, infoDivBody) {
 		.append("span")
 		.html("$" + formatMoney0Decimals(datum.totalValue));
 
+	infoDivBody.append("div")
+		.attr("class", classPrefix + "infoDivProjectTotal")
+		.html("Number of Projects: ")
+		.append("span")
+		.html(datum.projectList.length);
+
+	const aggregatedSectorsList = datum.projectList.reduce((acc, curr) => {
+		for (const key in curr.sectorsList) {
+			acc[key] = (acc[key] || 0) + curr.sectorsList[key];
+		}
+		return acc;
+	}, {});
+
+	infoDivBody.append("div")
+		.attr("class", classPrefix + "infoDivSectorsTitle")
+		.html("Sectors");
+
+	Object.entries(aggregatedSectorsList).forEach(sector => {
+		const rowDiv = infoDivBody.append("div")
+			.attr("class", classPrefix + "infoDivRow");
+		const sectorName = rowDiv.append("div")
+			.html(lists.sectorNamesList[sector[0]] + " (" + (formatPercentage(sector[1] / datum.totalValue)) + "): ");
+		const sectorValue = rowDiv.append("div")
+			.attr("class", classPrefix + "infoDivRowValue")
+			.html("$" + formatMoney0Decimals(sector[1]));
+	});
+
+	const buttonDiv = infoDivBody.append("div")
+		.attr("class", classPrefix + "infoDivButton")
+		.datum({ clicked: false });
+
+	const projectListDiv = infoDivBody.append("div")
+		.attr("class", classPrefix + "projectListDiv");
+
+	if (datum.projectList.length > 1) {
+
+		buttonDiv.append("span")
+			.html("Generate List of Projects")
+			.on("click", (event, d) => {
+				event.stopPropagation();
+				d.clicked = !d.clicked;
+				if (d.clicked) {
+					generateProjectsList();
+				} else {
+					projectListDiv.html(null);
+				};
+				d3.select(event.currentTarget).html(d.clicked ? "Clear List of Projects" : "Generate List of Projects")
+			});
+	};
+
+
 	//show number of projects only if n > 1
 
 	function generateProjectsList() {
 
-		infoDivBody.append("div")
+		projectListDiv.append("div")
 			.attr("class", classPrefix + "projectListHeader")
 			.html("List of Projects");
 
 		datum.projectList.forEach((project, index) => {
-			infoDivBody.append("div")
+			projectListDiv.append("div")
 				.attr("class", classPrefix + "infoDivProjectCode")
 				.html("Project: " + project.projectCode);
-			infoDivBody.append("div")
+			projectListDiv.append("div")
 				.attr("class", classPrefix + "infoDivProjectTitle")
 				.html(project.projectTitle);
-			infoDivBody.append("div")
+			projectListDiv.append("div")
 				.attr("class", classPrefix + "infoDivProjectTotal")
 				.html("Total allocated: ")
 				.append("span")
 				.html("$" + formatMoney0Decimals(project.value));
-			infoDivBody.append("div")
+			projectListDiv.append("div")
 				.attr("class", classPrefix + "infoDivProjectStatus")
 				.html("Status: ")
 				.append("span")
 				.html(project.status);
-			infoDivBody.append("div")
+			projectListDiv.append("div")
 				.attr("class", classPrefix + "infoDivSectorsTitle")
 				.html("Sectors");
 			Object.entries(project.sectorsList).forEach(sector => {
-				const rowDiv = infoDivBody.append("div")
+				const rowDiv = projectListDiv.append("div")
 					.attr("class", classPrefix + "infoDivRow");
 				const sectorName = rowDiv.append("div")
 					.html(lists.sectorNamesList[sector[0]] + " (" + (formatPercentage(sector[1] / project.value)) + "): ");
@@ -974,7 +1023,7 @@ function populateInfoDiv(datum, infoDivTitle, infoDivBody) {
 					.html("$" + formatMoney0Decimals(sector[1]));
 			});
 			if (datum.projectList.length > 1 && index < datum.projectList.length - 1) {
-				infoDivBody.append("div")
+				projectListDiv.append("div")
 					.attr("class", classPrefix + "divider");
 			};
 		});
@@ -1137,6 +1186,7 @@ function processData(rawAllocationsData) {
 
 			if (foundObject) {
 				foundObject.projectList.push({
+					year: row.AYr,
 					projectCode: row.PrjCode,
 					projectTitle: row.PrjTitle,
 					status: row.PrjCycleStatus,
@@ -1153,9 +1203,9 @@ function processData(rawAllocationsData) {
 			} else {
 				const valuesArray = [{ value: aggregatedObjectSum, status: row.PrjCycleStatus }];
 				const copiedRow = {
-					year: row.AYr,
 					fund: row.PFId,
 					projectList: [{
+						year: row.AYr,
 						projectCode: row.PrjCode,
 						projectTitle: row.PrjTitle,
 						status: row.PrjCycleStatus,
