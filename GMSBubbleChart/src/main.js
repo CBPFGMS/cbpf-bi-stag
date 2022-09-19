@@ -41,6 +41,7 @@ const padding = [4, 4, 4, 4],
 	legendSizeGroupPadding = 36,
 	strokeOpacityValue = 0.8,
 	fillOpacityValue = 0.5,
+	pinFadeOpacity = 0.3,
 	circleColor = "#E56A54",
 	circleGlobalColor = "#418FDE",
 	unBlue = "#1F69B3",
@@ -155,9 +156,18 @@ function createBubbleMap({ containerDivId, dataUrl, colors }) {
 	const infoDiv = containerDiv.append("div")
 		.attr("class", classPrefix + "infoDiv");
 
-	const infoDivTitle = infoDiv.append("div")
+	const infoDivTop = infoDiv.append("div")
+		.attr("class", classPrefix + "infoDivTop");
+
+	const infoDivTitle = infoDivTop.append("div")
 		.attr("class", classPrefix + "infoDivTitle")
 		.html("Additional Information");
+
+	const infoDivPin = infoDivTop.append("div")
+		.attr("class", classPrefix + "infoDivPin")
+		.append("i")
+		.style("opacity", pinFadeOpacity)
+		.attr("class", "fa-solid fa-thumbtack");
 
 	const infoDivBody = infoDiv.append("div")
 		.attr("class", classPrefix + "infoDivBody");
@@ -220,7 +230,7 @@ function createBubbleMap({ containerDivId, dataUrl, colors }) {
 
 		disableDropdownOptions(allDropdowns);
 
-		drawBubbleMap(data, d3MapSvgGroup, legendSvg, leafletMap, buttons, infoDivTitle, infoDivBody);
+		drawBubbleMap(data, d3MapSvgGroup, legendSvg, leafletMap, buttons, infoDivTitle, infoDivBody, infoDivPin);
 
 		leafletMap.on("zoom", () => redrawMap(d3MapSvgGroup, leafletMap));
 
@@ -264,7 +274,7 @@ function createBubbleMap({ containerDivId, dataUrl, colors }) {
 
 				disableDropdownOptions(allDropdowns);
 
-				drawBubbleMap(data, d3MapSvgGroup, legendSvg, leafletMap, buttons, infoDivTitle, infoDivBody);
+				drawBubbleMap(data, d3MapSvgGroup, legendSvg, leafletMap, buttons, infoDivTitle, infoDivBody, infoDivPin);
 
 			});
 
@@ -274,11 +284,16 @@ function createBubbleMap({ containerDivId, dataUrl, colors }) {
 			for (const state in chartState) chartState[state] = structuredClone(frozenChartState[state]);
 			const data = processData(rawAllocationsData);
 			disableDropdownOptions(allDropdowns);
-			drawBubbleMap(data, d3MapSvgGroup, legendSvg, leafletMap, buttons, infoDivTitle, infoDivBody);
+			drawBubbleMap(data, d3MapSvgGroup, legendSvg, leafletMap, buttons, infoDivTitle, infoDivBody, infoDivPin);
 			for (const dropdown in allDropdowns) {
 				if (dropdown === "filterContainer") continue;
 				const type = dropdown.replace("Dropdown", "");
-				allDropdowns[dropdown].title.html(`Select ${capitalize(type)}`)
+				const names = type + "NamesList";
+				allDropdowns[dropdown].title.html(chartState[`selected${capitalize(type)}`].length === inAllDataLists[`${type}sInAllData`].length ? (type === "status" ? "All statuses" : `All ${type}s`) :
+					chartState[`selected${capitalize(type)}`].length > 1 ? (type === "status" ? "Multiple statuses" : `Multiple ${type}s`) :
+					chartState[`selected${capitalize(type)}`].length === 1 ? ((lists[names] && lists[names][chartState[`selected${capitalize(type)}`]]) ? lists[names][chartState[`selected${capitalize(type)}`]] : chartState[`selected${capitalize(type)}`]) :
+					"No selection"
+				);
 			};
 		});
 
@@ -333,6 +348,8 @@ function createDropdowns(dropdownDiv, filterDiv, tooltip) {
 
 		//region checkboxes
 
+		const names = type + "NamesList";
+
 		const dropdownContainer = dropdownDiv.append("div")
 			.datum({
 				clicked: false
@@ -348,7 +365,11 @@ function createDropdowns(dropdownDiv, filterDiv, tooltip) {
 
 		const title = titleDiv.append("div")
 			.attr("class", classPrefix + type + "Title")
-			.html("Select " + capitalize(type));
+			.html(chartState[`selected${capitalize(type)}`].length === inAllDataLists[`${type}sInAllData`].length ? (type === "status" ? "All statuses" : `All ${type}s`) :
+				chartState[`selected${capitalize(type)}`].length > 1 ? (type === "status" ? "Multiple statuses" : `Multiple ${type}s`) :
+				chartState[`selected${capitalize(type)}`].length === 1 ? ((lists[names] && lists[names][chartState[`selected${capitalize(type)}`]]) ? lists[names][chartState[`selected${capitalize(type)}`]] : chartState[`selected${capitalize(type)}`]) :
+				"No selection"
+			);
 
 		const arrow = titleDiv.append("div")
 			.attr("class", classPrefix + type + "Arrow");
@@ -475,7 +496,7 @@ function createRadioButtons(container, tooltip) {
 	//end of createRadioButtons
 };
 
-function drawBubbleMap(data, mapSvg, legendSvg, leafletMap, buttons, infoDivTitle, infoDivBody) {
+function drawBubbleMap(data, mapSvg, legendSvg, leafletMap, buttons, infoDivTitle, infoDivBody, infoDivPin) {
 
 	const mapCenter = leafletMap.getCenter();
 
@@ -678,6 +699,7 @@ function drawBubbleMap(data, mapSvg, legendSvg, leafletMap, buttons, infoDivTitl
 					populateInfoDiv(d, infoDivTitle, infoDivBody);
 				};
 				activeGroup = d.clicked ? event.currentTarget : null;
+				infoDivPin.style("opacity", d.clicked ? 1 : pinFadeOpacity);
 			});
 
 		htmlBody.on("click", () => {
@@ -687,6 +709,7 @@ function drawBubbleMap(data, mapSvg, legendSvg, leafletMap, buttons, infoDivTitl
 				.style("stroke", bubbleStrokeColor)
 				.style("stroke-width", "1px");
 			clearInfoDiv(infoDivTitle, infoDivBody);
+			infoDivPin.style("opacity", pinFadeOpacity);
 		});
 
 	};
@@ -917,13 +940,12 @@ function drawBubbleMap(data, mapSvg, legendSvg, leafletMap, buttons, infoDivTitl
 };
 
 function populateInfoDiv(datum, infoDivTitle, infoDivBody) {
-	console.log(datum)
 
 	infoDivTitle.html(datum.adminLoc + " (" + lists.fundNamesList[datum.fund] + ")");
 
 	if (!groupClicked) {
 		infoDivDisclaimer = infoDivTitle.append("span")
-			.html("&nbsp;- click the marker for freezing this panel");
+			.html("&nbsp;- click for freezing this panel");
 	};
 
 	infoDivBody.html(null);
@@ -971,7 +993,7 @@ function populateInfoDiv(datum, infoDivTitle, infoDivBody) {
 	if (datum.projectList.length > 1) {
 
 		buttonDiv.append("span")
-			.html("Generate List of Projects")
+			.html("Show List of Projects")
 			.on("click", (event, d) => {
 				event.stopPropagation();
 				d.clicked = !d.clicked;
@@ -980,7 +1002,7 @@ function populateInfoDiv(datum, infoDivTitle, infoDivBody) {
 				} else {
 					projectListDiv.html(null);
 				};
-				d3.select(event.currentTarget).html(d.clicked ? "Clear List of Projects" : "Generate List of Projects")
+				d3.select(event.currentTarget).html(d.clicked ? "Clear List of Projects" : "Show List of Projects")
 			});
 	};
 

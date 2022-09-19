@@ -97,7 +97,7 @@ svg.leaflet-zoom-animated {
   left: 0.2em;
   width: 0.6em;
   height: 0.6em;
-  background: #0069d9;
+  background: #3070b0;
   border-radius: 50%;
   opacity: 0;
   transform: scale(1.5);
@@ -108,8 +108,8 @@ svg.leaflet-zoom-animated {
 }
 #gmsbmcoption-1:checked:checked ~ .gmsbmcoption-1,
 #gmsbmcoption-2:checked:checked ~ .gmsbmcoption-2{
-  border-color: #0069d9;
-  background: #0069d9;
+  border-color: #3070b0;
+  background: #3070b0;
 }
 #gmsbmcoption-1:checked:checked ~ .gmsbmcoption-1 .gmsbmcdot,
 #gmsbmcoption-2:checked:checked ~ .gmsbmcoption-2 .gmsbmcdot{
@@ -131,7 +131,7 @@ svg.leaflet-zoom-animated {
 
 #gmsbmcmapContainerDiv {
 	width: 100%;
-	height: 45vh;
+	height: 50vh;
 }
 
 .gmsbmcLegendDiv {
@@ -283,13 +283,12 @@ svg.leaflet-zoom-animated {
 	width: 100%;
 	margin-top: 0.8em;
 	border-radius: 4px;
-	border: 1px solid #0069d9;
+	border: 1px solid #3070b0;
 	color: #fff; 
 }
 
 .gmsbmcprojectListDiv {
-	max-height: 10vh;
-	overflow-y: scroll;
+
 }
 
 .gmsbmcprojectListHeader {
@@ -297,25 +296,35 @@ svg.leaflet-zoom-animated {
 	font-size: 1.6em;
 	font-family: "Roboto", sans-serif;
 	font-weight: 500;
-	color: #0069d9;
+	color: #3070b0;
 	margin-bottom: 1em;
 }
 
 .gmsbmcdivider {
 	margin-bottom: 1em;
 	margin-top: 1em;
-	border-bottom: 1px solid #0069d9;
+	border-bottom: 1px solid #3070b0;
 }
 
-.gmsbmcinfoDivTitle {
-	background-color: #0069d9;
+.gmsbmcinfoDivTop {
+	background-color: #3070b0;
 	color: white;
 	font-family: "Roboto", sans-serif;
-	font-size: 1.4em;
-	padding: 0.2em 1em;
+	padding: 0.4em 1em;
 	font-weight: 500;
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
+}
+
+.gmsbmcinfoDivTitle {
+	font-size: 1.4em;
+	display: flex;
+	align-items: center;
+}
+
+.gmsbmcinfoDivPin i {
+	font-size: 1.6em;
 }
 
 .gmsbmcinfoDivBody {
@@ -348,7 +357,7 @@ svg.leaflet-zoom-animated {
 }
 
 .gmsbmcinfoDivProjectTotal span, .gmsbmcinfoDivProjectStatus span, .gmsbmcinfoDivProjectNumber span {
-	color: #418fde;
+	color: #3070b0;
 	font-weight: bold;
 	font-style: normal;
 	font-size: 1em;
@@ -404,7 +413,7 @@ svg.leaflet-zoom-animated {
 }
 
 .gmsbmcinfoDivRowValue {
-	color: #418fde;
+	color: #3070b0;
 }
 
 /*Loader???*/
