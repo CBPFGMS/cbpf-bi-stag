@@ -106,8 +106,7 @@ let cerfPooledFundId,
 	frozenChartState,
 	infoDivDisclaimer,
 	groupClicked = false,
-	activeGroup = null,
-	lastFilterClicked = null;
+	activeGroup = null;
 
 const colorScale = d3.scaleOrdinal();
 
@@ -240,7 +239,6 @@ function createBubbleMap({ containerDivId, dataUrl, colors }) {
 			const type = dropdown.replace("Dropdown", "");
 
 			allDropdowns[dropdown].checkboxDiv.on("change", (event, d) => {
-				lastFilterClicked = type;
 				if (+d !== +d && d.includes("All")) {
 					if (event.target.checked) {
 						chartState[`selected${capitalize(type)}`] = inAllDataLists[`${type}sInAllData`].slice();
@@ -346,8 +344,6 @@ function createDropdowns(dropdownDiv, filterDiv, tooltip) {
 
 	function createDropdown(type, allOption) {
 
-		//region checkboxes
-
 		const names = type + "NamesList";
 
 		const dropdownContainer = dropdownDiv.append("div")
@@ -423,7 +419,7 @@ function createDropdowns(dropdownDiv, filterDiv, tooltip) {
 		const allSelection = checkboxDiv.filter(d => d === allOption).select("input");
 
 		d3.select(allSelection.node().nextSibling)
-			.attr("class", classPrefix + "checkboxTextAllRegions");
+			.attr("class", classPrefix + "checkboxTextAllSelection");
 
 		const checkbox = checkboxDiv.filter(d => d !== allOption).select("input");
 
@@ -1143,6 +1139,9 @@ function processData(rawAllocationsData) {
 	const filterBy = (value, type) => chartState[`selected${type}`].includes(value);
 	const filterBySector = arr => arr.some(e => chartState.selectedSector.includes(e));
 
+	const filterByForSelection = (value, type) => chartState[`selected${type}`].length === inAllDataLists[`${type.toLowerCase()}sInAllData`].length || chartState[`selected${type}`].includes(value);
+	const filterBySectorForSelection = arr => chartState.selectedSector.length === inAllDataLists.sectorsInAllData.length || arr.some(e => chartState.selectedSector.includes(e));
+
 	const yearsInCurrentSelectionSet = new Set(),
 		fundsInCurrentSelectionSet = new Set(),
 		sectorsInCurrentSelectionSet = new Set(),
@@ -1173,13 +1172,33 @@ function processData(rawAllocationsData) {
 		const aggregatedObjectKeys = Object.keys(aggregatedObject).map(e => +e);
 
 		//populates the 'inSelectionList' outside the filtered row
+		if (filterByForSelection(row.PFId, "Fund") &&
+			filterByForSelection(row.PrjCycleStatus, "Status") &&
+			filterBySectorForSelection(aggregatedObjectKeys)) {
+			yearsInCurrentSelectionSet.add(row.AYr);
+		};
+
+		if (filterByForSelection(row.AYr, "Year") &&
+			filterByForSelection(row.PrjCycleStatus, "Status") &&
+			filterBySectorForSelection(aggregatedObjectKeys)) {
+			fundsInCurrentSelectionSet.add(row.PFId);
+		};
+
+		if (filterByForSelection(row.AYr, "Year") &&
+			filterByForSelection(row.PFId, "Fund") &&
+			filterBySectorForSelection(aggregatedObjectKeys)) {
+			statussInCurrentSelectionSet.add(row.PrjCycleStatus);
+		};
+
+		if (filterByForSelection(row.AYr, "Year") &&
+			filterByForSelection(row.PFId, "Fund") &&
+			filterByForSelection(row.PrjCycleStatus, "Status")) {
+			Object.keys(aggregatedObject).forEach(e => sectorsInCurrentSelectionSet.add(+e));
+		};
+
 		if (chartState.selectedFund.length === inAllDataLists.fundsInAllData.length &&
 			chartState.selectedSector.length === inAllDataLists.sectorsInAllData.length &&
 			chartState.selectedStatus.length === inAllDataLists.statussInAllData.length) yearsInCurrentSelectionSet.add(row.AYr);
-		//CHANGE THIS LOGIC!!!!
-		if (lastFilterClicked === "fund") fundsInCurrentSelectionSet.add(row.PFId);
-		if (lastFilterClicked === "sector") Object.keys(aggregatedObject).forEach(e => sectorsInCurrentSelectionSet.add(+e));
-		if (lastFilterClicked === "status") statussInCurrentSelectionSet.add(row.PrjCycleStatus);
 
 		//filter the row according to the filters
 		if (filterBy(row.AYr, "Year") &&
@@ -1193,12 +1212,6 @@ function processData(rawAllocationsData) {
 			};
 
 			const aggregatedObjectSum = d3.sum(Object.values(aggregatedObject));
-
-			//populates the 'inSelectionList'
-			yearsInCurrentSelectionSet.add(row.AYr);
-			fundsInCurrentSelectionSet.add(row.PFId);
-			Object.keys(aggregatedObject).forEach(e => sectorsInCurrentSelectionSet.add(+e));
-			statussInCurrentSelectionSet.add(row.PrjCycleStatus);
 
 			const latLong = row.AdmLocCord1.split(",").map(e => +e);
 
