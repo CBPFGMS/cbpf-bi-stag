@@ -352,9 +352,8 @@ function createDropdowns(dropdownDiv, filterDiv, tooltip) {
 			})
 			.attr("class", classPrefix + type + "Container");
 
-		//IMPROVE THIS, IF REQUESTED
-		// dropdownContainer.on("mouseleave", (event, d) => d3.select(event.currentTarget)
-		// 	.classed("active", d => d.clicked = false));
+		dropdownContainer.on("mouseleave", (event, d) => d3.select(event.currentTarget)
+			.classed("active", d => d.clicked = false));
 
 		const titleDiv = dropdownContainer.append("div")
 			.attr("class", classPrefix + type + "TitleDiv");
@@ -406,7 +405,7 @@ function createDropdowns(dropdownDiv, filterDiv, tooltip) {
 			label.append("i")
 				.style("font-size", "0.8em")
 				.style("color", d => colorScale(d))
-				.attr("class", "fa-solid fa-circle");
+				.attr("class", "fa-solid fa-circle " + classPrefix + "statusDot");
 		};
 
 		const span = label.append("span")
@@ -958,6 +957,12 @@ function populateInfoDiv(datum, infoDivTitle, infoDivBody) {
 		.append("span")
 		.html(datum.projectList.length);
 
+	if (datum.projectList.length === 1) {
+		const projectListDivSingle = infoDivBody.append("div")
+			.attr("class", classPrefix + "projectListDiv");
+		generateProjectsList(projectListDivSingle, false);
+	};
+
 	const aggregatedSectorsList = datum.projectList.reduce((acc, curr) => {
 		for (const key in curr.sectorsList) {
 			acc[key] = (acc[key] || 0) + curr.sectorsList[key];
@@ -994,7 +999,7 @@ function populateInfoDiv(datum, infoDivTitle, infoDivBody) {
 				event.stopPropagation();
 				d.clicked = !d.clicked;
 				if (d.clicked) {
-					generateProjectsList();
+					generateProjectsList(projectListDiv, true);
 				} else {
 					projectListDiv.html(null);
 				};
@@ -1002,46 +1007,49 @@ function populateInfoDiv(datum, infoDivTitle, infoDivBody) {
 			});
 	};
 
+	function generateProjectsList(projectContainerDiv, fromButton) {
 
-	//show number of projects only if n > 1
-
-	function generateProjectsList() {
-
-		projectListDiv.append("div")
-			.attr("class", classPrefix + "projectListHeader")
-			.html("List of Projects");
+		if (fromButton) {
+			projectContainerDiv.append("div")
+				.attr("class", classPrefix + "projectListHeader")
+				.html("List of Projects");
+		};
 
 		datum.projectList.forEach((project, index) => {
-			projectListDiv.append("div")
+			projectContainerDiv.append("div")
 				.attr("class", classPrefix + "infoDivProjectCode")
 				.html("Project: " + project.projectCode);
-			projectListDiv.append("div")
+			projectContainerDiv.append("div")
 				.attr("class", classPrefix + "infoDivProjectTitle")
 				.html(project.projectTitle);
-			projectListDiv.append("div")
-				.attr("class", classPrefix + "infoDivProjectTotal")
-				.html("Total allocated: ")
-				.append("span")
-				.html("$" + formatMoney0Decimals(project.value));
-			projectListDiv.append("div")
+			if (fromButton) {
+				projectContainerDiv.append("div")
+					.attr("class", classPrefix + "infoDivProjectTotal")
+					.html("Total allocated: ")
+					.append("span")
+					.html("$" + formatMoney0Decimals(project.value));
+			};
+			projectContainerDiv.append("div")
 				.attr("class", classPrefix + "infoDivProjectStatus")
 				.html("Status: ")
 				.append("span")
 				.html(project.status);
-			projectListDiv.append("div")
-				.attr("class", classPrefix + "infoDivSectorsTitle")
-				.html("Sectors");
-			Object.entries(project.sectorsList).forEach(sector => {
-				const rowDiv = projectListDiv.append("div")
-					.attr("class", classPrefix + "infoDivRow");
-				const sectorName = rowDiv.append("div")
-					.html(lists.sectorNamesList[sector[0]] + " (" + (formatPercentage(sector[1] / project.value)) + "): ");
-				const sectorValue = rowDiv.append("div")
-					.attr("class", classPrefix + "infoDivRowValue")
-					.html("$" + formatMoney0Decimals(sector[1]));
-			});
+			if (fromButton) {
+				projectContainerDiv.append("div")
+					.attr("class", classPrefix + "infoDivSectorsTitle")
+					.html("Sectors");
+				Object.entries(project.sectorsList).forEach(sector => {
+					const rowDiv = projectContainerDiv.append("div")
+						.attr("class", classPrefix + "infoDivRow");
+					const sectorName = rowDiv.append("div")
+						.html(lists.sectorNamesList[sector[0]] + " (" + (formatPercentage(sector[1] / project.value)) + "): ");
+					const sectorValue = rowDiv.append("div")
+						.attr("class", classPrefix + "infoDivRowValue")
+						.html("$" + formatMoney0Decimals(sector[1]));
+				});
+			};
 			if (datum.projectList.length > 1 && index < datum.projectList.length - 1) {
-				projectListDiv.append("div")
+				projectContainerDiv.append("div")
 					.attr("class", classPrefix + "divider");
 			};
 		});
