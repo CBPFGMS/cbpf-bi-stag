@@ -108,7 +108,7 @@ function fetchFile(fileName, url, method) {
 					timestamp: currentDate.getTime()
 				}));
 			} catch (error) {
-				console.error(`Error: ${fileName}`);
+				console.error(`Error fetching the file ${fileName}`);
 			};
 			console.info(`%cInfo: data file ${fileName} obtained from API call`, consoleStyle);
 			return fetchedData;
