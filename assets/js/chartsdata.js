@@ -122,7 +122,6 @@ function fetchFile(fileName, url, method, rowFunction) {
 		return Promise.resolve(fetchedData);
 	} else {
 		const fetchMethod = method === "csv" ? d3.csv : d3.json;
-		const rowFunction = method === "csv" ? d3.autoType : null;
 		return fetchMethod(url, rowFunction).then(fetchedData => {
 			try {
 				localStorage.setItem(fileName, JSON.stringify({
