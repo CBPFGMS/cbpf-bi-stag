@@ -74,7 +74,7 @@ const filesURLs = [{
 }, {
 	name: "contributionsTotalData",
 	url: "https://cbpfapi.unocha.org/vo2/odata/ContributionTotal?$format=csv&ShowAllPooledFunds=1",
-	rowFunction: d3.autoType,
+	rowFunction: null,
 	format: "csv",
 	usedBy: ["pbiclc", "pbicli", "pbifdc"]
 }, {
@@ -101,6 +101,12 @@ const filesURLs = [{
 	rowFunction: d3.autoType,
 	format: "csv",
 	usedBy: ["pbigam"]
+}, {
+	name: "worldMap",
+	url: "https://raw.githubusercontent.com/CBPFGMS/cbpfgms.github.io/master/img/assets/worldmap.json",
+	rowFunction: null,
+	format: "json",
+	usedBy: ["pbifdc"]
 }];
 
 filesURLs.forEach(file => {
