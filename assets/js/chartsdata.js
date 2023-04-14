@@ -79,7 +79,7 @@ const filesURLs = [{
 	usedBy: ["pbiclc", "pbicli", "pbifdc"]
 }, {
 	name: "targetedPersonsData",
-	url: "https://cbpfapi.unocha.org/vo2/odata/PoolFundBeneficiarySummary?$format=csv",
+	url: "https://cbpfapi.unocha.org/vo2/odata/PoolFundBeneficiarySummary?$format=csv&ShowAllPooledFunds=1",
 	rowFunction: d3.autoType,
 	format: "csv",
 	usedBy: ["pbiolc"]
