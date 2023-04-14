@@ -67,7 +67,7 @@ const filesURLs = [{
 	usedBy: ["pbinad"]
 }, {
 	name: "allocationsData",
-	url: "https://cbpfapi.unocha.org/vo2/odata/AllocationBudgetTotalsByYearAndFund?&ShowAllPooledFunds=1&FundingType=3&$format=csv",
+	url: "https://cbpfapi.unocha.org/vo2/odata/AllocationBudgetTotalsByYearAndFund?&FundingType=3&$format=csv",
 	rowFunction: d3.autoType,
 	format: "csv",
 	usedBy: ["pbialp"]
@@ -79,19 +79,19 @@ const filesURLs = [{
 	usedBy: ["pbiclc", "pbicli", "pbifdc"]
 }, {
 	name: "targetedPersonsData",
-	url: "https://cbpfapi.unocha.org/vo2/odata/PoolFundBeneficiarySummary?$format=csv&ShowAllPooledFunds=1",
+	url: "https://cbpfapi.unocha.org/vo2/odata/PoolFundBeneficiarySummary?$format=csv",
 	rowFunction: d3.autoType,
 	format: "csv",
 	usedBy: ["pbiolc"]
 }, {
 	name: "targetedPersonsDetailsData",
-	url: "https://cbpfapi.unocha.org/vo2/odata/ProjectSummaryBeneficiaryDetail?$format=csv&ShowAllPooledFunds=1",
+	url: "https://cbpfapi.unocha.org/vo2/odata/ProjectSummaryBeneficiaryDetail?$format=csv",
 	rowFunction: d3.autoType,
 	format: "csv",
 	usedBy: ["pbiobe"]
 }, {
 	name: "dataGam",
-	url: "https://cbpfapi.unocha.org/vo2/odata/ProjectGAMSummary?$format=csv&ShowAllPooledFunds=1",
+	url: "https://cbpfapi.unocha.org/vo2/odata/ProjectGAMSummary?$format=csv",
 	rowFunction: d3.autoType,
 	format: "csv",
 	usedBy: ["pbigam"]
