@@ -24,8 +24,6 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3-sankey/0.12.3/d3-sankey.min.js"></script>
     <script src="https://kit.fontawesome.com/d5d759e566.js" crossorigin="anonymous"></script>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-1884029-23"></script>
     <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cbpfgms.github.io/css/d3chartstyles.css">
     <link rel="stylesheet" type="text/css" href="https://cbpfgms.github.io/css/d3chartstylescbsank.css">
@@ -38,9 +36,26 @@
     <link rel="stylesheet" type="text/css" href="https://cbpfgms.github.io/css/d3chartstylespbiclc.css">
     <link rel="stylesheet" type="text/css" href="https://cbpfgms.github.io/css/d3chartstylespbiuac.css">
     <link rel="stylesheet" type="text/css" href="https://cbpfgms.github.io/css/d3chartstylespbinad.css">
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-MFQ9DZ9');</script>
+		<!-- End Google Tag Manager -->
+	<style>
+		.bn-news {
+			font-size: 11px;
+			font-weight: bold;
+		}
+	</style>
 </head>
 
 <body style="font-family: Montserrat, sans-serif;" data-spy="scroll" data-target="#toc">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MFQ9DZ9"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
     <div class="notification-bar">
         <div class="alert alert-warning fade in alert-dismissible show">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -303,6 +318,7 @@
                                 </div>
                             </div>
                         </section>
+
                         <section class="clean-block slider dark" style="background-color: rgb(255,255,255);">
                             <div class="container">
                                 <div class="row">
@@ -316,10 +332,34 @@
                                         </div>
                                     </div>
                                 </div>
+                                <section class="bg-grey-1">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="breaking-news-ticker" id="newsTicker3" style="height: 80px;">
+                                                    <!--<div class="bn-label">Latest Updates</div>-->
+                                                    <div class="bn-news">
+                                                        <ul>
+                                                            <li><span class="bn-prefix"><b>Note:</b></span><a href="#" style="font-size: 9px;">  Somalia, Afghanistan, CAR, DRC, Sudan and South Sudan funds contributions are currently not updated due to the migration of MPTF site to a new platform. <br> </a></li>
+                                                            
+                                                        </ul>
+                                                        
+                                                    </div>
+                                                </div>
+                                                <div id="newsTicker3" style="height: 40px; font-size: small; margin-left: 20px;">
+                                                <span class="bn-prefix">
+                                                    MPTF site is under migration to a new platform, so contributions to 6 MPTF managed funds are unavailable.
+                                                </span>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
                                 <div id="d3chartcontainerpbiclc" data-year="2023" data-contribution="paid" data-responsive="true" data-lazyload="true"></div>
 
                             </div>
                         </section>
+
                         <section class="clean-block slider">
                             <div class="container">
                                 <div class="row">
@@ -820,15 +860,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
     <script src="assets/js/breaking-news-ticker.min.js"></script>
     <script src="assets/js/chartsdata.js"></script>
+    <script>
+        $("#newsTicker3").breakingNews({
+            play:false,
+            delayTimer: 600000,
+            stopOnHover: true
+        })
+    </script>
     <script type="text/javascript">
         if (document.location.hostname.search("cbpf.data.unocha.org") !== -1) {
             window.dataLayer = window.dataLayer || [];
-
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-            gtag('js', new Date());
-            gtag('config', 'UA-1884029-23');
             $.getScript("https://cbpfgms.github.io/cbsank/src/d3chartcbsank.js", function() {});
             $.getScript("https://cbpfgms.github.io/pbiclc/src/d3chartpbiclc.js", function() {});
             $.getScript("https://cbpfgms.github.io/pbicli/src/d3chartpbicli.js", function() {});
