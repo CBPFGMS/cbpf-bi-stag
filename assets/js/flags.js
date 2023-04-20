@@ -353,7 +353,7 @@
 				if (d.name === "UNOCHA") return flagsData.un;
 				if (d.name === "Multi-Donor Funds") return flagsData.private;
 				if (!flagsData[d.isoCode.toLowerCase()]) {
-					console.warn("Flag for " + d.name + " (ISO code \"" + d.isoCode + "\") is missing")
+					console.warn("Flag for " + d.name + " (ISO code \"" + d.isoCode + "\") is missing", d)
 					return blankImg;
 				};
 				return flagsData[d.isoCode.toLowerCase()];
