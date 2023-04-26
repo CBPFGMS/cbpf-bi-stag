@@ -24,7 +24,7 @@
 
 	Promise.all([
 		window.cbpfbiDataObject.contributionsTotalData,
-		window.cbpfbiDataObject.flags
+		window.cbpfbiDataObject.flags60
 	]).then(createList);
 
 	function createList([rawData, flagsData]) {
