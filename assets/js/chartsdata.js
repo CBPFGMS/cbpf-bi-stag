@@ -25,7 +25,7 @@ const filesURLs = [{
 	usedBy: ["cbsank"]
 }, {
 	name: "flags",
-	url: "https://cbpfgms.github.io/img/assets/flags24.json",
+	url: "https://cbpfgms.github.io/img/assets/flags60.json",
 	rowFunction: d3.autoType,
 	format: "json",
 	usedBy: ["cbsank"]
