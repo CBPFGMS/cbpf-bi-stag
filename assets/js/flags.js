@@ -1,21 +1,16 @@
 (function flags() {
+	/* global d3 */
 
 	const flagsContainer = d3.select(".donor-flags-list"),
 		totalContainer = d3.select("#flags-total"),
-		currentDate = new Date(),
-		currentYear = currentDate.getFullYear(),
-		localStorageTime = 600000,
-		numberOfYears = 3,
-		formatMoney = d3.format(",.0s"),
 		formatMoney0Decimals = d3.format(",.0f"),
 		tooltipWidth = 300,
-		classPrefix = "pbiflags",
 		isPfbiSite = window.location.hostname === "cbpf.data.unocha.org",
-		blankImg = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==",
-		dataUrl = "https://cbpfapi.unocha.org/vo2/odata/ContributionTotal?ShowAllPooledFunds=1&$format=csv",
-		flagsUrl = "https://cbpfgms.github.io/img/assets/flags60.json";
-
-	const tooltip = flagsContainer.append("div")
+		blankImg =
+			"data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+			
+	const tooltip = flagsContainer
+		.append("div")
 		.attr("id", "tooltipFlags")
 		.style("display", "none");
 
@@ -24,46 +19,54 @@
 
 	Promise.all([
 		window.cbpfbiDataObject.contributionsTotalData,
-		window.cbpfbiDataObject.flags60
+		window.cbpfbiDataObject.flags60,
 	]).then(createList);
 
 	function createList([rawData, flagsData]) {
 		const allDonors = rawData.reduce(function (acc, curr) {
-			totalValue += (+curr.PaidAmt) + (+curr.PledgeAmt);
+			totalValue += +curr.PaidAmt + +curr.PledgeAmt;
 			firstYear = Math.min(firstYear, +curr.FiscalYear);
 			const foundDonor = acc.find(function (e) {
-				return e.isoCode === curr.GMSDonorISO2Code
+				return e.isoCode === curr.GMSDonorISO2Code;
 			});
 			if (foundDonor) {
-				foundDonor.amount += (+curr.PaidAmt) + (+curr.PledgeAmt);
+				foundDonor.amount += +curr.PaidAmt + +curr.PledgeAmt;
 			} else {
 				acc.push({
 					name: curr.GMSDonorName,
 					isoCode: curr.GMSDonorISO2Code,
-					amount: (+curr.PaidAmt) + (+curr.PledgeAmt)
+					amount: +curr.PaidAmt + +curr.PledgeAmt,
 				});
-			};
+			}
 			return acc;
 		}, []);
 		allDonors.sort(function (a, b) {
 			return a.name.localeCompare(b.name);
 		});
-		totalContainer.append("span")
+		totalContainer
+			.append("span")
 			.attr("class", "highlightedSpan")
 			.html(allDonors.length);
-		totalContainer.append("span")
-			.html(" CBPF donors contributed ");
-		totalContainer.append("span")
+		totalContainer.append("span").html(" CBPF donors contributed ");
+		totalContainer
+			.append("span")
 			.attr("class", "highlightedSpan")
 			.html(function () {
 				let siTotal = d3.formatPrefix(".2s", totalValue)(totalValue);
 				const unit = siTotal.slice(-1);
-				const unitText = unit === "k" ? "Thousand" : unit === "M" ? "Million" : unit === "G" ? "Billion" : "";
+				const unitText =
+					unit === "k"
+						? "Thousand"
+						: unit === "M"
+						? "Million"
+						: unit === "G"
+						? "Billion"
+						: "";
 				return siTotal.slice(0, -1) + " " + unitText;
 			});
-		totalContainer.append("span")
-			.html(" since " + firstYear);
-		const div = flagsContainer.selectAll(null)
+		totalContainer.append("span").html(" since " + firstYear);
+		const div = flagsContainer
+			.selectAll(null)
 			.data(allDonors)
 			.enter()
 			.append("div")
@@ -75,9 +78,16 @@
 				if (d.name === "UNOCHA") return flagsData.un;
 				if (d.name === "Multi-Donor Funds") return flagsData.private;
 				if (!flagsData[d.isoCode.toLowerCase()]) {
-					if (!isPfbiSite) console.warn("Flag for " + d.name + " (ISO code \"" + d.isoCode + "\") is missing")
+					if (!isPfbiSite)
+						console.warn(
+							"Flag for " +
+								d.name +
+								' (ISO code "' +
+								d.isoCode +
+								'") is missing'
+						);
 					return blankImg;
-				};
+				}
 				return flagsData[d.isoCode.toLowerCase()];
 			});
 		div.append("div")
@@ -88,32 +98,34 @@
 				return d.name;
 			});
 
-		div.on("mouseover", generateTooltip)
-			.on("mouseout", function () {
-				tooltip.style("display", "none")
-					.html(null);
-			});
+		div.on("mouseover", generateTooltip).on("mouseout", function () {
+			tooltip.style("display", "none").html(null);
+		});
 
 		function generateTooltip(datum) {
-			tooltip.style("display", "block")
-				.html(null)
+			tooltip.style("display", "block").html(null);
 
-			const innerTooltipDiv = tooltip.append("div")
+			const innerTooltipDiv = tooltip
+				.append("div")
 				.style("max-width", tooltipWidth + "px")
 				.attr("id", "flagsinnerTooltipDiv");
 
-			const titleDiv = innerTooltipDiv.append("div")
+			const titleDiv = innerTooltipDiv
+				.append("div")
 				.attr("class", "flagstooltipTitleDiv")
 				.style("margin-bottom", "18px");
 
-			const titleNameDiv = titleDiv.append("div")
+			const titleNameDiv = titleDiv
+				.append("div")
 				.attr("class", "flagstitleNameDiv");
 
-			titleNameDiv.append("strong")
+			titleNameDiv
+				.append("strong")
 				.style("font-size", "16px")
 				.html(datum.isoCode === "MK" ? "North Macedonia" : datum.name);
 
-			const tooltipContainer = innerTooltipDiv.append("div")
+			const tooltipContainer = innerTooltipDiv
+				.append("div")
 				.style("margin", "0px")
 				.style("display", "flex")
 				.style("flex-wrap", "wrap")
@@ -121,33 +133,41 @@
 				.style("line-height", 1.4)
 				.style("width", "100%");
 
-			const rowDiv = tooltipContainer.append("div")
+			const rowDiv = tooltipContainer
+				.append("div")
 				.style("display", "flex")
 				.style("align-items", "center")
 				.style("margin-bottom", "4px")
 				.style("width", "100%");
 
-			rowDiv.append("span")
+			rowDiv
+				.append("span")
 				.attr("class", "flagstooltipKeys")
 				.html("Total contributions");
 
-			rowDiv.append("span")
-				.attr("class", "flagstooltipLeader");
+			rowDiv.append("span").attr("class", "flagstooltipLeader");
 
-			rowDiv.append("span")
+			rowDiv
+				.append("span")
 				.attr("class", "flagstooltipValues")
 				.html("$" + formatMoney0Decimals(datum.amount));
 
 			const thisBox = this.getBoundingClientRect();
 			const containerBox = flagsContainer.node().getBoundingClientRect();
 			const tooltipBox = tooltip.node().getBoundingClientRect();
-			const thisOffsetTop = thisBox.top - containerBox.top - (tooltipBox.height - thisBox.height) / 2;
-			const thisOffsetLeft = thisBox.left - containerBox.left > containerBox.width - tooltipBox.width - thisBox.width ?
-				thisBox.left - containerBox.left - tooltipBox.width :
-				thisBox.right - containerBox.left;
-			tooltip.style("top", thisOffsetTop + "px")
+			const thisOffsetTop =
+				thisBox.top -
+				containerBox.top -
+				(tooltipBox.height - thisBox.height) / 2;
+			const thisOffsetLeft =
+				thisBox.left - containerBox.left >
+				containerBox.width - tooltipBox.width - thisBox.width
+					? thisBox.left - containerBox.left - tooltipBox.width
+					: thisBox.right - containerBox.left;
+			tooltip
+				.style("top", thisOffsetTop + "px")
 				.style("left", thisOffsetLeft + "px");
-		};
+		}
 
 		//No value for the time being
 		// div.append("div")
@@ -156,6 +176,5 @@
 		// 	.html(function(d) {
 		// 		return "($" + formatMoney0Decimals(d.amount) + ")";
 		// 	});
-	};
-
-}());
+	}
+})();
