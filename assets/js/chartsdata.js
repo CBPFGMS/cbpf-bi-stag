@@ -32,8 +32,8 @@ const ipNames = ["ingo", "ngo", "o", "un"],
 	],
 	GenderMarkerGroups = ["gam", "gm"],
 	GenderMarkerCodes = ["2a", "2b"],
-	maxDonorId = 207,
-	maxFundId = 251;
+	maxDonorId = 250,
+	maxFundId = 300;
 
 const localStorageTime = 3600000,
 	currentDate = new Date(),
