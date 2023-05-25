@@ -396,7 +396,7 @@ const filesURLs = [
 			},
 			{
 				name: "PledgeAmtLocalCurrency",
-				type: "string",
+				type: t => typeof t === "string" || t === null, //the value must be either a string or null
 				filterFunction: null,
 			},
 			{
@@ -406,7 +406,7 @@ const filesURLs = [
 			},
 			{
 				name: "PaidAmtLocalCurrency",
-				type: "string",
+				type: t => typeof t === "string" || t === null, //the value must be either a string or null
 				filterFunction: null,
 			},
 			{
