@@ -87,12 +87,14 @@ Dataset: [https://cbpfapi.unocha.org/vo2/odata/ContributionTotal?$format=csv&Sho
 |PooledFundISO2Code|string|2 characters|
 |PaidAmt|number|non-negative|
 |PledgeAmt|number|non-negative|
-|PledgeAmtLocalCurrency|string|no|
+|PledgeAmtLocalCurrency|string or `null`|no|
 |PledgeAmtCurrencyExchangeRate|number|no|
-|PaidAmtLocalCurrency|string|no|
+|PaidAmtLocalCurrency|string or `null`|no|
 |PaidAmtCurrencyExchangeRate|number|no|
 |PledgeAmtLocal|number|non-negative|
 |PaidAmtLocal|number|non-negative|
+
+> `null` refers to an empty cell in the CSV
 
 ### 6. Targeted persons data
 Dataset: [https://cbpfapi.unocha.org/vo2/odata/PoolFundBeneficiarySummary?$format=csv&ShowAllPooledFunds=1](https://cbpfapi.unocha.org/vo2/odata/PoolFundBeneficiarySummary?$format=csv&ShowAllPooledFunds=1)
