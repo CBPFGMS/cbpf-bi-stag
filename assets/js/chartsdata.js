@@ -1,3 +1,4 @@
+/* global d3 */
 //using a global object for sharing data
 window.cbpfbiDataObject = {};
 
