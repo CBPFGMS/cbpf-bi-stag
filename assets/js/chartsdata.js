@@ -59,6 +59,14 @@ const filesURLs = [
 		dataFilters: null,
 	},
 	{
+		name: "masterRegionalFunds",
+		url: "https://cbpfgms.github.io/pfbi-data/mst/MstRhpf.json",
+		autoType: false,
+		format: "json",
+		usedBy: ["pbiclc", "pbialp", "pbifdc", "pbigam", "pbihrp"],
+		dataFilters: null,
+	},
+	{
 		name: "masterAllocationTypes",
 		url: "https://cbpfgms.github.io/pfbi-data/mst/MstAllocation.json",
 		autoType: false,
