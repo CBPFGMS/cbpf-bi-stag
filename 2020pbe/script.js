@@ -1,6 +1,6 @@
 // Change this to the location of your CSV file
 const CSV_URL = '2020data.csv';
-
+$.fn.dataTable.ext.errMode = 'none';
 // Parse the CSV
 Papa.parse(CSV_URL, {
   download: true,
