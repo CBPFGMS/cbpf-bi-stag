@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab">
     <link rel="stylesheet" href="assets/css/Highlight-Phone.css">
-    <link rel="stylesheet" href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap-toc.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
     <link rel="stylesheet" href="assets/css/smoothproducts.css">
@@ -36,19 +36,19 @@
     <link rel="stylesheet" type="text/css" href="https://cbpfgms.github.io/css/d3chartstylespbiclc.css">
     <link rel="stylesheet" type="text/css" href="https://cbpfgms.github.io/css/d3chartstylespbiuac.css">
     <link rel="stylesheet" type="text/css" href="https://cbpfgms.github.io/css/d3chartstylespbinad.css">
-	<!-- Google Tag Manager -->
-	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-		})(window,document,'script','dataLayer','GTM-MFQ9DZ9');</script>
-		<!-- End Google Tag Manager -->
-	<style>
-		.bn-news {
-			font-size: 11px;
-			font-weight: bold;
-		}
-	</style>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-MFQ9DZ9');</script>
+        <!-- End Google Tag Manager -->
+    <style>
+        .bn-news {
+            font-size: 11px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body style="font-family: Montserrat, sans-serif;" data-spy="scroll" data-target="#toc">
@@ -130,7 +130,6 @@
                         FIRST TIME TO CBPF DATA HUB <span><i class="fa fa-play-circle" style="color:#f79a3b"></i></span>
                     </button><a href="assets/pdf/cbpf-data-hub.pdf" class="info-pdf" alt="PFBI Background" title="PFBI Background" target="_blank"><img src="assets/img/info-pdf_icon.svg" width="13" height="13px;"></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="dataexplorer.html" style="color:#146eb4;">DATA EXPLORER</a></li>
-                    <li class="nav-item p-0" role="presentation"><a class="nav-link active" href="resources.html" style="color:#146eb4;">RESOURCES</a></li>
                 </ul>
             </div>
         </div>
@@ -217,17 +216,20 @@
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-md-auto col-sm-3">
+                    <a href="https://cbpf.data.unocha.org/results.html" target="_blank" title="Results Dashboard"><img src="assets/img/results-dashboard-banner.png" alt="" class="img-fluid"></a>
+                </div>
+                <div class="col-md-auto col-sm-3">
                     <a href="allocations-overview.html" title="Alloacation Overview"><img src="assets/img/allocation-overview-banner-update1.png" alt="" class="img-fluid"></a>
                 </div>
                 <div class="col-md-auto col-sm-3">
 					<a href="cbpfvshrp.html" title="CBPF vs HRP"><img src="assets/img/cbpf-vs-hrp-banner-update1.png" alt="" class="img-fluid"></a>
                 </div>
-				<div class="col-md-auto col-sm-3">
+				<!--<div class="col-md-auto col-sm-3">
 					<a href="#gam_heading" title="GAM Marker"><img src="assets/img/gam-marker-update1.png" alt="" class="img-fluid"></a>
                 </div>
                 <div class="col-md-auto col-sm-3">
                     <a href="https://pfdata.unocha.org/COVID19/" title="COVID 19 CBPF and CERF"><img src="assets/img/covid-19-allocation-banner.png" alt="" class="img-fluid"></a>
-                </div>
+                </div>-->
             </div>
         </div>
     </section>
@@ -318,7 +320,7 @@
                                 </div>
                             </div>
                         </section>
-
+                        
                         <section class="clean-block slider dark" style="background-color: rgb(255,255,255);">
                             <div class="container">
                                 <div class="row">
@@ -332,34 +334,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <section class="bg-grey-1">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="breaking-news-ticker" id="newsTicker3" style="height: 80px;">
-                                                    <!--<div class="bn-label">Latest Updates</div>-->
-                                                    <div class="bn-news">
-                                                        <ul>
-                                                            <li><span class="bn-prefix"><b>Note:</b></span><a href="#" style="font-size: 9px;">  Somalia, Afghanistan, CAR, DRC, Sudan and South Sudan funds contributions are currently not updated due to the migration of MPTF site to a new platform. <br> </a></li>
-                                                            
-                                                        </ul>
-                                                        
-                                                    </div>
-                                                </div>
-                                                <div id="newsTicker3" style="height: 40px; font-size: small; margin-left: 20px;">
-                                                <span class="bn-prefix">
-                                                    MPTF site is under migration to a new platform, so contributions to 6 MPTF managed funds are unavailable.
-                                                </span>
-                                            </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </section>
                                 <div id="d3chartcontainerpbiclc" data-year="2023" data-contribution="paid" data-responsive="true" data-lazyload="true"></div>
 
                             </div>
                         </section>
-
+                        
                         <section class="clean-block slider">
                             <div class="container">
                                 <div class="row">
@@ -851,7 +830,7 @@
     <script type="text/javascript" id="cookieinfo" src="assets/js/cookieinfo.min.js" data-bg="#002856" data-fg="#FFF" data-link="#FFF" data-cookie="CookieInfoScript" data-text-align="left" data-close-text="OK">
     </script>
 
-    <script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+    <script src="assets/js/bootstrap-toc.min.js"></script>
     <script src="assets/js/bs-animation.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
     <script src="assets/js/smoothproducts.min.js"></script>
