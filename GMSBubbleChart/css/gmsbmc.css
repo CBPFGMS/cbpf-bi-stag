@@ -60,7 +60,7 @@ svg.leaflet-zoom-animated {
 }
 
 .gmsbmcradioTextDiv span {
-	font-size: 1.2em;
+	font-size: 1em;
 	color: #222;
 	font-weight: normal;
 }
@@ -127,7 +127,7 @@ svg.leaflet-zoom-animated {
   transform: scale(1);
 }
 .gmsbmcoption span{
-  font-size: 1.2em;
+  font-size: 0.9em;
   color: #222;
 }
 #gmsbmcoption-1:checked:checked ~ .gmsbmcoption-1 span,
@@ -209,7 +209,7 @@ svg.leaflet-zoom-animated {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
-	font-size: 1.2em;
+	font-size: 1em;
 	color: #222;
 }
 
@@ -317,7 +317,7 @@ svg.leaflet-zoom-animated {
 
 .gmsbmcprojectListHeader {
 	margin-top: 0.8em;
-	font-size: 1.6em;
+	font-size: 1.2em;
 	font-family: "Roboto", sans-serif;
 	font-weight: 500;
 	color: #3070b0;
@@ -342,13 +342,13 @@ svg.leaflet-zoom-animated {
 }
 
 .gmsbmcinfoDivTitle {
-	font-size: 1.4em;
+	font-size: 1em;
 	display: flex;
 	align-items: center;
 }
 
 .gmsbmcinfoDivPin i {
-	font-size: 1.6em;
+	font-size: 1.2em;
 }
 
 .gmsbmcinfoDivBody {
@@ -361,7 +361,7 @@ svg.leaflet-zoom-animated {
 
 .gmsbmcinfoDivProjectCode {
 	font-weight: bold;
-	font-size: 1.2em;
+	font-size: 1em;
 	font-family: "Arial", sans-serif;
 	margin-top: 0.5em;
 }
@@ -376,7 +376,7 @@ svg.leaflet-zoom-animated {
 
 .gmsbmcinfoDivProjectTotal, .gmsbmcinfoDivProjectStatus, .gmsbmcinfoDivProjectNumber {
 	color: #2f4f4f;
-	font-size: 1.2em;
+	font-size: 1em;
 	font-style: normal;
 }
 
@@ -422,7 +422,7 @@ svg.leaflet-zoom-animated {
 .gmsbmcinfoDivSectorsTitle {
 	margin-top: 1em;
 	font-weight: bold;
-	font-size: 1.2em;
+	font-size: 1em;
 	margin-bottom: 0.3em;
 	border-bottom: 1px solid #ccc;
 }
