@@ -1,4 +1,4 @@
-//necessary external resourtces: d3.js, leaflet.js, leaflet.css
+//necessary external resources: d3.js, leaflet.js, leaflet.css
 //d3 version: 7.6.1 (all listeners using the arguments in the sequence: event, datum)
 //leaflet version: 1.4.0
 
