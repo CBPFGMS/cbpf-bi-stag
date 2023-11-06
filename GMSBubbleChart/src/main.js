@@ -1,6 +1,7 @@
 //necessary external resources: d3.js, leaflet.js, leaflet.css
 //d3 version: 7.6.1 (all listeners using the arguments in the sequence: event, datum)
 //leaflet version: 1.4.0
+/* global d3 */
 
 import { countryBoundingBoxes } from "./boundingboxes.js";
 import { isoAlpha2to3 } from "./alpha2to3.js";
@@ -48,7 +49,8 @@ const padding = [4, 4, 4, 4],
 	highlightColor = "#F79A3B",
 	circleStroke = "#555",
 	markerStroke = "#555",
-	markerAttribute = "M0,0l-8.8-17.7C-12.1-24.3-7.4-32,0-32h0c7.4,0,12.1,7.7,8.8,14.3L0,0z",
+	markerAttribute =
+		"M0,0l-8.8-17.7C-12.1-24.3-7.4-32,0-32h0c7.4,0,12.1,7.7,8.8,14.3L0,0z",
 	minValueColor = "#eee",
 	highlightedBubbleColor = "darkred",
 	bubbleStrokeColor = "#666",
@@ -69,7 +71,7 @@ const padding = [4, 4, 4, 4],
 		selectedFund: null,
 		selectedSector: null,
 		selectedStatus: null,
-		displayMode: null
+		displayMode: null,
 	},
 	cbpfStatusList = {},
 	cerfIdsList = {},
@@ -83,23 +85,24 @@ const padding = [4, 4, 4, 4],
 		yearsInCurrentSelection: [],
 		fundsInCurrentSelection: [],
 		sectorsInCurrentSelection: [],
-		statussInCurrentSelection: []
+		statussInCurrentSelection: [],
 	},
 	inAllDataLists = {
 		yearsInAllData: [],
 		fundsInAllData: [],
 		sectorsInAllData: [],
-		statussInAllData: []
+		statussInAllData: [],
 	},
 	lists = {
 		fundNamesList: {},
 		fundNamesListKeys: [],
-		sectorNamesList: {}
+		sectorNamesList: {},
 	},
 	colorScales = {},
 	// masterFundsUrl = "https://cbpfgms.github.io/pfbi-data/mst/MstCountry.json",
 	masterFundsUrl = "https://cbpfapi.unocha.org/vo2/odata/MstPooledFund", //IMPORTANT: CHANGE THIS FOR THE UNIFIED ID SYSTEM, LINK ABOVE
-	masterSectorTypesUrl = "https://cbpfgms.github.io/pfbi-data/mst/MstCluster.json",
+	masterSectorTypesUrl =
+		"https://cbpfgms.github.io/pfbi-data/mst/MstCluster.json",
 	htmlBody = d3.select("body");
 
 let cerfPooledFundId,
@@ -110,22 +113,18 @@ let cerfPooledFundId,
 
 const colorScale = d3.scaleOrdinal();
 
-const radiusScale = d3.scaleSqrt()
-	.range([minCircleRadius, maxCircleRadius]);
+const radiusScale = d3.scaleSqrt().range([minCircleRadius, maxCircleRadius]);
 
-const arcGenerator = d3.arc()
-	.innerRadius(0);
+const arcGenerator = d3.arc().innerRadius(0);
 
-const arcGeneratorEnter = d3.arc()
-	.innerRadius(0)
-	.outerRadius(0);
+const arcGeneratorEnter = d3.arc().innerRadius(0).outerRadius(0);
 
-const pieGenerator = d3.pie()
+const pieGenerator = d3
+	.pie()
 	.value(d => d.value)
 	.sort(null);
 
 function createBubbleMap({ containerDivId, dataUrl, colors }) {
-
 	const containerDiv = d3.select(`#${containerDivId}`);
 	containerDiv.style("position", "relative");
 	const containerDivSize = containerDiv.node().getBoundingClientRect();
@@ -133,83 +132,124 @@ function createBubbleMap({ containerDivId, dataUrl, colors }) {
 
 	const loader = createLoader(containerDiv);
 
-	const tooltip = containerDiv.append("div")
+	const tooltip = containerDiv
+		.append("div")
 		.attr("id", classPrefix + "tooltipDiv")
 		.style("display", "none");
 
-	const topDiv = containerDiv.append("div")
+	const topDiv = containerDiv
+		.append("div")
 		.attr("class", classPrefix + "topDiv");
 
-	const dropdownDiv = topDiv.append("div")
+	const dropdownDiv = topDiv
+		.append("div")
 		.attr("class", classPrefix + "dropdownDiv");
 
-	const filterDiv = topDiv.append("div")
+	const filterDiv = topDiv
+		.append("div")
 		.attr("class", classPrefix + "filterDiv");
 
-	const buttonsDiv = containerDiv.append("div")
+	const buttonsDiv = containerDiv
+		.append("div")
 		.attr("class", classPrefix + "buttonsDiv");
 
-	const mapContainerDiv = containerDiv.append("div")
+	const mapContainerDiv = containerDiv
+		.append("div")
 		.attr("id", classPrefix + "mapContainerDiv");
 
-	const infoDiv = containerDiv.append("div")
+	const infoDiv = containerDiv
+		.append("div")
 		.attr("class", classPrefix + "infoDiv");
 
-	const infoDivTop = infoDiv.append("div")
+	const infoDivTop = infoDiv
+		.append("div")
 		.attr("class", classPrefix + "infoDivTop");
 
-	const infoDivTitle = infoDivTop.append("div")
+	const infoDivTitle = infoDivTop
+		.append("div")
 		.attr("class", classPrefix + "infoDivTitle")
 		.html("Additional Information");
 
-	const infoDivPin = infoDivTop.append("div")
+	const infoDivPin = infoDivTop
+		.append("div")
 		.attr("class", classPrefix + "infoDivPin")
 		.append("i")
 		.style("opacity", pinFadeOpacity)
 		.attr("class", "fa-solid fa-thumbtack");
 
-	const infoDivBody = infoDiv.append("div")
+	const infoDivBody = infoDiv
+		.append("div")
 		.attr("class", classPrefix + "infoDivBody");
 
 	const leafletMap = L.map(`${classPrefix}mapContainerDiv`, {
 		zoomSnap: zoomSnap,
-		zoomDelta: zoomDelta
+		zoomDelta: zoomDelta,
 	});
 
-	leafletMap.setView([mapInitialLatitude, mapInitialLongitude], mapInitialZoom);
+	leafletMap.setView(
+		[mapInitialLatitude, mapInitialLongitude],
+		mapInitialZoom
+	);
 
-	L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-		subdomains: 'abcd',
-		maxZoom: maxZoomValue
-	}).addTo(leafletMap);
+	L.tileLayer(
+		"https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+		{
+			attribution:
+				'&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+			subdomains: "abcd",
+			maxZoom: maxZoomValue,
+		}
+	).addTo(leafletMap);
 
 	const svgLayer = L.svg();
 
 	svgLayer.addTo(leafletMap);
 
-	const d3MapSvgGroup = d3.select(".leaflet-overlay-pane g")
+	const d3MapSvgGroup = d3
+		.select(".leaflet-overlay-pane g")
 		.attr("class", classPrefix + "D3MapSvg");
 
-	const legendDiv = mapContainerDiv.append("div")
+	const legendDiv = mapContainerDiv
+		.append("div")
 		.attr("class", classPrefix + "LegendDiv");
 
-	const legendSvg = legendDiv.append("svg")
+	const legendSvg = legendDiv
+		.append("svg")
 		.attr("class", classPrefix + "LegendSvg")
 		.attr("width", legendSvgWidth)
-		.attr("height", chartState.displayMode === "size" ? legendSvgHeightSize : legendColorPadding + legendSvgHeightColor * 3);
+		.attr(
+			"height",
+			chartState.displayMode === "size"
+				? legendSvgHeightSize
+				: legendColorPadding + legendSvgHeightColor * 3
+		);
 
-	Promise.all([fetchFile("masterFunds", masterFundsUrl, "master table for funds", "json"),
-			fetchFile("masterSectorTypes", masterSectorTypesUrl, "master table for sector types", "json"),
-			fetchFile("allocationsData", dataUrl, "allocations data", "csv")
-		])
-		.then(rawData => controlChart(rawData));
+	Promise.all([
+		fetchFile(
+			classPrefix + "masterFunds",
+			masterFundsUrl,
+			"master table for funds",
+			"json"
+		),
+		fetchFile(
+			classPrefix + "masterSectorTypes",
+			masterSectorTypesUrl,
+			"master table for sector types",
+			"json"
+		),
+		fetchFile(
+			classPrefix + "allocationsData",
+			dataUrl,
+			"allocations data",
+			"csv"
+		),
+	]).then(rawData => controlChart(rawData));
 
-	function controlChart([masterFunds,
+	function controlChart([
+		masterFunds,
 		masterSectorTypes,
-		rawAllocationsData
+		rawAllocationsData,
 	]) {
-
 		removeLoader(loader);
 
 		createFundsList(masterFunds.value); //REMOVE 'value' IN THE FINAL VERSION
@@ -217,7 +257,11 @@ function createBubbleMap({ containerDivId, dataUrl, colors }) {
 
 		preProcessData(rawAllocationsData, colors);
 
-		infoDivBody.html(`Hover over the ${chartState.displayMode === "size" ? "circles" : "markers"} for displaying additional information`);
+		infoDivBody.html(
+			`Hover over the ${
+				chartState.displayMode === "size" ? "circles" : "markers"
+			} for displaying additional information`
+		);
 
 		createColorScales();
 
@@ -229,7 +273,16 @@ function createBubbleMap({ containerDivId, dataUrl, colors }) {
 
 		disableDropdownOptions(allDropdowns);
 
-		drawBubbleMap(data, d3MapSvgGroup, legendSvg, leafletMap, buttons, infoDivTitle, infoDivBody, infoDivPin);
+		drawBubbleMap(
+			data,
+			d3MapSvgGroup,
+			legendSvg,
+			leafletMap,
+			buttons,
+			infoDivTitle,
+			infoDivBody,
+			infoDivPin
+		);
 
 		leafletMap.on("zoom", () => redrawMap(d3MapSvgGroup, leafletMap));
 
@@ -241,143 +294,257 @@ function createBubbleMap({ containerDivId, dataUrl, colors }) {
 			allDropdowns[dropdown].checkboxDiv.on("change", (event, d) => {
 				if (+d !== +d && d.includes("All")) {
 					if (event.target.checked) {
-						chartState[`selected${capitalize(type)}`] = inAllDataLists[`${type}sInAllData`].slice();
-						allDropdowns[dropdown].checkbox.property("checked", false);
+						chartState[`selected${capitalize(type)}`] =
+							inAllDataLists[`${type}sInAllData`].slice();
+						allDropdowns[dropdown].checkbox.property(
+							"checked",
+							false
+						);
 					} else {
 						chartState[`selected${capitalize(type)}`].length = 0;
-					};
+					}
 				} else {
 					if (event.target.checked) {
-						if (chartState[`selected${capitalize(type)}`].length === inAllDataLists[`${type}sInAllData`].length) {
+						if (
+							chartState[`selected${capitalize(type)}`].length ===
+							inAllDataLists[`${type}sInAllData`].length
+						) {
 							chartState[`selected${capitalize(type)}`] = [d];
 						} else {
 							chartState[`selected${capitalize(type)}`].push(d);
-						};
+						}
 					} else {
-						const thisIndex = chartState[`selected${capitalize(type)}`].indexOf(d);
-						chartState[`selected${capitalize(type)}`].splice(thisIndex, 1);
-					};
-					allDropdowns[dropdown].allSelection.property("checked", false);
-				};
+						const thisIndex =
+							chartState[`selected${capitalize(type)}`].indexOf(
+								d
+							);
+						chartState[`selected${capitalize(type)}`].splice(
+							thisIndex,
+							1
+						);
+					}
+					allDropdowns[dropdown].allSelection.property(
+						"checked",
+						false
+					);
+				}
 
 				const names = type + "NamesList";
 
-				allDropdowns[dropdown].title.html(chartState[`selected${capitalize(type)}`].length === inAllDataLists[`${type}sInAllData`].length ? (type === "status" ? "All statuses" : `All ${type}s`) :
-					chartState[`selected${capitalize(type)}`].length > 1 ? (type === "status" ? "Multiple statuses" : `Multiple ${type}s`) :
-					chartState[`selected${capitalize(type)}`].length === 1 ? ((lists[names] && lists[names][d]) ? lists[names][d] : d) :
-					"No selection"
+				allDropdowns[dropdown].title.html(
+					chartState[`selected${capitalize(type)}`].length ===
+						inAllDataLists[`${type}sInAllData`].length
+						? type === "status"
+							? "All statuses"
+							: `All ${type}s`
+						: chartState[`selected${capitalize(type)}`].length > 1
+						? type === "status"
+							? "Multiple statuses"
+							: `Multiple ${type}s`
+						: chartState[`selected${capitalize(type)}`].length === 1
+						? lists[names] && lists[names][d]
+							? lists[names][d]
+							: d
+						: "No selection"
 				);
 
 				const data = processData(rawAllocationsData);
 
 				disableDropdownOptions(allDropdowns);
 
-				drawBubbleMap(data, d3MapSvgGroup, legendSvg, leafletMap, buttons, infoDivTitle, infoDivBody, infoDivPin);
-
+				drawBubbleMap(
+					data,
+					d3MapSvgGroup,
+					legendSvg,
+					leafletMap,
+					buttons,
+					infoDivTitle,
+					infoDivBody,
+					infoDivPin
+				);
 			});
-
-		};
+		}
 
 		allDropdowns.filterContainer.on("click", () => {
-			for (const state in chartState) chartState[state] = structuredClone(frozenChartState[state]);
+			for (const state in chartState)
+				chartState[state] = structuredClone(frozenChartState[state]);
 			const data = processData(rawAllocationsData);
 			disableDropdownOptions(allDropdowns);
-			drawBubbleMap(data, d3MapSvgGroup, legendSvg, leafletMap, buttons, infoDivTitle, infoDivBody, infoDivPin);
+			drawBubbleMap(
+				data,
+				d3MapSvgGroup,
+				legendSvg,
+				leafletMap,
+				buttons,
+				infoDivTitle,
+				infoDivBody,
+				infoDivPin
+			);
 			for (const dropdown in allDropdowns) {
 				if (dropdown === "filterContainer") continue;
 				const type = dropdown.replace("Dropdown", "");
 				const names = type + "NamesList";
-				allDropdowns[dropdown].title.html(chartState[`selected${capitalize(type)}`].length === inAllDataLists[`${type}sInAllData`].length ? (type === "status" ? "All statuses" : `All ${type}s`) :
-					chartState[`selected${capitalize(type)}`].length > 1 ? (type === "status" ? "Multiple statuses" : `Multiple ${type}s`) :
-					chartState[`selected${capitalize(type)}`].length === 1 ? ((lists[names] && lists[names][chartState[`selected${capitalize(type)}`]]) ? lists[names][chartState[`selected${capitalize(type)}`]] : chartState[`selected${capitalize(type)}`]) :
-					"No selection"
+				allDropdowns[dropdown].title.html(
+					chartState[`selected${capitalize(type)}`].length ===
+						inAllDataLists[`${type}sInAllData`].length
+						? type === "status"
+							? "All statuses"
+							: `All ${type}s`
+						: chartState[`selected${capitalize(type)}`].length > 1
+						? type === "status"
+							? "Multiple statuses"
+							: `Multiple ${type}s`
+						: chartState[`selected${capitalize(type)}`].length === 1
+						? lists[names] &&
+						  lists[names][
+								chartState[`selected${capitalize(type)}`]
+						  ]
+							? lists[names][
+									chartState[`selected${capitalize(type)}`]
+							  ]
+							: chartState[`selected${capitalize(type)}`]
+						: "No selection"
 				);
-			};
+			}
 		});
 
 		//end of controlChart
-	};
+	}
 
 	//end of createBubbleMap;
-};
-
+}
 
 function createDropdowns(dropdownDiv, filterDiv, tooltip) {
-
 	const yearDropdown = createDropdown("year", allYears);
 	const fundDropdown = createDropdown("fund", allFunds);
 	const sectorDropdown = createDropdown("sector", allSectors);
 	const statusDropdown = createDropdown("status", allStatus);
 
-	const filterContainer = filterDiv.append("div")
+	const filterContainer = filterDiv
+		.append("div")
 		.attr("class", classPrefix + "filterContainer");
 
-	filterContainer.append("i")
+	filterContainer
+		.append("i")
 		.style("font-size", "22px")
 		.attr("class", "fa-solid fa-filter-circle-xmark");
 
-	filterContainer.on("mouseover", event => {
-		tooltip.style("display", "block")
-			.html(null);
+	filterContainer
+		.on("mouseover", event => {
+			tooltip.style("display", "block").html(null);
 
-		const innerTooltip = tooltip.append("div")
-			.style("max-width", "120px")
-			.style("white-space", "nowrap")
-			.attr("id", classPrefix + "innerTooltipDiv");
+			const innerTooltip = tooltip
+				.append("div")
+				.style("max-width", "120px")
+				.style("white-space", "nowrap")
+				.attr("id", classPrefix + "innerTooltipDiv");
 
-		innerTooltip.html("Remove all filters.");
+			innerTooltip.html("Remove all filters.");
 
-		const containerSize = tooltip.node().parentNode.getBoundingClientRect();
-		const thisSize = event.currentTarget.getBoundingClientRect();
-		const tooltipSize = tooltip.node().getBoundingClientRect();
+			const containerSize = tooltip
+				.node()
+				.parentNode.getBoundingClientRect();
+			const thisSize = event.currentTarget.getBoundingClientRect();
+			const tooltipSize = tooltip.node().getBoundingClientRect();
 
-		//IMPORTANT: add the function for positioning the tooltip
-		tooltip.style("left", (thisSize.left + thisSize.width / 2 - tooltipSize.width / 2) < containerSize.left ?
-				"0px" : thisSize.left + thisSize.width / 2 - tooltipSize.width / 2 - containerSize.left + "px")
-			.style("top", thisSize.top - containerSize.top + thisSize.height + 12 + "px");
-	}).on("mouseout", () => {
-		tooltip.html(null)
-			.style("display", "none");
-	});
+			//IMPORTANT: add the function for positioning the tooltip
+			tooltip
+				.style(
+					"left",
+					thisSize.left + thisSize.width / 2 - tooltipSize.width / 2 <
+						containerSize.left
+						? "0px"
+						: thisSize.left +
+								thisSize.width / 2 -
+								tooltipSize.width / 2 -
+								containerSize.left +
+								"px"
+				)
+				.style(
+					"top",
+					thisSize.top -
+						containerSize.top +
+						thisSize.height +
+						12 +
+						"px"
+				);
+		})
+		.on("mouseout", () => {
+			tooltip.html(null).style("display", "none");
+		});
 
-	return { yearDropdown, fundDropdown, sectorDropdown, statusDropdown, filterContainer };
+	return {
+		yearDropdown,
+		fundDropdown,
+		sectorDropdown,
+		statusDropdown,
+		filterContainer,
+	};
 
 	function createDropdown(type, allOption) {
-
 		const names = type + "NamesList";
 
-		const dropdownContainer = dropdownDiv.append("div")
+		const dropdownContainer = dropdownDiv
+			.append("div")
 			.datum({
-				clicked: false
+				clicked: false,
 			})
 			.attr("class", classPrefix + type + "Container");
 
-		dropdownContainer.on("mouseleave", (event, d) => d3.select(event.currentTarget)
-			.classed("active", d => d.clicked = false));
+		dropdownContainer.on("mouseleave", (event, d) =>
+			d3
+				.select(event.currentTarget)
+				.classed("active", d => (d.clicked = false))
+		);
 
-		const titleDiv = dropdownContainer.append("div")
+		const titleDiv = dropdownContainer
+			.append("div")
 			.attr("class", classPrefix + type + "TitleDiv");
 
-		const title = titleDiv.append("div")
+		const title = titleDiv
+			.append("div")
 			.attr("class", classPrefix + type + "Title")
-			.html(chartState[`selected${capitalize(type)}`].length === inAllDataLists[`${type}sInAllData`].length ? (type === "status" ? "All statuses" : `All ${type}s`) :
-				chartState[`selected${capitalize(type)}`].length > 1 ? (type === "status" ? "Multiple statuses" : `Multiple ${type}s`) :
-				chartState[`selected${capitalize(type)}`].length === 1 ? ((lists[names] && lists[names][chartState[`selected${capitalize(type)}`]]) ? lists[names][chartState[`selected${capitalize(type)}`]] : chartState[`selected${capitalize(type)}`]) :
-				"No selection"
+			.html(
+				chartState[`selected${capitalize(type)}`].length ===
+					inAllDataLists[`${type}sInAllData`].length
+					? type === "status"
+						? "All statuses"
+						: `All ${type}s`
+					: chartState[`selected${capitalize(type)}`].length > 1
+					? type === "status"
+						? "Multiple statuses"
+						: `Multiple ${type}s`
+					: chartState[`selected${capitalize(type)}`].length === 1
+					? lists[names] &&
+					  lists[names][chartState[`selected${capitalize(type)}`]]
+						? lists[names][
+								chartState[`selected${capitalize(type)}`]
+						  ]
+						: chartState[`selected${capitalize(type)}`]
+					: "No selection"
 			);
 
-		const arrow = titleDiv.append("div")
+		const arrow = titleDiv
+			.append("div")
 			.attr("class", classPrefix + type + "Arrow");
 
-		arrow.append("i")
-			.attr("class", "fa fa-angle-down");
+		arrow.append("i").attr("class", "fa fa-angle-down");
 
-		const dropdown = dropdownContainer.append("div")
+		const dropdown = dropdownContainer
+			.append("div")
 			.attr("class", classPrefix + type + "Dropdown");
 
 		titleDiv.on("click", () => {
-			dropdownDiv.selectChildren("div")
-				.classed("active", (d, i, n) => d.clicked = (n[i] === dropdownContainer.node() ? !d.clicked : false));
+			dropdownDiv
+				.selectChildren("div")
+				.classed(
+					"active",
+					(d, i, n) =>
+						(d.clicked =
+							n[i] === dropdownContainer.node()
+								? !d.clicked
+								: false)
+				);
 		});
 
 		const checkboxData = inAllDataLists[`${type}sInAllData`].slice();
@@ -389,7 +556,8 @@ function createDropdowns(dropdownDiv, filterDiv, tooltip) {
 
 		checkboxData.unshift(allOption);
 
-		const checkboxDiv = dropdown.selectAll(null)
+		const checkboxDiv = dropdown
+			.selectAll(null)
 			.data(checkboxData)
 			.enter()
 			.append("div")
@@ -397,30 +565,42 @@ function createDropdowns(dropdownDiv, filterDiv, tooltip) {
 
 		const label = checkboxDiv.append("label");
 
-		const input = label.append("input")
+		const input = label
+			.append("input")
 			.attr("type", "checkbox")
 			.attr("value", d => d);
 
 		if (type === "status") {
-			label.append("i")
+			label
+				.append("i")
 				.style("font-size", "0.8em")
 				.style("color", d => colorScale(d))
-				.attr("class", "fa-solid fa-circle " + classPrefix + "statusDot");
-		};
+				.attr(
+					"class",
+					"fa-solid fa-circle " + classPrefix + "statusDot"
+				);
+		}
 
-		const span = label.append("span")
+		const span = label
+			.append("span")
 			.attr("class", classPrefix + "checkboxText")
 			.html(d => {
 				const names = type + "NamesList";
-				return (lists[names] && lists[names][d]) ? lists[names][d] : d;
+				return lists[names] && lists[names][d] ? lists[names][d] : d;
 			});
 
-		const allSelection = checkboxDiv.filter(d => d === allOption).select("input");
+		const allSelection = checkboxDiv
+			.filter(d => d === allOption)
+			.select("input");
 
-		d3.select(allSelection.node().nextSibling)
-			.attr("class", classPrefix + "checkboxTextAllSelection");
+		d3.select(allSelection.node().nextSibling).attr(
+			"class",
+			classPrefix + "checkboxTextAllSelection"
+		);
 
-		const checkbox = checkboxDiv.filter(d => d !== allOption).select("input");
+		const checkbox = checkboxDiv
+			.filter(d => d !== allOption)
+			.select("input");
 
 		// checkbox.property("disabled", d => !inSelectionLists[`${type}sInCurrentSelection`].includes(d));
 
@@ -429,40 +609,59 @@ function createDropdowns(dropdownDiv, filterDiv, tooltip) {
 		return { title, checkboxDiv, checkbox, allSelection };
 
 		//end of createDropdown
-	};
+	}
 
 	//end of createDropdowns
-};
+}
 
 function disableDropdownOptions(allDropdowns) {
-
 	for (const dropdown in allDropdowns) {
 		if (dropdown === "filterContainer") continue;
 		const type = dropdown.replace("Dropdown", "");
 
-		allDropdowns[dropdown].checkboxDiv.filter((_, i) => i)
-			.style("opacity", d => inSelectionLists[`${type}sInCurrentSelection`].includes(d) ? 1 : disabledOpacity);
+		allDropdowns[dropdown].checkboxDiv
+			.filter((_, i) => i)
+			.style("opacity", d =>
+				inSelectionLists[`${type}sInCurrentSelection`].includes(d)
+					? 1
+					: disabledOpacity
+			);
 
-		allDropdowns[dropdown].checkbox.property("disabled", d => !inSelectionLists[`${type}sInCurrentSelection`].includes(d))
-			.property("checked", d => chartState[`selected${capitalize(type)}`].length !== inAllDataLists[`${type}sInAllData`].length && chartState[`selected${capitalize(type)}`].includes(d))
+		allDropdowns[dropdown].checkbox
+			.property(
+				"disabled",
+				d => !inSelectionLists[`${type}sInCurrentSelection`].includes(d)
+			)
+			.property(
+				"checked",
+				d =>
+					chartState[`selected${capitalize(type)}`].length !==
+						inAllDataLists[`${type}sInAllData`].length &&
+					chartState[`selected${capitalize(type)}`].includes(d)
+			);
 
-		allDropdowns[dropdown].allSelection.property("checked", () => chartState[`selected${capitalize(type)}`].length === inAllDataLists[`${type}sInAllData`].length);
-	};
-
-};
+		allDropdowns[dropdown].allSelection.property(
+			"checked",
+			() =>
+				chartState[`selected${capitalize(type)}`].length ===
+				inAllDataLists[`${type}sInAllData`].length
+		);
+	}
+}
 
 function createRadioButtons(container, tooltip) {
-
-	const radioTextDiv = container.append("div")
+	const radioTextDiv = container
+		.append("div")
 		.attr("class", classPrefix + "radioTextDiv");
 
-	const radioDiv = container.append("div")
+	const radioDiv = container
+		.append("div")
 		.attr("class", classPrefix + "radioDiv");
 
-	radioTextDiv.append("span")
-		.html("Allocations value encoded by: ");
+	radioTextDiv.append("span").html("Allocations value encoded by: ");
 
-	const input = radioDiv.selectAll(null)
+	const input = radioDiv
+		.selectAll(null)
 		.data(displayModes)
 		.enter()
 		.append("input")
@@ -472,46 +671,63 @@ function createRadioButtons(container, tooltip) {
 		.property("checked", d => d === chartState.displayMode)
 		.attr("value", d => d);
 
-	const label = radioDiv.selectAll(null)
+	const label = radioDiv
+		.selectAll(null)
 		.data(displayModes)
 		.enter()
 		.append("label")
 		.attr("for", (_, i) => classPrefix + "option-" + (i + 1))
-		.attr("class", (_, i) => classPrefix + "option " + classPrefix + "option-" + (i + 1));
+		.attr(
+			"class",
+			(_, i) =>
+				classPrefix + "option " + classPrefix + "option-" + (i + 1)
+		);
 
-	label.append("div")
-		.attr("class", classPrefix + "dot");
+	label.append("div").attr("class", classPrefix + "dot");
 
-	label.append("span")
+	label
+		.append("span")
 		.attr("class", classPrefix + "radioSpan")
 		.html(d => capitalize(d));
 
 	return input;
 
 	//end of createRadioButtons
-};
+}
 
-function drawBubbleMap(data, mapSvg, legendSvg, leafletMap, buttons, infoDivTitle, infoDivBody, infoDivPin) {
-
+function drawBubbleMap(
+	data,
+	mapSvg,
+	legendSvg,
+	leafletMap,
+	buttons,
+	infoDivTitle,
+	infoDivBody,
+	infoDivPin
+) {
 	const mapCenter = leafletMap.getCenter();
 
-	const noDataGroup = mapSvg.selectAll(`.${classPrefix}noDataGroup`)
+	const noDataGroup = mapSvg
+		.selectAll(`.${classPrefix}noDataGroup`)
 		.data(data.length === 0 ? [true] : []);
 
 	noDataGroup.exit().remove();
 
-	const noDataGroupEnter = noDataGroup.enter()
+	const noDataGroupEnter = noDataGroup
+		.enter()
 		.append("g")
 		.attr("class", classPrefix + "noDataGroup");
 
-	noDataGroupEnter.append("text")
+	noDataGroupEnter
+		.append("text")
 		.attr("class", classPrefix + "NoDataTextBack")
 		.attr("y", leafletMap.latLngToLayerPoint(mapCenter).y)
 		.attr("x", leafletMap.latLngToLayerPoint(mapCenter).x)
 		.attr("text-anchor", "middle")
 		.text("No data for the current selection");
 
-	noDataGroupEnter.append("text")
+	noDataGroupEnter
+		.append("text")
 		.attr("class", classPrefix + "NoDataText")
 		.attr("y", leafletMap.latLngToLayerPoint(mapCenter).y)
 		.attr("x", leafletMap.latLngToLayerPoint(mapCenter).x)
@@ -522,26 +738,44 @@ function drawBubbleMap(data, mapSvg, legendSvg, leafletMap, buttons, infoDivTitl
 
 	for (const status in colorScales) {
 		const allValues = data.reduce((acc, curr) => {
-			if (curr.status === status) acc.push(curr.totalValue)
+			if (curr.status === status) acc.push(curr.totalValue);
 			return acc;
 		}, []);
 		allValues.sort((a, b) => a - b);
 		colorScales[status].domain(allValues);
-	};
+	}
 
 	radiusScale.domain([0, maxValue]);
 
-	const extentLatitude = data.length === 1 ? [countryBoundingBoxes[isoAlpha2to3[fundIsoCodesList[data[0].fund]]].sw.lat, countryBoundingBoxes[isoAlpha2to3[fundIsoCodesList[data[0].fund]]].ne.lat] :
-		d3.extent(data, d => +d.lat);
+	const extentLatitude =
+		data.length === 1
+			? [
+					countryBoundingBoxes[
+						isoAlpha2to3[fundIsoCodesList[data[0].fund]]
+					].sw.lat,
+					countryBoundingBoxes[
+						isoAlpha2to3[fundIsoCodesList[data[0].fund]]
+					].ne.lat,
+			  ]
+			: d3.extent(data, d => +d.lat);
 
-	const extentLongitude = data.length === 1 ? [countryBoundingBoxes[isoAlpha2to3[fundIsoCodesList[data[0].fund]]].sw.lon, countryBoundingBoxes[isoAlpha2to3[fundIsoCodesList[data[0].fund]]].ne.lon] :
-		d3.extent(data, d => +d.lon);
+	const extentLongitude =
+		data.length === 1
+			? [
+					countryBoundingBoxes[
+						isoAlpha2to3[fundIsoCodesList[data[0].fund]]
+					].sw.lon,
+					countryBoundingBoxes[
+						isoAlpha2to3[fundIsoCodesList[data[0].fund]]
+					].ne.lon,
+			  ]
+			: d3.extent(data, d => +d.lon);
 
 	if (chartState.displayMode === "size") {
 		drawSizeMap();
 	} else {
 		drawColorMap();
-	};
+	}
 
 	flyTo(extentLatitude, extentLongitude);
 
@@ -550,76 +784,94 @@ function drawBubbleMap(data, mapSvg, legendSvg, leafletMap, buttons, infoDivTitl
 	createLegend();
 
 	function drawSizeMap() {
-
 		mapSvg.select(`.${classPrefix}ColorMapGroup`).remove();
 
-		let sizeMapGroup = mapSvg.selectAll(`.${classPrefix}SizeMapGroup`)
+		let sizeMapGroup = mapSvg
+			.selectAll(`.${classPrefix}SizeMapGroup`)
 			.data([true]);
 
-		sizeMapGroup = sizeMapGroup.enter()
+		sizeMapGroup = sizeMapGroup
+			.enter()
 			.append("g")
 			.attr("class", classPrefix + "SizeMapGroup")
 			.merge(sizeMapGroup);
 
-		let pieGroup = sizeMapGroup.selectAll("." + classPrefix + "pieGroup")
+		let pieGroup = sizeMapGroup
+			.selectAll("." + classPrefix + "pieGroup")
 			.data(data, d => d.key);
 
 		const pieGroupExit = pieGroup.exit();
 
 		pieGroupExit.each((_, i, n) => {
 			const thisGroup = d3.select(n[i]);
-			thisGroup.selectAll("." + classPrefix + "slice")
+			thisGroup
+				.selectAll("." + classPrefix + "slice")
 				.transition()
 				.duration(duration)
 				.attrTween("d", (d, j, m) => {
-					const finalObject = !j ? {
-						startAngle: 0,
-						endAngle: 0,
-						outerRadius: 0
-					} : {
-						startAngle: Math.PI * 2,
-						endAngle: Math.PI * 2,
-						outerRadius: 0
-					};
-					const interpolator = d3.interpolateObject(localVariable.get(m[j]), finalObject);
+					const finalObject = !j
+						? {
+								startAngle: 0,
+								endAngle: 0,
+								outerRadius: 0,
+						  }
+						: {
+								startAngle: Math.PI * 2,
+								endAngle: Math.PI * 2,
+								outerRadius: 0,
+						  };
+					const interpolator = d3.interpolateObject(
+						localVariable.get(m[j]),
+						finalObject
+					);
 					return t => arcGenerator(interpolator(t));
 				})
-				.on("end", () => thisGroup.remove())
+				.on("end", () => thisGroup.remove());
 		});
 
-		const pieGroupEnter = pieGroup.enter()
+		const pieGroupEnter = pieGroup
+			.enter()
 			.append("g")
 			.attr("class", classPrefix + "pieGroup")
-			.each(d => d.clicked = false);
+			.each(d => (d.clicked = false));
 
 		pieGroup = pieGroupEnter.merge(pieGroup);
 
 		pieGroup.order();
 
-		let slices = pieGroup.selectAll("." + classPrefix + "slice")
-			.data(d => pieGenerator(d.values.filter(e => e.value !== 0)), d => d.data.status);
+		let slices = pieGroup.selectAll("." + classPrefix + "slice").data(
+			d => pieGenerator(d.values.filter(e => e.value !== 0)),
+			d => d.data.status
+		);
 
-		const slicesRemove = slices.exit()
+		const slicesRemove = slices
+			.exit()
 			.transition()
 			.duration(duration)
 			.attrTween("d", (d, i, n) => {
 				const parentDatum = d3.select(n[i].parentNode).datum();
 				const thisTotal = radiusScale(parentDatum.totalValue);
-				const finalObject = !i ? {
-					startAngle: 0,
-					endAngle: 0,
-					outerRadius: thisTotal
-				} : {
-					startAngle: Math.PI * 2,
-					endAngle: Math.PI * 2,
-					outerRadius: thisTotal
-				};
-				const interpolator = d3.interpolateObject(localVariable.get(n[i]), finalObject);
+				const finalObject = !i
+					? {
+							startAngle: 0,
+							endAngle: 0,
+							outerRadius: thisTotal,
+					  }
+					: {
+							startAngle: Math.PI * 2,
+							endAngle: Math.PI * 2,
+							outerRadius: thisTotal,
+					  };
+				const interpolator = d3.interpolateObject(
+					localVariable.get(n[i]),
+					finalObject
+				);
 				return t => arcGenerator(interpolator(t));
 			})
-			.on("end", (_, i, n) => d3.select(n[i]).remove())
+			.on("end", (_, i, n) => d3.select(n[i]).remove());
 
-		const slicesEnter = slices.enter()
+		const slicesEnter = slices
+			.enter()
 			.append("path")
 			.attr("class", classPrefix + "slice")
 			.style("pointer-events", "all")
@@ -630,45 +882,47 @@ function drawBubbleMap(data, mapSvg, legendSvg, leafletMap, buttons, infoDivTitl
 			.style("fill-opacity", fillOpacityValue)
 			.each((d, i, n) => {
 				let siblingRadius = 0;
-				const siblings = d3.select(n[i].parentNode).selectAll("path")
+				const siblings = d3
+					.select(n[i].parentNode)
+					.selectAll("path")
 					.each((_, j, m) => {
-						const thisLocal = localVariable.get(m[j])
+						const thisLocal = localVariable.get(m[j]);
 						if (thisLocal) siblingRadius = thisLocal.outerRadius;
 					});
 				if (!i) {
 					localVariable.set(n[i], {
 						startAngle: 0,
 						endAngle: 0,
-						outerRadius: siblingRadius
+						outerRadius: siblingRadius,
 					});
 				} else {
 					localVariable.set(n[i], {
 						startAngle: Math.PI * 2,
 						endAngle: Math.PI * 2,
-						outerRadius: siblingRadius
+						outerRadius: siblingRadius,
 					});
-				};
-			})
+				}
+			});
 
 		slices = slicesEnter.merge(slices);
 
-		slices.transition()
-			.duration(duration)
-			.attrTween("d", pieTween);
+		slices.transition().duration(duration).attrTween("d", pieTween);
 
 		function pieTween(d) {
 			const i = d3.interpolateObject(localVariable.get(this), {
 				startAngle: d.startAngle,
 				endAngle: d.endAngle,
-				outerRadius: radiusScale(d.data.total)
+				outerRadius: radiusScale(d.data.total),
 			});
 			localVariable.set(this, i(1));
 			return t => arcGenerator(i(t));
-		};
+		}
 
-		pieGroup.on("mouseover", (event, d) => {
+		pieGroup
+			.on("mouseover", (event, d) => {
 				if (activeGroup) return;
-				d3.select(event.currentTarget).selectAll("path")
+				d3.select(event.currentTarget)
+					.selectAll("path")
 					.style("stroke", highlightedBubbleColor)
 					.style("stroke-width", "2px");
 				populateInfoDiv(d, infoDivTitle, infoDivBody);
@@ -676,11 +930,12 @@ function drawBubbleMap(data, mapSvg, legendSvg, leafletMap, buttons, infoDivTitl
 			.on("mouseout", (event, d) => {
 				if (activeGroup) return;
 				if (!d.clicked) {
-					d3.select(event.currentTarget).selectAll("path")
+					d3.select(event.currentTarget)
+						.selectAll("path")
 						.style("stroke", bubbleStrokeColor)
 						.style("stroke-width", "1px");
 					clearInfoDiv(infoDivTitle, infoDivBody);
-				};
+				}
 			})
 			.on("click", (event, d) => {
 				event.stopPropagation();
@@ -688,45 +943,57 @@ function drawBubbleMap(data, mapSvg, legendSvg, leafletMap, buttons, infoDivTitl
 				infoDivDisclaimer.remove();
 				d.clicked = !d.clicked;
 				if (activeGroup !== event.currentTarget) {
-					pieGroup.selectAll("path")
-						.style("stroke", (_, i, n) => n[i].parentNode === event.currentTarget ? highlightedBubbleColor : bubbleStrokeColor)
-						.style("stroke-width", (_, i, n) => n[i].parentNode === event.currentTarget ? "2px" : "1px");
+					pieGroup
+						.selectAll("path")
+						.style("stroke", (_, i, n) =>
+							n[i].parentNode === event.currentTarget
+								? highlightedBubbleColor
+								: bubbleStrokeColor
+						)
+						.style("stroke-width", (_, i, n) =>
+							n[i].parentNode === event.currentTarget
+								? "2px"
+								: "1px"
+						);
 					populateInfoDiv(d, infoDivTitle, infoDivBody);
-				};
+				}
 				activeGroup = d.clicked ? event.currentTarget : null;
 				infoDivPin.style("opacity", d.clicked ? 1 : pinFadeOpacity);
 			});
 
 		htmlBody.on("click", () => {
 			activeGroup = null;
-			pieGroup.each(d => d.clicked = false)
+			pieGroup
+				.each(d => (d.clicked = false))
 				.selectAll("path")
 				.style("stroke", bubbleStrokeColor)
 				.style("stroke-width", "1px");
 			clearInfoDiv(infoDivTitle, infoDivBody);
 			infoDivPin.style("opacity", pinFadeOpacity);
 		});
-
-	};
+	}
 
 	function drawColorMap() {
-
 		mapSvg.select(`.${classPrefix}SizeMapGroup`).remove();
 
-		let colorMapGroup = mapSvg.selectAll(`.${classPrefix}ColorMapGroup`)
+		let colorMapGroup = mapSvg
+			.selectAll(`.${classPrefix}ColorMapGroup`)
 			.data([true]);
 
-		colorMapGroup = colorMapGroup.enter()
+		colorMapGroup = colorMapGroup
+			.enter()
 			.append("g")
 			.attr("class", classPrefix + "ColorMapGroup")
 			.merge(colorMapGroup);
 
-		let colorMarkers = colorMapGroup.selectAll(`.${classPrefix}ColorMarkers`)
+		let colorMarkers = colorMapGroup
+			.selectAll(`.${classPrefix}ColorMarkers`)
 			.data(data, d => d.key);
 
 		const colorMarkersExit = colorMarkers.exit().remove();
 
-		const colorMarkersEnter = colorMarkers.enter()
+		const colorMarkersEnter = colorMarkers
+			.enter()
 			.append("path")
 			.attr("class", classPrefix + "ColorMarkers")
 			.attr("d", markerAttribute)
@@ -737,9 +1004,12 @@ function drawBubbleMap(data, mapSvg, legendSvg, leafletMap, buttons, infoDivTitl
 
 		colorMarkers.style("fill", d => colorScales[d.status](d.totalValue));
 
-		colorMarkers.on("mouseover", (_, d) => populateInfoDiv(d, infoDivTitle, infoDivBody))
+		colorMarkers
+			.on("mouseover", (_, d) =>
+				populateInfoDiv(d, infoDivTitle, infoDivBody)
+			)
 			.on("mouseout", () => clearInfoDiv(infoDivTitle, infoDivBody));
-	};
+	}
 
 	buttons.on("click", (_, d) => {
 		chartState.displayMode = d;
@@ -747,33 +1017,55 @@ function drawBubbleMap(data, mapSvg, legendSvg, leafletMap, buttons, infoDivTitl
 			drawSizeMap();
 		} else {
 			drawColorMap();
-		};
+		}
 		redrawMap(mapSvg, leafletMap);
 		createLegend();
 		clearInfoDiv(infoDivTitle, infoDivBody);
 	});
 
 	function createLegend() {
-
 		const maxDataValue = radiusScale.domain()[1];
 
-		const sizeCirclesData = [0, maxDataValue / 4, maxDataValue / 2, maxDataValue];
+		const sizeCirclesData = [
+			0,
+			maxDataValue / 4,
+			maxDataValue / 2,
+			maxDataValue,
+		];
 
-		legendSvg.attr("height", chartState.displayMode === "size" ? legendSvgHeightSize : legendColorPadding + legendSvgHeightColor * inSelectionLists.statussInCurrentSelection.length);
+		legendSvg.attr(
+			"height",
+			chartState.displayMode === "size"
+				? legendSvgHeightSize
+				: legendColorPadding +
+						legendSvgHeightColor *
+							inSelectionLists.statussInCurrentSelection.length
+		);
 
-		let backgroundRectangle = legendSvg.selectAll(`.${classPrefix}backgroundRectangle`)
+		let backgroundRectangle = legendSvg
+			.selectAll(`.${classPrefix}backgroundRectangle`)
 			.data([true]);
 
-		backgroundRectangle = backgroundRectangle.enter()
+		backgroundRectangle = backgroundRectangle
+			.enter()
 			.append("rect")
 			.attr("class", classPrefix + "backgroundRectangle")
 			.style("fill", "#fff")
 			.style("opacity", 0.6)
 			.attr("width", legendSvgWidth)
 			.merge(backgroundRectangle)
-			.attr("height", chartState.displayMode === "size" ? legendSvgHeightSize : legendColorPadding + legendSvgHeightColor * inSelectionLists.statussInCurrentSelection.length);
+			.attr(
+				"height",
+				chartState.displayMode === "size"
+					? legendSvgHeightSize
+					: legendColorPadding +
+							legendSvgHeightColor *
+								inSelectionLists.statussInCurrentSelection
+									.length
+			);
 
-		const legendTitle = legendSvg.selectAll(`.${classPrefix}LegendTitle`)
+		const legendTitle = legendSvg
+			.selectAll(`.${classPrefix}LegendTitle`)
 			.data([true])
 			.enter()
 			.append("text")
@@ -786,136 +1078,217 @@ function drawBubbleMap(data, mapSvg, legendSvg, leafletMap, buttons, infoDivTitl
 			createSizeLegend();
 		} else {
 			createColorLegend();
-		};
+		}
 
 		function createSizeLegend() {
-
 			legendSvg.select(`.${classPrefix}LegendColorGroup`).remove();
 
-			const legendSizeGroups = legendSvg.selectAll(`.${classPrefix}LegendSizeGroups`)
+			const legendSizeGroups = legendSvg
+				.selectAll(`.${classPrefix}LegendSizeGroups`)
 				.data([true])
 				.enter()
 				.append("g")
 				.attr("class", classPrefix + "LegendSizeGroups");
 
-			let legendSizeGroup = legendSizeGroups.selectAll(`.${classPrefix}LegendSizeGroup`)
+			let legendSizeGroup = legendSizeGroups
+				.selectAll(`.${classPrefix}LegendSizeGroup`)
 				.data(sizeCirclesData);
 
-			const legendSizeGroupEnter = legendSizeGroup.enter()
+			const legendSizeGroupEnter = legendSizeGroup
+				.enter()
 				.append("g")
 				.attr("class", classPrefix + "LegendSizeGroup");
 
-			const legendSizeLines = legendSizeGroupEnter.append("line")
+			const legendSizeLines = legendSizeGroupEnter
+				.append("line")
 				.attr("x1", legendSvgPadding[3] + radiusScale.range()[1])
 				.attr("x2", legendSvgPadding[3] + radiusScale.range()[1] + 30)
-				.attr("y1", d => d ? legendSvgPadding[0] + legendCirclePadding + (radiusScale.range()[1] * 2) - radiusScale(d) * 2 :
-					legendSvgPadding[0] + legendCirclePadding + (radiusScale.range()[1] * 2))
-				.attr("y2", d => d ? legendSvgPadding[0] + legendCirclePadding + (radiusScale.range()[1] * 2) - radiusScale(d) * 2 :
-					legendSvgPadding[0] + legendCirclePadding + (radiusScale.range()[1] * 2))
+				.attr("y1", d =>
+					d
+						? legendSvgPadding[0] +
+						  legendCirclePadding +
+						  radiusScale.range()[1] * 2 -
+						  radiusScale(d) * 2
+						: legendSvgPadding[0] +
+						  legendCirclePadding +
+						  radiusScale.range()[1] * 2
+				)
+				.attr("y2", d =>
+					d
+						? legendSvgPadding[0] +
+						  legendCirclePadding +
+						  radiusScale.range()[1] * 2 -
+						  radiusScale(d) * 2
+						: legendSvgPadding[0] +
+						  legendCirclePadding +
+						  radiusScale.range()[1] * 2
+				)
 				.style("stroke", "#666")
 				.style("stroke-dasharray", "2,2")
 				.style("stroke-width", "1px");
 
-			const legendSizeCircles = legendSizeGroupEnter.append("circle")
+			const legendSizeCircles = legendSizeGroupEnter
+				.append("circle")
 				.attr("cx", legendSvgPadding[3] + radiusScale.range()[1])
-				.attr("cy", d => legendSvgPadding[0] + legendCirclePadding + (radiusScale.range()[1] * 2) - radiusScale(d))
-				.attr("r", d => !d ? 0 : radiusScale(d))
+				.attr(
+					"cy",
+					d =>
+						legendSvgPadding[0] +
+						legendCirclePadding +
+						radiusScale.range()[1] * 2 -
+						radiusScale(d)
+				)
+				.attr("r", d => (!d ? 0 : radiusScale(d)))
 				.style("fill", "none")
 				.style("stroke", "darkslategray");
 
-			const legendSizeCirclesText = legendSizeGroupEnter.append("text")
+			const legendSizeCirclesText = legendSizeGroupEnter
+				.append("text")
 				.attr("class", classPrefix + "LegendCirclesText")
 				.attr("x", legendSvgPadding[3] + radiusScale.range()[1] + 34)
-				.attr("y", (d, i) => i === 1 ? legendSvgPadding[0] + (legendCirclePadding + 5) + (radiusScale.range()[1] * 2) - radiusScale(d) * 2 :
-					i ? legendSvgPadding[0] + (legendCirclePadding + 3) + (radiusScale.range()[1] * 2) - radiusScale(d) * 2 :
-					legendSvgPadding[0] + (legendCirclePadding + 3) + (radiusScale.range()[1] * 2) - 2)
-				.text(d => d ? d3.formatPrefix(".0", d)(d) : "0");
+				.attr("y", (d, i) =>
+					i === 1
+						? legendSvgPadding[0] +
+						  (legendCirclePadding + 5) +
+						  radiusScale.range()[1] * 2 -
+						  radiusScale(d) * 2
+						: i
+						? legendSvgPadding[0] +
+						  (legendCirclePadding + 3) +
+						  radiusScale.range()[1] * 2 -
+						  radiusScale(d) * 2
+						: legendSvgPadding[0] +
+						  (legendCirclePadding + 3) +
+						  radiusScale.range()[1] * 2 -
+						  2
+				)
+				.text(d => (d ? d3.formatPrefix(".0", d)(d) : "0"));
 
 			legendSizeGroup = legendSizeGroup.merge(legendSizeGroupEnter);
 
-			legendSizeGroup.select(`.${classPrefix}LegendCirclesText`)
-				.text(d => d ? d3.formatPrefix(".0", d)(d) : "0");
+			legendSizeGroup
+				.select(`.${classPrefix}LegendCirclesText`)
+				.text(d => (d ? d3.formatPrefix(".0", d)(d) : "0"));
 
 			//end of createSizeLegend
-		};
+		}
 
 		function createColorLegend() {
-
 			legendSvg.select(`.${classPrefix}LegendSizeGroups`).remove();
 
-			let legendColorGroup = legendSvg.selectAll(`.${classPrefix}LegendColorGroup`)
+			let legendColorGroup = legendSvg
+				.selectAll(`.${classPrefix}LegendColorGroup`)
 				.data([true]);
 
-			legendColorGroup = legendColorGroup.enter()
+			legendColorGroup = legendColorGroup
+				.enter()
 				.append("g")
 				.attr("class", classPrefix + "LegendColorGroup")
 				.merge(legendColorGroup);
 
-			let statusGroup = legendColorGroup.selectAll(`.${classPrefix}statusGroup`)
+			let statusGroup = legendColorGroup
+				.selectAll(`.${classPrefix}statusGroup`)
 				.data(inSelectionLists.statussInCurrentSelection, d => d);
 
 			statusGroup.exit().remove();
 
-			const statusGroupEnter = statusGroup.enter()
+			const statusGroupEnter = statusGroup
+				.enter()
 				.append("g")
 				.attr("class", classPrefix + "statusGroup")
-				.each((d, i, n) => localVariable.set(n[i], colorScales[d]))
+				.each((d, i, n) => localVariable.set(n[i], colorScales[d]));
 
-			const legendColorTitle = statusGroupEnter.append("text")
+			const legendColorTitle = statusGroupEnter
+				.append("text")
 				.attr("class", classPrefix + "legendColorTitle")
 				.attr("y", legendRectPadding - 2)
 				.attr("x", legendSvgPadding[3])
-				.text(d => d === "Under Implementation" ? "Under Implem." : d);
+				.text(d =>
+					d === "Under Implementation" ? "Under Implem." : d
+				);
 
-			const legendRects = statusGroupEnter.selectAll(`.${classPrefix}LegendRects`)
-				.data(d => [colorScales[d].domain()[0]].concat(colorScales[d].quantiles()))
+			const legendRects = statusGroupEnter
+				.selectAll(`.${classPrefix}LegendRects`)
+				.data(d =>
+					[colorScales[d].domain()[0]].concat(
+						colorScales[d].quantiles()
+					)
+				)
 				.enter()
 				.append("rect")
 				.attr("class", classPrefix + "LegendRects")
 				.attr("y", legendRectPadding)
-				.attr("x", (_, i) => legendSvgPadding[3] + i * (legendRectWidth + 3))
+				.attr(
+					"x",
+					(_, i) => legendSvgPadding[3] + i * (legendRectWidth + 3)
+				)
 				.style("stroke", "#444")
 				.attr("width", legendRectWidth)
 				.attr("height", legendRectHeight)
 				.style("fill", (d, i, n) => localVariable.get(n[i])(d));
 
-			const legendColorLines = statusGroupEnter.selectAll(`.${classPrefix}LegendColorLines`)
+			const legendColorLines = statusGroupEnter
+				.selectAll(`.${classPrefix}LegendColorLines`)
 				.data(d3.range(2))
 				.enter()
 				.append("line")
 				.attr("class", classPrefix + "LegendColorLines")
 				.attr("y1", legendRectPadding + legendRectHeight + 1)
-				.attr("y2", legendRectPadding + legendRectHeight + legendLineHeight)
-				.attr("x1", d => d ? legendSvgPadding[3] + 10 * (legendRectWidth + 3) - 3 : legendSvgPadding[3])
-				.attr("x2", d => d ? legendSvgPadding[3] + 10 * (legendRectWidth + 3) - 3 : legendSvgPadding[3])
+				.attr(
+					"y2",
+					legendRectPadding + legendRectHeight + legendLineHeight
+				)
+				.attr("x1", d =>
+					d
+						? legendSvgPadding[3] + 10 * (legendRectWidth + 3) - 3
+						: legendSvgPadding[3]
+				)
+				.attr("x2", d =>
+					d
+						? legendSvgPadding[3] + 10 * (legendRectWidth + 3) - 3
+						: legendSvgPadding[3]
+				)
 				.style("stroke-width", "1px")
 				.style("shape-rendering", "crispEdges")
 				.style("stroke", "#444");
 
-			let legendColorTexts = statusGroupEnter.selectAll(`.${classPrefix}LegendColorTexts`)
+			let legendColorTexts = statusGroupEnter
+				.selectAll(`.${classPrefix}LegendColorTexts`)
 				.data(d => d3.extent(colorScales[d].domain()))
 				.enter()
 				.append("text")
 				.attr("class", classPrefix + "LegendColorTexts")
-				.attr("y", legendRectPadding + legendRectHeight + legendLineHeight + 2)
-				.attr("x", (_, i) => i ? legendSvgPadding[3] + 10 * (legendRectWidth + 3) - 3 : legendSvgPadding[3])
-				.attr("text-anchor", (_, i) => i ? "end" : "start")
-				.text(d => d ? d3.formatPrefix(".0", d)(d) : "0");
+				.attr(
+					"y",
+					legendRectPadding + legendRectHeight + legendLineHeight + 2
+				)
+				.attr("x", (_, i) =>
+					i
+						? legendSvgPadding[3] + 10 * (legendRectWidth + 3) - 3
+						: legendSvgPadding[3]
+				)
+				.attr("text-anchor", (_, i) => (i ? "end" : "start"))
+				.text(d => (d ? d3.formatPrefix(".0", d)(d) : "0"));
 
 			statusGroup = statusGroupEnter.merge(statusGroup);
 
-			statusGroup.attr("transform", (_, i) => `translate(0,${legendColorPadding + (i*legendSizeGroupPadding)})`);
+			statusGroup.attr(
+				"transform",
+				(_, i) =>
+					`translate(0,${
+						legendColorPadding + i * legendSizeGroupPadding
+					})`
+			);
 
 			//IMPORTANT: UPDATE THE RECTANGLES' COLORS AND THE TEXT VALUES
 
 			//end of createColorLegend
-		};
+		}
 
 		//end of createLegend
-	};
+	}
 
 	function flyTo(extentLatitude, extentLongitude) {
-
 		const topLeftCorner = [extentLatitude[1], extentLongitude[0]];
 
 		const bottomRightCorner = [extentLatitude[0], extentLongitude[1]];
@@ -925,43 +1298,48 @@ function drawBubbleMap(data, mapSvg, legendSvg, leafletMap, buttons, infoDivTitl
 		leafletMap.flyToBounds(bounds, {
 			paddingTopLeft: [2 * maxCircleRadius, maxCircleRadius],
 			paddingBottomRight: [maxCircleRadius, maxCircleRadius],
-			maxZoom: maxZoomValue
+			maxZoom: maxZoomValue,
 		});
 
 		//end of flyTo
-	};
+	}
 
 	//end of drawBubbleMap
-};
+}
 
 function populateInfoDiv(datum, infoDivTitle, infoDivBody) {
-
-	infoDivTitle.html(datum.adminLoc + " (" + lists.fundNamesList[datum.fund] + ")");
+	infoDivTitle.html(
+		datum.adminLoc + " (" + lists.fundNamesList[datum.fund] + ")"
+	);
 
 	if (!groupClicked) {
-		infoDivDisclaimer = infoDivTitle.append("span")
+		infoDivDisclaimer = infoDivTitle
+			.append("span")
 			.html("&nbsp;- click for freezing this panel");
-	};
+	}
 
 	infoDivBody.html(null);
 
-	infoDivBody.append("div")
+	infoDivBody
+		.append("div")
 		.attr("class", classPrefix + "infoDivProjectTotal")
 		.html("Total allocated: ")
 		.append("span")
 		.html("$" + formatMoney0Decimals(datum.totalValue));
 
-	infoDivBody.append("div")
+	infoDivBody
+		.append("div")
 		.attr("class", classPrefix + "infoDivProjectTotal")
 		.html("Number of Projects: ")
 		.append("span")
 		.html(datum.projectList.length);
 
 	if (datum.projectList.length === 1) {
-		const projectListDivSingle = infoDivBody.append("div")
+		const projectListDivSingle = infoDivBody
+			.append("div")
 			.attr("class", classPrefix + "projectListDiv");
 		generateProjectsList(projectListDivSingle, false);
-	};
+	}
 
 	const aggregatedSectorsList = datum.projectList.reduce((acc, curr) => {
 		for (const key in curr.sectorsList) {
@@ -970,30 +1348,41 @@ function populateInfoDiv(datum, infoDivTitle, infoDivBody) {
 		return acc;
 	}, {});
 
-	infoDivBody.append("div")
+	infoDivBody
+		.append("div")
 		.attr("class", classPrefix + "infoDivSectorsTitle")
 		.html("Sectors");
 
 	Object.entries(aggregatedSectorsList).forEach(sector => {
-		const rowDiv = infoDivBody.append("div")
+		const rowDiv = infoDivBody
+			.append("div")
 			.attr("class", classPrefix + "infoDivRow");
-		const sectorName = rowDiv.append("div")
-			.html(lists.sectorNamesList[sector[0]] + " (" + (formatPercentage(sector[1] / datum.totalValue)) + "): ");
-		const sectorValue = rowDiv.append("div")
+		const sectorName = rowDiv
+			.append("div")
+			.html(
+				lists.sectorNamesList[sector[0]] +
+					" (" +
+					formatPercentage(sector[1] / datum.totalValue) +
+					"): "
+			);
+		const sectorValue = rowDiv
+			.append("div")
 			.attr("class", classPrefix + "infoDivRowValue")
 			.html("$" + formatMoney0Decimals(sector[1]));
 	});
 
-	const buttonDiv = infoDivBody.append("div")
+	const buttonDiv = infoDivBody
+		.append("div")
 		.attr("class", classPrefix + "infoDivButton")
 		.datum({ clicked: false });
 
-	const projectListDiv = infoDivBody.append("div")
+	const projectListDiv = infoDivBody
+		.append("div")
 		.attr("class", classPrefix + "projectListDiv");
 
 	if (datum.projectList.length > 1) {
-
-		buttonDiv.append("span")
+		buttonDiv
+			.append("span")
 			.html("Show List of Projects")
 			.on("click", (event, d) => {
 				event.stopPropagation();
@@ -1002,85 +1391,125 @@ function populateInfoDiv(datum, infoDivTitle, infoDivBody) {
 					generateProjectsList(projectListDiv, true);
 				} else {
 					projectListDiv.html(null);
-				};
-				d3.select(event.currentTarget).html(d.clicked ? "Clear List of Projects" : "Show List of Projects")
+				}
+				d3.select(event.currentTarget).html(
+					d.clicked
+						? "Clear List of Projects"
+						: "Show List of Projects"
+				);
 			});
-	};
+	}
 
 	function generateProjectsList(projectContainerDiv, fromButton) {
-
 		if (fromButton) {
-			projectContainerDiv.append("div")
+			projectContainerDiv
+				.append("div")
 				.attr("class", classPrefix + "projectListHeader")
 				.html("List of Projects");
-		};
+		}
 
 		datum.projectList.forEach((project, index) => {
-			projectContainerDiv.append("div")
+			projectContainerDiv
+				.append("div")
 				.attr("class", classPrefix + "infoDivProjectCode")
 				.html("Project: " + project.projectCode);
-			projectContainerDiv.append("div")
+			projectContainerDiv
+				.append("div")
 				.attr("class", classPrefix + "infoDivProjectTitle")
 				.html(project.projectTitle);
 			if (fromButton) {
-				projectContainerDiv.append("div")
+				projectContainerDiv
+					.append("div")
 					.attr("class", classPrefix + "infoDivProjectTotal")
 					.html("Total allocated: ")
 					.append("span")
 					.html("$" + formatMoney0Decimals(project.value));
-			};
-			projectContainerDiv.append("div")
+			}
+			projectContainerDiv
+				.append("div")
 				.attr("class", classPrefix + "infoDivProjectStatus")
 				.html("Status: ")
 				.append("span")
 				.html(project.status);
 			if (fromButton) {
-				projectContainerDiv.append("div")
+				projectContainerDiv
+					.append("div")
 					.attr("class", classPrefix + "infoDivSectorsTitle")
 					.html("Sectors");
 				Object.entries(project.sectorsList).forEach(sector => {
-					const rowDiv = projectContainerDiv.append("div")
+					const rowDiv = projectContainerDiv
+						.append("div")
 						.attr("class", classPrefix + "infoDivRow");
-					const sectorName = rowDiv.append("div")
-						.html(lists.sectorNamesList[sector[0]] + " (" + (formatPercentage(sector[1] / project.value)) + "): ");
-					const sectorValue = rowDiv.append("div")
+					const sectorName = rowDiv
+						.append("div")
+						.html(
+							lists.sectorNamesList[sector[0]] +
+								" (" +
+								formatPercentage(sector[1] / project.value) +
+								"): "
+						);
+					const sectorValue = rowDiv
+						.append("div")
 						.attr("class", classPrefix + "infoDivRowValue")
 						.html("$" + formatMoney0Decimals(sector[1]));
 				});
-			};
-			if (datum.projectList.length > 1 && index < datum.projectList.length - 1) {
-				projectContainerDiv.append("div")
+			}
+			if (
+				datum.projectList.length > 1 &&
+				index < datum.projectList.length - 1
+			) {
+				projectContainerDiv
+					.append("div")
 					.attr("class", classPrefix + "divider");
-			};
+			}
 		});
-	};
-};
+	}
+}
 
 function clearInfoDiv(infoDivTitle, infoDivBody) {
 	infoDivTitle.html("Additional Information");
-	infoDivBody.html(`Hover over the ${chartState.displayMode === "size" ? "circles" : "markers"} for displaying additional information`);
-};
+	infoDivBody.html(
+		`Hover over the ${
+			chartState.displayMode === "size" ? "circles" : "markers"
+		} for displaying additional information`
+	);
+}
 
 function redrawMap(mapSvg, leafletMap) {
-
-	const selectedClass = chartState.displayMode === "size" ? `.${classPrefix}pieGroup` : `.${classPrefix}ColorMarkers`;
+	const selectedClass =
+		chartState.displayMode === "size"
+			? `.${classPrefix}pieGroup`
+			: `.${classPrefix}ColorMarkers`;
 
 	const scaleValue = chartState.displayMode === "size" ? 1 : 0.75;
 
 	const markers = mapSvg.selectAll(selectedClass);
 
-	markers.attr("transform", d => "translate(" + leafletMap.latLngToLayerPoint(d.coordinates).x + "," + leafletMap.latLngToLayerPoint(d.coordinates).y + ") scale(" + scaleValue + ")");
+	markers.attr(
+		"transform",
+		d =>
+			"translate(" +
+			leafletMap.latLngToLayerPoint(d.coordinates).x +
+			"," +
+			leafletMap.latLngToLayerPoint(d.coordinates).y +
+			") scale(" +
+			scaleValue +
+			")"
+	);
 
-	const noDataText = mapSvg.selectAll(`.${classPrefix}NoDataText, .${classPrefix}NoDataTextBack`);
+	const noDataText = mapSvg.selectAll(
+		`.${classPrefix}NoDataText, .${classPrefix}NoDataTextBack`
+	);
 
 	if (noDataText) {
 		const mapCenter = leafletMap.getCenter();
-		noDataText.attr("y", leafletMap.latLngToLayerPoint(mapCenter).y)
-			.attr("x", leafletMap.latLngToLayerPoint(mapCenter).x)
-	};
+		noDataText
+			.attr("y", leafletMap.latLngToLayerPoint(mapCenter).y)
+			.attr("x", leafletMap.latLngToLayerPoint(mapCenter).x);
+	}
 
 	//end of redrawMap
-};
+}
 
 function preProcessData(rawAllocationsData, colors) {
 	const yearsSet = new Set(),
@@ -1095,7 +1524,7 @@ function preProcessData(rawAllocationsData, colors) {
 			sectorsSet.add(row.ClstAgg);
 		} else {
 			row.ClstAgg.split(pipeSeparator).forEach(e => sectorsSet.add(+e));
-		};
+		}
 		statusSet.add(row.PrjCycleStatus);
 	});
 
@@ -1116,16 +1545,13 @@ function preProcessData(rawAllocationsData, colors) {
 
 	inAllDataLists.statussInAllData.sort((a, b) => a.localeCompare(b));
 
-	colorScale.range(colors)
-		.domain(inAllDataLists.statussInAllData);
+	colorScale.range(colors).domain(inAllDataLists.statussInAllData);
 
 	frozenChartState = structuredClone(chartState);
 	Object.freeze(frozenChartState);
-
-};
+}
 
 function processData(rawAllocationsData) {
-
 	//Object example:
 	// 	{
 	//     "FundId": 1,
@@ -1144,86 +1570,123 @@ function processData(rawAllocationsData) {
 	//     "SubIPName": "Org1"
 	// }
 
-	const filterBy = (value, type) => chartState[`selected${type}`].includes(value);
-	const filterBySector = arr => arr.some(e => chartState.selectedSector.includes(e));
+	const filterBy = (value, type) =>
+		chartState[`selected${type}`].includes(value);
+	const filterBySector = arr =>
+		arr.some(e => chartState.selectedSector.includes(e));
 
-	const filterByForSelection = (value, type) => chartState[`selected${type}`].length === inAllDataLists[`${type.toLowerCase()}sInAllData`].length || chartState[`selected${type}`].includes(value);
-	const filterBySectorForSelection = arr => chartState.selectedSector.length === inAllDataLists.sectorsInAllData.length || arr.some(e => chartState.selectedSector.includes(e));
+	const filterByForSelection = (value, type) =>
+		chartState[`selected${type}`].length ===
+			inAllDataLists[`${type.toLowerCase()}sInAllData`].length ||
+		chartState[`selected${type}`].includes(value);
+	const filterBySectorForSelection = arr =>
+		chartState.selectedSector.length ===
+			inAllDataLists.sectorsInAllData.length ||
+		arr.some(e => chartState.selectedSector.includes(e));
 
 	const yearsInCurrentSelectionSet = new Set(),
 		fundsInCurrentSelectionSet = new Set(),
 		sectorsInCurrentSelectionSet = new Set(),
 		statussInCurrentSelectionSet = new Set();
 
-	for (const selection in inSelectionLists) inSelectionLists[selection].length = 0;
+	for (const selection in inSelectionLists)
+		inSelectionLists[selection].length = 0;
 
 	const data = [];
 
 	rawAllocationsData.forEach(row => {
-
 		let aggregatedObject = {};
-		const aggregatedData = (+row.ClstAgg !== +row.ClstAgg) || (+row.AdmLocClustBdg1 !== +row.AdmLocClustBdg1);
+		const aggregatedData =
+			+row.ClstAgg !== +row.ClstAgg ||
+			+row.AdmLocClustBdg1 !== +row.AdmLocClustBdg1;
 		if (aggregatedData) {
 			const sectorsList = row.ClstAgg.split(pipeSeparator);
 			const valuesList = row.AdmLocClustBdg1.split(pipeSeparator);
 			if (sectorsList.length !== valuesList.length) {
-				console.warn("Pipe separators not matching. Row: " + JSON.stringify(row));
+				console.warn(
+					"Pipe separators not matching. Row: " + JSON.stringify(row)
+				);
 				return;
-			};
+			}
 			sectorsList.forEach((list, i) => {
 				aggregatedObject[list] = +valuesList[i];
 			});
 		} else {
 			aggregatedObject[row.ClstAgg] = +row.AdmLocClustBdg1;
-		};
+		}
 
 		const aggregatedObjectKeys = Object.keys(aggregatedObject).map(e => +e);
 
 		//populates the 'inSelectionList' outside the filtered row
-		if (filterByForSelection(row.PFId, "Fund") &&
+		if (
+			filterByForSelection(row.PFId, "Fund") &&
 			filterByForSelection(row.PrjCycleStatus, "Status") &&
-			filterBySectorForSelection(aggregatedObjectKeys)) {
+			filterBySectorForSelection(aggregatedObjectKeys)
+		) {
 			yearsInCurrentSelectionSet.add(row.AYr);
-		};
+		}
 
-		if (filterByForSelection(row.AYr, "Year") &&
+		if (
+			filterByForSelection(row.AYr, "Year") &&
 			filterByForSelection(row.PrjCycleStatus, "Status") &&
-			filterBySectorForSelection(aggregatedObjectKeys)) {
+			filterBySectorForSelection(aggregatedObjectKeys)
+		) {
 			fundsInCurrentSelectionSet.add(row.PFId);
-		};
+		}
 
-		if (filterByForSelection(row.AYr, "Year") &&
+		if (
+			filterByForSelection(row.AYr, "Year") &&
 			filterByForSelection(row.PFId, "Fund") &&
-			filterBySectorForSelection(aggregatedObjectKeys)) {
+			filterBySectorForSelection(aggregatedObjectKeys)
+		) {
 			statussInCurrentSelectionSet.add(row.PrjCycleStatus);
-		};
+		}
 
-		if (filterByForSelection(row.AYr, "Year") &&
+		if (
+			filterByForSelection(row.AYr, "Year") &&
 			filterByForSelection(row.PFId, "Fund") &&
-			filterByForSelection(row.PrjCycleStatus, "Status")) {
-			Object.keys(aggregatedObject).forEach(e => sectorsInCurrentSelectionSet.add(+e));
-		};
+			filterByForSelection(row.PrjCycleStatus, "Status")
+		) {
+			Object.keys(aggregatedObject).forEach(e =>
+				sectorsInCurrentSelectionSet.add(+e)
+			);
+		}
 
-		if (chartState.selectedFund.length === inAllDataLists.fundsInAllData.length &&
-			chartState.selectedSector.length === inAllDataLists.sectorsInAllData.length &&
-			chartState.selectedStatus.length === inAllDataLists.statussInAllData.length) yearsInCurrentSelectionSet.add(row.AYr);
+		if (
+			chartState.selectedFund.length ===
+				inAllDataLists.fundsInAllData.length &&
+			chartState.selectedSector.length ===
+				inAllDataLists.sectorsInAllData.length &&
+			chartState.selectedStatus.length ===
+				inAllDataLists.statussInAllData.length
+		)
+			yearsInCurrentSelectionSet.add(row.AYr);
 
 		//filter the row according to the filters
-		if (filterBy(row.AYr, "Year") &&
+		if (
+			filterBy(row.AYr, "Year") &&
 			filterBy(row.PFId, "Fund") &&
 			filterBy(row.PrjCycleStatus, "Status") &&
-			filterBySector(aggregatedObjectKeys)) {
-
+			filterBySector(aggregatedObjectKeys)
+		) {
 			//filters aggregatedObject
 			for (const prop in aggregatedObject) {
-				if (chartState.selectedSector.length !== inAllDataLists.sectorsInAllData.length && !chartState.selectedSector.includes(prop)) delete aggregatedObject[prop];
-			};
+				if (
+					chartState.selectedSector.length !==
+						inAllDataLists.sectorsInAllData.length &&
+					!chartState.selectedSector.includes(prop)
+				)
+					delete aggregatedObject[prop];
+			}
 
 			const aggregatedObjectSum = d3.sum(Object.values(aggregatedObject));
 
 			const latLong = row.AdmLocCord1.split(",").map(e => +e);
 
-			const thisKey = row.AdmLoc1 + Math.abs(Math.floor(latLong[0] * 1000)) + Math.abs(Math.floor(latLong[1] * 1000));
+			const thisKey =
+				row.AdmLoc1 +
+				Math.abs(Math.floor(latLong[0] * 1000)) +
+				Math.abs(Math.floor(latLong[1] * 1000));
 
 			const foundObject = data.find(e => e.key === thisKey);
 
@@ -1237,68 +1700,79 @@ function processData(rawAllocationsData) {
 					sectorsList: aggregatedObject,
 				});
 				foundObject.totalValue += aggregatedObjectSum;
-				const foundStatus = foundObject.values.find(e => e.status === row.PrjCycleStatus);
+				const foundStatus = foundObject.values.find(
+					e => e.status === row.PrjCycleStatus
+				);
 				if (foundStatus) {
 					foundStatus.value += aggregatedObjectSum;
 				} else {
-					foundObject.values.push({ value: aggregatedObjectSum, status: row.PrjCycleStatus });
-				};
+					foundObject.values.push({
+						value: aggregatedObjectSum,
+						status: row.PrjCycleStatus,
+					});
+				}
 			} else {
-				const valuesArray = [{ value: aggregatedObjectSum, status: row.PrjCycleStatus }];
+				const valuesArray = [
+					{ value: aggregatedObjectSum, status: row.PrjCycleStatus },
+				];
 				const copiedRow = {
 					fund: row.PFId,
-					projectList: [{
-						year: row.AYr,
-						projectCode: row.PrjCode,
-						projectTitle: row.PrjTitle,
-						status: row.PrjCycleStatus,
-						value: aggregatedObjectSum,
-						sectorsList: aggregatedObject,
-					}],
+					projectList: [
+						{
+							year: row.AYr,
+							projectCode: row.PrjCode,
+							projectTitle: row.PrjTitle,
+							status: row.PrjCycleStatus,
+							value: aggregatedObjectSum,
+							sectorsList: aggregatedObject,
+						},
+					],
 					adminLoc: row.AdmLoc1,
 					lat: latLong[0],
 					lon: latLong[1],
 					totalValue: aggregatedObjectSum,
 					values: valuesArray,
 					key: thisKey,
-					coordinates: new L.LatLng(latLong[0], latLong[1])
+					coordinates: new L.LatLng(latLong[0], latLong[1]),
 				};
 
 				data.push(copiedRow);
-			};
-
-		};
-
+			}
+		}
 	});
 
-	inSelectionLists.yearsInCurrentSelection.push(...yearsInCurrentSelectionSet);
-	inSelectionLists.fundsInCurrentSelection.push(...fundsInCurrentSelectionSet);
-	inSelectionLists.sectorsInCurrentSelection.push(...sectorsInCurrentSelectionSet);
-	inSelectionLists.statussInCurrentSelection.push(...statussInCurrentSelectionSet);
+	inSelectionLists.yearsInCurrentSelection.push(
+		...yearsInCurrentSelectionSet
+	);
+	inSelectionLists.fundsInCurrentSelection.push(
+		...fundsInCurrentSelectionSet
+	);
+	inSelectionLists.sectorsInCurrentSelection.push(
+		...sectorsInCurrentSelectionSet
+	);
+	inSelectionLists.statussInCurrentSelection.push(
+		...statussInCurrentSelectionSet
+	);
 
 	data.forEach(row => {
 		row.values.sort((a, b) => a.value - b.value);
-		row.values.forEach(valuesObj => valuesObj.total = row.totalValue);
+		row.values.forEach(valuesObj => (valuesObj.total = row.totalValue));
 		row.status = row.values[row.values.length - 1].status;
-	})
+	});
 
 	data.sort((a, b) => b.totalValue - a.totalValue);
 
 	return data;
-
-};
+}
 
 function createColorScales() {
-
 	inAllDataLists.statussInAllData.forEach(status => {
 		const color = colorScale(status),
 			colorInterpolator = d3.interpolateRgb(minValueColor, color),
 			colorsQuantile = d3.range(10).map(d => colorInterpolator(d / 9));
-		colorScales[status] = d3.scaleQuantile()
-			.range(colorsQuantile);
+		colorScales[status] = d3.scaleQuantile().range(colorsQuantile);
 	});
-
-};
+}
 
 function createFundsList(fundsData) {
 	//TEMPORARY OBJECT:
@@ -1334,61 +1808,81 @@ function createFundsList(fundsData) {
 	// 	fundLatLongList[row.ISO2Code] = [row.latitude, row.longitude];
 	// 	if (row.PooledFundName === "CERF") cerfPooledFundId = row.id;
 	// });
-};
+}
 
 function createSectorsList(sectorsData) {
-	sectorsData.forEach(row => lists.sectorNamesList[row.id + ""] = row.ClustNm);
-};
+	sectorsData.forEach(
+		row => (lists.sectorNamesList[row.id + ""] = row.ClustNm)
+	);
+}
 
 function capitalize(str) {
-	return str[0].toUpperCase() + str.substring(1)
-};
+	return str[0].toUpperCase() + str.substring(1);
+}
 
 function createLoader(container) {
-
-	const loader = container.append("div")
+	const loader = container
+		.append("div")
 		.attr("class", classPrefix + "roller");
 
-	loader.selectAll(null)
+	loader
+		.selectAll(null)
 		.data(d3.range(8))
 		.enter()
 		.append("div")
 		.attr("class", classPrefix + "rollerDots");
 
-	loader.append("div")
+	loader
+		.append("div")
 		.attr("class", classPrefix + "rollerText")
 		.html("Loading data...");
 
 	return loader;
-};
+}
 
 function removeLoader(loader) {
 	loader.remove();
-};
+}
 
 function fetchFile(fileName, url, warningString, method) {
-	if (localStorage.getItem(fileName) &&
-		JSON.parse(localStorage.getItem(fileName)).timestamp > (currentDate.getTime() - localStorageTime)) {
-		const fetchedData = method === "csv" ? d3.csvParse(JSON.parse(localStorage.getItem(fileName)).data, d3.autoType) :
-			JSON.parse(localStorage.getItem(fileName)).data;
-		console.info("PFBI chart info: " + warningString + " from local storage");
+	if (
+		localStorage.getItem(fileName) &&
+		JSON.parse(localStorage.getItem(fileName)).timestamp >
+			currentDate.getTime() - localStorageTime
+	) {
+		const fetchedData =
+			method === "csv"
+				? d3.csvParse(
+						JSON.parse(localStorage.getItem(fileName)).data,
+						d3.autoType
+				  )
+				: JSON.parse(localStorage.getItem(fileName)).data;
+		console.info(
+			"PFBI chart info: " + warningString + " from local storage"
+		);
 		return Promise.resolve(fetchedData);
 	} else {
 		const fetchMethod = method === "csv" ? d3.csv : d3.json;
 		const rowFunction = method === "csv" ? d3.autoType : null;
 		return fetchMethod(url, rowFunction).then(fetchedData => {
 			try {
-				localStorage.setItem(fileName, JSON.stringify({
-					data: method === "csv" ? d3.csvFormat(fetchedData) : fetchedData,
-					timestamp: currentDate.getTime()
-				}));
+				localStorage.setItem(
+					fileName,
+					JSON.stringify({
+						data:
+							method === "csv"
+								? d3.csvFormat(fetchedData)
+								: fetchedData,
+						timestamp: currentDate.getTime(),
+					})
+				);
 			} catch (error) {
 				console.info("PFBI chart, " + error);
-			};
+			}
 			console.info("PFBI chart info: " + warningString + " from API");
 			return fetchedData;
 		});
-	};
-};
+	}
+}
 
 export { createBubbleMap };
