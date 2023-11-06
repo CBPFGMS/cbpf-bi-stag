@@ -7,9 +7,9 @@ import { countryBoundingBoxes } from "./boundingboxes.js";
 import { isoAlpha2to3 } from "./alpha2to3.js";
 
 const padding = [4, 4, 4, 4],
-	legendSvgWidth = 90,
+	legendSvgWidth = 96,
 	legendSvgHeightColor = 38,
-	legendSvgHeightSize = 98,
+	legendSvgHeightSize = 102,
 	legendSvgPadding = [4, 4, 4, 4],
 	legendTitlePadding = 10,
 	duration = 1000,
@@ -216,7 +216,13 @@ function createBubbleMap({ containerDivId, dataUrl, colors }) {
 	const legendSvg = legendDiv
 		.append("svg")
 		.attr("class", classPrefix + "LegendSvg")
-		.attr("width", legendSvgWidth)
+		.attr(
+			"width",
+			chartState.displayMode === "size"
+				? legendSvgWidth
+				: legendSvgWidth * 1.25
+		)
+		.style("overflow", "visible")
 		.attr(
 			"height",
 			chartState.displayMode === "size"
@@ -342,9 +348,14 @@ function createBubbleMap({ containerDivId, dataUrl, colors }) {
 							? "Multiple statuses"
 							: `Multiple ${type}s`
 						: chartState[`selected${capitalize(type)}`].length === 1
-						? lists[names] && lists[names][d]
-							? lists[names][d]
-							: d
+						? lists[names] &&
+						  lists[names][
+								chartState[`selected${capitalize(type)}`][0]
+						  ]
+							? lists[names][
+									chartState[`selected${capitalize(type)}`][0]
+							  ]
+							: chartState[`selected${capitalize(type)}`][0]
 						: "No selection"
 				);
 
@@ -747,37 +758,39 @@ function drawBubbleMap(
 
 	radiusScale.domain([0, maxValue]);
 
-	const extentLatitude =
-		data.length === 1
-			? [
-					countryBoundingBoxes[
-						isoAlpha2to3[fundIsoCodesList[data[0].fund]]
-					].sw.lat,
-					countryBoundingBoxes[
-						isoAlpha2to3[fundIsoCodesList[data[0].fund]]
-					].ne.lat,
-			  ]
-			: d3.extent(data, d => +d.lat);
-
-	const extentLongitude =
-		data.length === 1
-			? [
-					countryBoundingBoxes[
-						isoAlpha2to3[fundIsoCodesList[data[0].fund]]
-					].sw.lon,
-					countryBoundingBoxes[
-						isoAlpha2to3[fundIsoCodesList[data[0].fund]]
-					].ne.lon,
-			  ]
-			: d3.extent(data, d => +d.lon);
-
 	if (chartState.displayMode === "size") {
 		drawSizeMap();
 	} else {
 		drawColorMap();
 	}
 
-	flyTo(extentLatitude, extentLongitude);
+	if (data.length !== 0) {
+		const extentLatitude =
+			data.length === 1
+				? [
+						countryBoundingBoxes[
+							isoAlpha2to3[fundIsoCodesList[data[0].fund]]
+						].sw.lat,
+						countryBoundingBoxes[
+							isoAlpha2to3[fundIsoCodesList[data[0].fund]]
+						].ne.lat,
+				  ]
+				: d3.extent(data, d => +d.lat);
+
+		const extentLongitude =
+			data.length === 1
+				? [
+						countryBoundingBoxes[
+							isoAlpha2to3[fundIsoCodesList[data[0].fund]]
+						].sw.lon,
+						countryBoundingBoxes[
+							isoAlpha2to3[fundIsoCodesList[data[0].fund]]
+						].ne.lon,
+				  ]
+				: d3.extent(data, d => +d.lon);
+
+		flyTo(extentLatitude, extentLongitude);
+	}
 
 	redrawMap(mapSvg, leafletMap);
 
@@ -1033,14 +1046,22 @@ function drawBubbleMap(
 			maxDataValue,
 		];
 
-		legendSvg.attr(
-			"height",
-			chartState.displayMode === "size"
-				? legendSvgHeightSize
-				: legendColorPadding +
-						legendSvgHeightColor *
-							inSelectionLists.statussInCurrentSelection.length
-		);
+		legendSvg
+			.attr(
+				"width",
+				chartState.displayMode === "size"
+					? legendSvgWidth
+					: legendSvgWidth * 1.25
+			)
+			.attr(
+				"height",
+				chartState.displayMode === "size"
+					? legendSvgHeightSize
+					: legendColorPadding +
+							legendSvgHeightColor *
+								inSelectionLists.statussInCurrentSelection
+									.length
+			);
 
 		let backgroundRectangle = legendSvg
 			.selectAll(`.${classPrefix}backgroundRectangle`)
@@ -1054,6 +1075,12 @@ function drawBubbleMap(
 			.style("opacity", 0.6)
 			.attr("width", legendSvgWidth)
 			.merge(backgroundRectangle)
+			.attr(
+				"width",
+				chartState.displayMode === "size"
+					? legendSvgWidth
+					: legendSvgWidth * 1.25
+			)
 			.attr(
 				"height",
 				chartState.displayMode === "size"
@@ -1674,7 +1701,7 @@ function processData(rawAllocationsData) {
 				if (
 					chartState.selectedSector.length !==
 						inAllDataLists.sectorsInAllData.length &&
-					!chartState.selectedSector.includes(prop)
+					!chartState.selectedSector.includes(+prop)
 				)
 					delete aggregatedObject[prop];
 			}
