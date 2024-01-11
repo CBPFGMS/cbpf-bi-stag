@@ -287,9 +287,9 @@ span[class*="tag-"] {
     z-index: 20;
 }
 
-.banners-panel {
-    min-height: 116px;
+.banners-panel {    
     padding: 15px 0;
+    background-color: #f4f4f4;
 }
 
 .banners-panel .allocation-banner,
