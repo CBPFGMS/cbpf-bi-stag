@@ -1452,7 +1452,14 @@ a.cd-footer-social__link:hover .hover-style {
 
 .allocation-overview {
     position: absolute;
-    top: 351px;
+    top: 365px;
+    width: 160px;
+}
+
+.cpf-overview {
+    position: absolute;
+    top: 390px;
+    width: 160px;
 }
 
 .allocation-overview img {
@@ -1461,6 +1468,16 @@ a.cd-footer-social__link:hover .hover-style {
 }
 
 .allocation-overview span {
+    background: #5392cb;
+    border: 1px solid #5392cb;
+    font-size: 11px;
+    text-align: center;
+    color: #fff;
+    display: block;
+    padding: 2px 5px;
+    transition: .3s ease-out;
+}
+.cpf-overview span {
     background: #5392cb;
     border: 1px solid #5392cb;
     font-size: 11px;
@@ -1482,17 +1499,39 @@ a.cd-footer-social__link:hover .hover-style {
     background: #32659a;
 }
 
+.cpf-overview a:hover {
+    text-decoration: none
+}
+
+.cpf-overview a:hover span {
+    color: #fff;
+    text-decoration: none;
+    border: 1px solid #32659a;
+    background: #32659a;
+}
+
 @-moz-document url-prefix() {
     .allocation-overview span {
         font-weight: 300 !important;
     }
+    .cpf-overview span {
+        font-weight: 300 !important;
+    }
 }
+
 
 _:-ms-fullscreen,
  :root .allocation-overview {
     position: absolute;
     top: 390px;
 }
+
+_:-ms-fullscreen,
+ :root .cpf-overview {
+    position: absolute;
+    top: 390px;
+}
+
 
 _:-ms-fullscreen,
  :root .btn-fullscreen {
@@ -1506,6 +1545,12 @@ _:-ms-fullscreen,
 
 @supports (-ms-ime-align:auto) and (not (-ms-accelerator:true)) {
     .allocation-overview {
+        position: absolute;
+        top: 356px;
+    }
+}
+@supports (-ms-ime-align:auto) and (not (-ms-accelerator:true)) {
+    .cpf-overview {
         position: absolute;
         top: 356px;
     }
