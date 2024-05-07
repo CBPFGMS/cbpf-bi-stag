@@ -1456,9 +1456,21 @@ a.cd-footer-social__link:hover .hover-style {
     width: 160px;
 }
 
-.cpf-overview {
+.result-dashbrd {
     position: absolute;
     top: 390px;
+    width: 160px;
+}
+
+.cbpf-hrp {
+    position: absolute;
+    top: 415px;
+    width: 160px;
+}
+
+.cpf-overview {
+    position: absolute;
+    top: 440px;
     width: 160px;
 }
 
@@ -1467,17 +1479,7 @@ a.cd-footer-social__link:hover .hover-style {
     width: 100%;
 }
 
-.allocation-overview span {
-    background: #5392cb;
-    border: 1px solid #5392cb;
-    font-size: 11px;
-    text-align: center;
-    color: #fff;
-    display: block;
-    padding: 2px 5px;
-    transition: .3s ease-out;
-}
-.cpf-overview span {
+.allocation-overview span, .result-dashbrd span, .cbpf-hrp span, .cpf-overview span{
     background: #5392cb;
     border: 1px solid #5392cb;
     font-size: 11px;
@@ -1488,7 +1490,7 @@ a.cd-footer-social__link:hover .hover-style {
     transition: .3s ease-out;
 }
 
-.allocation-overview a:hover {
+.allocation-overview a:hover, .result-dashbrd a:hover, .cbpf-hrp a:hover, .cpf-overview a:hover{
     text-decoration: none
 }
 
@@ -1499,11 +1501,7 @@ a.cd-footer-social__link:hover .hover-style {
     background: #32659a;
 }
 
-.cpf-overview a:hover {
-    text-decoration: none
-}
-
-.cpf-overview a:hover span {
+.cpf-overview a:hover span, .result-dashbrd a:hover span, .cbpf-hrp a:hover span, .cpf-overview a:hover span {
     color: #fff;
     text-decoration: none;
     border: 1px solid #32659a;
