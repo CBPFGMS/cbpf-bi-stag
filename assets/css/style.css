@@ -551,7 +551,16 @@ nav[data-toggle=toc] .nav-link.active:hover {
         min-height: 175px;
     }
     .allocation-overview {
-        top: 359px !important;
+        top: 410px !important;
+    }
+    .result-dashbrd{
+        top: 434px !important;
+    }
+    .cbpf-hrp{
+        top: 458px !important;
+    }
+    .cpf-overview{
+        top: 482px !important;
     }
     .cookie-panel .btn-custom {
         height: auto
