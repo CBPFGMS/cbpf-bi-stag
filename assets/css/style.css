@@ -2210,3 +2210,24 @@ td:nth-of-type(6) {
      ". . . . . . . . . . . . . . . . . . . . "
      ". . . . . . . . . . . . . . . . . . . . "
 }
+#alloc-prog-dash .modal-dialog {
+    max-width: max-content;
+}
+#alloc-prog-dash .modal-content {
+    background-color: #dfdfdf;
+    max-width: max-content;
+}
+#alloc-prog-dash .modal-body img {margin-right: 13px;}
+#alloc-prog-dash .close-panel .close {
+    font-size: 1.8rem;
+    font-weight: 600;
+    line-height: 1;
+    color: #bbb;   
+    right:0;
+    background-color: #fff;
+    border-radius: 50%;
+    padding: 2px 8px;
+    margin: 15px;
+    box-shadow: 0px 0px 6px -1px rgba(0,0,0,0.10);
+    outline: none;
+}
