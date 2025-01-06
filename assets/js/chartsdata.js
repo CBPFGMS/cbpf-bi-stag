@@ -93,7 +93,7 @@ const filesURLs = [
 	},
 	{
 		name: "launchedAllocationsData",
-		url: "https://cbpfapi.unocha.org/vo2/odata/AllocationTypes?PoolfundCodeAbbrv=&$format=csv",
+		url: "https://cbpfapi.unocha.org/vo2/odata/AllocationTypes?PoolfundCodeAbbrv=&FundTypeId=1&$format=csv",
 		autoType: true,
 		format: "csv",
 		usedBy: ["cbsank", "pbinad", "pbialp", "pbiuac", "pbiolc", "pbigam"],
