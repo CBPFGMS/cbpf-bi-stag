@@ -104,7 +104,7 @@ const filesURLs = [
 			},
 			{
 				name: "AllocationSummary",
-				type: "string",
+				type: t => t === null || typeof t === "string",
 				filterFunction: null,
 			},
 			{
