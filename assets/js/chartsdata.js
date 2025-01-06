@@ -777,6 +777,6 @@ function verifyRow(obj, dataFilter, url, autoType) {
 	return autoType ? copiedObj : obj;
 }
 
-function stringifyFunction(key, value) {
+function stringifyFunction(_, value) {
 	return typeof value === "function" ? value.toString() : value;
 }
