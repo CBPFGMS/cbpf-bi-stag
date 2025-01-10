@@ -382,7 +382,7 @@ const filesURLs = [
 			{
 				name: "GMSDonorISO2Code",
 				type: "string",
-				filterFunction: str => str.length <= 3, //the ISO2 code must be 3 characters or less
+				filterFunction: str => str.length <= 3 || str.includes("-"), //the ISO2 code must be 3 characters or less, or include a hyphen for non-standard codes
 			},
 			{
 				name: "PooledFundName",
@@ -392,7 +392,7 @@ const filesURLs = [
 			{
 				name: "PooledFundISO2Code",
 				type: "string",
-				filterFunction: str => str.length === 2, //the ISO2 code must be 2 characters
+				filterFunction: str => str.length === 2 || str.includes("-"), //the ISO2 code must be 2 characters, or include a hyphen for non-standard codes
 			},
 			{
 				name: "PaidAmt",

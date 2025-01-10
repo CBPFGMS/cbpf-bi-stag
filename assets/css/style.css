@@ -2115,7 +2115,7 @@ td:nth-of-type(6) {
     display: flex;
     flex-direction: column;
     width: 80px;
-    height: 74px;
+    min-height: 74px;
     align-items: center;
     margin-bottom: 8px;
 }
