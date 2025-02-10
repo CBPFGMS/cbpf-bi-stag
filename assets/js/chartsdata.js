@@ -2,6 +2,11 @@
 //using a global object for sharing data
 window.cbpfbiDataObject = {};
 
+// New stage API URLs:
+// https://fieldwebapps.unocha.org/vo1
+// https://fieldwebapps.unocha.org/vo2/
+// https://fieldwebapps.unocha.org/vo3
+
 //constants used by the filters
 const ipNames = ["ingo", "ngo", "o", "un"],
 	subIpNames = ["ingo", "ngo", "o", "un", "og", "pc"],
@@ -93,7 +98,7 @@ const filesURLs = [
 	},
 	{
 		name: "launchedAllocationsData",
-		url: "https://cbpfapi.unocha.org/vo2/odata/AllocationTypes?PoolfundCodeAbbrv=&FundTypeId=1&$format=csv",
+		url: "https://fieldwebapps.unocha.org/vo2/odata/AllocationTypes?PoolfundCodeAbbrv=&FundTypeId=1&$format=csv",
 		autoType: true,
 		format: "csv",
 		usedBy: ["cbsank", "pbinad", "pbialp", "pbiuac", "pbiolc", "pbigam"],
@@ -217,7 +222,7 @@ const filesURLs = [
 	},
 	{
 		name: "allocationFlowData",
-		url: "https://cbpfapi.unocha.org/vo2/odata/AllocationFlowByOrgType?PoolfundCodeAbbrv=&$format=csv",
+		url: "https://fieldwebapps.unocha.org/vo2/odata/AllocationFlowByOrgType?PoolfundCodeAbbrv=&$format=csv",
 		autoType: false,
 		format: "csv",
 		usedBy: ["pbinad"],
@@ -260,7 +265,7 @@ const filesURLs = [
 	},
 	{
 		name: "masterPooledFunds",
-		url: "https://cbpfapi.unocha.org/vo2/odata/MstPooledFund?$format=csv",
+		url: "https://fieldwebapps.unocha.org/vo2/odata/MstPooledFund?$format=csv",
 		autoType: true,
 		format: "csv",
 		usedBy: ["pbinad"],
@@ -268,7 +273,7 @@ const filesURLs = [
 	},
 	{
 		name: "masterPartners",
-		url: "https://cbpfapi.unocha.org/vo2/odata/MstOrgType?$format=csv",
+		url: "https://fieldwebapps.unocha.org/vo2/odata/MstOrgType?$format=csv",
 		autoType: true,
 		format: "csv",
 		usedBy: ["pbinad"],
@@ -276,7 +281,7 @@ const filesURLs = [
 	},
 	{
 		name: "masterSubPartners",
-		url: "https://cbpfapi.unocha.org/vo2/odata/SubIPType?$format=csv",
+		url: "https://fieldwebapps.unocha.org/vo2/odata/SubIPType?$format=csv",
 		autoType: true,
 		format: "csv",
 		usedBy: ["pbinad"],
@@ -284,7 +289,7 @@ const filesURLs = [
 	},
 	{
 		name: "allocationsData",
-		url: "https://cbpfapi.unocha.org/vo2/odata/AllocationBudgetTotalsByYearAndFund?&FundingType=3&$format=csv",
+		url: "https://fieldwebapps.unocha.org/vo2/odata/AllocationBudgetTotalsByYearAndFund?&FundingType=3&$format=csv",
 		autoType: true,
 		format: "csv",
 		usedBy: ["pbialp"],
@@ -364,7 +369,7 @@ const filesURLs = [
 	},
 	{
 		name: "contributionsTotalData",
-		url: "https://cbpfapi.unocha.org/vo2/odata/ContributionTotal?$format=csv&ShowAllPooledFunds=1",
+		url: "https://fieldwebapps.unocha.org/vo2/odata/ContributionTotal?$format=csv&ShowAllPooledFunds=1",
 		autoType: false,
 		format: "csv",
 		usedBy: ["pbiclc", "pbicli", "pbifdc"],
@@ -438,7 +443,7 @@ const filesURLs = [
 	},
 	{
 		name: "targetedPersonsData",
-		url: "https://cbpfapi.unocha.org/vo2/odata/PoolFundBeneficiarySummary?$format=csv&ShowAllPooledFunds=1",
+		url: "https://fieldwebapps.unocha.org/vo2/odata/PoolFundBeneficiarySummary?$format=csv&ShowAllPooledFunds=1",
 		autoType: true,
 		format: "csv",
 		usedBy: ["pbiolc"],
@@ -509,7 +514,7 @@ const filesURLs = [
 	},
 	{
 		name: "targetedPersonsDetailsData",
-		url: "https://cbpfapi.unocha.org/vo2/odata/ProjectSummaryBeneficiaryDetail?$format=csv",
+		url: "https://fieldwebapps.unocha.org/vo2/odata/ProjectSummaryBeneficiaryDetail?$format=csv",
 		autoType: true,
 		format: "csv",
 		usedBy: ["pbiobe"],
@@ -608,7 +613,7 @@ const filesURLs = [
 	},
 	{
 		name: "dataGam",
-		url: "https://cbpfapi.unocha.org/vo2/odata/ProjectGAMSummary?$format=csv",
+		url: "https://fieldwebapps.unocha.org/vo2/odata/ProjectGAMSummary?$format=csv",
 		autoType: true,
 		format: "csv",
 		usedBy: ["pbigam"],
@@ -661,7 +666,7 @@ const filesURLs = [
 	},
 	{
 		name: "masterGam",
-		url: "https://cbpfapi.unocha.org/vo2/odata/GenderMarker?$format=csv",
+		url: "https://fieldwebapps.unocha.org/vo2/odata/GenderMarker?$format=csv",
 		autoType: true,
 		format: "csv",
 		usedBy: ["pbigam"],

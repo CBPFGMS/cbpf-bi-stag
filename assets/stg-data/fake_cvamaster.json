@@ -1,0 +1,22 @@
+[
+	{
+		"CVAName": "Conditional cash transfers",
+		"CVAId": 1
+	},
+	{
+		"CVAName": "Conditional vouchers",
+		"CVAId": 2
+	},
+	{
+		"CVAName": "Multi-purpose cash",
+		"CVAId": 3
+	},
+	{
+		"CVAName": "Sector-specific unconditional cash transfers",
+		"CVAId": 4
+	},
+	{
+		"CVAName": "Unconditional vouchers",
+		"CVAId": 5
+	}
+]
