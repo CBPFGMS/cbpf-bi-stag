@@ -3,7 +3,7 @@ var currentyear = d.getFullYear();
 var changedYear = 0;
 
 var minYear = 2014;
-var yearToShowDataOnLoad = 2024;
+var yearToShowDataOnLoad = 2025;
 
 $(function() {
     $('.annualHeading__2uJLv').text(yearToShowDataOnLoad);
