@@ -5,35 +5,52 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Welcome to Country Based Pooled Funds Data Hub</title>
+    
+    <!-- Resource Hints for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cbpfgms.github.io">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="//kit.fontawesome.com">
+    
+    <!-- Critical CSS -->
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,400i,700,700i,600,600i">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab">
+    
+    <!-- Combined Google Fonts - Single Request -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,400i,600,600i,700,700i|Lora:400,400i|Roboto+Slab:400,700&display=swap">
+    
     <link rel="stylesheet" href="assets/css/Highlight-Phone.css">
-    <link rel="stylesheet" href="assets/css/bootstrap-toc.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
-    <link rel="stylesheet" href="assets/css/smoothproducts.css">
+    
+    <!-- Non-critical CSS - Load asynchronously -->
+    <link rel="preload" href="assets/css/bootstrap-toc.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="assets/css/bootstrap-toc.min.css"></noscript>
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css"></noscript>
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css"></noscript>
+    
+    <link rel="preload" href="assets/css/smoothproducts.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="assets/css/smoothproducts.css"></noscript>
+    
     <link rel="stylesheet" href="assets/css/style.css">
+    
+    <!-- Essential Scripts Only -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.min.js" integrity="sha512-FHsFVKQ/T1KWJDGSbrUhTJyS1ph3eRrxI228ND0EGaEp6v4a/vGwPWd3Dtd/+9cI7ccofZvl/wulICEurHN1pg==" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@ungap/url-search-params@0.1.2/min.min.js"></script>
-    <script type="text/javascript" src="https://cbpfgms.github.io/libraries/html2canvas.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3-sankey/0.12.3/d3-sankey.min.js"></script>
-    <script src="https://kit.fontawesome.com/d5d759e566.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://cbpfgms.github.io/css/d3chartstyles.css">
-    <link rel="stylesheet" type="text/css" href="https://cbpfgms.github.io/css/d3chartstylescbsank.css">
-    <link rel="stylesheet" type="text/css" href="https://cbpfgms.github.io/css/d3chartstylespbialp.css">
-    <link rel="stylesheet" type="text/css" href="https://cbpfgms.github.io/css/d3chartstylespbifdc.css">
-    <link rel="stylesheet" type="text/css" href="https://cbpfgms.github.io/css/d3chartstylespbiolc.css">
-    <link rel="stylesheet" type="text/css" href="https://cbpfgms.github.io/css/d3chartstylespbiobe.css">
-    <link rel="stylesheet" type="text/css" href="https://cbpfgms.github.io/css/d3chartstylespbicli.css">
-    <link rel="stylesheet" type="text/css" href="https://cbpfgms.github.io/css/d3chartstylespbiuac.css">
-    <link rel="stylesheet" type="text/css" href="https://cbpfgms.github.io/css/d3chartstylespbiclc.css">
-    <link rel="stylesheet" type="text/css" href="https://cbpfgms.github.io/css/d3chartstylespbiuac.css">
-    <link rel="stylesheet" type="text/css" href="https://cbpfgms.github.io/css/d3chartstylespbinad.css">
+    
+    <!-- Deferred third-party scripts -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@ungap/url-search-params@0.1.2/min.min.js" defer></script>
+    <script type="text/javascript" src="https://cbpfgms.github.io/libraries/html2canvas.min.js" defer></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js" defer></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3-sankey/0.12.3/d3-sankey.min.js" defer></script>
+    
+
+    
+    <!-- Chart Styles - Load base styles only, others on demand -->
+    <link rel="preload" href="https://cbpfgms.github.io/css/d3chartstyles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cbpfgms.github.io/css/d3chartstyles.css"></noscript>
+    
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -59,7 +76,7 @@
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true" style="font-size:25px">×</span>
             </button>
-            <strong>Browser Support :</strong> This site is best viewable in “Google Chrome” or “Microsoft Edge”
+            <strong>Browser Support :</strong> This site is best viewable in "Google Chrome" or "Microsoft Edge"
         </div>
     </div>
     <header class="cd-header">
@@ -639,7 +656,7 @@
             </symbol>
             <symbol viewBox="0 0 48 48" id="file-json" xmlns="http://www.w3.org/2000/svg">
                 <path d="M32.78 38a.78.78 0 0 0-.78.78V45l7-7h-6.22zM25.88 19.88A1.15 1.15 0 0 0 24.73 21v5.44a1.15 1.15 0 1 0 2.3 0V21a1.15 1.15 0 0 0-1.15-1.15z"></path>
-                <path d="M38.06 3H9.94A1 1 0 0 0 9 4v40a1 1 0 0 0 .94 1H30v-6.22A2.79 2.79 0 0 1 32.78 36H39V4a1 1 0 0 0-.94-1zM15.67 26.47a2.61 2.61 0 0 1-.37 1.34 2.81 2.81 0 0 1-1 1 2.72 2.72 0 0 1-1.36.35 2.6 2.6 0 0 1-1.33-.35.83.83 0 0 1-.36-.48.71.71 0 0 1 .07-.58.77.77 0 0 1 .47-.36.72.72 0 0 1 .58.07 1.12 1.12 0 0 0 1.15 0 1 1 0 0 0 .42-.41 1.15 1.15 0 0 0 .15-.58v-7.36a.77.77 0 1 1 1.54 0zm6.14 1.25a3 3 0 0 1-.75.88 2.67 2.67 0 0 1-1.06.5 2.75 2.75 0 0 1-2.24-.46 2.62 2.62 0 0 1-.77-.86.69.69 0 0 1-.09-.58.77.77 0 0 1 .36-.47.71.71 0 0 1 .58-.07.83.83 0 0 1 .48.36 1.23 1.23 0 0 0 .82.59 1.21 1.21 0 0 0 1-.24 1.05 1.05 0 0 0 .34-.38 1.5 1.5 0 0 0 .14-.5 1.2 1.2 0 0 0-.34-1l-2.56-2.59a2.55 2.55 0 0 1-.61-1 2.67 2.67 0 0 1-.11-1.08 2.72 2.72 0 0 1 .32-1.08 2.68 2.68 0 0 1 1.77-1.34 2.68 2.68 0 0 1 1.13 0 3 3 0 0 1 1 .46 2.51 2.51 0 0 1 .76.84.71.71 0 0 1 .07.58.83.83 0 0 1-.36.48.7.7 0 0 1-.58.07.76.76 0 0 1-.46-.36 1.25 1.25 0 0 0-.77-.56 1.12 1.12 0 0 0-.93.22 1.15 1.15 0 0 0-.13 1.71l2.54 2.62a2.85 2.85 0 0 1 .62 1 2.66 2.66 0 0 1 .16 1.15 2.7 2.7 0 0 1-.32 1.11zm6.75-1.25A2.7 2.7 0 0 1 24.83 29a2.69 2.69 0 0 1-1.43-1.43 2.64 2.64 0 0 1-.21-1V21a2.66 2.66 0 0 1 .78-1.9 2.69 2.69 0 0 1 .86-.58 2.74 2.74 0 0 1 2.1 0A2.67 2.67 0 0 1 28.57 21zm7.49 1.92a.74.74 0 0 1-.17.48.77.77 0 0 1-.42.27.73.73 0 0 1-.51-.06.74.74 0 0 1-.35-.36q-.48-1-1-2.1l-1-2-1-2.14v5.92a.77.77 0 1 1-1.54 0v-9.29a.77.77 0 0 1 .16-.48.75.75 0 0 1 .43-.27.72.72 0 0 1 .5.06.85.85 0 0 1 .36.36q.48 1 1 2.1l1 2Q34 24 34.52 25v-5.89a.77.77 0 1 1 1.54 0z"></path>
+                <path d="M38.06 3H9.94A1 1 0 0 0 9 4v40a1 1 0 0 0 .94 1H30v-6.22A2.79 2.79 0 0 1 32.78 36H39V4a1 1 0 0 0-.94-1zM15.67 26.47a2.61 2.61 0 0 1-.37 1.34 2.81 2.81 0 0 1-1 1 2.72 2.72 0 0 1-1.36.35 2.6 2.6 0 0 1-1.33-.35.83.83 0 0 1-.36-.48.71.71 0 0 1 .07-.58.77.77 0 0 1 .47-.36.72.72 0 0 1 .58.07 1.12 1.12 0 0 0 1.15 0 1 1 0 0 0 .42-.41 1.15 1.15 0 0 0 .15-.58v-7.36a.77.77 0 1 1 1.54 0zm6.14 1.25a3 3 0 0 1-.75.88 2.67 2.67 0 0 1-1.06.5 2.75 2.75 0 0 1-2.24-.46 2.62 2.62 0 0 1-.77-.86.69.69 0 0 1-.09-.58.77.77 0 0 1 .36-.47.71.71 0 0 1 .58-.07.83.83 0 0 1 .48.36 1.23 1.23 0 0 0 .82.59 1.21 1.21 0 0 0 1-.24 1 1 0 0 0 .34-.38 1.5 1.5 0 0 0 .14-.5 1.2 1.2 0 0 0-.34-1l-2.56-2.59a2.55 2.55 0 0 1-.61-1 2.67 2.67 0 0 1-.11-1.08 2.72 2.72 0 0 1 .32-1.08 2.68 2.68 0 0 1 1.77-1.34 2.68 2.68 0 0 1 1.13 0 3 3 0 0 1 1 .46 2.51 2.51 0 0 1 .76.84.71.71 0 0 1 .07.58.83.83 0 0 1-.36.48.7.7 0 0 1-.58.07.76.76 0 0 1-.46-.36 1.25 1.25 0 0 0-.77-.56 1.12 1.12 0 0 0-.93.22 1.15 1.15 0 0 0-.13 1.71l2.54 2.62a2.85 2.85 0 0 1 .62 1 2.66 2.66 0 0 1 .16 1.15 2.7 2.7 0 0 1-.32 1.11zm6.75-1.25A2.7 2.7 0 0 1 24.83 29a2.69 2.69 0 0 1-1.43-1.43 2.64 2.64 0 0 1-.21-1V21a2.66 2.66 0 0 1 .78-1.9 2.69 2.69 0 0 1 .86-.58 2.74 2.74 0 0 1 2.1 0A2.67 2.67 0 0 1 28.57 21zm7.49 1.92a.74.74 0 0 1-.17.48.77.77 0 0 1-.42.27.73.73 0 0 1-.51-.06.74.74 0 0 1-.35-.36q-.48-1-1-2.1l-1-2-1-2.14v5.92a.77.77 0 1 1-1.54 0v-9.29a.77.77 0 0 1 .16-.48.75.75 0 0 1 .43-.27.72.72 0 0 1 .5.06.85.85 0 0 1 .36.36q.48 1 1 2.1l1 2Q34 24 34.52 25v-5.89a.77.77 0 1 1 1.54 0z"></path>
             </symbol>
             <symbol viewBox="0 0 48 48" id="file-pdf" xmlns="http://www.w3.org/2000/svg">
                 <path d="M32.78 38a.78.78 0 0 0-.78.78V45l7-7h-6.22zM16.72 19.06h-1.4V23h1.4a1.4 1.4 0 0 0 1.4-1.4v-1.14a1.4 1.4 0 0 0-1.4-1.4zM24.51 19.06H23.1v9.27h1.4a1.4 1.4 0 0 0 1.4-1.4v-6.47a1.4 1.4 0 0 0-1.4-1.4z"></path>
@@ -844,67 +861,248 @@
 			</div>
 		</div>
 	</div>
+    <!-- Bottom Scripts - Optimized Loading -->
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap-dropdown.js"></script>
     <script src="assets/js/custom-menu.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    
+    <!-- Non-critical scripts loaded asynchronously -->
+    <script>
+        // Async script loader
+        function loadScript(src) {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = src;
+                script.async = true;
+                script.onload = resolve;
+                script.onerror = reject;
+                document.head.appendChild(script);
+            });
+        }
+        
+        // Load non-critical scripts after page load
+        window.addEventListener('load', function() {
+            // Load critical data script first, then other scripts
+            loadScript('assets/js/chartsdata.js').then(() => {
+                // Load flags.js after chartsdata.js to ensure data is available
+                return loadScript('assets/js/flags.js');
+            }).then(() => {
+                // Load all other non-critical scripts in parallel
+                return Promise.all([
+                    loadScript('https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js'),
+                    loadScript('assets/js/bootstrap-toc.min.js'),
+                    loadScript('assets/js/bs-animation.js'),
+                    loadScript('https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js'),
+                    loadScript('assets/js/smoothproducts.min.js'),
+                    loadScript('assets/js/respond.js'),
+                    loadScript('assets/js/theme.js'),
+                    loadScript('https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js'),
+                    loadScript('assets/js/breaking-news-ticker.min.js'),
+                    loadScript('https://kit.fontawesome.com/d5d759e566.js'),
+                    loadScript('https://cdn.jsdelivr.net/npm/@ungap/url-search-params@0.1.2/min.min.js'),
+                    loadScript('https://cbpfgms.github.io/libraries/html2canvas.min.js'),
+                    loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js'),
+                    loadScript('https://cdnjs.cloudflare.com/ajax/libs/d3-sankey/0.12.3/d3-sankey.min.js')
+                ]);
+            }).then(() => {
+                // Initialize breaking news ticker after all scripts load
+                if (typeof $ !== 'undefined' && $.fn.breakingNews) {
+                    $("#newsTicker3").breakingNews({
+                        play: false,
+                        delayTimer: 600000,
+                        stopOnHover: true
+                    });
+                }
+            }).catch(error => {
+                console.warn('Some scripts failed to load:', error);
+                // Try to initialize ticker anyway if jQuery and plugin are available
+                setTimeout(() => {
+                    if (typeof $ !== 'undefined' && $.fn.breakingNews) {
+                        $("#newsTicker3").breakingNews({
+                            play: false,
+                            delayTimer: 600000,
+                            stopOnHover: true
+                        });
+                    }
+                }, 1000);
+            });
+        });
+    </script>
+    
     <script>
         $(document).ready(function() {
             $(".cd-ocha-btn").click(function() {
                 $(".cd-dropdown").toggle();
             });
             $(window).on('click', function() {
-                $('#cd-ocha-dropdown').css('display', 'none'); //$( '#layers' ).hide();
+                $('#cd-ocha-dropdown').css('display', 'none');
             });
         });
     </script>
-    <script type="text/javascript" id="cookieinfo" src="assets/js/cookieinfo.min.js" data-bg="#002856" data-fg="#FFF" data-link="#FFF" data-cookie="CookieInfoScript" data-text-align="left" data-close-text="OK">
-    </script>
-
-    <script src="assets/js/bootstrap-toc.min.js"></script>
-    <script src="assets/js/bs-animation.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
-    <script src="assets/js/smoothproducts.min.js"></script>
-    <script src="assets/js/respond.js"></script>
-    <script src="assets/js/theme.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
-    <script src="assets/js/breaking-news-ticker.min.js"></script>
-    <script src="assets/js/chartsdata.js"></script>
-    <script>
-        $("#newsTicker3").breakingNews({
-            play:false,
-            delayTimer: 600000,
-            stopOnHover: true
-        })
-    </script>
+    
+    <!-- Chart Loading System - Lazy Load on Demand -->
     <script type="text/javascript">
-        if (document.location.hostname.search("cbpf.data.unocha.org") !== -1) {
-            window.dataLayer = window.dataLayer || [];
-            $.getScript("https://cbpfgms.github.io/cbsank/src/d3chartcbsank.js", function() {});
-            $.getScript("https://cbpfgms.github.io/pbiclc/src/d3chartpbiclc.js", function() {});
-            $.getScript("https://cbpfgms.github.io/pbicli/src/d3chartpbicli.js", function() {});
-            $.getScript("https://cbpfgms.github.io/pbialp/src/d3chartpbialp.js", function() {});
-            $.getScript("https://cbpfgms.github.io/pbifdc/src/d3chartpbifdc.js", function() {});
-            $.getScript("https://cbpfgms.github.io/pbiolc/src/d3chartpbiolc.js", function() {});
-            $.getScript("https://cbpfgms.github.io/pbiobe/src/d3chartpbiobe.js", function() {});
-            $.getScript("https://cbpfgms.github.io/pbiuac/src/d3chartpbiuac.js", function() {});
-            $.getScript("https://cbpfgms.github.io/pbigam/src/d3chartpbigam.js", function() {});
-	    $.getScript("https://cbpfgms.github.io/pbinad/src/d3chartpbinad.js", function() {});
-        } else {
-            $.getScript("https://cbpfgms.github.io/cbsank/src/d3chartcbsank-stg.js", function() {});
-            $.getScript("https://cbpfgms.github.io/pbiclc/src/d3chartpbiclc-stg.js", function() {});
-            $.getScript("https://cbpfgms.github.io/pbicli/src/d3chartpbicli-stg.js", function() {});
-            $.getScript("https://cbpfgms.github.io/pbialp/src/d3chartpbialp-stg.js", function() {});
-            $.getScript("https://cbpfgms.github.io/pbifdc/src/d3chartpbifdc-stg.js", function() {});
-            $.getScript("https://cbpfgms.github.io/pbiolc/src/d3chartpbiolc-stg.js", function() {});
-            $.getScript("https://cbpfgms.github.io/pbiobe/src/d3chartpbiobe-stg.js", function() {});
-            $.getScript("https://cbpfgms.github.io/pbiuac/src/d3chartpbiuac-stg.js", function() {});
-            $.getScript("https://cbpfgms.github.io/pbigam/src/d3chartpbigam-stg.js", function() {});
-	        $.getScript("https://cbpfgms.github.io/pbinad/src/d3chartpbinad-stg.js", function() {});
+        // Chart configuration with lazy loading
+        const chartConfig = {
+            'cbsank': {
+                styles: ['https://cbpfgms.github.io/css/d3chartstylescbsank.css'],
+                script: document.location.hostname.search("cbpf.data.unocha.org") !== -1 
+                    ? "https://cbpfgms.github.io/cbsank/src/d3chartcbsank.js"
+                    : "https://cbpfgms.github.io/cbsank/src/d3chartcbsank-stg.js",
+                container: "#d3chartcontainercbsank"
+            },
+            'pbiclc': {
+                styles: ['https://cbpfgms.github.io/css/d3chartstylespbiclc.css'],
+                script: document.location.hostname.search("cbpf.data.unocha.org") !== -1 
+                    ? "https://cbpfgms.github.io/pbiclc/src/d3chartpbiclc.js"
+                    : "https://cbpfgms.github.io/pbiclc/src/d3chartpbiclc-stg.js",
+                container: "#d3chartcontainerpbiclc"
+            },
+            'pbicli': {
+                styles: ['https://cbpfgms.github.io/css/d3chartstylespbicli.css'],
+                script: document.location.hostname.search("cbpf.data.unocha.org") !== -1 
+                    ? "https://cbpfgms.github.io/pbicli/src/d3chartpbicli.js"
+                    : "https://cbpfgms.github.io/pbicli/src/d3chartpbicli-stg.js",
+                container: "#d3chartcontainerpbicli"
+            },
+            'pbialp': {
+                styles: ['https://cbpfgms.github.io/css/d3chartstylespbialp.css'],
+                script: document.location.hostname.search("cbpf.data.unocha.org") !== -1 
+                    ? "https://cbpfgms.github.io/pbialp/src/d3chartpbialp.js"
+                    : "https://cbpfgms.github.io/pbialp/src/d3chartpbialp-stg.js",
+                container: "#d3chartcontainerpbialp"
+            },
+            'pbifdc': {
+                styles: ['https://cbpfgms.github.io/css/d3chartstylespbifdc.css'],
+                script: document.location.hostname.search("cbpf.data.unocha.org") !== -1 
+                    ? "https://cbpfgms.github.io/pbifdc/src/d3chartpbifdc.js"
+                    : "https://cbpfgms.github.io/pbifdc/src/d3chartpbifdc-stg.js",
+                container: "#d3chartcontainerpbifdc"
+            },
+            'pbiolc': {
+                styles: ['https://cbpfgms.github.io/css/d3chartstylespbiolc.css'],
+                script: document.location.hostname.search("cbpf.data.unocha.org") !== -1 
+                    ? "https://cbpfgms.github.io/pbiolc/src/d3chartpbiolc.js"
+                    : "https://cbpfgms.github.io/pbiolc/src/d3chartpbiolc-stg.js",
+                container: "#d3chartcontainerpbiolc"
+            },
+            'pbiobe': {
+                styles: ['https://cbpfgms.github.io/css/d3chartstylespbiobe.css'],
+                script: document.location.hostname.search("cbpf.data.unocha.org") !== -1 
+                    ? "https://cbpfgms.github.io/pbiobe/src/d3chartpbiobe.js"
+                    : "https://cbpfgms.github.io/pbiobe/src/d3chartpbiobe-stg.js",
+                container: "#d3chartcontainerpbiobe"
+            },
+            'pbiuac': {
+                styles: ['https://cbpfgms.github.io/css/d3chartstylespbiuac.css'],
+                script: document.location.hostname.search("cbpf.data.unocha.org") !== -1 
+                    ? "https://cbpfgms.github.io/pbiuac/src/d3chartpbiuac.js"
+                    : "https://cbpfgms.github.io/pbiuac/src/d3chartpbiuac-stg.js",
+                container: "#d3chartcontainerpbiuac"
+            },
+            'pbigam': {
+                styles: ['https://cbpfgms.github.io/css/d3chartstylespbigam.css'],
+                script: document.location.hostname.search("cbpf.data.unocha.org") !== -1 
+                    ? "https://cbpfgms.github.io/pbigam/src/d3chartpbigam.js"
+                    : "https://cbpfgms.github.io/pbigam/src/d3chartpbigam-stg.js",
+                container: "#d3chartcontainerpbigam"
+            },
+            'pbinad': {
+                styles: ['https://cbpfgms.github.io/css/d3chartstylespbinad.css'],
+                script: document.location.hostname.search("cbpf.data.unocha.org") !== -1 
+                    ? "https://cbpfgms.github.io/pbinad/src/d3chartpbinad.js"
+                    : "https://cbpfgms.github.io/pbinad/src/d3chartpbinad-stg.js",
+                container: "#d3chartcontainerpbinad"
+            }
+        };
+        
+        const loadedCharts = {};
+        
+        // Intersection Observer for lazy loading charts
+        const chartObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const chartType = entry.target.dataset.chartType;
+                    if (chartType && !loadedCharts[chartType]) {
+                        loadChart(chartType);
+                        chartObserver.unobserve(entry.target);
+                    }
+                }
+            });
+        }, {
+            rootMargin: '100px'
+        });
+        
+        // Load chart on demand
+        function loadChart(chartType) {
+            const config = chartConfig[chartType];
+            if (!config || loadedCharts[chartType]) return;
+            
+            loadedCharts[chartType] = true;
+            const container = document.querySelector(config.container);
+            
+            if (container) {
+                container.innerHTML = '<div class="chart-loading">Loading chart...</div>';
+                
+                // Load chart styles first
+                const loadStyles = config.styles.map(styleUrl => {
+                    return new Promise((resolve) => {
+                        const link = document.createElement('link');
+                        link.rel = 'stylesheet';
+                        link.href = styleUrl;
+                        link.onload = resolve;
+                        link.onerror = resolve; // Continue even if style fails
+                        document.head.appendChild(link);
+                    });
+                });
+                
+                // Load chart script after styles
+                Promise.all(loadStyles).then(() => {
+                    return loadScript(config.script);
+                }).then(() => {
+                    container.querySelector('.chart-loading').remove();
+                }).catch(error => {
+                    console.error('Failed to load chart:', chartType, error);
+                    container.innerHTML = '<div class="chart-loading" style="color: red;">Failed to load chart</div>';
+                });
+            }
         }
+        
+        // Initialize chart observers when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load base chart styles
+            const baseStyleLink = document.querySelector('link[data-chart-style="base"]');
+            if (baseStyleLink) {
+                baseStyleLink.rel = 'stylesheet';
+            }
+            
+            // Observe chart containers
+            document.querySelectorAll('[id^="d3chartcontainer"]').forEach(container => {
+                const chartType = container.id.replace('d3chartcontainer', '');
+                container.dataset.chartType = chartType;
+                chartObserver.observe(container);
+            });
+        });
+        
+        // Fallback: Load visible charts after page load
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.querySelectorAll('[id^="d3chartcontainer"]').forEach(container => {
+                    const rect = container.getBoundingClientRect();
+                    const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+                    if (isVisible) {
+                        const chartType = container.dataset.chartType;
+                        if (chartType && !loadedCharts[chartType]) {
+                            loadChart(chartType);
+                        }
+                    }
+                });
+            }, 1000);
+        });
     </script>
-    <script type="text/javascript" src="assets/js/flags.js"></script>
+    
+    <script type="text/javascript" id="cookieinfo" src="assets/js/cookieinfo.min.js" data-bg="#002856" data-fg="#FFF" data-link="#FFF" data-cookie="CookieInfoScript" data-text-align="left" data-close-text="OK" async></script>
 </body>
 
 </html>
