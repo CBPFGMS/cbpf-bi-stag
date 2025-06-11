@@ -881,31 +881,36 @@
             });
         }
         
+        // Load critical data first, immediately after DOM load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load chartsdata.js early and then flags.js to ensure data is available
+            loadScript('assets/js/chartsdata.js').then(() => {
+                // Give chartsdata.js a moment to initialize the data object
+                setTimeout(() => {
+                    loadScript('assets/js/flags.js');
+                }, 500);
+            });
+        });
+
         // Load non-critical scripts after page load
         window.addEventListener('load', function() {
-            // Load critical data script first, then other scripts
-            loadScript('assets/js/chartsdata.js').then(() => {
-                // Load flags.js after chartsdata.js to ensure data is available
-                return loadScript('assets/js/flags.js');
-            }).then(() => {
-                // Load all other non-critical scripts in parallel
-                return Promise.all([
-                    loadScript('https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js'),
-                    loadScript('assets/js/bootstrap-toc.min.js'),
-                    loadScript('assets/js/bs-animation.js'),
-                    loadScript('https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js'),
-                    loadScript('assets/js/smoothproducts.min.js'),
-                    loadScript('assets/js/respond.js'),
-                    loadScript('assets/js/theme.js'),
-                    loadScript('https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js'),
-                    loadScript('assets/js/breaking-news-ticker.min.js'),
-                    loadScript('https://kit.fontawesome.com/d5d759e566.js'),
-                    loadScript('https://cdn.jsdelivr.net/npm/@ungap/url-search-params@0.1.2/min.min.js'),
-                    loadScript('https://cbpfgms.github.io/libraries/html2canvas.min.js'),
-                    loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js'),
-                    loadScript('https://cdnjs.cloudflare.com/ajax/libs/d3-sankey/0.12.3/d3-sankey.min.js')
-                ]);
-            }).then(() => {
+            // Load all non-critical scripts in parallel
+            Promise.all([
+                loadScript('https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js'),
+                loadScript('assets/js/bootstrap-toc.min.js'),
+                loadScript('assets/js/bs-animation.js'),
+                loadScript('https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js'),
+                loadScript('assets/js/smoothproducts.min.js'),
+                loadScript('assets/js/respond.js'),
+                loadScript('assets/js/theme.js'),
+                loadScript('https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js'),
+                loadScript('assets/js/breaking-news-ticker.min.js'),
+                loadScript('https://kit.fontawesome.com/d5d759e566.js'),
+                loadScript('https://cdn.jsdelivr.net/npm/@ungap/url-search-params@0.1.2/min.min.js'),
+                loadScript('https://cbpfgms.github.io/libraries/html2canvas.min.js'),
+                loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js'),
+                loadScript('https://cdnjs.cloudflare.com/ajax/libs/d3-sankey/0.12.3/d3-sankey.min.js')
+            ]).then(() => {
                 // Initialize breaking news ticker after all scripts load
                 if (typeof $ !== 'undefined' && $.fn.breakingNews) {
                     $("#newsTicker3").breakingNews({
@@ -1034,6 +1039,20 @@
             rootMargin: '100px'
         });
         
+        // Wait for data to be available
+        function waitForChartData() {
+            return new Promise((resolve) => {
+                function checkData() {
+                    if (window.cbpfbiDataObject && Object.keys(window.cbpfbiDataObject).length > 0) {
+                        resolve();
+                    } else {
+                        setTimeout(checkData, 100);
+                    }
+                }
+                checkData();
+            });
+        }
+
         // Load chart on demand
         function loadChart(chartType) {
             const config = chartConfig[chartType];
@@ -1045,23 +1064,29 @@
             if (container) {
                 container.innerHTML = '<div class="chart-loading">Loading chart...</div>';
                 
-                // Load chart styles first
-                const loadStyles = config.styles.map(styleUrl => {
-                    return new Promise((resolve) => {
-                        const link = document.createElement('link');
-                        link.rel = 'stylesheet';
-                        link.href = styleUrl;
-                        link.onload = resolve;
-                        link.onerror = resolve; // Continue even if style fails
-                        document.head.appendChild(link);
+                // Wait for data to be available before loading chart
+                waitForChartData().then(() => {
+                    // Load chart styles first
+                    const loadStyles = config.styles.map(styleUrl => {
+                        return new Promise((resolve) => {
+                            const link = document.createElement('link');
+                            link.rel = 'stylesheet';
+                            link.href = styleUrl;
+                            link.onload = resolve;
+                            link.onerror = resolve; // Continue even if style fails
+                            document.head.appendChild(link);
+                        });
                     });
-                });
-                
-                // Load chart script after styles
-                Promise.all(loadStyles).then(() => {
-                    return loadScript(config.script);
+                    
+                    // Load chart script after styles and data are ready
+                    return Promise.all(loadStyles).then(() => {
+                        return loadScript(config.script);
+                    });
                 }).then(() => {
-                    container.querySelector('.chart-loading').remove();
+                    const loadingElement = container.querySelector('.chart-loading');
+                    if (loadingElement) {
+                        loadingElement.remove();
+                    }
                 }).catch(error => {
                     console.error('Failed to load chart:', chartType, error);
                     container.innerHTML = '<div class="chart-loading" style="color: red;">Failed to load chart</div>';
