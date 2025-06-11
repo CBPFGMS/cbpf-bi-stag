@@ -13,8 +13,7 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="//kit.fontawesome.com">
     
-    <!-- Preload LCP hero background image -->
-    <link rel="preload" href="assets/img/bg1.png" as="image" fetchpriority="high">
+
     
     <!-- Critical CSS -->
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
@@ -69,9 +68,7 @@
         
         /* Critical CSS for LCP hero section */
         .clean-block.clean-hero {
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #1e3c72 100%);
             min-height: 350px;
             display: flex;
             align-items: center;
@@ -83,12 +80,18 @@
             max-width: 1140px;
             padding: 10px 20px 20px;
             text-align: center;
+            color: #ffffff;
         }
         
         .clean-hero h2 {
             margin-bottom: 10px;
             font-size: 34px;
             line-height: 1.2;
+            color: #ffffff;
+        }
+        
+        .clean-hero p {
+            color: rgba(255, 255, 255, 0.9);
         }
     </style>
 </head>
@@ -176,7 +179,7 @@
             </div>
         </div>
     </nav>
-    <section class="clean-block clean-hero" style="background-image: url(assets/img/bg1.png);color: rgba(0,0,0,0.40);min-height: 350px;background-size: cover; background-color: rgba(0,0,0,0.75); border-bottom: 7px solid #fdc735;">
+    <section class="clean-block clean-hero" style="border-bottom: 7px solid #fdc735;">
         <div class="text" style="width: 100%;max-width: 1140px;padding-top: 10px;padding-bottom: 20px;">
             <h2 data-toc-skip style="margin-bottom: 10px; font-size: 34px">
                 <br>
@@ -1072,7 +1075,7 @@
                 function checkData() {
                     if (window.cbpfbiDataObject && Object.keys(window.cbpfbiDataObject).length > 0) {
                         resolve();
-                    } else {
+        } else {
                         setTimeout(checkData, 100);
                     }
                 }
