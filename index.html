@@ -38,8 +38,8 @@
     
     <link rel="stylesheet" href="assets/css/style.css">
     
-    <!-- Essential Scripts Only -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.min.js" integrity="sha512-FHsFVKQ/T1KWJDGSbrUhTJyS1ph3eRrxI228ND0EGaEp6v4a/vGwPWd3Dtd/+9cI7ccofZvl/wulICEurHN1pg==" crossorigin="anonymous"></script>
+    <!-- Essential Scripts Only - Defer D3.js to reduce main-thread blocking -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.min.js" integrity="sha512-FHsFVKQ/T1KWJDGSbrUhTJyS1ph3eRrxI228ND0EGaEp6v4a/vGwPWd3Dtd/+9cI7ccofZvl/wulICEurHN1pg==" crossorigin="anonymous" defer></script>
     
     <!-- Deferred third-party scripts -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@ungap/url-search-params@0.1.2/min.min.js" defer></script>
@@ -53,12 +53,26 @@
     <link rel="preload" href="https://cbpfgms.github.io/css/d3chartstyles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cbpfgms.github.io/css/d3chartstyles.css"></noscript>
     
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-MFQ9DZ9');</script>
+    <!-- Google Tag Manager - Deferred to reduce main-thread blocking -->
+    <script>
+        // Defer GTM initialization to avoid blocking main thread
+        function initGTM() {
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-MFQ9DZ9');
+        }
+        
+        // Initialize GTM after critical rendering
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(initGTM, 1000);
+            });
+        } else {
+            setTimeout(initGTM, 1000);
+        }
+    </script>
         <!-- End Google Tag Manager -->
     <style>
         .bn-news {
@@ -891,11 +905,11 @@
 			</div>
 		</div>
 	</div>
-    <!-- Bottom Scripts - Optimized Loading -->
+    <!-- Bottom Scripts - Optimized Loading with main-thread protection -->
     <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/bootstrap-dropdown.js"></script>
-    <script src="assets/js/custom-menu.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap-dropdown.js" defer></script>
+    <script src="assets/js/custom-menu.js" defer></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js" defer></script>
     
     <!-- Non-critical scripts loaded asynchronously -->
     <script>
@@ -911,57 +925,82 @@
             });
         }
         
-        // Load critical data first, immediately after DOM load
+        // Use requestIdleCallback to defer non-critical work
+        function scheduleWork(callback, options = {}) {
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(callback, { timeout: options.timeout || 5000 });
+            } else {
+                setTimeout(callback, options.fallbackDelay || 100);
+            }
+        }
+
+        // Load critical data first, with main-thread protection
         document.addEventListener('DOMContentLoaded', function() {
-            // Load chartsdata.js early and then flags.js to ensure data is available
-            loadScript('assets/js/chartsdata.js').then(() => {
-                // Give chartsdata.js a moment to initialize the data object
-                setTimeout(() => {
-                    loadScript('assets/js/flags.js');
-                }, 500);
+            scheduleWork(() => {
+                loadScript('assets/js/chartsdata.js').then(() => {
+                    // Use another idle callback for flags.js
+                    scheduleWork(() => {
+                        loadScript('assets/js/flags.js');
+                    }, { fallbackDelay: 500 });
+                });
             });
         });
 
-        // Load non-critical scripts after page load
+        // Load non-critical scripts with main-thread protection
         window.addEventListener('load', function() {
-            // Load all non-critical scripts in parallel
-            Promise.all([
-                loadScript('https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js'),
-                loadScript('assets/js/bootstrap-toc.min.js'),
-                loadScript('assets/js/bs-animation.js'),
-                loadScript('https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js'),
-                loadScript('assets/js/smoothproducts.min.js'),
-                loadScript('assets/js/respond.js'),
-                loadScript('assets/js/theme.js'),
-                loadScript('https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js'),
-                loadScript('assets/js/breaking-news-ticker.min.js'),
-                loadScript('https://kit.fontawesome.com/d5d759e566.js'),
-                loadScript('https://cdn.jsdelivr.net/npm/@ungap/url-search-params@0.1.2/min.min.js'),
-                loadScript('https://cbpfgms.github.io/libraries/html2canvas.min.js'),
-                loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js'),
-                loadScript('https://cdnjs.cloudflare.com/ajax/libs/d3-sankey/0.12.3/d3-sankey.min.js')
-            ]).then(() => {
-                // Initialize breaking news ticker after all scripts load
-                if (typeof $ !== 'undefined' && $.fn.breakingNews) {
-                    $("#newsTicker3").breakingNews({
-                        play: false,
-                        delayTimer: 600000,
-                        stopOnHover: true
-                    });
-                }
-            }).catch(error => {
-                console.warn('Some scripts failed to load:', error);
-                // Try to initialize ticker anyway if jQuery and plugin are available
-                setTimeout(() => {
-                    if (typeof $ !== 'undefined' && $.fn.breakingNews) {
-                        $("#newsTicker3").breakingNews({
-                            play: false,
-                            delayTimer: 600000,
-                            stopOnHover: true
-                        });
+            // Defer script loading to avoid blocking main thread
+            scheduleWork(() => {
+                // Load scripts in smaller batches to avoid large main-thread blocks
+                const scriptBatches = [
+                    // Batch 1: UI libraries and AOS
+                    [
+                        'https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js',
+                        'assets/js/bootstrap-toc.min.js',
+                        'https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js'
+                    ],
+                    // Batch 2: Animation initialization and visual effects
+                    [
+                        'assets/js/bs-animation.js',
+                        'https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js',
+                        'assets/js/smoothproducts.min.js',
+                        'assets/js/breaking-news-ticker.min.js'
+                    ],
+                    // Batch 3: Theme and utilities (after plugins)
+                    [
+                        'assets/js/respond.js',
+                        'assets/js/theme.js',
+                        'https://kit.fontawesome.com/d5d759e566.js'
+                    ],
+                    // Batch 4: Heavy libraries
+                    [
+                        'https://cdn.jsdelivr.net/npm/@ungap/url-search-params@0.1.2/min.min.js',
+                        'https://cbpfgms.github.io/libraries/html2canvas.min.js',
+                        'https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js',
+                        'https://cdnjs.cloudflare.com/ajax/libs/d3-sankey/0.12.3/d3-sankey.min.js'
+                    ]
+                ];
+
+                // Load each batch with idle callbacks
+                function loadBatch(batchIndex) {
+                    if (batchIndex >= scriptBatches.length) {
+                        // All batches loaded - ticker is initialized by theme.js
+                        return;
                     }
-                }, 1000);
-            });
+
+                    Promise.all(scriptBatches[batchIndex].map(loadScript))
+                        .then(() => {
+                            // Load next batch in idle time
+                            scheduleWork(() => loadBatch(batchIndex + 1), { fallbackDelay: 50 });
+                        })
+                        .catch(error => {
+                            console.warn(`Batch ${batchIndex} failed:`, error);
+                            // Continue with next batch anyway
+                            scheduleWork(() => loadBatch(batchIndex + 1), { fallbackDelay: 50 });
+                        });
+                }
+
+                loadBatch(0);
+            }, { timeout: 2000, fallbackDelay: 1000 });
         });
     </script>
     
@@ -1054,13 +1093,16 @@
         
         const loadedCharts = {};
         
-        // Intersection Observer for lazy loading charts
+        // Intersection Observer for lazy loading charts with main-thread protection
         const chartObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const chartType = entry.target.dataset.chartType;
                     if (chartType && !loadedCharts[chartType]) {
-                        loadChart(chartType);
+                        // Use idle callback to avoid blocking main thread
+                        scheduleWork(() => {
+                            loadChart(chartType);
+                        }, { timeout: 2000, fallbackDelay: 200 });
                         chartObserver.unobserve(entry.target);
                     }
                 }
@@ -1069,21 +1111,22 @@
             rootMargin: '100px'
         });
         
-        // Wait for data to be available
+        // Wait for data to be available with idle callbacks
         function waitForChartData() {
             return new Promise((resolve) => {
                 function checkData() {
                     if (window.cbpfbiDataObject && Object.keys(window.cbpfbiDataObject).length > 0) {
                         resolve();
-        } else {
-                        setTimeout(checkData, 100);
+                    } else {
+                        // Use idle callback for data checking to avoid blocking main thread
+                        scheduleWork(checkData, { fallbackDelay: 100 });
                     }
                 }
                 checkData();
             });
         }
 
-        // Load chart on demand
+        // Load chart on demand with main-thread protection
         function loadChart(chartType) {
             const config = chartConfig[chartType];
             if (!config || loadedCharts[chartType]) return;
@@ -1096,64 +1139,113 @@
                 
                 // Wait for data to be available before loading chart
                 waitForChartData().then(() => {
-                    // Load chart styles first
+                    // Load chart styles first with idle callbacks
                     const loadStyles = config.styles.map(styleUrl => {
                         return new Promise((resolve) => {
-                            const link = document.createElement('link');
-                            link.rel = 'stylesheet';
-                            link.href = styleUrl;
-                            link.onload = resolve;
-                            link.onerror = resolve; // Continue even if style fails
-                            document.head.appendChild(link);
+                            scheduleWork(() => {
+                                const link = document.createElement('link');
+                                link.rel = 'stylesheet';
+                                link.href = styleUrl;
+                                link.onload = resolve;
+                                link.onerror = resolve; // Continue even if style fails
+                                document.head.appendChild(link);
+                            }, { fallbackDelay: 50 });
                         });
                     });
                     
-                    // Load chart script after styles and data are ready
+                    // Load chart script after styles and data are ready, with main-thread protection
                     return Promise.all(loadStyles).then(() => {
-                        return loadScript(config.script);
+                        return new Promise((resolve, reject) => {
+                            scheduleWork(() => {
+                                loadScript(config.script).then(resolve).catch(reject);
+                            }, { timeout: 1000, fallbackDelay: 100 });
+                        });
                     });
                 }).then(() => {
-                    const loadingElement = container.querySelector('.chart-loading');
-                    if (loadingElement) {
-                        loadingElement.remove();
-                    }
+                    scheduleWork(() => {
+                        const loadingElement = container.querySelector('.chart-loading');
+                        if (loadingElement) {
+                            loadingElement.remove();
+                        }
+                    }, { fallbackDelay: 50 });
                 }).catch(error => {
                     console.error('Failed to load chart:', chartType, error);
-                    container.innerHTML = '<div class="chart-loading" style="color: red;">Failed to load chart</div>';
+                    scheduleWork(() => {
+                        container.innerHTML = '<div class="chart-loading" style="color: red;">Failed to load chart</div>';
+                    }, { fallbackDelay: 50 });
                 });
             }
         }
         
-        // Initialize chart observers when DOM is ready
+        // Initialize chart observers when DOM is ready with main-thread protection
         document.addEventListener('DOMContentLoaded', function() {
-            // Load base chart styles
-            const baseStyleLink = document.querySelector('link[data-chart-style="base"]');
-            if (baseStyleLink) {
-                baseStyleLink.rel = 'stylesheet';
-            }
-            
-            // Observe chart containers
-            document.querySelectorAll('[id^="d3chartcontainer"]').forEach(container => {
-                const chartType = container.id.replace('d3chartcontainer', '');
-                container.dataset.chartType = chartType;
-                chartObserver.observe(container);
-            });
+            scheduleWork(() => {
+                // Load base chart styles
+                const baseStyleLink = document.querySelector('link[data-chart-style="base"]');
+                if (baseStyleLink) {
+                    baseStyleLink.rel = 'stylesheet';
+                }
+                
+                // Observe chart containers with batching to avoid blocking main thread
+                const containers = document.querySelectorAll('[id^="d3chartcontainer"]');
+                let index = 0;
+                
+                function processContainerBatch() {
+                    const batchSize = 3; // Process 3 containers at a time
+                    const endIndex = Math.min(index + batchSize, containers.length);
+                    
+                    for (let i = index; i < endIndex; i++) {
+                        const container = containers[i];
+                        const chartType = container.id.replace('d3chartcontainer', '');
+                        container.dataset.chartType = chartType;
+                        chartObserver.observe(container);
+                    }
+                    
+                    index = endIndex;
+                    
+                    if (index < containers.length) {
+                        // Process next batch in idle time
+                        scheduleWork(processContainerBatch, { fallbackDelay: 10 });
+                    }
+                }
+                
+                processContainerBatch();
+            }, { fallbackDelay: 100 });
         });
         
-        // Fallback: Load visible charts after page load
+        // Fallback: Load visible charts after page load with main-thread protection
         window.addEventListener('load', function() {
-            setTimeout(() => {
-                document.querySelectorAll('[id^="d3chartcontainer"]').forEach(container => {
-                    const rect = container.getBoundingClientRect();
-                    const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-                    if (isVisible) {
-                        const chartType = container.dataset.chartType;
-                        if (chartType && !loadedCharts[chartType]) {
-                            loadChart(chartType);
+            scheduleWork(() => {
+                const containers = document.querySelectorAll('[id^="d3chartcontainer"]');
+                
+                // Process visible charts in batches
+                let index = 0;
+                function checkVisibleBatch() {
+                    const batchSize = 2; // Check 2 charts at a time
+                    const endIndex = Math.min(index + batchSize, containers.length);
+                    
+                    for (let i = index; i < endIndex; i++) {
+                        const container = containers[i];
+                        const rect = container.getBoundingClientRect();
+                        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+                        if (isVisible) {
+                            const chartType = container.dataset.chartType;
+                            if (chartType && !loadedCharts[chartType]) {
+                                loadChart(chartType);
+                            }
                         }
                     }
-                });
-            }, 1000);
+                    
+                    index = endIndex;
+                    
+                    if (index < containers.length) {
+                        // Check next batch in idle time
+                        scheduleWork(checkVisibleBatch, { fallbackDelay: 50 });
+                    }
+                }
+                
+                checkVisibleBatch();
+            }, { timeout: 2000, fallbackDelay: 1000 });
         });
     </script>
     
