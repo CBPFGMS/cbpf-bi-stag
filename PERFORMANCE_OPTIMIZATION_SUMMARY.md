@@ -19,46 +19,24 @@ This document outlines the optimizations made to `index.html` to significantly i
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,400i,600,600i,700,700i|Lora:400,400i|Roboto+Slab:400,700&display=swap">
 ```
 
-**Impact:** Reduced font loading requests from 4 to 1, added `display=swap` for better font loading experience.
+**Impact:** 75% reduction in font requests, added `display=swap` for better rendering performance.
 
 ### 2. **Eliminated Redundant Font Awesome Loading**
 **Before:**
 ```html
-<!-- Two Font Awesome sources -->
-<script src="https://kit.fontawesome.com/d5d759e566.js"></script>
+<script src="https://kit.fontawesome.com/d5d759e566.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 ```
 
 **After:**
 ```html
-<!-- Single Font Awesome source, loaded asynchronously -->
-loadScript('https://kit.fontawesome.com/d5d759e566.js') // in async loader
+<!-- Only one Font Awesome resource loaded asynchronously -->
+<script src="https://kit.fontawesome.com/d5d759e566.js" defer></script>
 ```
 
-**Impact:** Removed duplicate Font Awesome loading, implementing async loading instead.
+**Impact:** Eliminated duplicate loading, reduced redundant HTTP requests.
 
-### 3. **Chart Resources - Lazy Loading Implementation**
-**Before:** 11 chart CSS files + 10 chart JS files loaded immediately on page load
-
-**After:** 
-- Base chart styles loaded with `preload` + `onload`
-- Individual chart styles and scripts loaded only when charts become visible
-- Intersection Observer API used for efficient visibility detection
-
-```javascript
-// Chart lazy loading system
-const chartObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            loadChart(chartType); // Load only when visible
-        }
-    });
-}, { rootMargin: '50px 0px' });
-```
-
-**Impact:** Massive reduction in initial page load - charts load only when needed.
-
-### 4. **Resource Hints for Performance**
+### 3. **Optimized Resource Loading with Performance Hints**
 **Added:**
 ```html
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -68,99 +46,105 @@ const chartObserver = new IntersectionObserver((entries) => {
 <link rel="dns-prefetch" href="//kit.fontawesome.com">
 ```
 
-**Impact:** Early connection establishment to external domains reduces latency.
+**Impact:** Faster connection establishment to external domains.
 
-### 5. **Async CSS Loading for Non-Critical Styles**
-**Before:** All CSS loaded synchronously
-**After:** Non-critical CSS loaded asynchronously:
-
+### 4. **Async/Deferred Loading for Non-Critical CSS**
+**Implementation:**
 ```html
 <link rel="preload" href="assets/css/bootstrap-toc.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="assets/css/bootstrap-toc.min.css"></noscript>
 ```
 
-**Impact:** Faster initial render, non-critical styles don't block page rendering.
+**Impact:** Non-critical CSS loads without blocking render.
 
-### 6. **Optimized Script Loading Strategy**
-**Before:** All scripts loaded immediately and individually
-**After:** 
-- Critical scripts load first
-- Non-critical scripts load in parallel after page load
-- Promise-based loading with error handling
+### 5. **Intelligent Chart Lazy Loading System**
+**Implementation:**
+- Charts load only when they become visible (Intersection Observer)
+- Base chart styles preloaded, individual chart resources loaded on demand
+- 21 chart-related files now load progressively
 
-```javascript
-Promise.all([
-    loadScript('jquery-ui'),
-    loadScript('bootstrap-toc'),
-    loadScript('aos'),
-    // ... all non-critical scripts
-]).then(() => {
-    // Initialize components after all scripts load
-}).catch(error => {
-    // Graceful error handling
-});
-```
+**Impact:** Significant reduction in initial page load time.
 
-**Impact:** Faster time to interactive, better error handling, parallel loading.
+### 6. **Script Loading Optimization**
+**Strategy:**
+- Essential scripts in `<head>` (D3.js)
+- Non-critical scripts load after page load event
+- Third-party scripts deferred with `defer` attribute
 
-### 7. **Deferred Third-Party Libraries**
-**Moved to deferred loading:**
-- URL search params polyfill
-- HTML2Canvas
-- jsPDF  
-- D3 Sankey
-- Cookie info script
-- Flag scripts
+**Impact:** Improved blocking behavior and load prioritization.
 
+### 7. **Optimized Largest Contentful Paint (LCP)**
+**Problem:** Hero section background image (`bg1.png`) was the LCP element but not optimized.
+
+**Solution:**
 ```html
-<script src="library.js" defer></script>
-<!-- or -->
-<script src="library.js" async></script>
+<!-- Preload LCP image with high priority -->
+<link rel="preload" href="assets/img/bg1.png" as="image" fetchpriority="high">
+
+<!-- Critical CSS for hero section -->
+<style>
+.clean-block.clean-hero {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+</style>
 ```
 
-**Impact:** These scripts don't block page rendering or critical functionality.
+**Optimizations Applied:**
+- Preloaded hero background image with `fetchpriority="high"`
+- Moved critical hero styles to inline CSS
+- Reduced inline styles in HTML
+- Optimized layout shift prevention
 
-## Performance Metrics Improvements
+**Impact:** Faster LCP rendering, improved Core Web Vitals score.
 
-### Estimated Load Time Reductions:
-- **Initial CSS requests:** 15+ → 5 critical requests
-- **Initial JS requests:** 20+ → 8 critical requests  
-- **Chart resources:** 21 files → 1 base file (others on-demand)
-- **Font requests:** 4 → 1 consolidated request
+### 8. **Fixed Script Dependency Issues**
+**Problem:** Chart scripts and `flags.js` trying to access data before `chartsdata.js` loaded it.
 
-### Browser Compatibility:
-- Intersection Observer with graceful fallback for older browsers
-- Progressive enhancement approach - site works without JS
-- Noscript fallbacks for critical CSS
+**Solution:**
+- Sequential loading: `chartsdata.js` → other scripts
+- Added data availability checking for charts
+- Proper error handling and fallbacks
 
-### Error Handling:
-- Promise-based loading with catch blocks
-- Graceful degradation if scripts fail
-- Retry mechanisms for critical functionality
+**Impact:** Eliminated JavaScript errors, improved reliability.
 
-## Implementation Benefits
+## Performance Metrics Expected Improvements
 
-1. **Faster First Contentful Paint (FCP)**
-2. **Improved Largest Contentful Paint (LCP)**  
-3. **Better Time to Interactive (TTI)**
-4. **Reduced bandwidth usage**
-5. **Better mobile performance**
-6. **Improved Core Web Vitals scores**
+### Before Optimization:
+- **Multiple redundant font requests**
+- **Synchronous third-party loading**
+- **No resource prioritization**
+- **Charts loading all at once**
+- **Unoptimized LCP element**
+
+### After Optimization:
+- **75% reduction in font requests**
+- **Async/deferred loading for non-critical resources**
+- **Preconnect and DNS prefetch optimizations**  
+- **Progressive chart loading (21 files on-demand)**
+- **Optimized LCP with preload and critical CSS**
+- **Proper script dependency management**
 
 ## Browser Support
-- Modern browsers: Full optimization benefits
-- Legacy browsers: Graceful fallbacks ensure functionality
-- No-JS environments: Core content and styles still load
+- Resource hints: All modern browsers
+- Intersection Observer: IE11+ (with polyfill if needed)
+- CSS preload: All modern browsers with fallback
 
-## Maintenance Notes
-- Chart lazy loading system is easily extensible for new charts
-- Resource hints should be updated if new third-party domains are added
+## Monitoring Recommendations
 - Monitor actual performance metrics to validate improvements
 - Consider implementing Service Worker for additional caching benefits
+- Track Core Web Vitals, especially LCP improvements
 
 ## Next Steps for Further Optimization
 1. Implement Service Worker for caching strategy
 2. Consider bundling smaller local assets
 3. Add image lazy loading if not already implemented  
 4. Monitor and optimize based on real user metrics (RUM)
-5. Consider critical CSS inlining for above-the-fold content 
+5. Consider critical CSS inlining for above-the-fold content
+6. Optimize hero background image (WebP format, compression)
+7. Implement responsive images for different screen sizes 
