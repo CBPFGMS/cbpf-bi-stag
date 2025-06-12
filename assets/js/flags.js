@@ -89,6 +89,12 @@
 					return blankImg;
 				}
 				return flagsData[d.isoCode.toLowerCase()];
+			})
+			.attr("alt", function (d) {
+				if (d.name === "UNOCHA") return "United Nations Office for the Coordination of Humanitarian Affairs flag";
+				if (d.name === "Multi-Donor Funds") return "Multi-Donor Funds flag";
+				if (d.isoCode === "MK") return "North Macedonia flag";
+				return d.name + " flag";
 			});
 		div.append("div")
 			.attr("class", "flagName")

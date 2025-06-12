@@ -1,112 +1,112 @@
 <!DOCTYPE html>
-<html lang="en" style="font-family: Montserrat, sans-serif;" data-spy="scroll" data-target="#toc">
+<html style="font-family: Montserrat, sans-serif;" data-spy="scroll" data-target="#toc">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <meta name="description" content="CBPF Data Hub provides real-time data on Country Based Pooled Funds contributions, allocations, and humanitarian funding across UN OCHA Country Based Pooled Funds.">
     <title>Welcome to Country Based Pooled Funds Data Hub</title>
-    
-    <!-- Resource Hints for Performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cbpfgms.github.io">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link rel="dns-prefetch" href="//kit.fontawesome.com">
-    
-
-    
-    <!-- Critical CSS -->
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    
-    <!-- Combined Google Fonts - Single Request -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,400i,600,600i,700,700i|Lora:400,400i|Roboto+Slab:400,700&display=swap">
-    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,400i,700,700i,600,600i">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab">
     <link rel="stylesheet" href="assets/css/Highlight-Phone.css">
-    
-    <!-- Non-critical CSS - Load asynchronously -->
-    <link rel="preload" href="assets/css/bootstrap-toc.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="assets/css/bootstrap-toc.min.css"></noscript>
-    
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css"></noscript>
-    
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css"></noscript>
-    
-    <link rel="preload" href="assets/css/smoothproducts.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="assets/css/smoothproducts.css"></noscript>
-    
+    <link rel="stylesheet" href="assets/css/bootstrap-toc.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
+    <link rel="stylesheet" href="assets/css/smoothproducts.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    
-    <!-- Essential Scripts Only - Defer D3.js to reduce main-thread blocking -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.min.js" integrity="sha512-FHsFVKQ/T1KWJDGSbrUhTJyS1ph3eRrxI228ND0EGaEp6v4a/vGwPWd3Dtd/+9cI7ccofZvl/wulICEurHN1pg==" crossorigin="anonymous" defer></script>
-    
-    <!-- Deferred third-party scripts -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@ungap/url-search-params@0.1.2/min.min.js" defer></script>
-    <script type="text/javascript" src="https://cbpfgms.github.io/libraries/html2canvas.min.js" defer></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js" defer></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3-sankey/0.12.3/d3-sankey.min.js" defer></script>
-    
-
-    
-    <!-- Chart Styles - Load base styles only, others on demand -->
-    <link rel="preload" href="https://cbpfgms.github.io/css/d3chartstyles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cbpfgms.github.io/css/d3chartstyles.css"></noscript>
-    
-    <!-- Google Tag Manager - Deferred to reduce main-thread blocking -->
-    <script>
-        // Defer GTM initialization to avoid blocking main thread
-        function initGTM() {
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-MFQ9DZ9');
-        }
-        
-        // Initialize GTM after critical rendering
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', function() {
-                setTimeout(initGTM, 1000);
-            });
-        } else {
-            setTimeout(initGTM, 1000);
-        }
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.min.js" integrity="sha512-FHsFVKQ/T1KWJDGSbrUhTJyS1ph3eRrxI228ND0EGaEp6v4a/vGwPWd3Dtd/+9cI7ccofZvl/wulICEurHN1pg==" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@ungap/url-search-params@0.1.2/min.min.js"></script>
+    <script type="text/javascript" src="https://cbpfgms.github.io/libraries/html2canvas.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3-sankey/0.12.3/d3-sankey.min.js"></script>
+    <script src="https://kit.fontawesome.com/d5d759e566.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cbpfgms.github.io/css/d3chartstyles.css">
+    <link rel="stylesheet" type="text/css" href="https://cbpfgms.github.io/css/d3chartstylescbsank.css">
+    <link rel="stylesheet" type="text/css" href="https://cbpfgms.github.io/css/d3chartstylespbialp.css">
+    <link rel="stylesheet" type="text/css" href="https://cbpfgms.github.io/css/d3chartstylespbifdc.css">
+    <link rel="stylesheet" type="text/css" href="https://cbpfgms.github.io/css/d3chartstylespbiolc.css">
+    <link rel="stylesheet" type="text/css" href="https://cbpfgms.github.io/css/d3chartstylespbiobe.css">
+    <link rel="stylesheet" type="text/css" href="https://cbpfgms.github.io/css/d3chartstylespbicli.css">
+    <link rel="stylesheet" type="text/css" href="https://cbpfgms.github.io/css/d3chartstylespbiuac.css">
+    <link rel="stylesheet" type="text/css" href="https://cbpfgms.github.io/css/d3chartstylespbiclc.css">
+    <link rel="stylesheet" type="text/css" href="https://cbpfgms.github.io/css/d3chartstylespbiuac.css">
+    <link rel="stylesheet" type="text/css" href="https://cbpfgms.github.io/css/d3chartstylespbinad.css">
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-MFQ9DZ9');</script>
         <!-- End Google Tag Manager -->
     <style>
         .bn-news {
             font-size: 11px;
             font-weight: bold;
         }
-        
-        /* Critical CSS for LCP hero section */
-        .clean-block.clean-hero {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #1e3c72 100%);
-            min-height: 350px;
+        /* Sticky Navigation Menu Styles */
+        .sticky-nav-menu {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: #ecf6fd;
+            padding: 10px 0;
+            border-bottom: 2px solid #146eb4;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .nav-menu-container {
             display: flex;
-            align-items: center;
             justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
-        
-        .clean-hero .text {
-            width: 100%;
-            max-width: 1140px;
-            padding: 10px 20px 20px;
+        .nav-menu-item {
+            background: #146eb4;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+        .nav-menu-item:hover {
+            background: #0d5a96;
+            color: white;
+            text-decoration: none;
+            transform: translateY(-2px);
+        }
+        .nav-menu-item.active {
+            background: #fdc735;
+            color: #333;
+        }
+        .chart-section {
+            display: none;
+            min-height: 400px;
+        }
+        .chart-section.active {
+            display: block;
+        }
+        .chart-loading {
             text-align: center;
-            color: #ffffff;
+            padding: 50px;
+            color: #666;
         }
-        
-        .clean-hero h2 {
+        .chart-loading i {
+            font-size: 24px;
             margin-bottom: 10px;
-            font-size: 34px;
-            line-height: 1.2;
-            color: #ffffff;
+            animation: spin 1s linear infinite;
         }
-        
-        .clean-hero p {
-            color: rgba(255, 255, 255, 0.9);
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -186,15 +186,15 @@
             <button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1" style="font-family:Montserrat, sans-serif;">
                 <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item" role="presentation"><button class="nav-link video-btn d-inline-block" data-toggle="modal" data-src="https://embed.fleeq.io/l/ok1ifsb74r-jjm2cqsf3d" data-target="#myModal" style="color:#146eb4; border-right: 1px solid #ddd;" aria-label="Watch CBPF Data Hub introduction video">
+                    <li class="nav-item" role="presentation"><button class="nav-link video-btn d-inline-block" data-toggle="modal" data-src="https://embed.fleeq.io/l/ok1ifsb74r-jjm2cqsf3d" data-target="#myModal" style="color:#146eb4; border-right: 1px solid #ddd;">
                         FIRST TIME TO CBPF DATA HUB <span><i class="fa fa-play-circle" style="color:#f79a3b"></i></span>
-                    </button><a href="assets/pdf/cbpf-data-hub.pdf" class="info-pdf" alt="PFBI Background" title="PFBI Background" target="_blank"><img src="assets/img/info-pdf_icon.svg" width="13" height="13px;" alt="Download CBPF Data Hub background PDF"></a></li>
+                    </button><a href="assets/pdf/cbpf-data-hub.pdf" class="info-pdf" alt="PFBI Background" title="PFBI Background" target="_blank"><img src="assets/img/info-pdf_icon.svg" width="13" height="13px;"></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="dataexplorer.html" style="color:#146eb4;">DATA EXPLORER</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-    <section class="clean-block clean-hero" style="border-bottom: 7px solid #fdc735;">
+    <section class="clean-block clean-hero" style="background-image: url(assets/img/bg1.png);color: rgba(0,0,0,0.40);min-height: 350px;background-size: cover; background-color: rgba(0,0,0,0.75); border-bottom: 7px solid #fdc735;">
         <div class="text" style="width: 100%;max-width: 1140px;padding-top: 10px;padding-bottom: 20px;">
             <h2 data-toc-skip style="margin-bottom: 10px; font-size: 34px">
                 <br>
@@ -202,8 +202,8 @@
             </h2>
             <p>The CBPF Data Hub provides detailed contribution and allocation data in real-time</p>
             <div class="yearSlider__1HtPN">
-                <button class="previous__39nbE" aria-label="Previous year"></button><span class="annualHeading__2uJLv"></span>
-                <button class="next__d5jll" aria-label="Next year"></button>
+                <button class="previous__39nbE"></button><span class="annualHeading__2uJLv"></span>
+                <button class="next__d5jll"></button>
             </div>
             <div class="row figure-box-panel">
                 <div class="col-lg-2 col-md-4 col-sm-4">
@@ -276,104 +276,119 @@
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-md-auto col-sm-3">
-                    <a href="https://cbpfgms.github.io/cbpf-bi-stag/progress.html" target="_blank" title="Allocation Progress Dashboard"><img src="assets/img/apvectorbanner.svg" width="350px" height="79px" alt="Allocation Progress Dashboard banner" class="img-fluid"></a>
+                    <a href="https://cbpfgms.github.io/cbpf-bi-stag/progress.html" target="_blank" title="Allocation Progress Dashboard"><img src="assets/img/apvectorbanner.svg" width="350px" height="79px" alt="" class="img-fluid"></a>
                 </div>
                 <div class="col-md-auto col-sm-3">
-                    <a href="https://cbpfgms.github.io/cbpf-bi-stag/cpf" target="_blank" title="Common Performance Framework"><img src="assets/img/cpfvectorbanner.svg" width="350px" height="79px" alt="Common Performance Framework banner" class="img-fluid"></a>
+                    <a href="https://cbpfgms.github.io/cbpf-bi-stag/cpf" target="_blank" title="Common Performance Framework"><img src="assets/img/cpfvectorbanner.svg" width="350px" height="79px" alt="" class="img-fluid"></a>
                 </div>
                 <div class="col-md-auto col-sm-3">
-                    <a href="results.html" target="_blank" title="Results Dashboard"><img src="assets/img/rdvectorbanner.svg" width="350px" height="79px" alt="Results Dashboard banner" class="img-fluid"></a>
+                    <a href="results.html" target="_blank" title="Results Dashboard"><img src="assets/img/rdvectorbanner.svg" width="350px" height="79px" alt="" class="img-fluid"></a>
                 </div>
-                <!--<div class="col-md-auto col-sm-3">
-                    <a href="allocations-overview.html" title="CBPF Allocation Overview"><img src="assets/img/cbpf-allocation-overview-banner-new.svg" width="350px" height="79px" alt="CBPF Allocation Overview banner" class="img-fluid"></a>
-                </div>
-                <div class="col-md-auto col-sm-3">
-					<a href="cbpfvshrp.html" title="CBPF vs HRP"><img src="assets/img/cbpf-vs-hrp-banner-new.svg" width="350px" height="79px" alt="CBPF vs HRP banner" class="img-fluid"></a>
-                </div>
-				<div class="col-md-auto col-sm-3">
-					<a href="#gam_heading" title="GAM Marker"><img src="assets/img/gam-marker-update1.png" alt="Gender with Age Marker banner" class="img-fluid"></a>
-                </div>
-                <div class="col-md-auto col-sm-3">
-                    <a href="https://pfdata.unocha.org/COVID19/" title="COVID 19 CBPF and CERF"><img src="assets/img/covid-19-allocation-banner.png" alt="COVID-19 CBPF and CERF allocation banner" class="img-fluid"></a>
-                </div>-->
             </div>
         </div>
     </section>
-    <!-- <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="allocation_banner">
-                        <a href="allocations-overview.html" title="Allocations Overview"><img src="assets/img/allocation-overview-banner-v2.png" alt="Allocation Overview banner" class="img-fluid"></a>
-                    </div>
-                </div>
-            </div>
+
+    <!-- Sticky Navigation Menu -->
+    <div class="sticky-nav-menu">
+        <div class="nav-menu-container">
+            <button class="nav-menu-item" data-chart="cbpf-by-year">CBPF BY YEAR</button>
+            <button class="nav-menu-item" data-chart="allocation-flow">ALLOCATION FLOW</button>
+            <button class="nav-menu-item" data-chart="allocations">ALLOCATIONS</button>
+            <button class="nav-menu-item" data-chart="allocations-timeline">ALLOCATIONS TIMELINE</button>
+            <button class="nav-menu-item" data-chart="contributions">CONTRIBUTIONS</button>
+            <button class="nav-menu-item" data-chart="contribution-trends">CONTRIBUTION TRENDS</button>
+            <button class="nav-menu-item" data-chart="funding-overview">FUNDING OVERVIEW</button>
+            <button class="nav-menu-item" data-chart="sectors">SECTORS</button>
+            <button class="nav-menu-item" data-chart="targeted-reached">TARGETED & REACHED</button>
+            <button class="nav-menu-item" data-chart="gam-marker">GAM MARKER</button>
+            <a class="nav-menu-item" href="allocations-overview.html" target="_blank">ALLOCATIONS OVERVIEW</a>
+            <a class="nav-menu-item" href="cbpfvshrp.html" target="_blank">CBPF vs HRP</a>
         </div>
-    </section>-->
+    </div>
+
     <div>
         <div class="container">
-			<!-- <div class="row justify-content-center mt-3 mb-3">
-				<video loop autoplay muted controls playsinline src="./assets/img/video.mp4" style="aspect-ratio: 1920 / 1080; width: auto; height: auto; max-height: 450px; opacity: 1; display: inline-flex; border-radius: 8px; border: 1px solid #fff;"></video>
-			</div> -->
             <div class="row">
-                <div class="col-md-10 col-lg-10 col-xl-10">
+                <div class="col-md-12 col-lg-12 col-xl-12">
                     <main class="page landing-page">
-                        <section class="clean-block slider">
+                        
+                        <!-- CBPF BY YEAR Section -->
+                        <section class="clean-block slider chart-section" id="section-cbpf-by-year">
                             <div class="container">
                                 <div class="row">
                                     <div class="col">
                                         <div class="block-heading">
                                             <div id="anchor-3"></div>
-                                            <h2 class="text-info" id="byyear_heading">CBPF BY YEAR <button class="video-btn" data-toggle="modal" data-src="https://ocha.fleeq.io/l/cbpf-by-year" data-target="#myModal" aria-label="Watch CBPF by Year video tutorial"><span class="video-info"><i class="fa fa-play-circle" aria-hidden="true"></i></span></button></h2>
+                                            <h2 class="text-info" id="byyear_heading">CBPF BY YEAR <button class="video-btn" data-toggle="modal" data-src="https://ocha.fleeq.io/l/cbpf-by-year" data-target="#myModal"><span class="video-info"><i class="fa fa-play-circle" aria-hidden="true"></i></span></button></h2>
                                         </div>
                                     </div>
                                 </div>
-                                <div id="d3chartcontainercbsank" data-title="CBPF BY YEAR" data-year="2025" data-fund="all" data-minpercentage="3" data-responsive="true" data-lazyload="true"></div>
+                                <div id="d3chartcontainercbsank" data-title="CBPF BY YEAR" data-year="2025" data-fund="all" data-minpercentage="3" data-responsive="true" data-lazyload="true">
+                                    <div class="chart-loading">
+                                        <i class="fas fa-spinner"></i>
+                                        <p>Loading chart...</p>
+                                    </div>
+                                </div>
                                 <p class="text-center cbsankcovidDisclaimer" style="font-size:11px; color:#aaa; padding-top: 5px; margin:0">
                                     <b>Disclaimer:</b> A temporary COVID-19 cluster was established in four countries while the Global HRP to COVID-19 was being released. Funding and people targeted within the temporary COVID-19 cluster do not include the whole CBPF response to COVID-19. Comprehensive data and information on CBPFs response to COVID-19 can be found here <a href="https://pfdata.unocha.org/COVID19/" target="_blank">https://pfdata.unocha.org/COVID19/</a><br>
                                 </p>
 			                </div>
                         </section>
-			<section class="clean-block slider">
+
+                        <!-- ALLOCATION FLOW Section -->
+			            <section class="clean-block slider chart-section" id="section-allocation-flow">
                             <div class="container">
                                 <div class="row">
                                     <div class="col">
                                         <div class="block-heading">
                                             <div id="anchor-3"></div>
-                                            <h2 class="text-info" id="netfunding_heading">ALLOCATION FLOW <button class="video-btn" data-toggle="modal" data-src="https://ocha.fleeq.io/l/allocation-flow" data-target="#myModal" aria-label="Watch Allocation Flow video tutorial"><span class="video-info"><i class="fa fa-play-circle" aria-hidden="true"></i></span></button></h2>
+                                            <h2 class="text-info" id="netfunding_heading">ALLOCATION FLOW <button class="video-btn" data-toggle="modal" data-src="https://ocha.fleeq.io/l/allocation-flow" data-target="#myModal"><span class="video-info"><i class="fa fa-play-circle" aria-hidden="true"></i></span></button></h2>
                                             <p style="max-width: 1020px;">CBPFs allocate funds to UN agencies, national and international NGOs, and Red Cross/ Red Crescent National Societies as primary recipients. In turn, those implementing partners may sub-grant part of their initial grant to another organization – a sub-grantee. For instance, in 2021, UN agencies sub-granted $7M to international NGOs and $37M to national NGOs.
                                             </p>
                                             <p style="max-width: 1020px;">The Allocation flow presents the breakdown of direct grants (blue) and sub-grants (orange) to humanitarian partners.</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div id="d3chartcontainerpbinad" data-title="Allocation Flow (Net Funding*)" data-year="2025" data-cbpf="all" data-aggregate="level" data-minpercentage="3" data-showhelp="false" data-showlink="true" data-responsive="true" data-lazyload="true"></div>
-                        	<p class="text-center" style="font-size:11px; color:#aaa; padding-top: 5px; margin:0">
+                                <div id="d3chartcontainerpbinad" data-title="Allocation Flow (Net Funding*)" data-year="2025" data-cbpf="all" data-aggregate="level" data-minpercentage="3" data-showhelp="false" data-showlink="true" data-responsive="true" data-lazyload="true">
+                                    <div class="chart-loading">
+                                        <i class="fas fa-spinner"></i>
+                                        <p>Loading chart...</p>
+                                    </div>
+                                </div>
+                        	    <p class="text-center" style="font-size:11px; color:#aaa; padding-top: 5px; margin:0">
                                     <b>(*)Net Funding</b> includes funds provided to humanitarian organizations either as a primary recipient or as a sub-grantee (some organizations may sub-grant part of their funding budget to another organization)<br>
                                 </p>    
-			    </div>
-				
-            </section>
-			<section class="clean-block slider">
+			                </div>
+                        </section>
+
+                        <!-- ALLOCATIONS Section -->
+			            <section class="clean-block slider chart-section" id="section-allocations">
                             <div class="container">
                                 <div class="row">
                                     <div class="col">
                                         <div class="block-heading">
                                             <div id="anchor-5"></div>
-                                            <h2 class="text-info" id="allocation_heading">ALLOCATIONS<button class="video-btn" data-toggle="modal" data-src="https://ocha.fleeq.io/l/s7q22qmqus-53e65u965e" data-target="#myModal" aria-label="Watch Allocations video tutorial"><span class="video-info"><i class="fa fa-play-circle"></i></span>
+                                            <h2 class="text-info" id="allocation_heading">ALLOCATIONS<button class="video-btn" data-toggle="modal" data-src="https://ocha.fleeq.io/l/s7q22qmqus-53e65u965e" data-target="#myModal"><span class="video-info"><i class="fa fa-play-circle"></i></span>
                                                 </button></h2>
                                             <p style="max-width: 1020px;">Funding from CBPFs is directly available to UN agencies, national and international non-governmental organizations (NGOs) and Red Cross/ Red Crescent organizations.</p>
                                             <p style="max-width: 1020px;">In 2021, CBPFs allocated more than $1.03 billion to 781 partners in 19 countries to support 1,538 critical humanitarian projects. These projects targeted millions of people with healthcare, food aid, clean water, shelter and other life-saving assistance.</p>
-                                            <div id="d3chartcontainerpbialp" data-title="Allocations by Organization Type" data-year="2025" data-partner="total" data-showaverage="true" data-selectedcbpfs="none" data-netfunding="true" data-minpercentage="3" data-showhelp="false" data-showlink="true" data-responsive="true" data-lazyload="true"></div>
-					 </div>
+                                            <div id="d3chartcontainerpbialp" data-title="Allocations by Organization Type" data-year="2025" data-partner="total" data-showaverage="true" data-selectedcbpfs="none" data-netfunding="true" data-minpercentage="3" data-showhelp="false" data-showlink="true" data-responsive="true" data-lazyload="true">
+                                                <div class="chart-loading">
+                                                    <i class="fas fa-spinner"></i>
+                                                    <p>Loading chart...</p>
+                                                </div>
+                                            </div>
+					                    </div>
                                     </div>
-					<p class="text-center" style="font-size:11px; color:#aaa; margin:0">
-                                            <b>(*)Net Funding</b> includes funds provided to humanitarian organizations either as a primary recipient or as a sub-grantee (some organizations may sub-grant part of their funding budget to another organization)<br>
+					                <p class="text-center" style="font-size:11px; color:#aaa; margin:0">
+                                        <b>(*)Net Funding</b> includes funds provided to humanitarian organizations either as a primary recipient or as a sub-grantee (some organizations may sub-grant part of their funding budget to another organization)<br>
                                 	</p>
                                 </div>
                             </div>
                         </section>
-                        <section class="clean-block slider">
+
+                        <!-- ALLOCATIONS TIMELINE Section -->
+                        <section class="clean-block slider chart-section" id="section-allocations-timeline">
                             <div class="container">
                                 <div class="row">
                                     <div class="col">
@@ -382,33 +397,43 @@
                                             <h2 class="text-info" id="allocationtimeline_heading">ALLOCATIONS TIMELINE</h2>
                                         </div>
                                         <div>
-                                            <div id="d3chartcontainerpbiuac" data-year="2025" data-showhelp="false" data-showlink="true" data-responsive="true" data-lazyload="true"></div>
+                                            <div id="d3chartcontainerpbiuac" data-year="2025" data-showhelp="false" data-showlink="true" data-responsive="true" data-lazyload="true">
+                                                <div class="chart-loading">
+                                                    <i class="fas fa-spinner"></i>
+                                                    <p>Loading chart...</p>
+                                                </div>
+                                            </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
                         </section>
                         
-                        <section class="clean-block slider dark" style="background-color: rgb(255,255,255);">
+                        <!-- CONTRIBUTIONS Section -->
+                        <section class="clean-block slider dark chart-section" id="section-contributions" style="background-color: rgb(255,255,255);">
                             <div class="container">
                                 <div class="row">
                                     <div class="col">
                                         <div class="block-heading" style="padding-top: 0px;">
                                             <div id="anchor-4"></div>
-                                            <h2 class="text-info" id="contribution_heading">CONTRIBUTIONS<button class="video-btn" data-toggle="modal" data-src="https://embed.fleeq.io/l/kd5aypmodt-fosiqzucnj" data-target="#myModal" aria-label="Watch Contributions video tutorial"><span class="video-info"><i class="fa fa-play-circle"></i></span>
+                                            <h2 class="text-info" id="contribution_heading">CONTRIBUTIONS<button class="video-btn" data-toggle="modal" data-src="https://embed.fleeq.io/l/kd5aypmodt-fosiqzucnj" data-target="#myModal"><span class="video-info"><i class="fa fa-play-circle"></i></span>
                                                 </button>
                                             </h2>
                                             <p style="max-width:800px;">Since the first CBPF was opened in Angola in 1997, 91 donors have contributed more than $9 billion to 36 funds operating in the most severe and complex emergencies around the world.</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div id="d3chartcontainerpbiclc" data-year="2025" data-contribution="paid" data-responsive="true" data-lazyload="true"></div>
-
+                                <div id="d3chartcontainerpbiclc" data-year="2025" data-contribution="paid" data-responsive="true" data-lazyload="true">
+                                    <div class="chart-loading">
+                                        <i class="fas fa-spinner"></i>
+                                        <p>Loading chart...</p>
+                                    </div>
+                                </div>
                             </div>
                         </section>
                         
-                        <section class="clean-block slider">
+                        <!-- CONTRIBUTION TRENDS Section -->
+                        <section class="clean-block slider chart-section" id="section-contribution-trends">
                             <div class="container">
                                 <div class="row">
                                     <div class="col">
@@ -419,18 +444,24 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="d3chartcontainerpbicli" data-showfuture="true" data-responsive="true"></div>
-
+                                <div id="d3chartcontainerpbicli" data-showfuture="true" data-responsive="true">
+                                    <div class="chart-loading">
+                                        <i class="fas fa-spinner"></i>
+                                        <p>Loading chart...</p>
+                                    </div>
+                                </div>
                             </div>
                         </section>
-                        <section class="clean-block slider">
+
+                        <!-- FUNDING OVERVIEW Section -->
+                        <section class="clean-block slider chart-section" id="section-funding-overview">
                             <div class="container">
                                 <div class="row">
                                     <div class="col">
                                         <div class="block-heading">
                                             <div id="anchor-2"></div>
                                             <h2 class="text-info" id="fundingoverview_heading">FUNDING OVERVIEW</h2>
-                                            <p style="max-width:800px;">CBPF receives broad support from United Nations Member States, the private sectors and individuals.&nbsp;Contributions from donors around the world are collected into single, unearmarked funds to support local
+                                            <p style="max-width:800px;">CBPF receives broad support from United Nations Member States, the private sectors and individuals. Contributions from donors around the world are collected into single, unearmarked funds to support local
                                                 humanitarian efforts.
                                                 <br>
                                                 <br>
@@ -438,11 +469,17 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="d3chartcontainerpbifdc" data-year="2025" data-showmap="false" data-shownames="true" data-regions="all" data-responsive="true" data-lazyload="true"></div>
-
+                                <div id="d3chartcontainerpbifdc" data-year="2025" data-showmap="false" data-shownames="true" data-regions="all" data-responsive="true" data-lazyload="true">
+                                    <div class="chart-loading">
+                                        <i class="fas fa-spinner"></i>
+                                        <p>Loading chart...</p>
+                                    </div>
+                                </div>
                             </div>
                         </section>
-                        <section class="clean-block slider">
+
+                        <!-- SECTORS Section -->
+                        <section class="clean-block slider chart-section" id="section-sectors">
                             <div class="container">
                                 <div class="row">
                                     <div class="col">
@@ -453,13 +490,20 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="d3chartcontainerpbiolc" data-title="Cluster Overview" data-showhelp="false" data-cbpf="all" data-year="2025" data-modality="total" data-beneficiaries="targeted" data-minpercentage="3" data-responsive="true" data-lazyload="true"></div>
+                                <div id="d3chartcontainerpbiolc" data-title="Cluster Overview" data-showhelp="false" data-cbpf="all" data-year="2025" data-modality="total" data-beneficiaries="targeted" data-minpercentage="3" data-responsive="true" data-lazyload="true">
+                                    <div class="chart-loading">
+                                        <i class="fas fa-spinner"></i>
+                                        <p>Loading chart...</p>
+                                    </div>
+                                </div>
                                 <p class="text-center pbiolccovidDisclaimer" style="font-size:11px; color:#aaa; padding-top: 5px; margin:0">
                                     <b>Disclaimer:</b> A temporary COVID-19 cluster was established in four countries while the Global HRP to COVID-19 was being released. Funding and people targeted within the temporary COVID-19 cluster do not include the whole CBPF response to COVID-19. Comprehensive data and information on CBPFs response to COVID-19 can be found here <a href="https://pfdata.unocha.org/COVID19/" target="_blank">https://pfdata.unocha.org/COVID19/</a><br>
                                 </p>
                             </div>
                         </section>
-                        <section class="clean-block slider">
+
+                        <!-- TARGETED AND REACHED PEOPLE Section -->
+                        <section class="clean-block slider chart-section" id="section-targeted-reached">
                             <div class="container">
                                 <div class="row">
                                     <div class="col">
@@ -467,51 +511,41 @@
                                             <div id="anchor-6"></div>
                                             <h2 class="text-info" id="clustertrend_heading">TARGETED AND REACHED PEOPLE</h2>
                                         </div>
-                                        <div id="d3chartcontainerpbiobe" data-title="Targeted and Reached People" data-cbpf="all" data-year="2025" data-responsive="true" data-lazyload="true"></div>
+                                        <div id="d3chartcontainerpbiobe" data-title="Targeted and Reached People" data-cbpf="all" data-year="2025" data-responsive="true" data-lazyload="true">
+                                            <div class="chart-loading">
+                                                <i class="fas fa-spinner"></i>
+                                                <p>Loading chart...</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </section>
-                        <section class="clean-block slider">
+
+                        <!-- GAM MARKER Section -->
+                        <section class="clean-block slider chart-section" id="section-gam-marker">
                             <div class="container">
                                 <div class="row">
                                     <div class="col">
                                         <div class="block-heading">
                                             <h2 class="text-info" id="gam_heading">GENDER WITH AGE MARKER</h2>
                                         </div>
-                                        <div id="d3chartcontainerpbigam" data-title="Gender with Age Marker (GAM)" data-cbpf="all" data-year="2025" data-display="marker" data-valuetype="budget" data-showmean="false" data-minpercentage="3" data-showhelp="false" data-showlink="true" data-responsive="true" data-lazyload="true"></div>
-
+                                        <div id="d3chartcontainerpbigam" data-title="Gender with Age Marker (GAM)" data-cbpf="all" data-year="2025" data-display="marker" data-valuetype="budget" data-showmean="false" data-minpercentage="3" data-showhelp="false" data-showlink="true" data-responsive="true" data-lazyload="true">
+                                            <div class="chart-loading">
+                                                <i class="fas fa-spinner"></i>
+                                                <p>Loading chart...</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </section>
                     </main>
                 </div>
-                <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 col-order">
-                    <nav id="toc" data-toggle="toc" class="sticky-top" style="float:right; margin-top:55px; background: #ecf6fd; width: 100%;">
-                        <h2 data-toc-skip data-toc-text="Contents :">
-                            <span class="tbl-content-hd">Contents:</span>
-                        </h2>                        
-			            <div class="allocation-overview">
-				            <a href="allocations-overview.html" target="_blank" title="Allocations Overview"><span>Allocations Overview</span></a>
-			            </div>
-                        <div class="result-dashbrd">
-				            <a href="results.html" target="_blank" title="Results Dashboard"><span>Results Dashboard</span></a>
-			            </div>
-						<div class="progress-dashbrd">
-				            <a href="progress.html" target="_blank" title="Progress Dashboard"><span>Progress Dashboard</span></a>
-			            </div>
-                        <div class="cbpf-hrp">
-				            <a href="cbpfvshrp.html" target="_blank" title="CBPF vs HRP"><span>CBPF vs HRP</span></a>
-			            </div>
-                        <div class="cpf-overview">
-				            <a href="https://cbpfgms.github.io/cbpf-bi-stag/cpf" target="_blank" title="Common Performance Framework"><span>Common Performance Framework</span></a>
-			            </div>
-                    </nav>                 
-                </div>
             </div>
         </div>
     </div>
+
     <section class="bg-grey-donor marg-t-120">
         <div class="container">
             <div class="row">
@@ -709,7 +743,7 @@
             </symbol>
             <symbol viewBox="0 0 48 48" id="file-svg" xmlns="http://www.w3.org/2000/svg">
                 <path d="M32.78 38a.78.78 0 0 0-.78.78V45l7-7h-6.22z"></path>
-                <path d="M38.06 3H9.94A1 1 0 0 0 9 4v40a1 1 0 0 0 .94 1H30v-6.22A2.79 2.79 0 0 1 32.78 36H39V4a1 1 0 0 0-.94-1zM18.45 28.53a3.62 3.62 0 0 1-.92 1.07 3.23 3.23 0 0 1-1.29.6 3.35 3.35 0 0 1-2.73-.55 3.21 3.21 0 0 1-.94-1 .84.84 0 0 1-.11-.71.94.94 0 0 1 .44-.58.86.86 0 0 1 .7-.09 1 1 0 0 1 .58.44 1.5 1.5 0 0 0 1 .72 1.48 1.48 0 0 0 1.21-.29 1.26 1.26 0 0 0 .41-.47A1.78 1.78 0 0 0 17 27a1.47 1.47 0 0 0-.41-1.17l-3.12-3.19a3.08 3.08 0 0 1-.74-1.17 3.25 3.25 0 0 1-.18-1.36 3.33 3.33 0 0 1 .39-1.32 3.26 3.26 0 0 1 2.15-1.63 3.27 3.27 0 0 1 1.37 0 3.58 3.58 0 0 1 1.26.55 3.06 3.06 0 0 1 .93 1 .86.86 0 0 1 .09.7 1 1 0 0 1-.44.58.86.86 0 0 1-.7.09.94.94 0 0 1-.56-.44 1.51 1.51 0 0 0-.94-.68 1.36 1.36 0 0 0-1.13.27 1.4 1.4 0 0 0-.16 2.08l3.1 3.19a3.46 3.46 0 0 1 .76 1.21 3.33 3.33 0 0 1-.21 2.77zm9.29-10.23l-3.12 11.3a1 1 0 0 1-.34.5.89.89 0 0 1-.56.19.92.92 0 0 1-.58-.19 1 1 0 0 1-.34-.5l-3.1-11.3a1 1 0 0 1 .09-.72.87.87 0 0 1 .57-.43.94.94 0 0 1 .71.09.86.86 0 0 1 .44.55q.37 1.38.76 2.79l.73 2.61.74 2.65q.33-1.25.72-2.65l.72-2.61q.37-1.4.76-2.79a.86.86 0 0 1 .44-.55.94.94 0 0 1 .71-.09.87.87 0 0 1 .57.43 1 1 0 0 1 .08.72zm7.65 8.7a3.22 3.22 0 0 1-.25 1.28A3.3 3.3 0 0 1 30.85 30a3.16 3.16 0 0 1-1-.7 3.49 3.49 0 0 1-.7-1 3.11 3.11 0 0 1-.3-1.3v-6.61a3.24 3.24 0 0 1 1.44-2.72 3.11 3.11 0 0 1 1-.44 3.49 3.49 0 0 1 1.07-.11 3.09 3.09 0 0 1 1 .23 3.38 3.38 0 0 1 .9.56 3.08 3.08 0 0 1 .68.84.86.86 0 0 1 .09.7 1 1 0 0 1-.44.58.86.86 0 0 1-.7.09.93.93 0 0 1-.56-.44 1.48 1.48 0 0 0-.69-.59 1.27 1.27 0 0 0-.89 0 1.39 1.39 0 0 0-1.05 1.34V27a1.34 1.34 0 0 0 .42 1 1.4 1.4 0 0 0 2.39-1v-2.17h-1a.93.93 0 1 1 0-1.87h1.95a.93.93 0 0 1 .94.93z"></path>
+                <path d="M38.06 3H9.94A1 1 0 0 0 9 4v40a1 1 0 0 0 .94 1H30v-6.22A2.79 2.79 0 0 1 32.78 36H39V4a1 1 0 0 0-.94-1zM18.45 28.53a3.62 3.62 0 0 1-.92 1.07 3.23 3.23 0 0 1-1.29.6 3.35 3.35 0 0 1-2.73-.55 3.21 3.21 0 0 1-.94-1 .84.84 0 0 1-.11-.71.94.94 0 0 1 .44-.58.86.86 0 0 1 .7-.09 1 1 0 0 1 .58.44 1.5 1.5 0 0 0 1 .72 1.48 1.48 0 0 0 1.21-.29 1.26 1.26 0 0 0 .41-.47A1.78 1.78 0 0 0 17 27a1.47 1.47 0 0 0-.41-1.17l-3.12-3.19a3.08 3.08 0 0 1-.74-1.17 3.25 3.25 0 0 1-.18-1.36 3.33 3.33 0 0 1 .39-1.32 3.26 3.26 0 0 1 2.15-1.63 3.27 3.27 0 0 1 1.37 0 3.58 3.58 0 0 1 1.26.55 3.06 3.06 0 0 1 .93 1 .86.86 0 0 1 .09.7 1 1 0 0 1-.44.58.86.86 0 0 1-.7.09.94.94 0 0 1-.56-.44 1.51 1.51 0 0 0-.94-.68 1.36 1.36 0 0 0-1.13.27 1.4 1.4 0 0 0-.16 2.08l3.1 3.19a3.48 3.48 0 0 1 .76 1.21 3.33 3.33 0 0 1-.21 2.77zm9.29-10.23l-3.12 11.3a1 1 0 0 1-.34.5.89.89 0 0 1-.56.19.92.92 0 0 1-.58-.19 1 1 0 0 1-.34-.5l-3.1-11.3a1 1 0 0 1 .09-.72.87.87 0 0 1 .57-.43.94.94 0 0 1 .71.09.86.86 0 0 1 .44.55q.37 1.38.76 2.79l.73 2.61.74 2.65q.33-1.25.72-2.65l.72-2.61q.37-1.4.76-2.79a.86.86 0 0 1 .44-.55.94.94 0 0 1 .71-.09.87.87 0 0 1 .57.43 1 1 0 0 1 .08.72zm7.65 8.7a3.22 3.22 0 0 1-.25 1.28A3.3 3.3 0 0 1 30.85 30a3.16 3.16 0 0 1-1-.7 3.49 3.49 0 0 1-.7-1 3.11 3.11 0 0 1-.3-1.3v-6.61a3.24 3.24 0 0 1 1.44-2.72 3.11 3.11 0 0 1 1-.44 3.49 3.49 0 0 1 1.07-.11 3.09 3.09 0 0 1 1 .23 3.38 3.38 0 0 1 .9.56 3.08 3.08 0 0 1 .68.84.86.86 0 0 1 .09.7 1 1 0 0 1-.44.58.86.86 0 0 1-.7.09.93.93 0 0 1-.56-.44 1.48 1.48 0 0 0-.69-.59 1.27 1.27 0 0 0-.89 0 1.39 1.39 0 0 0-1.05 1.34V27a1.34 1.34 0 0 0 .42 1 1.4 1.4 0 0 0 2.39-1v-2.17h-1a.93.93 0 1 1 0-1.87h1.95a.93.93 0 0 1 .94.93z"></path>
             </symbol>
             <symbol viewBox="0 0 48 48" id="file-xlsx" xmlns="http://www.w3.org/2000/svg">
                 <path d="M32.78 38a.78.78 0 0 0-.78.78V45l7-7h-6.22z"></path>
@@ -901,356 +935,173 @@
                 </button>
             </div>
             <div class="modal-body p-5 m-3">
-                <div class="text-center"><a href="progress.html"><img src="assets/img/allocation-progress-banner-1.svg" alt="Allocation Progress Dashboard banner" width="611" height="244"></a></div>
+                <div class="text-center"><a href="progress.html"><img src="assets/img/allocation-progress-banner-1.svg" alt="" width="611" height="244"></a></div>
             </div>
 			</div>
 		</div>
 	</div>
-    <!-- Bottom Scripts - Optimized Loading with main-thread protection -->
     <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/bootstrap-dropdown.js" defer></script>
-    <script src="assets/js/custom-menu.js" defer></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js" defer></script>
-    
-    <!-- Non-critical scripts loaded asynchronously -->
-    <script>
-        // Async script loader
-        function loadScript(src) {
-            return new Promise((resolve, reject) => {
-                const script = document.createElement('script');
-                script.src = src;
-                script.async = true;
-                script.onload = resolve;
-                script.onerror = reject;
-                document.head.appendChild(script);
-            });
-        }
-        
-        // Use requestIdleCallback to defer non-critical work
-        function scheduleWork(callback, options = {}) {
-            if ('requestIdleCallback' in window) {
-                requestIdleCallback(callback, { timeout: options.timeout || 5000 });
-            } else {
-                setTimeout(callback, options.fallbackDelay || 100);
-            }
-        }
-
-        // Load critical data first, with main-thread protection
-        document.addEventListener('DOMContentLoaded', function() {
-            scheduleWork(() => {
-                loadScript('assets/js/chartsdata.js').then(() => {
-                    // Use another idle callback for flags.js
-                    scheduleWork(() => {
-                        loadScript('assets/js/flags.js');
-                    }, { fallbackDelay: 500 });
-                });
-            });
-        });
-
-        // Load non-critical scripts with main-thread protection
-        window.addEventListener('load', function() {
-            // Defer script loading to avoid blocking main thread
-            scheduleWork(() => {
-                // Load scripts in smaller batches to avoid large main-thread blocks
-                const scriptBatches = [
-                    // Batch 1: UI libraries and AOS
-                    [
-                        'https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js',
-                        'assets/js/bootstrap-toc.min.js',
-                        'https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js'
-                    ],
-                    // Batch 2: Animation initialization and visual effects
-                    [
-                        'assets/js/bs-animation.js',
-                        'https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js',
-                        'assets/js/smoothproducts.min.js',
-                        'assets/js/breaking-news-ticker.min.js'
-                    ],
-                    // Batch 3: Theme and utilities (after plugins)
-                    [
-                        'assets/js/respond.js',
-                        'assets/js/theme.js',
-                        'https://kit.fontawesome.com/d5d759e566.js'
-                    ],
-                    // Batch 4: Heavy libraries
-                    [
-                        'https://cdn.jsdelivr.net/npm/@ungap/url-search-params@0.1.2/min.min.js',
-                        'https://cbpfgms.github.io/libraries/html2canvas.min.js',
-                        'https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js',
-                        'https://cdnjs.cloudflare.com/ajax/libs/d3-sankey/0.12.3/d3-sankey.min.js'
-                    ]
-                ];
-
-                // Load each batch with idle callbacks
-                function loadBatch(batchIndex) {
-                    if (batchIndex >= scriptBatches.length) {
-                        // All batches loaded - ticker is initialized by theme.js
-                        return;
-                    }
-
-                    Promise.all(scriptBatches[batchIndex].map(loadScript))
-                        .then(() => {
-                            // Load next batch in idle time
-                            scheduleWork(() => loadBatch(batchIndex + 1), { fallbackDelay: 50 });
-                        })
-                        .catch(error => {
-                            console.warn(`Batch ${batchIndex} failed:`, error);
-                            // Continue with next batch anyway
-                            scheduleWork(() => loadBatch(batchIndex + 1), { fallbackDelay: 50 });
-                        });
-                }
-
-                loadBatch(0);
-            }, { timeout: 2000, fallbackDelay: 1000 });
-        });
-    </script>
-    
+    <script src="assets/js/bootstrap-dropdown.js"></script>
+    <script src="assets/js/custom-menu.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <script>
         $(document).ready(function() {
             $(".cd-ocha-btn").click(function() {
                 $(".cd-dropdown").toggle();
             });
             $(window).on('click', function() {
-                $('#cd-ocha-dropdown').css('display', 'none');
+                $('#cd-ocha-dropdown').css('display', 'none'); //$( '#layers' ).hide();
             });
         });
     </script>
-    
-    <!-- Chart Loading System - Lazy Load on Demand -->
+    <script type="text/javascript" id="cookieinfo" src="assets/js/cookieinfo.min.js" data-bg="#002856" data-fg="#FFF" data-link="#FFF" data-cookie="CookieInfoScript" data-text-align="left" data-close-text="OK">
+    </script>
+
+    <script src="assets/js/bootstrap-toc.min.js"></script>
+    <script src="assets/js/bs-animation.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+    <script src="assets/js/smoothproducts.min.js"></script>
+    <script src="assets/js/respond.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
+    <script src="assets/js/breaking-news-ticker.min.js"></script>
+    <script src="assets/js/chartsdata.js"></script>
+    <script>
+        $("#newsTicker3").breakingNews({
+            play:false,
+            delayTimer: 600000,
+            stopOnHover: true
+        })
+    </script>
     <script type="text/javascript">
-        // Chart configuration with lazy loading
-        const chartConfig = {
-            'cbsank': {
-                styles: ['https://cbpfgms.github.io/css/d3chartstylescbsank.css'],
+        // Chart configuration and lazy loading functionality
+        var chartConfig = {
+            'cbpf-by-year': {
                 script: document.location.hostname.search("cbpf.data.unocha.org") !== -1 
                     ? "https://cbpfgms.github.io/cbsank/src/d3chartcbsank.js"
                     : "https://cbpfgms.github.io/cbsank/src/d3chartcbsank-stg.js",
-                container: "#d3chartcontainercbsank"
+                container: "#d3chartcontainercbsank",
+                section: "#section-cbpf-by-year"
             },
-            'pbiclc': {
-                styles: ['https://cbpfgms.github.io/css/d3chartstylespbiclc.css'],
-                script: document.location.hostname.search("cbpf.data.unocha.org") !== -1 
-                    ? "https://cbpfgms.github.io/pbiclc/src/d3chartpbiclc.js"
-                    : "https://cbpfgms.github.io/pbiclc/src/d3chartpbiclc-stg.js",
-                container: "#d3chartcontainerpbiclc"
-            },
-            'pbicli': {
-                styles: ['https://cbpfgms.github.io/css/d3chartstylespbicli.css'],
-                script: document.location.hostname.search("cbpf.data.unocha.org") !== -1 
-                    ? "https://cbpfgms.github.io/pbicli/src/d3chartpbicli.js"
-                    : "https://cbpfgms.github.io/pbicli/src/d3chartpbicli-stg.js",
-                container: "#d3chartcontainerpbicli"
-            },
-            'pbialp': {
-                styles: ['https://cbpfgms.github.io/css/d3chartstylespbialp.css'],
-                script: document.location.hostname.search("cbpf.data.unocha.org") !== -1 
-                    ? "https://cbpfgms.github.io/pbialp/src/d3chartpbialp.js"
-                    : "https://cbpfgms.github.io/pbialp/src/d3chartpbialp-stg.js",
-                container: "#d3chartcontainerpbialp"
-            },
-            'pbifdc': {
-                styles: ['https://cbpfgms.github.io/css/d3chartstylespbifdc.css'],
-                script: document.location.hostname.search("cbpf.data.unocha.org") !== -1 
-                    ? "https://cbpfgms.github.io/pbifdc/src/d3chartpbifdc.js"
-                    : "https://cbpfgms.github.io/pbifdc/src/d3chartpbifdc-stg.js",
-                container: "#d3chartcontainerpbifdc"
-            },
-            'pbiolc': {
-                styles: ['https://cbpfgms.github.io/css/d3chartstylespbiolc.css'],
-                script: document.location.hostname.search("cbpf.data.unocha.org") !== -1 
-                    ? "https://cbpfgms.github.io/pbiolc/src/d3chartpbiolc.js"
-                    : "https://cbpfgms.github.io/pbiolc/src/d3chartpbiolc-stg.js",
-                container: "#d3chartcontainerpbiolc"
-            },
-            'pbiobe': {
-                styles: ['https://cbpfgms.github.io/css/d3chartstylespbiobe.css'],
-                script: document.location.hostname.search("cbpf.data.unocha.org") !== -1 
-                    ? "https://cbpfgms.github.io/pbiobe/src/d3chartpbiobe.js"
-                    : "https://cbpfgms.github.io/pbiobe/src/d3chartpbiobe-stg.js",
-                container: "#d3chartcontainerpbiobe"
-            },
-            'pbiuac': {
-                styles: ['https://cbpfgms.github.io/css/d3chartstylespbiuac.css'],
-                script: document.location.hostname.search("cbpf.data.unocha.org") !== -1 
-                    ? "https://cbpfgms.github.io/pbiuac/src/d3chartpbiuac.js"
-                    : "https://cbpfgms.github.io/pbiuac/src/d3chartpbiuac-stg.js",
-                container: "#d3chartcontainerpbiuac"
-            },
-            'pbigam': {
-                styles: ['https://cbpfgms.github.io/css/d3chartstylespbigam.css'],
-                script: document.location.hostname.search("cbpf.data.unocha.org") !== -1 
-                    ? "https://cbpfgms.github.io/pbigam/src/d3chartpbigam.js"
-                    : "https://cbpfgms.github.io/pbigam/src/d3chartpbigam-stg.js",
-                container: "#d3chartcontainerpbigam"
-            },
-            'pbinad': {
-                styles: ['https://cbpfgms.github.io/css/d3chartstylespbinad.css'],
+            'allocation-flow': {
                 script: document.location.hostname.search("cbpf.data.unocha.org") !== -1 
                     ? "https://cbpfgms.github.io/pbinad/src/d3chartpbinad.js"
                     : "https://cbpfgms.github.io/pbinad/src/d3chartpbinad-stg.js",
-                container: "#d3chartcontainerpbinad"
+                container: "#d3chartcontainerpbinad",
+                section: "#section-allocation-flow"
+            },
+            'allocations': {
+                script: document.location.hostname.search("cbpf.data.unocha.org") !== -1 
+                    ? "https://cbpfgms.github.io/pbialp/src/d3chartpbialp.js"
+                    : "https://cbpfgms.github.io/pbialp/src/d3chartpbialp-stg.js",
+                container: "#d3chartcontainerpbialp",
+                section: "#section-allocations"
+            },
+            'allocations-timeline': {
+                script: document.location.hostname.search("cbpf.data.unocha.org") !== -1 
+                    ? "https://cbpfgms.github.io/pbiuac/src/d3chartpbiuac.js"
+                    : "https://cbpfgms.github.io/pbiuac/src/d3chartpbiuac-stg.js",
+                container: "#d3chartcontainerpbiuac",
+                section: "#section-allocations-timeline"
+            },
+            'contributions': {
+                script: document.location.hostname.search("cbpf.data.unocha.org") !== -1 
+                    ? "https://cbpfgms.github.io/pbiclc/src/d3chartpbiclc.js"
+                    : "https://cbpfgms.github.io/pbiclc/src/d3chartpbiclc-stg.js",
+                container: "#d3chartcontainerpbiclc",
+                section: "#section-contributions"
+            },
+            'contribution-trends': {
+                script: document.location.hostname.search("cbpf.data.unocha.org") !== -1 
+                    ? "https://cbpfgms.github.io/pbicli/src/d3chartpbicli.js"
+                    : "https://cbpfgms.github.io/pbicli/src/d3chartpbicli-stg.js",
+                container: "#d3chartcontainerpbicli",
+                section: "#section-contribution-trends"
+            },
+            'funding-overview': {
+                script: document.location.hostname.search("cbpf.data.unocha.org") !== -1 
+                    ? "https://cbpfgms.github.io/pbifdc/src/d3chartpbifdc.js"
+                    : "https://cbpfgms.github.io/pbifdc/src/d3chartpbifdc-stg.js",
+                container: "#d3chartcontainerpbifdc",
+                section: "#section-funding-overview"
+            },
+            'sectors': {
+                script: document.location.hostname.search("cbpf.data.unocha.org") !== -1 
+                    ? "https://cbpfgms.github.io/pbiolc/src/d3chartpbiolc.js"
+                    : "https://cbpfgms.github.io/pbiolc/src/d3chartpbiolc-stg.js",
+                container: "#d3chartcontainerpbiolc",
+                section: "#section-sectors"
+            },
+            'targeted-reached': {
+                script: document.location.hostname.search("cbpf.data.unocha.org") !== -1 
+                    ? "https://cbpfgms.github.io/pbiobe/src/d3chartpbiobe.js"
+                    : "https://cbpfgms.github.io/pbiobe/src/d3chartpbiobe-stg.js",
+                container: "#d3chartcontainerpbiobe",
+                section: "#section-targeted-reached"
+            },
+            'gam-marker': {
+                script: document.location.hostname.search("cbpf.data.unocha.org") !== -1 
+                    ? "https://cbpfgms.github.io/pbigam/src/d3chartpbigam.js"
+                    : "https://cbpfgms.github.io/pbigam/src/d3chartpbigam-stg.js",
+                container: "#d3chartcontainerpbigam",
+                section: "#section-gam-marker"
             }
         };
-        
-        const loadedCharts = {};
-        
-        // Intersection Observer for lazy loading charts with main-thread protection
-        const chartObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const chartType = entry.target.dataset.chartType;
-                    if (chartType && !loadedCharts[chartType]) {
-                        // Use idle callback to avoid blocking main thread
-                        scheduleWork(() => {
-                            loadChart(chartType);
-                        }, { timeout: 2000, fallbackDelay: 200 });
-                        chartObserver.unobserve(entry.target);
-                    }
-                }
-            });
-        }, {
-            rootMargin: '100px'
-        });
-        
-        // Wait for data to be available with idle callbacks
-        function waitForChartData() {
-            return new Promise((resolve) => {
-                function checkData() {
-                    if (window.cbpfbiDataObject && Object.keys(window.cbpfbiDataObject).length > 0) {
-                        resolve();
-                    } else {
-                        // Use idle callback for data checking to avoid blocking main thread
-                        scheduleWork(checkData, { fallbackDelay: 100 });
-                    }
-                }
-                checkData();
-            });
-        }
 
-        // Load chart on demand with main-thread protection
-        function loadChart(chartType) {
-            const config = chartConfig[chartType];
-            if (!config || loadedCharts[chartType]) return;
+        var loadedCharts = {};
+        var currentActiveChart = null;
+
+        function showChart(chartKey) {
+            // Hide all chart sections
+            $('.chart-section').removeClass('active');
+            $('.nav-menu-item').removeClass('active');
             
-            loadedCharts[chartType] = true;
-            const container = document.querySelector(config.container);
-            
-            if (container) {
-                container.innerHTML = '<div class="chart-loading">Loading chart...</div>';
+            // Show selected chart section
+            var config = chartConfig[chartKey];
+            if (config) {
+                $(config.section).addClass('active');
+                $('[data-chart="' + chartKey + '"]').addClass('active');
+                currentActiveChart = chartKey;
                 
-                // Wait for data to be available before loading chart
-                waitForChartData().then(() => {
-                    // Load chart styles first with idle callbacks
-                    const loadStyles = config.styles.map(styleUrl => {
-                        return new Promise((resolve) => {
-                            scheduleWork(() => {
-                                const link = document.createElement('link');
-                                link.rel = 'stylesheet';
-                                link.href = styleUrl;
-                                link.onload = resolve;
-                                link.onerror = resolve; // Continue even if style fails
-                                document.head.appendChild(link);
-                            }, { fallbackDelay: 50 });
-                        });
+                // Load chart script if not already loaded
+                if (!loadedCharts[chartKey]) {
+                    $.getScript(config.script, function() {
+                        loadedCharts[chartKey] = true;
+                        // Remove loading indicator
+                        $(config.container + ' .chart-loading').remove();
+                    }).fail(function() {
+                        console.error('Failed to load chart script for: ' + chartKey);
+                        $(config.container + ' .chart-loading').html('<p style="color: red;">Failed to load chart. Please try again.</p>');
                     });
-                    
-                    // Load chart script after styles and data are ready, with main-thread protection
-                    return Promise.all(loadStyles).then(() => {
-                        return new Promise((resolve, reject) => {
-                            scheduleWork(() => {
-                                loadScript(config.script).then(resolve).catch(reject);
-                            }, { timeout: 1000, fallbackDelay: 100 });
-                        });
-                    });
-                }).then(() => {
-                    scheduleWork(() => {
-                        const loadingElement = container.querySelector('.chart-loading');
-                        if (loadingElement) {
-                            loadingElement.remove();
-                        }
-                    }, { fallbackDelay: 50 });
-                }).catch(error => {
-                    console.error('Failed to load chart:', chartType, error);
-                    scheduleWork(() => {
-                        container.innerHTML = '<div class="chart-loading" style="color: red;">Failed to load chart</div>';
-                    }, { fallbackDelay: 50 });
-                });
+                } else {
+                    // Chart already loaded, just remove loading indicator if it exists
+                    $(config.container + ' .chart-loading').remove();
+                }
+                
+                // Scroll to the chart section
+                $('html, body').animate({
+                    scrollTop: $(config.section).offset().top - 100
+                }, 500);
             }
         }
-        
-        // Initialize chart observers when DOM is ready with main-thread protection
-        document.addEventListener('DOMContentLoaded', function() {
-            scheduleWork(() => {
-                // Load base chart styles
-                const baseStyleLink = document.querySelector('link[data-chart-style="base"]');
-                if (baseStyleLink) {
-                    baseStyleLink.rel = 'stylesheet';
-                }
-                
-                // Observe chart containers with batching to avoid blocking main thread
-                const containers = document.querySelectorAll('[id^="d3chartcontainer"]');
-                let index = 0;
-                
-                function processContainerBatch() {
-                    const batchSize = 3; // Process 3 containers at a time
-                    const endIndex = Math.min(index + batchSize, containers.length);
-                    
-                    for (let i = index; i < endIndex; i++) {
-                        const container = containers[i];
-                        const chartType = container.id.replace('d3chartcontainer', '');
-                        container.dataset.chartType = chartType;
-                        chartObserver.observe(container);
-                    }
-                    
-                    index = endIndex;
-                    
-                    if (index < containers.length) {
-                        // Process next batch in idle time
-                        scheduleWork(processContainerBatch, { fallbackDelay: 10 });
-                    }
-                }
-                
-                processContainerBatch();
-            }, { fallbackDelay: 100 });
-        });
-        
-        // Fallback: Load visible charts after page load with main-thread protection
-        window.addEventListener('load', function() {
-            scheduleWork(() => {
-                const containers = document.querySelectorAll('[id^="d3chartcontainer"]');
-                
-                // Process visible charts in batches
-                let index = 0;
-                function checkVisibleBatch() {
-                    const batchSize = 2; // Check 2 charts at a time
-                    const endIndex = Math.min(index + batchSize, containers.length);
-                    
-                    for (let i = index; i < endIndex; i++) {
-                        const container = containers[i];
-                        const rect = container.getBoundingClientRect();
-                        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-                        if (isVisible) {
-                            const chartType = container.dataset.chartType;
-                            if (chartType && !loadedCharts[chartType]) {
-                                loadChart(chartType);
-                            }
-                        }
-                    }
-                    
-                    index = endIndex;
-                    
-                    if (index < containers.length) {
-                        // Check next batch in idle time
-                        scheduleWork(checkVisibleBatch, { fallbackDelay: 50 });
-                    }
-                }
-                
-                checkVisibleBatch();
-            }, { timeout: 2000, fallbackDelay: 1000 });
+
+        // Initialize page
+        $(document).ready(function() {
+            // Initially hide all chart sections
+            $('.chart-section').removeClass('active');
+            
+            // Set up menu click handlers
+            $('.nav-menu-item[data-chart]').click(function() {
+                var chartKey = $(this).data('chart');
+                showChart(chartKey);
+            });
+            
+            // Show first chart by default
+            showChart('cbpf-by-year');
         });
     </script>
-    
-    <script type="text/javascript" id="cookieinfo" src="assets/js/cookieinfo.min.js" data-bg="#002856" data-fg="#FFF" data-link="#FFF" data-cookie="CookieInfoScript" data-text-align="left" data-close-text="OK" async></script>
+    <script type="text/javascript" src="assets/js/flags.js"></script>
 </body>
 
 </html>
