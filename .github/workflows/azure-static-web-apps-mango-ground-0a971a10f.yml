@@ -15,37 +15,50 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     permissions:
-        id-token: write
-        contents: read
+      id-token: write   # Required for OIDC authentication with Azure
+      contents: read    # Required for actions/checkout
     steps:
       - uses: actions/checkout@v3
         with:
           submodules: true
-          lfs: false
-      - name: Install OIDC Client from Core Package
-        run: npm install @actions/core@1.6.0 @actions/http-client
-      - name: Get Id Token
-        uses: actions/github-script@v6
-        id: idtoken
+
+      # New Step 1: Setup Node.js environment
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          script: |
-            const coredemo = require('@actions/core')
-            return await coredemo.getIDToken()
-          result-encoding: string
+          node-version: 18 # Specify your desired Node.js version
+
+      # New Step 2: Install Terser and run minification
+      - name: Build and Minify JavaScript
+        run: |
+          # Install Terser, a modern JavaScript minifier
+          npm install terser -g
+          
+          # Create an output directory for the optimized files
+          # Note: We are also copying non-JS files like HTML, CSS, images, etc.
+          # The `rsync` command is great for this.
+          rsync -a --exclude='*.js' ./ build/
+          
+          # Find all .js files, minify them, and place them in the build directory
+          # preserving the folder structure.
+          for file in $(find . -name "*.js"); do
+            echo "Minifying $file..."
+            # Create the target directory inside 'build' if it doesn't exist
+            mkdir -p "$(dirname "build/$file")"
+            # Run terser
+            terser "$file" -o "build/$file" -c -m
+          done
+
+      # Modified 'Build And Deploy' Step
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_GROUND_0A971A10F }}
+          # NOTE: The azure_static_web_apps_api_token is REMOVED to use secure OIDC auth
           action: "upload"
-          ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
-          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: "/" # App source code path
           api_location: "" # Api source code path - optional
-          output_location: "" # Built app content directory - optional
-          github_id_token: ${{ steps.idtoken.outputs.result }}
-          skip_app_build: true
-          ###### End of Repository/Build Configurations ######
+          output_location: "build" # IMPORTANT: Point to the folder with your minified files
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
@@ -57,4 +70,5 @@ jobs:
         uses: Azure/static-web-apps-deploy@v1
         with:
           action: "close"
+
 
