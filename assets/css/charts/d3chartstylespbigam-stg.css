@@ -1,0 +1,377 @@
+/*Public BI, Gender with Age Marker (code: pbigam)*/
+
+#d3chartcontainerpbigam {
+	position: relative;
+}
+
+#pbigamDownloadingDiv {
+	position: absolute;
+	padding: 8px;
+	background: #fcfcfc; 
+	border: 1px solid #222; 
+	border-radius: 8px;
+	pointer-events: none;
+	cursor: none;
+	width: 200px;
+	height: 100px;
+	z-index: 1500;
+}
+
+#pbigamtooltipdiv {    
+	position: absolute;
+	text-align: left;
+	color: darkslategray;
+	font-family: "Arial";
+	white-space: normal;
+	padding: 8px;
+	line-height: 120%;
+	background: #f1f1f1; 
+	border: 1px solid #999; 
+	border-radius: 4px;
+	pointer-events: none;
+	cursor: none;
+	z-index: 1500;
+}
+
+.pbigamTopDiv {
+	display: flex;
+	width: 100%;
+	margin-bottom: 4px;
+}
+
+.pbigamTitleDiv {
+	display: flex;
+	flex:0 50%;
+	margin-left: 8px;
+}
+
+.pbigamIconsDiv {
+	display: flex;
+	flex:0 50%;
+	flex-direction: row-reverse;
+	align-items: center;
+	margin-right: 16px;
+	z-index: 1400;
+}
+
+.pbigamFooterDiv {
+	width: 100%;
+	margin-top: 8px;
+}
+
+.pbigamYearsDescriptionDiv {
+	margin-left: 22px;
+	font-family: "Arial", sans-serif;
+	font-size: 12px;
+	color: #888;
+	width: 98%;
+}
+
+.pbigamOverDivHelp {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(255,255,255,0.5);
+	top: 0;
+	left: 0;
+	z-index: 10;
+}
+
+p#pbigamd3chartTitle {
+	font-size: 26px;
+	font-family: "Arial", sans-serif;
+	margin: 0px;
+	color: #418fde;
+}
+
+.pbigamSelectTitleDiv {
+	display: flex;
+	width: 100%;
+	margin-bottom: 8px;
+	margin-top: 8px;
+	margin-left: 10px;
+	font-family: "Arial", sans-serif;
+	font-size: 16px;
+	color: #666;
+}
+
+.pbigamSelectDiv {
+	display: flex;
+	margin-left: 10px;
+	margin-right: 4px;
+	flex-wrap: wrap;
+}
+
+.pbigamlaunchedValueDiv {
+	width: 100%;
+	margin-top: 1em;
+}
+
+.pbigamlaunchedValue {
+	font-family: "Arial", sans-serif;
+	font-size: 16px;
+	color: #666;
+	padding-left: 150px;
+}
+
+.pbigamCheckboxDiv {
+	display: flex;
+	margin-right: 12px;
+	align-items: center;
+}
+
+.pbigamCheckboxDiv label, .pbigamCheckboxDiv input {
+	cursor: pointer;
+}
+
+.pbigamCheckboxDiv label {
+    margin-bottom: 0 !important
+}
+
+.pbigamCheckboxText {
+	font-family: "Arial", sans-serif;
+	font-size: 14px;
+	color: #666;
+	margin-left: 2px;
+}
+
+.pbigamCheckboxTextAllCbpfs {
+	font-family: "Arial", sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+	margin-left: 2px;
+	color: #f79a3b;
+}
+
+.pbigamtopPanelMainValue, .pbigamtopPanelProjectsNumber {
+	font-family: "Arial", sans-serif;
+	font-size: 48px;
+}
+
+.pbigamtopPanelCbpfsNumber, .pbigamtopPanelRhpfsNumber {
+	font-family: "Arial", sans-serif;
+}
+
+.pbigamtopPanelMainText, .pbigamtopPanelSubText, .pbigamtopPanelProjectsText, .pbigamtopPanelProjectsTextSubText {
+	font-family: "Arial", sans-serif;
+	font-size: 18px;
+	fill: #888;
+}
+
+.pbigamtopPanelCbpfsText, .pbigamtopPanelRhpfsText {
+	font-family: "Arial", sans-serif;
+	fill: #888;
+}
+
+.pbigambuttonsLegendText {
+	font-family: "Arial", sans-serif;
+	font-size: 10px;
+	fill: #888;
+}
+
+.pbigambuttonsText, .pbigambuttonsAllocationsText, .pbigambuttonsDisplayText {
+	font-family: "Arial", sans-serif;
+	font-size: 12px;
+	pointer-events: none;
+}
+
+.pbigamleftArrowText, .pbigamrightArrowText {
+	font-family: "Arial", sans-serif;
+	font-size: 20px;
+	pointer-events: none;
+}
+
+.pbigamxAxisGroup text {
+	font-family: "Arial", sans-serif;
+	font-size: 10px;
+	fill: #aaa;
+	pointer-events: none;
+}
+
+.pbigamaxisLabelCode, .pbigamtotalLabel {
+	font-family: "Arial", sans-serif;
+	font-size: 10px;
+	font-weight: 700;
+	fill: #888;
+	pointer-events: none;
+}
+
+.pbigamlegendSizeTitle, .pbigamlegendColorTitle {
+	font-family: "Arial", sans-serif;
+	font-size: 13px;
+	fill: #666;
+	pointer-events: none;
+}
+
+.pbigamshowMeanText {
+	font-family: "Arial", sans-serif;
+	font-size: 12px;
+	fill: #666;
+}
+
+.pbigamlegendSizeLabels {
+	font-family: "Arial", sans-serif;
+	font-size: 10px;
+	fill: #888;
+}
+
+.pbigamsizeTitleSpan, .pbigamcolorTitleSpan {
+	font-family: "Arial", sans-serif;
+	font-size: 12px;
+	fill: #888;
+	pointer-events: none;
+}
+
+.pbigamlegendColorGroup {
+	font-family: "Arial", sans-serif;
+	font-size: 12px;
+	fill: #777;
+}
+
+.pbigamxAxisGroup path {
+	stroke: none;
+}
+
+.pbigamxAxisGroup line {
+	stroke: #e7e7e7;
+	stroke-dasharray: 2, 2;
+}
+
+.pbigamyAxisGroup text {
+	font-family: "Arial", sans-serif;
+	font-size: 22px;
+	font-weight: 700;
+	fill: #888;
+	pointer-events: none;
+}
+
+.pbigamaxisDescriptions {
+	font-family: "Arial", sans-serif;
+	font-size: 12px;
+	fill: #888;
+	pointer-events: none;
+}
+
+.pbigamtotalValues {
+	font-family: "Arial", sans-serif;
+	font-size: 11px;
+	fill: #888;
+	pointer-events: none;
+}
+
+.pbigamtotalValuesTspan {
+	font-family: "Arial", sans-serif;
+	font-size: 9px;
+	fill: #999;
+	pointer-events: none;
+}
+
+.pbigammeanGroupTextBack {
+	font-family: "Arial", sans-serif;
+	font-size: 11px;
+	fill: white;
+	stroke: white;
+	stroke-width: 2px;
+	pointer-events: none;
+}
+
+.pbigambeeswarmLabel {
+	font-family: "Arial", sans-serif;
+	font-size: 10px;
+	fill: #444;
+	pointer-events: none;
+}
+
+.pbigambeeswarmLabelBack {
+	font-family: "Arial", sans-serif;
+	font-size: 10px;
+	fill: white;
+	stroke: white;
+	stroke-width: 2px;
+	pointer-events: none;
+}
+
+.pbigammeanGroupText {
+	font-family: "Arial", sans-serif;
+	font-size: 11px;
+	fill: #666;
+	pointer-events: none;
+}
+
+.pbigamyAxisGroup path {
+	stroke: none;
+}
+
+.pbigamyAxisGroup line {
+	stroke: #ddd;
+}
+
+.pbigamAnnotationMainText {
+	font-family: "Arial", sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+	pointer-events: none;
+	fill: white;
+}
+
+.pbigamAnnotationText {
+	font-family: "Arial", sans-serif;
+	font-size: 15px;
+	fill: #222;
+	pointer-events: none;
+}
+
+#pbigamSnapshotTooltip {
+	z-index: 1600;
+}
+
+.pbigamSnapshotContent {
+	position: absolute;
+	min-width: 100px;
+	display: none;
+	background-color: #f9f9f9;
+	box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.25);
+	cursor: pointer;
+	border-radius: 4px;
+	overflow: hidden;
+}
+
+.pbigamSnapshotContent #pbigamSnapshotPdfText, .pbigamSnapshotContent #pbigamSnapshotPngText, .pbigamSnapshotContent #pbigamSnapshotTooltipPdfText, .pbigamSnapshotContent #pbigamSnapshotTooltipPngText {
+	font-size: 14px;
+	padding: 10px;
+	margin: 0px;
+	color: #222;
+	font-family: "Arial", sans-serif;
+}
+
+.pbigamSnapshotContent #pbigamBestVisualizedText, .pbigamSnapshotContent #pbigamTooltipBestVisualizedText {
+	font-size: 11px;
+	padding: 10px;
+	margin: 0px;
+	color: #222;
+	font-family: "Arial", sans-serif;
+	border-top: 1px solid lightgray;
+	width: 202px;
+}
+
+.pbigamSnapshotContent #pbigamSnapshotPdfText:hover, .pbigamSnapshotContent #pbigamSnapshotPngText:hover, .pbigamSnapshotContent #pbigamSnapshotTooltipPdfText:hover, .pbigamSnapshotContent #pbigamSnapshotTooltipPngText:hover {
+	background-color: #1F69B3;
+	color: white;
+}
+
+.pbigaminfoIcon {
+	font-family: "Font Awesome 5 Free";
+	font-weight: 600;
+	font-size: 18px;
+}
+
+.pbigamFundsDiv ul {
+	margin-top: 4px;
+	margin-bottom: 4px;
+	padding-inline-start: 20px;
+}
+
+.pbigamfundsDivTitle {
+	margin-bottom: 8px;
+	font-weight: bold;
+}

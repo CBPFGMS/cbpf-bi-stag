@@ -1,0 +1,197 @@
+/*Public BI, Allocations tab, line graph (code: pbiali)*/
+
+#d3chartcontainerpbiali {
+	position: relative;
+}
+
+#pbialiDownloadingDiv {
+	position: absolute;
+	padding: 8px;
+	background: #fcfcfc; 
+	border: 1px solid #222; 
+	border-radius: 8px;
+	pointer-events: none;
+	cursor: none;
+	width: 200px;
+	height: 100px;
+	z-index: 1500;
+}
+
+#pbialitooltipdiv {    
+	position: absolute;
+	text-align: left;
+	color: darkslategray;
+	font-family: "Arial";
+	white-space: normal;
+	padding: 8px;
+	line-height: 120%;
+	font-size: 14px;
+	background: #f1f1f1; 
+	border: 1px solid #999; 
+	border-radius: 4px;
+	pointer-events: none;
+	cursor: none;
+	max-width: 270px;
+	z-index: 1500;
+}
+
+.pbialiTopDiv {
+	display: flex;
+	width: 100%;
+	margin-bottom: 4px;
+}
+
+.pbialiTitleDiv {
+	display: flex;
+	flex:0 60%;
+	margin-left: 38px;
+}
+
+.pbialiIconsDiv {
+	display: flex;
+	flex:0 40%;
+	flex-direction: row-reverse;
+	align-items: center;
+	margin-right: 16px;
+}
+
+.pbialiFooterDiv {
+	width: 100%;
+}
+
+.pbialiOverDivHelp {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(255,255,255,0.5);
+	top: 0;
+	left: 0;
+	z-index: 10;
+}
+
+p#pbialid3chartTitle {
+	font-size: 26px;
+	font-family: "Arial", sans-serif;
+	margin: 0px;
+	color: #418fde;
+}
+
+.pbialiMainPanelTitle {
+	font-family: "Arial", sans-serif;
+	font-size: 12px;
+	fill: #666;
+}
+
+.pbialigroupXAxisMainPanel text, .pbialigroupYAxisMainPanel text {
+	font-family: "Roboto", sans-serif;
+	font-size: 10px;
+	fill: #666;
+	pointer-events: none;
+}
+
+.pbialigroupXAxisMainPanel path, .pbialigroupYAxisMainPanel path {
+	stroke: gray;
+}
+
+.pbialigroupXAxisMainPanel line {
+	stroke: gray;
+}
+
+.pbialigroupYAxisMainPanel line {
+	stroke: #e4e4e4;
+	stroke-dasharray: 2, 2;
+}
+
+.pbialiYAxisLabel {
+	font-family: "Roboto", sans-serif;
+	font-size: 8px;
+	fill: #888;
+}
+
+.pbialiButtonTitle {
+	font-family: "Roboto", sans-serif;
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: -0.05em;
+}
+
+.pbialiUnselectedPath {
+	stroke: #eee;
+}
+
+.pbialiButtonsOrderControl {
+	font-family: "Roboto", sans-serif;
+	font-size: 10px;
+	fill: #666;
+}
+
+.pbialiAverageText {
+	font-family: "Arial", sans-serif;
+	font-size: 10px;
+	fill: #999;
+}
+
+.pbialiLabelText {
+	font-family: "Roboto", sans-serif;
+	font-size: 14px;
+	fill: #666;
+}
+
+.pbialiAnnotationMainText {
+	font-family: "Arial", sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+	pointer-events: none;
+	fill: white;
+}
+
+.pbialiAnnotationText {
+	font-family: "Arial", sans-serif;
+	font-size: 15px;
+	fill: #222;
+	pointer-events: none;
+}
+
+.pbialiCurrentYearText {
+	font-family: "Roboto", sans-serif;
+	font-size: 10px;
+	fill: #666;
+}
+
+#pbialiSnapshotTooltip {
+	z-index: 1600;
+}
+
+.pbialiSnapshotContent {
+	position: absolute;
+	min-width: 100px;
+	display: none;
+	background-color: #f9f9f9;
+	box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.25);
+	cursor: pointer;
+	border-radius: 4px;
+	overflow: hidden;
+}
+
+.pbialiSnapshotContent #pbialiSnapshotPdfText, .pbialiSnapshotContent #pbialiSnapshotPngText, .pbialiSnapshotContent #pbialiSnapshotTooltipPdfText, .pbialiSnapshotContent #pbialiSnapshotTooltipPngText {
+	font-size: 14px;
+	padding: 10px;
+	margin: 0px;
+	color: #222;
+	font-family: "Arial", sans-serif;
+}
+
+.pbialiSnapshotContent #pbialiBestVisualizedText, .pbialiSnapshotContent #pbialiTooltipBestVisualizedText {
+	font-size: 11px;
+	padding: 10px;
+	margin: 0px;
+	color: #222;
+	font-family: "Arial", sans-serif;
+	border-top: 1px solid lightgray;
+	width: 202px;
+}
+
+.pbialiSnapshotContent #pbialiSnapshotPdfText:hover, .pbialiSnapshotContent #pbialiSnapshotPngText:hover, .pbialiSnapshotContent #pbialiSnapshotTooltipPdfText:hover, .pbialiSnapshotContent #pbialiSnapshotTooltipPngText:hover {
+	background-color: #1F69B3;
+	color: white;
+}
