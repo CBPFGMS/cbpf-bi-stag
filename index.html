@@ -2533,125 +2533,118 @@
 		<!-- Chart Loading System - Lazy Load on Demand -->
 		<script type="text/javascript">
 			// Chart configuration with lazy loading
+			const isProdSite =
+				document.location.hostname.search("cbpf.data.unocha.org") !==
+				-1;
 			const chartConfig = {
 				cbsank: {
 					styles: [
-						"https://cbpfgms.github.io/css/d3chartstylescbsank.css",
+						isProdSite
+							? "./assets/css/charts/d3chartstylescbsank.css"
+							: "./assets/css/charts/d3chartstylescbsank-stg.css",
 					],
-					script:
-						document.location.hostname.search(
-							"cbpf.data.unocha.org"
-						) !== -1
-							? "https://cbpfgms.github.io/cbsank/src/d3chartcbsank.js"
-							: "https://cbpfgms.github.io/cbsank/src/d3chartcbsank-stg.js",
+					script: isProdSite
+						? "./assets/js/charts/d3chartcbsank.min.js"
+						: "./assets/js/charts/d3chartcbsank-stg.min.js",
 					container: "#d3chartcontainercbsank",
 				},
 				pbiclc: {
 					styles: [
-						"https://cbpfgms.github.io/css/d3chartstylespbiclc.css",
+						isProdSite
+							? "./assets/css/charts/d3chartstylespbiclc.css"
+							: "./assets/css/charts/d3chartstylespbiclc-stg.css",
 					],
-					script:
-						document.location.hostname.search(
-							"cbpf.data.unocha.org"
-						) !== -1
-							? "https://cbpfgms.github.io/pbiclc/src/d3chartpbiclc.js"
-							: "https://cbpfgms.github.io/pbiclc/src/d3chartpbiclc-stg.js",
+					script: isProdSite
+						? "./assets/js/charts/d3chartpbiclc.min.js"
+						: "./assets/js/charts/d3chartpbiclc-stg.min.js",
 					container: "#d3chartcontainerpbiclc",
 				},
 				pbicli: {
 					styles: [
-						"https://cbpfgms.github.io/css/d3chartstylespbicli.css",
+						isProdSite
+							? "./assets/css/charts/d3chartstylespbicli.css"
+							: "./assets/css/charts/d3chartstylespbicli-stg.css",
 					],
-					script:
-						document.location.hostname.search(
-							"cbpf.data.unocha.org"
-						) !== -1
-							? "https://cbpfgms.github.io/pbicli/src/d3chartpbicli.js"
-							: "https://cbpfgms.github.io/pbicli/src/d3chartpbicli-stg.js",
+					script: isProdSite
+						? "./assets/js/charts/d3chartpbicli.min.js"
+						: "./assets/js/charts/d3chartpbicli-stg.min.js",
 					container: "#d3chartcontainerpbicli",
 				},
 				pbialp: {
 					styles: [
-						"https://cbpfgms.github.io/css/d3chartstylespbialp.css",
+						isProdSite
+							? "./assets/css/charts/d3chartstylespbialp.css"
+							: "./assets/css/charts/d3chartstylespbialp-stg.css",
 					],
-					script:
-						document.location.hostname.search(
-							"cbpf.data.unocha.org"
-						) !== -1
-							? "https://cbpfgms.github.io/pbialp/src/d3chartpbialp.js"
-							: "https://cbpfgms.github.io/pbialp/src/d3chartpbialp-stg.js",
+					script: isProdSite
+						? "./assets/js/charts/d3chartpbialp.min.js"
+						: "./assets/js/charts/d3chartpbialp-stg.min.js",
 					container: "#d3chartcontainerpbialp",
 				},
 				pbifdc: {
 					styles: [
-						"https://cbpfgms.github.io/css/d3chartstylespbifdc.css",
+						isProdSite
+							? "./assets/css/charts/d3chartstylespbifdc.css"
+							: "./assets/css/charts/d3chartstylespbifdc-stg.css",
 					],
-					script:
-						document.location.hostname.search(
-							"cbpf.data.unocha.org"
-						) !== -1
-							? "https://cbpfgms.github.io/pbifdc/src/d3chartpbifdc.js"
-							: "https://cbpfgms.github.io/pbifdc/src/d3chartpbifdc-stg.js",
+					script: isProdSite
+						? "./assets/js/charts/d3chartpbifdc.min.js"
+						: "./assets/js/charts/d3chartpbifdc-stg.min.js",
 					container: "#d3chartcontainerpbifdc",
 				},
 				pbiolc: {
 					styles: [
-						"https://cbpfgms.github.io/css/d3chartstylespbiolc.css",
+						isProdSite
+							? "./assets/css/charts/d3chartstylespbiolc.css"
+							: "./assets/css/charts/d3chartstylespbiolc-stg.css",
 					],
-					script:
-						document.location.hostname.search(
-							"cbpf.data.unocha.org"
-						) !== -1
-							? "https://cbpfgms.github.io/pbiolc/src/d3chartpbiolc.js"
-							: "https://cbpfgms.github.io/pbiolc/src/d3chartpbiolc-stg.js",
+					script: isProdSite
+						? "./assets/js/charts/d3chartpbiolc.min.js"
+						: "./assets/js/charts/d3chartpbiolc-stg.min.js",
 					container: "#d3chartcontainerpbiolc",
 				},
 				pbiobe: {
 					styles: [
-						"https://cbpfgms.github.io/css/d3chartstylespbiobe.css",
+						isProdSite
+							? "./assets/css/charts/d3chartstylespbiobe.css"
+							: "./assets/css/charts/d3chartstylespbiobe-stg.css",
 					],
-					script:
-						document.location.hostname.search(
-							"cbpf.data.unocha.org"
-						) !== -1
-							? "https://cbpfgms.github.io/pbiobe/src/d3chartpbiobe.js"
-							: "https://cbpfgms.github.io/pbiobe/src/d3chartpbiobe-stg.js",
+					script: isProdSite
+						? "./assets/js/charts/d3chartpbiobe.min.js"
+						: "./assets/js/charts/d3chartpbiobe-stg.min.js",
 					container: "#d3chartcontainerpbiobe",
 				},
 				pbiuac: {
 					styles: [
-						"https://cbpfgms.github.io/css/d3chartstylespbiuac.css",
+						isProdSite
+							? "./assets/css/charts/d3chartstylespbiuac.css"
+							: "./assets/css/charts/d3chartstylespbiuac-stg.css",
 					],
-					script:
-						document.location.hostname.search(
-							"cbpf.data.unocha.org"
-						) !== -1
-							? "https://cbpfgms.github.io/pbiuac/src/d3chartpbiuac.js"
-							: "https://cbpfgms.github.io/pbiuac/src/d3chartpbiuac-stg.js",
+					script: isProdSite
+						? "./assets/js/charts/d3chartpbiuac.min.js"
+						: "./assets/js/charts/d3chartpbiuac-stg.min.js",
 					container: "#d3chartcontainerpbiuac",
 				},
 				pbigam: {
 					styles: [
-						"https://cbpfgms.github.io/css/d3chartstylespbigam.css",
+						isProdSite
+							? "./assets/css/charts/d3chartstylespbigam.css"
+							: "./assets/css/charts/d3chartstylespbigam-stg.css",
 					],
-					script:
-						document.location.hostname.search(
-							"cbpf.data.unocha.org"
-						) !== -1
-							? "https://cbpfgms.github.io/pbigam/src/d3chartpbigam.js"
-							: "https://cbpfgms.github.io/pbigam/src/d3chartpbigam-stg.js",
+					script: isProdSite
+						? "./assets/js/charts/d3chartpbigam.min.js"
+						: "./assets/js/charts/d3chartpbigam-stg.min.js",
 					container: "#d3chartcontainerpbigam",
 				},
 				pbinad: {
 					styles: [
-						"https://cbpfgms.github.io/css/d3chartstylespbinad.css",
+						isProdSite
+							? "./assets/css/charts/d3chartstylespbinad.css"
+							: "./assets/css/charts/d3chartstylespbinad-stg.css",
 					],
-					script:
-						document.location.hostname.search(
-							"cbpf.data.unocha.org"
-						) !== -1
-							? "https://cbpfgms.github.io/pbinad/src/d3chartpbinad.js"
-							: "https://cbpfgms.github.io/pbinad/src/d3chartpbinad-stg.js",
+					script: isProdSite
+						? "./assets/js/charts/d3chartpbinad.min.js"
+						: "./assets/js/charts/d3chartpbinad-stg.min.js",
 					container: "#d3chartcontainerpbinad",
 				},
 			};
