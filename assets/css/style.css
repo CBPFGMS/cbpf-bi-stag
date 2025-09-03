@@ -594,12 +594,12 @@ nav[data-toggle=toc] .nav-link.active:hover {
 
 
 /* @media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape) {
-  nav[data-toggle="toc"] {
-    margin-bottom: 20px;
-    position: static;
-    float: none !important;
-    margin-top: 0!important;
-  }
+  nav[data-toggle="toc"] {
+    margin-bottom: 20px;
+    position: static;
+    float: none !important;
+    margin-top: 0!important;
+  }
 } */
 
 @media only screen and (max-device-width: 812px) and (orientation:landscape) {
