@@ -91,10 +91,34 @@
 
     <style>
         .hero-section {
-            background: linear-gradient(135deg, #146eb4 0%, #0d4d7a 100%);
+            position: relative;
             color: white;
-            padding: 80px 0 60px;
+            padding: 120px 0 100px;
             margin-bottom: 50px;
+            overflow: hidden;
+            min-height: 600px;
+        }
+        .hero-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(20, 111, 180, 0.459) 0%, rgba(13, 77, 122, 0.505) 100%);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
         }
         .hero-section h1 {
             font-size: 3.5rem;
@@ -104,6 +128,74 @@
         .hero-section p {
             font-size: 1.4rem;
             opacity: 0.95;
+        }
+        .watch-btn {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background-color: white;
+            color: #146eb4;
+            padding: 12px 24px;
+            border-radius: 5px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .watch-btn:hover {
+            background-color: #146eb4;
+            color: white;
+            text-decoration: none;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+        }
+        .video-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            padding: 60px 20px;
+        }
+        .video-modal-content {
+            position: relative;
+            margin: auto;
+            max-width: 900px;
+            width: 100%;
+        }
+        .close-video {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .close-video:hover {
+            color: #f79a3b;
+        }
+        .responsive-video {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        .responsive-video iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
         .foreword-section {
             background-color: #f8f9fa;
@@ -258,7 +350,25 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
-        <div class="container">
+        <div class="hero-video-bg">
+            <iframe id="hero-video" width="100%" height="100%" 
+                    src="https://www.youtube.com/embed/fWib83LJF1o?autoplay=1&mute=1&loop=1&playlist=fWib83LJF1o&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1" 
+                    frameborder="0" 
+                    allow="autoplay; encrypted-media" 
+                    allowfullscreen
+                    style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); min-width: 100%; min-height: 100%; width: auto; height: auto;">
+            </iframe>
+        </div>
+        <div class="hero-overlay"></div>
+        
+        <a href="#" class="watch-btn" onclick="openVideoModal(); return false;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 5v14l11-7z"/>
+            </svg>
+            Watch Video
+        </a>
+        
+        <div class="container hero-content">
             <div class="row">
                 <div class="col-md-10 offset-md-1 text-center">
                     <h1>2025 CBPF Annual Reports</h1>
@@ -267,6 +377,21 @@
             </div>
         </div>
     </section>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="video-modal">
+        <div class="close-video" onclick="closeVideoModal()">&times;</div>
+        <div class="video-modal-content">
+            <div class="responsive-video">
+                <iframe id="modal-video" 
+                        src="" 
+                        frameborder="0" 
+                        allow="autoplay; encrypted-media" 
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
 
     <!-- Breadcrumb -->
     <div class="container" style="padding-top: 30px; padding-bottom: 30px;">
@@ -556,6 +681,31 @@
                 `;
                 container.appendChild(col);
             });
+        }
+
+        // Video modal functions
+        function openVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const modalVideo = document.getElementById('modal-video');
+            modalVideo.src = 'https://www.youtube.com/embed/fWib83LJF1o?autoplay=1';
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const modalVideo = document.getElementById('modal-video');
+            modal.style.display = 'none';
+            modalVideo.src = '';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('videoModal');
+            if (event.target == modal) {
+                closeVideoModal();
+            }
         }
 
         // Initialize on page load
