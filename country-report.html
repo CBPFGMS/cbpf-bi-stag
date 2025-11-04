@@ -57,6 +57,23 @@
             border-bottom: 3px solid #146eb4;
             padding-bottom: 10px;
         }
+        .introduction-section {
+            padding: 50px 0;
+            margin-bottom: 50px;
+            background-color: #f8f9fa;
+        }
+        .introduction-content {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            line-height: 1.8;
+            font-size: 1.05rem;
+            color: #555;
+        }
+        .introduction-content p {
+            margin-bottom: 0;
+        }
         .impact-stat-card {
             background: linear-gradient(135deg, #146eb4 0%, #0d4d7a 100%);
             color: white;
@@ -310,6 +327,24 @@
         </div>
     </section>
 
+    <!-- Introduction Section -->
+    <section class="introduction-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="section-title">Introduction</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <div class="introduction-content" id="introduction-content">
+                        <p>Loading introduction...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- PDF Viewer Section -->
     <section class="pdf-viewer-section">
         <div class="container">
@@ -546,6 +581,32 @@
             return fund || 'yemen'; // Default to Yemen
         }
 
+        // Load introduction from JSON file
+        function loadIntroduction(countryKey) {
+            fetch('data/fund-introductions.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to load introductions data');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const fundData = data[countryKey];
+                    if (fundData && fundData.introduction) {
+                        const introductionContent = document.getElementById('introduction-content');
+                        introductionContent.innerHTML = '<p>' + fundData.introduction + '</p>';
+                    } else {
+                        document.getElementById('introduction-content').innerHTML = 
+                            '<p>Introduction content not available for this fund.</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading introduction:', error);
+                    document.getElementById('introduction-content').innerHTML = 
+                        '<p>Unable to load introduction content. Please try again later.</p>';
+                });
+        }
+
         // Populate page with country data
         function populateCountryData() {
             const countryKey = getCountryFromURL();
@@ -582,6 +643,9 @@
             document.getElementById('allocations-approved').textContent = '$' + data.allocation + 'M';
             document.getElementById('emergency-reserve').textContent = '$' + emergencyReserve.toFixed(0) + 'M';
             document.getElementById('standard-allocations').textContent = '$' + standardAlloc.toFixed(0) + 'M';
+            
+            // Load introduction from JSON
+            loadIntroduction(countryKey);
         }
 
         // Initialize page
