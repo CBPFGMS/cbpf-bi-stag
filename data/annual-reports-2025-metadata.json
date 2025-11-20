@@ -1,0 +1,26 @@
+{
+  "report": {
+    "title": "2025 CBPF Annual Reports",
+    "subtitle": "Delivering Hope and Recovery to Millions Across 23 Humanitarian Crises",
+    "year": 2025
+  },
+  "keyMetrics": {
+    "totalFundsAllocated": {
+      "value": "$2.8B+",
+      "description": "The total amount of humanitarian funding distributed through Country-Based Pooled Funds (CBPF) mechanisms in 2025, representing direct financial support for life-saving and recovery interventions"
+    },
+    "totalContributed": {
+      "value": "58M+",
+      "description": "The total number of contributions and donations made to humanitarian assistance through CBPF allocations, representing the collective support from donors and partners in 2025"
+    },
+    "cbpfOperations": {
+      "value": 23,
+      "description": "Number of active Country-Based Pooled Fund operations worldwide"
+    }
+  },
+  "coverPhoto": {
+    "url": "https://img.youtube.com/vi/fWib83LJF1o/maxresdefault.jpg",
+    "alt": "CBPF Humanitarian Operations 2025",
+    "description": "Representative image from the 2025 CBPF Annual Reports video"
+  }
+}

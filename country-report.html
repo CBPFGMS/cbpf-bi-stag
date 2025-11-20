@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title id="page-title">Country Report | CBPF</title>
+    <title id="page-title">Country and Regional Funds Annual Report | CBPF</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
@@ -80,15 +80,31 @@
             padding: 30px 20px;
             border-radius: 8px;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 160px;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
         }
         .impact-stat-card h3 {
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60px;
         }
         .impact-stat-card p {
             font-size: 1rem;
             opacity: 0.95;
+        }
+        .impact-stat-card * {
+            border: none !important;
+            outline: none !important;
         }
         .contributions-section {
             background-color: #f8f9fa;
@@ -277,7 +293,7 @@
                 <div class="col-md-10 offset-md-1">
                     <h1 id="country-name">Country Name</h1>
                     <div class="download-link">
-                        <a href="#" id="download-report-link" class="download-btn">📥 Download Full Report (PDF)</a>
+                        <a href="#" id="download-report-link" class="download-btn">Download Full Report (PDF)</a>
                         <p style="margin-top: 15px; font-size: 0.95rem; opacity: 0.9;">
                             <a href="https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29" target="_blank" rel="noopener" style="color: white; text-decoration: underline;">View previous years' annual reports →</a>
                         </p>
@@ -313,8 +329,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="impact-stat-card">
-                        <h3 id="people-reached">0M</h3>
-                        <p>People Reached</p>
+                        <h3 id="total-contributed">0M</h3>
+                        <p>Total Contributed</p>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -332,7 +348,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h2 class="section-title">Introduction</h2>
+                    <h2 class="section-title">Executive Summary</h2>
                 </div>
             </div>
             <div class="row">
@@ -345,87 +361,24 @@
         </div>
     </section>
 
-    <!-- PDF Viewer Section -->
-    <section class="pdf-viewer-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="pdf-viewer-container">
-                        <div class="pdf-viewer-header">
-                            <h3 id="pdf-report-title">DRC Humanitarian Fund Annual Report 2024</h3>
-                            <a href="assets/DRC_CBPF_Annual_Report_2024_Final.pdf" 
-                               class="pdf-download-link" 
-                               target="_blank" 
-                               download>📥 Download Report</a>
-                        </div>
-                        <iframe class="pdf-iframe" 
-                                src="assets/DRC_CBPF_Annual_Report_2024_Final.pdf#toolbar=1"
-                                frameborder="0">
-                            <p>Your browser does not support iframes. 
-                            <a href="assets/DRC_CBPF_Annual_Report_2024_Final.pdf" 
-                               target="_blank">Click here to view the report</a></p>
-                        </iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Total Contributions and Allocations -->
     <section class="contributions-section">
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h2 class="section-title">Total Contributions and Allocations</h2>
+                    <h2 class="section-title">Localization</h2>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="stat-box">
-                        <h4>Contributions Received</h4>
+                        <h4>RESERVED FOR LOCALIZATION VISUAL (TO BE BRAINSTORMED BY CBPF PU)</h4>
                         <div class="stat-value" id="contributions-received">$0M</div>
                         <div class="stat-label">Total funding received from donors</div>
                     </div>
                 </div>
             </div>
-            
-            <!-- Contribution Flow Visualization -->
-            <div class="row">
-                <div class="col-12" style="margin-top: 40px; padding: 20px; background: white; border-radius: 8px;">
-                    <div id="d3chartcontainerpbiclc" 
-                         data-year="2025" 
-                         data-contribution="paid" 
-                         data-responsive="true" 
-                         data-lazyload="true">
-                    </div>
-                </div>
-            </div>
-            <br>
-            <!-- Allocation Stat Cards -->
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="stat-box">
-                        <h4>Allocations Approved</h4>
-                        <div class="stat-value" id="allocations-approved">$0M</div>
-                        <div class="stat-label">Total allocations to implementing partners</div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="stat-box">
-                        <h4>Reserve Allocations</h4>
-                        <div class="stat-value" id="emergency-reserve">$0M</div>
-                        <div class="stat-label">Response to rapid-onset emergencies</div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="stat-box">
-                        <h4>Standard Allocations</h4>
-                        <div class="stat-value" id="standard-allocations">$0M</div>
-                        <div class="stat-label">Strategic multi-sectoral interventions</div>
-                    </div>
-                </div>
-            </div>
-            <br>
+
             <!-- Allocation Flow Visualization -->
             <div class="row">
                 <div class="col-12" style="margin-top: 40px; padding: 20px; background: white; border-radius: 8px;">
@@ -456,20 +409,8 @@
             <div class="row">
                 <div class="col-md-12" id="lessons-content">
                     <div class="lesson-card">
-                        <h4>Effective Coordination and Partnerships</h4>
-                        <p>Close collaboration between the Humanitarian Coordinator, UN agencies, and NGOs ensured that CBPF resources were allocated strategically to address priority humanitarian needs while strengthening the humanitarian coordination architecture.</p>
-                    </div>
-                    <div class="lesson-card">
-                        <h4>Localization and Capacity Building</h4>
-                        <p>Strong emphasis on supporting national and local NGOs through CBPF funding has contributed to building sustainable humanitarian capacity at the country level, enabling more effective and contextualized response to affected communities.</p>
-                    </div>
-                    <div class="lesson-card">
-                        <h4>Flexibility in Response</h4>
-                        <p>The emergency reserve mechanism demonstrated its critical value in enabling rapid response to sudden-onset crises and emerging needs, often reaching affected populations within days of approval.</p>
-                    </div>
-                    <div class="lesson-card">
-                        <h4>Multi-Sectoral Approach</h4>
-                        <p>Allocating CBPF resources across multiple sectors (health, food security, protection, shelter, WASH, education) ensured a comprehensive humanitarian response that addressed the diverse needs of affected populations.</p>
+                        <h4>Loading Lessons Learned...</h4>
+                        <p>Please wait while we load the country-specific lessons learned.</p>
                     </div>
                 </div>
             </div>
@@ -533,10 +474,6 @@
   		</div>
 	</footer>
 
-    <!-- SVG Icons -->
-    <div style="display:none;">
-		<svg class="icons-sprite" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><symbol viewBox="0 0 48 48" id="arrow-down" xmlns="http://্বwww.w3.org/2000/svg"><path d="M48 14a4 4 0 0 1-1.17 2.83l-20 20a4 4 0 0 1-5.66 0l-20-20a4 4 0 0 1 5.66-5.66L24 28.34l17.17-17.17A4 4 0 0 1 48 14z"></path></symbol><symbol viewBox="0 0 48 48" id="sm-tt-def" xmlns="http://www.w3.org/2000/svg"><path d="M24 5A19 19 0 1 1 5 24 19 19 0 0 1 24 5m0-3a22 22 0 1 0 22 22A22 22 0 0 0 24 2z"></path><path d="M36 16.56a9.83 9.83 0 0 1-2.83.78 4.94 4.94 0 0 0 2.16-2.72 9.社群 9.84 0 0 1-3.13 1.19 4.93 4.93 0 0 0-8.52 3.37 5 5 0 0 0 .13 1.12 14 14 0 0 1-10.15-5.14 4.93 4.93 0 0 0 1.52 6.57 4.9 4.9 0 0 1-2.18-.62v.06A4.93 4.93 0 0 0 16.91 26a4.9 4.9 그 0 0 1-1.3.17 5 5 0 0 1-.93-.09 4.93 4.93 0 0 0 4.6 3.42 9.91 9.91 0 0 1-7.29 2 寒14 14 0 0 0 21.57-11.76v-.64A10 10 0 0 0 36 16.56z"></path></symbol><symbol viewBox="0 0 48 48" id="sm-tt-full" xmlns="http://www.w3.org/2000/svg"><path d="M24 2a22 22 0 1 0 22 22A22 22 0 0 0 24 2zm9.54 17.11v.64A14 14 0 0 1 12 31.54a9.92 9.92 0 0 0 7.29-2 4.93 4.93 0 0 1-4.6-3.42 5 5 0 0 0 .93.09 4.9 4.9 0 0 0 1.3-.17A4.93 4.93 0 0 1 13 21.17v-.06a4.9 4.9 0 0 0 2.23.62 4.93 4.93 0 0 1-1.52-6.57 14 14 0 0 0 10.15 5.14 5 5 0 0 1-.13-1.12 4.93 4.93 0 0 1 8.52-3.37 9.83 9.83 0 0 0 3.13-1.19 4.94 4.94 0 0 1-2.16 2.72 9.83 9.83 0 0 0 2.78-.78 10 10  avoided 0 1-2.46 2.55z"></path></symbol><symbol viewBox="0 0 48 48" id="sm-yt-def" xmlns="http://www.w3.org/2000/svg"><path d="M32.58 16.83c-1.72-.45-8.59-.45-8.59-.45s-6.75 0-8.46.42a3 3 0 0 0-2.11 2A26.77 26.77 0 0 0 13 24a26.77 26.77 0 0 0 .42 5.24 3 3 0 0 0 2.11 2c1.72.46 8.46.42 8.46.42s6.75 0 8.46-.42a3 3 0 0 0 2.08-2A27.91 27.91 0 0 0 35 24a28.42 28.42 0 0 0-.47-5.24 2.74 2.74 0 0 0-1.95-1.93zM21.26 27.38v-6.握住76L26.74 24z"></path><path d="M24 2a22 22 0 1 0 22 22A22 22 0 0 0 24 2zm0 41a19 19 0 1 1 19-19 19 19 0 0 1-19 19z"></path></symbol><symbol viewBox="0 0 48 48" id="sm-yt-full" xmlns="http://www.w3.org/2000/svg"><path d="M24 2a22 22 0 1 0 22 22A22 22 0 0 0 24 2zm10.54 27.24a3 3 0 0 1-2.08 2c-1.72.45-8.46.42-8.46.42s-6.75 0-8.46-.42a3 3 0 0 1-2.11-2A26.77 26.77 0 0 1 13 24a26.77 26.77 0 0 1 .42-5.24 3 3 0 0 1 2.11-2c1.72-.45 8.46-.42 8.46-.42s6.87 0 8.59.45a2.74 2.74 0 0 1 1.94 1.93A28.42 28.42 0 0 1 35 24a27.91 27.91 0 0 1-.46 5.24z"></path><path d="M21.25 27.38l5.5-3.38-5.5-3.38v6.76z"></path류></symbol><symbol viewBox="0 0 32 32" id="creative-commons" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M15.886 28. adelphi-7.159.009-12.857-5.804-12.884-12.802C2.975 9.069 8.849 3.104 15. مواد04uckedunction: 285c6.356-.152 12. потребуется975 12.829 12.839.035 7.721-6.201 12.836-12.847 12.844zM15.907.254C6.554.198.034 8.091 0 16.082-.036 24.585 6.961 32.009 15.827 32c8.53-.009 15.954-6.753 15.885-15.803.111-8.79-6.935-15.89-15.805-15.943z"></path><path fill="#fff" d="M25.263 18.406c-.958 1.921-3.394 2.767-5.132 2.632-4.489-.347-5.501-3.918-4.747-6.567.701-2.462 3.115-3.831 6.002-3.466 1.667.21 2.961.886 3.863 2.334l-2.382 1.157c-.165-.166-.288-.268-.381-.388-.535-.7-1.25-.982-2.19-.822-.93.158-1.479.714-1.589 1.482a8.264 8.264 0 0 0 .039 2.482c.126.777.707 1.336 1.62 1.462.99.137 1.856-.059 2. thì-.931.065-.108.161-.201.309-.382l2.208 1.007z"></path><path fill="#fff" d="M16.842 13.347l-2.391 1.138c-.156-.15-.304-.262-.412-.4-.545-.698-1.269-.964-2.203-.797-.888.159-1.44.687-1外541 1.432a8.907 8.907 0 0 0 .03 2.557c.122.784.725 1.323 1.637 1.444.956.126 1.8-.056 2.326-.887.081-.128.193-.241.346-.43l2.206 1.014c-.357.81-.978 1.311-1.659 1.759-2.518 1.661-6.749.909-7.962-1.851-1.013-2.305-.422-5.145 1.656-6.505 2.136-1.398 5.664-1.088 7.33.691.212.226.376.49.636.834z"></path></symbol></svg>
-    </div>
 
     <script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/bootstrap-dropdown.js"></script>
@@ -547,38 +484,45 @@
     <script src="https://cbpfgms.github.io/pbiclc/src/d3chartpbiclc.js"></script>
 
     <script>
-        // Country data mapping
-        const countryData = {
-            'afghanistan': { name: 'Afghanistan', allocation: 245, people: 5.2, projects: 145 },
-            'burkina-faso': { name: 'Burkina Faso (RhPF-WCA)', allocation: 38, people: 0.85, projects: 68 },
-            'car': { name: 'Central African Republic', allocation: 42, people: 1.2, projects: 92 },
-            'chad': { name: 'Chad (RhPF-WCA)', allocation: 52, people: 2.1, projects: 75 },
-            'drc': { name: 'Democratic Republic of Congo', allocation: 185, people: 6.8, projects: 210 },
-            'ethiopia': { name: 'Ethiopia', allocation: 125, people: 4.2, projects: 158 },
-            'haiti': { name: 'Haiti (RhPF-LAC)', allocation: 28, people: 0.65, projects: 52 },
-            'lebanon': { name: 'Lebanon', allocation: 68, people: 1.8, projects: 95 },
-            'mali': { name: 'Mali (RhPF-WCA)', allocation: 45, people: 1.1, projects: 78 },
-            'mozambique': { name: 'Mozambique (RhPF)', allocation: 32, people: 0.92, projects: 64 },
-            'myanmar': { name: 'Myanmar', allocation: 165, people: 5.8, projects: 195 },
-            'niger': { name: 'Niger (RhPF-WCA)', allocation: 48, people: 1.4, projects: 81 },
-            'nigeria': { name: 'Nigeria', allocation: 95, people: 3.2, projects: 125 },
-            'opt': { name: 'Occupied Palestinian Territory', allocation: 142, people: 2.1, projects: 165 },
-            'pakistan': { name: 'Pakistan (AP-RHPF)', allocation: 58, people: 1.75, projects: 88 },
-            'somalia': { name: 'Somalia', allocation: 158, people: 3.9, projects: 175 },
-            'south-sudan': { name: 'South Sudan', allocation: 192, people: 6.1, projects: 200 },
-            'sudan': { name: 'Sudan', allocation: 245, people: 7.2, projects: 235 },
-            'syria': { name: 'Syria', allocation: 135, people: 3.4, projects: 165 },
-            'syria-crossborder': { name: 'Syria Cross-border', allocation: 112, people: 2.8, projects: 145 },
-            'ukraine': { name: 'Ukraine', allocation: 195, people: 8.1, projects: 220 },
-            'venezuela': { name: 'Venezuela', allocation: 42, people: 1.5, projects: 78 },
-            'yemen': { name: 'Yemen', allocation: 268, people: 9.5, projects: 285 }
-        };
+        // Country data mapping - loaded from JSON
+        let countryData = {};
 
         // Get country from URL parameter
         function getCountryFromURL() {
             const urlParams = new URLSearchParams(window.location.search);
             const fund = urlParams.get('fund');
             return fund || 'yemen'; // Default to Yemen
+        }
+
+        // Load country data from JSON
+        function loadCountryData() {
+            return fetch('data/cbpf-funds-details.json')
+                .then(response => response.json())
+                .then(data => {
+                    // Transform JSON data into expected format
+                    const transformedData = {};
+                    data.funds.forEach(fund => {
+                        const key = fund.countryReportLink.split('=')[1]; // Extract fund key from link
+                        transformedData[key] = {
+                            name: fund.name,
+                            allocation: parseInt(fund.impact2025.totalAllocated.replace('$', '').replace('M', '')),
+                            contributed: parseFloat(fund.impact2025.totalContributed.replace('M', '').replace('K', '')) * (fund.impact2025.totalContributed.includes('K') ? 0.001 : 1),
+                            projects: fund.impact2025.projectsFunded,
+                            reportDownloadUrl: fund.reportDownloadUrl,
+                            previousReportsUrl: fund.previousReportsUrl
+                        };
+                    });
+                    countryData = transformedData;
+                    return transformedData;
+                })
+                .catch(error => {
+                    console.error('Error loading country data:', error);
+                    // Fallback to basic data structure if JSON fails
+                    countryData = {
+                        'yemen': { name: 'Yemen', allocation: 268, contributed: 9.5, projects: 285 }
+                    };
+                    return countryData;
+                });
         }
 
         // Load introduction from JSON file
@@ -596,14 +540,46 @@
                         const introductionContent = document.getElementById('introduction-content');
                         introductionContent.innerHTML = '<p>' + fundData.introduction + '</p>';
                     } else {
-                        document.getElementById('introduction-content').innerHTML = 
+                        document.getElementById('introduction-content').innerHTML =
                             '<p>Introduction content not available for this fund.</p>';
                     }
                 })
                 .catch(error => {
                     console.error('Error loading introduction:', error);
-                    document.getElementById('introduction-content').innerHTML = 
+                    document.getElementById('introduction-content').innerHTML =
                         '<p>Unable to load introduction content. Please try again later.</p>';
+                });
+        }
+
+        // Load lessons learned from JSON file
+        function loadLessonsLearned(countryKey) {
+            fetch('data/lessons-learned.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to load lessons learned data');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const lessonsData = data.lessonsByCountry[countryKey];
+                    if (lessonsData && lessonsData.length > 0) {
+                        const lessonsContent = document.getElementById('lessons-content');
+                        const lessonsHTML = lessonsData.map(lesson => `
+                            <div class="lesson-card">
+                                <h4>${lesson.title}</h4>
+                                <p>${lesson.content}</p>
+                            </div>
+                        `).join('');
+                        lessonsContent.innerHTML = lessonsHTML;
+                    } else {
+                        document.getElementById('lessons-content').innerHTML =
+                            '<div class="lesson-card"><h4>Lessons Learned</h4><p>Lessons learned content not available for this fund.</p></div>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading lessons learned:', error);
+                    document.getElementById('lessons-content').innerHTML =
+                        '<div class="lesson-card"><h4>Lessons Learned</h4><p>Unable to load lessons learned content. Please try again later.</p></div>';
                 });
         }
 
@@ -611,7 +587,7 @@
         function populateCountryData() {
             const countryKey = getCountryFromURL();
             const data = countryData[countryKey];
-            
+
             if (!data) {
                 console.error('Country data not found for:', countryKey);
                 return;
@@ -619,44 +595,53 @@
 
             // Update page title
             document.getElementById('page-title').textContent = data.name + ' CBPF Report 2025 | CBPF';
-            
+
             // Update heading
             document.getElementById('country-name').textContent = data.name + ' CBPF';
-            
+
             // Update breadcrumb
             document.getElementById('breadcrumb-country').textContent = data.name + ' Report';
-            
-            // Update download link
-            document.getElementById('download-report-link').href = 'https://www.unocha.org/country-based-pooled-funds-annual-reports';
-            
+
+            // Update download link with data from JSON
+            document.getElementById('download-report-link').href = data.reportDownloadUrl || 'https://www.unocha.org/country-based-pooled-funds-annual-reports';
+
+            // Update previous reports link
+            const previousLink = document.querySelector('.download-link p a');
+            if (previousLink && data.previousReportsUrl) {
+                previousLink.href = data.previousReportsUrl;
+            }
+
             // Update impact stats
             document.getElementById('total-allocated').textContent = '$' + data.allocation + 'M';
-            document.getElementById('people-reached').textContent = data.people + 'M';
+            document.getElementById('total-contributed').textContent = data.contributed + 'M';
             document.getElementById('total-projects').textContent = data.projects;
-            
+
             // Placeholder values for contributions (can be customized per country)
             const contributions = data.allocation * 1.05; // Slightly higher than allocations
             const emergencyReserve = data.allocation * 0.25;
             const standardAlloc = data.allocation * 0.75;
-            
+
             document.getElementById('contributions-received').textContent = '$' + contributions.toFixed(0) + 'M';
-            document.getElementById('allocations-approved').textContent = '$' + data.allocation + 'M';
-            document.getElementById('emergency-reserve').textContent = '$' + emergencyReserve.toFixed(0) + 'M';
-            document.getElementById('standard-allocations').textContent = '$' + standardAlloc.toFixed(0) + 'M';
-            
-            // Load introduction from JSON
+
+            // Load introduction and lessons learned from JSON
             loadIntroduction(countryKey);
+            loadLessonsLearned(countryKey);
         }
 
         // Initialize page
         $(document).ready(function(){
-            populateCountryData();
-            
+            loadCountryData().then(() => {
+                populateCountryData();
+            }).catch(() => {
+                // Fallback if loading fails
+                populateCountryData();
+            });
+
             // OCHA Services dropdown
             $(".cd-ocha-btn").click(function(){
                 $(".cd-dropdown").toggle();
             });
-            
+
             $(window).on('click', function () {
                 $('#cd-ocha-dropdown').css('display','none');
             });

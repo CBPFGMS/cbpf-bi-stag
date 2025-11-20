@@ -1,0 +1,195 @@
+{
+  "metadata": {
+    "title": "CBPF Country Reports 2025",
+    "description": "List of Country-Based Pooled Fund operations with allocation amounts and contribution metrics",
+    "year": 2025,
+    "totalFunds": 2800000000,
+    "totalOperations": 23
+  },
+  "countries": [
+    {
+      "name": "Afghanistan",
+      "allocation": 245000000,
+      "contributed": 5200000,
+      "link": "country-report.html?fund=afghanistan",
+      "region": "Asia",
+      "coverImage": "https://www.unocha.org/sites/default/files/styles/small/public/previews/20/2e/202eff16-e89b-4ec8-93d7-5a3f393c5c7d.png?2644436-1-0?2644436-1-0"
+    },
+    {
+      "name": "Burkina Faso (RhP)",
+      "allocation": 38000000,
+      "contributed": 850000,
+      "link": "country-report.html?fund=burkina-faso",
+      "region": "West and Central Africa",
+      "coverImage": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format"
+    },
+    {
+      "name": "CAR",
+      "allocation": 42000000,
+      "contributed": 1200000,
+      "link": "country-report.html?fund=car",
+      "region": "West and Central Africa",
+      "coverImage": "https://www.unocha.org/sites/default/files/styles/small/public/previews/bf/b0/bfb02821-193e-4f26-8575-5330d6483b76.png?2642311-1-0?2642311-1-0"
+    },
+    {
+      "name": "Chad (RhPF)",
+      "allocation": 52000000,
+      "contributed": 2100000,
+      "link": "country-report.html?fund=chad",
+      "region": "West and Central Africa",
+      "coverImage": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format"
+    },
+    {
+      "name": "DRC",
+      "allocation": 185000000,
+      "contributed": 6800000,
+      "link": "country-report.html?fund=drc",
+      "region": "West and Central Africa",
+      "coverImage": "https://www.unocha.org/sites/default/files/styles/small/public/previews/52/83/528325f5-6b17-4ff6-8b88-11d25ae8d51d.png?2638905-1-0?2638905-1-0"
+    },
+    {
+      "name": "Ethiopia",
+      "allocation": 125000000,
+      "contributed": 4200000,
+      "link": "country-report.html?fund=ethiopia",
+      "region": "East and Southern Africa",
+      "coverImage": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format"
+    },
+    {
+      "name": "Haiti (RhPF)",
+      "allocation": 28000000,
+      "contributed": 650000,
+      "link": "country-report.html?fund=haiti",
+      "region": "Latin America and Caribbean",
+      "coverImage": ""
+    },
+    {
+      "name": "Lebanon",
+      "allocation": 68000000,
+      "contributed": 1800000,
+      "link": "country-report.html?fund=lebanon",
+      "region": "Middle East",
+      "coverImage": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format"
+    },
+    {
+      "name": "Mali (RhPF)",
+      "allocation": 45000000,
+      "contributed": 1100000,
+      "link": "country-report.html?fund=mali",
+      "region": "West and Central Africa",
+      "coverImage": ""
+    },
+    {
+      "name": "Mozambique (RhPF)",
+      "allocation": 32000000,
+      "contributed": 920000,
+      "link": "country-report.html?fund=mozambique",
+      "region": "East and Southern Africa",
+      "coverImage": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format"
+    },
+    {
+      "name": "Myanmar",
+      "allocation": 165000000,
+      "contributed": 5800000,
+      "link": "country-report.html?fund=myanmar",
+      "region": "Asia",
+      "coverImage": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format"
+    },
+    {
+      "name": "Niger (RhPF)",
+      "allocation": 48000000,
+      "contributed": 1400000,
+      "link": "country-report.html?fund=niger",
+      "region": "West and Central Africa",
+      "coverImage": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format"
+    },
+    {
+      "name": "Nigeria",
+      "allocation": 95000000,
+      "contributed": 3200000,
+      "link": "country-report.html?fund=nigeria",
+      "region": "West and Central Africa",
+      "coverImage": ""
+    },
+    {
+      "name": "oPt",
+      "allocation": 142000000,
+      "contributed": 2100000,
+      "link": "country-report.html?fund=opt",
+      "region": "Middle East",
+      "coverImage": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format"
+    },
+    {
+      "name": "Pakistan (AP-RHPF)",
+      "allocation": 58000000,
+      "contributed": 1750000,
+      "link": "country-report.html?fund=pakistan",
+      "region": "Asia",
+      "coverImage": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format"
+    },
+    {
+      "name": "Somalia",
+      "allocation": 158000000,
+      "contributed": 3900000,
+      "link": "country-report.html?fund=somalia",
+      "region": "East and Southern Africa",
+      "coverImage": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format"
+    },
+    {
+      "name": "South Sudan",
+      "allocation": 192000000,
+      "contributed": 6100000,
+      "link": "country-report.html?fund=south-sudan",
+      "region": "East and Southern Africa",
+      "coverImage": ""
+    },
+    {
+      "name": "Sudan",
+      "allocation": 245000000,
+      "contributed": 7200000,
+      "link": "country-report.html?fund=sudan",
+      "region": "East and Southern Africa",
+      "coverImage": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format"
+    },
+    {
+      "name": "Syria",
+      "allocation": 135000000,
+      "contributed": 3400000,
+      "link": "country-report.html?fund=syria",
+      "region": "Middle East",
+      "coverImage": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format"
+    },
+    {
+      "name": "Syria Cross border",
+      "allocation": 112000000,
+      "contributed": 2800000,
+      "link": "country-report.html?fund=syria-crossborder",
+      "region": "Middle East",
+      "coverImage": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format"
+    },
+    {
+      "name": "Ukraine",
+      "allocation": 195000000,
+      "contributed": 8100000,
+      "link": "country-report.html?fund=ukraine",
+      "region": "Europe",
+      "coverImage": ""
+    },
+    {
+      "name": "Venezuela",
+      "allocation": 42000000,
+      "contributed": 1500000,
+      "link": "country-report.html?fund=venezuela",
+      "region": "Latin America and Caribbean",
+      "coverImage": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format"
+    },
+    {
+      "name": "Yemen",
+      "allocation": 268000000,
+      "contributed": 9500000,
+      "link": "country-report.html?fund=yemen",
+      "region": "Middle East",
+      "coverImage": "https://www.unocha.org/sites/default/files/styles/small/public/previews/e8/12/e812d8f8-e5de-49a8-a83b-6dcc85e094d6.png?2659876-1-0?2659876-1-0"
+    }
+  ]
+}

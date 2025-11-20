@@ -212,10 +212,26 @@
         }
         .highlight-card {
             border-left: 4px solid #146eb4;
-            padding: 25px;
+            padding: 25px 25px 25px 80px;
             margin-bottom: 25px;
             background-color: #f8f9fa;
             transition: all 0.3s ease;
+            position: relative;
+        }
+        .highlight-icon {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            width: 32px;
+            height: 32px;
+            background-color: #146eb4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            z-index: 1;
         }
         .highlight-card:hover {
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
@@ -229,12 +245,31 @@
         }
         .impact-stat {
             text-align: center;
-            padding: 20px;
+            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            margin: 10px;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 160px;
+        }
+        .impact-stat * {
+            border: none !important;
+            outline: none !important;
         }
         .impact-stat h3 {
             font-size: 3rem;
             font-weight: 700;
             margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60px;
         }
         .impact-stat p {
             font-size: 1.1rem;
@@ -290,9 +325,9 @@
             background: white;
             border: 1px solid #e0e0e0;
             border-radius: 8px;
-            padding: 25px;
             margin-bottom: 25px;
             transition: all 0.3s ease;
+            overflow: hidden;
         }
         .fund-card:hover {
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
@@ -328,6 +363,64 @@
         }
         .fund-link a:hover {
             text-decoration: underline;
+        }
+        .fund-report-image {
+            position: relative;
+            margin-bottom: 15px;
+            width: 218px;
+            height: 309px;
+            margin: 15px auto 15px auto;
+        }
+        .fund-report-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px 4px 0 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .report-year {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+            z-index: 1;
+        }
+        .fund-content {
+            padding: 15px 20px 20px;
+        }
+        .footnotes-section {
+            background-color: #f8f9fa;
+            padding: 30px 0;
+            margin-bottom: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+        .footnotes-section h3 {
+            color: #146eb4;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+        .footnote-item {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        .footnote-asterisk {
+            color: #146eb4;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        .fund-stat-label[title], p[title] {
+            cursor: help;
+            border-bottom: 1px dotted #999;
+        }
+        .fund-stat-label[title]:hover, p[title]:hover {
+            color: #146eb4;
         }
         .section-title {
             color: #146eb4;
@@ -407,7 +500,7 @@
             <div class="row">
                 <div class="col-md-10 offset-md-1">
                     <h2>Foreword</h2>
-                    <p class="lead">The year 2025 marked a pivotal moment in humanitarian response, as Country-Based Pooled Funds (CBPFs) continued to demonstrate their critical role in delivering timely, coordinated, and principled assistance to millions of people affected by crises worldwide.</p>
+                    <p class="lead">the forward section of the webpage could serve multiple purposes, such as a traditional forward, a summary, or even a video recording, and recommended keeping this section flexible to accommodate future decisions.</p>
                     <p>These annual reports capture the collective efforts of humanitarian actors across 23 CBPF operations, showcasing how flexible, rapid funding has enabled life-saving interventions and long-term recovery in some of the world's most challenging environments. From providing essential services to displaced communities to supporting local resilience, this report highlights the tangible impact of CBPF investments in human dignity and hope.</p>
                     <p>As we present these comprehensive reports, we acknowledge the valuable contributions of our donors, partners, and implementing organizations whose dedication makes these achievements possible.</p>
                 </div>
@@ -426,12 +519,14 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="highlight-card">
+                        <div class="highlight-icon">⚡</div>
                         <h4><strong>Flexible Funding for Rapid Response</strong></h4>
                         <p>CBPFs continued to prove their effectiveness in enabling humanitarian actors to respond quickly to emerging needs, with the majority of allocations processed within 72 hours of approval.</p>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="highlight-card">
+                        <div class="highlight-icon">👥</div>
                         <h4><strong>Strengthening Local Capacity</strong></h4>
                         <p>Over 40% of CBPF partners were national NGOs, demonstrating a strong commitment to localization and strengthening humanitarian capacity at the country level.</p>
                     </div>
@@ -440,12 +535,14 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="highlight-card">
+                        <div class="highlight-icon">🎯</div>
                         <h4><strong>Multi-Sectoral Impact</strong></h4>
                         <p>CBPF allocations supported critical interventions across all humanitarian clusters, with particular emphasis on health, food security, shelter, and protection activities.</p>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="highlight-card">
+                        <div class="highlight-icon">⚖️</div>
                         <h4><strong>Gender-Responsive Programming</strong></h4>
                         <p>All CBPFs integrated gender mainstreaming across portfolio allocations, ensuring that the specific needs and capacities of women, girls, and other vulnerable groups were prioritized.</p>
                     </div>
@@ -466,13 +563,13 @@
                 <div class="col-md-4">
                     <div class="impact-stat">
                         <h3>$2.8B+</h3>
-                        <p>Total Funds Allocated</p>
+                        <p title="The total amount of humanitarian funding distributed through Country-Based Pooled Funds (CBPF) mechanisms in 2025, representing direct financial support for life-saving and recovery interventions">Total Funds Allocated*</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="impact-stat">
                         <h3>58M+</h3>
-                        <p>People Reached</p>
+                        <p title="The total number of contributions and donations made to humanitarian assistance through CBPF allocations, representing the collective support from donors and partners in 2025">Total Contributed*</p>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -497,39 +594,36 @@
                 <div class="col-md-4">
                     <div class="story-card">
                         <div class="story-image">
-                            [Image Placeholder]<br/>
-                            <span style="font-size: 0.9rem;">Healthcare and Shelter Support</span>
+                            <img src="https://reliefweb.int/sites/default/files/styles/large/public/images/reports/d7/b8/d7b83f65-bf4b-4413-af75-df2a49deb227.jpg.webp" alt="Mother and children receiving healthcare support in Nigeria" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
                         <div class="story-content">
-                            <h4>Restoring Healthcare in Conflict Zones</h4>
-                            <p>The CBPF in Yemen supported mobile health clinics that reached over 850,000 people in hard-to-reach areas, providing critical primary healthcare services and essential medicines to vulnerable communities.</p>
-                            <div class="story-fund"><strong>Yemen CBPF</strong></div>
+                            <h4><a href="https://reliefweb.int/report/nigeria/mothers-gratitude-their-appetite-came-back-they-started-playing-again" target="_blank" style="color: #146eb4; text-decoration: none;">A mother's gratitude: 'Their appetite came back … they started playing again'</a></h4>
+                            <p>Through the Nigeria Humanitarian Fund, a young mother and her daughters received life-saving treatment for severe acute malnutrition and anaemia at an IRC-run stabilization centre, giving them a second chance at life.</p>
+                            <div class="story-fund"><strong>Nigeria Humanitarian Fund</strong></div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="story-card">
                         <div class="story-image">
-                            [Image Placeholder]<br/>
-                            <span style="font-size: 0.9rem;">Education and Protection</span>
+                            <img src="https://reliefweb.int/sites/default/files/styles/large/public/images/reports/94/6a/946ad886-32c4-446e-a69a-f2e6f93b6566.webp.webp" alt="Somali woman standing proudly in her grocery stall" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
                         <div class="story-content">
-                            <h4>Keeping Children Safe and Learning</h4>
-                            <p>Through the South Sudan CBPF, safe learning spaces were established for 125,000 children, combining education with child protection services and psychosocial support in displacement camps.</p>
-                            <div class="story-fund"><strong>South Sudan CBPF</strong></div>
+                            <h4><a href="https://reliefweb.int/report/somalia/it-was-small-it-was-mine-somali-womans-journey-surviving-thriving" target="_blank" style="color: #146eb4; text-decoration: none;">'It was small, but it was mine': A Somali woman's journey from surviving to thriving</a></h4>
+                            <p>After losing everything to Somalia's worst drought in decades, Xaawo used funding from the Somalia Humanitarian Fund to start her own grocery store through a cash-for-work program, rebuilding her life and creating jobs for others.</p>
+                            <div class="story-fund"><strong>Somalia Humanitarian Fund</strong></div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="story-card">
                         <div class="story-image">
-                            [Image Placeholder]<br/>
-                            <span style="font-size: 0.9rem;">Food Security and Livelihoods</span>
+                            <img src="https://reliefweb.int/sites/default/files/styles/large/public/images/reports/ed/a3/eda3e475-9c82-4402-934b-cb87a3401620.jpg.webp" alt="Landmine survivor with prosthetic leg in Myanmar" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
                         <div class="story-content">
-                            <h4>Building Resilience Through Agriculture</h4>
-                            <p>The Central African Republic CBPF funded programs that trained 18,000 farmers in climate-resilient techniques, improving food security for over 90,000 people in rural communities.</p>
-                            <div class="story-fund"><strong>CAR CBPF</strong></div>
+                            <h4><a href="https://reliefweb.int/report/myanmar/myanmar-humanitarian-fund-provides-essential-support-landmine-survivors" target="_blank" style="color: #146eb4; text-decoration: none;">Myanmar Humanitarian Fund provides essential support to landmine survivors</a></h4>
+                            <p>With funding from the Myanmar Humanitarian Fund, a young landmine survivor received a prosthetic leg and now works to educate others about mine risks, transforming his life from feeling "useless" to helping his community.</p>
+                            <div class="story-fund"><strong>Myanmar Humanitarian Fund</strong></div>
                         </div>
                     </div>
                 </div>
@@ -542,7 +636,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h2 class="section-title">CBPF Country Reports</h2>
+                    <h2 class="section-title">CBPF Country and Regional Funds Annual Reports</h2>
                 </div>
             </div>
             <div class="row" id="funds-list">
@@ -550,6 +644,24 @@
             </div>
         </div>
     </section>
+
+    <!-- Footnotes -->
+    <section class="footnotes-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <h3>Methodology Notes</h3>
+                    <div class="footnote-item">
+                        <span class="footnote-asterisk">*</span><strong>Total Funds Allocated:</strong> The total amount of humanitarian funding distributed through Country-Based Pooled Funds (CBPF) mechanisms in 2025, representing direct financial support for life-saving and recovery interventions.
+                    </div>
+                    <div class="footnote-item">
+                        <span class="footnote-asterisk">*</span><strong>Total Contributed:</strong> The total number of contributions and donations made to humanitarian assistance through CBPF allocations, representing the collective support from donors and partners in 2025.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer class="cd-footer" role="contentinfo">
   		<div class="container cd-footer__inner">    
 			<div class="cd-footer__section cd-footer__section--menu">
@@ -615,32 +727,8 @@
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 	<script>
-        // CBPF Funds Data
-        const fundsData = [
-            { name: "Afghanistan", allocation: 245000000, people: 5200000, link: "country-report.html?fund=afghanistan" },
-            { name: "Burkina Faso (RhPF-WCA)", allocation: 38000000, people: 850000, link: "country-report.html?fund=burkina-faso" },
-            { name: "CAR", allocation: 42000000, people: 1200000, link: "country-report.html?fund=car" },
-            { name: "Chad (RhPF-WCA)", allocation: 52000000, people: 2100000, link: "country-report.html?fund=chad" },
-            { name: "DRC", allocation: 185000000, people: 6800000, link: "country-report.html?fund=drc" },
-            { name: "Ethiopia", allocation: 125000000, people: 4200000, link: "country-report.html?fund=ethiopia" },
-            { name: "Haiti (RhPF-LAC)", allocation: 28000000, people: 650000, link: "country-report.html?fund=haiti" },
-            { name: "Lebanon", allocation: 68000000, people: 1800000, link: "country-report.html?fund=lebanon" },
-            { name: "Mali (RhPF-WCA)", allocation: 45000000, people: 1100000, link: "country-report.html?fund=mali" },
-            { name: "Mozambique (RhPF)", allocation: 32000000, people: 920000, link: "country-report.html?fund=mozambique" },
-            { name: "Myanmar", allocation: 165000000, people: 5800000, link: "country-report.html?fund=myanmar" },
-            { name: "Niger (RhPF-WCA)", allocation: 48000000, people: 1400000, link: "country-report.html?fund=niger" },
-            { name: "Nigeria", allocation: 95000000, people: 3200000, link: "country-report.html?fund=nigeria" },
-            { name: "oPt", allocation: 142000000, people: 2100000, link: "country-report.html?fund=opt" },
-            { name: "Pakistan (AP-RHPF)", allocation: 58000000, people: 1750000, link: "country-report.html?fund=pakistan" },
-            { name: "Somalia", allocation: 158000000, people: 3900000, link: "country-report.html?fund=somalia" },
-            { name: "South Sudan", allocation: 192000000, people: 6100000, link: "country-report.html?fund=south-sudan" },
-            { name: "Sudan", allocation: 245000000, people: 7200000, link: "country-report.html?fund=sudan" },
-            { name: "Syria", allocation: 135000000, people: 3400000, link: "country-report.html?fund=syria" },
-            { name: "Syria Cross border", allocation: 112000000, people: 2800000, link: "country-report.html?fund=syria-crossborder" },
-            { name: "Ukraine", allocation: 195000000, people: 8100000, link: "country-report.html?fund=ukraine" },
-            { name: "Venezuela", allocation: 42000000, people: 1500000, link: "country-report.html?fund=venezuela" },
-            { name: "Yemen", allocation: 268000000, people: 9500000, link: "country-report.html?fund=yemen" }
-        ];
+        // Load CBPF Funds Data from JSON
+        let fundsData = [];
 
         // Format currency
         function formatCurrency(amount) {
@@ -657,6 +745,46 @@
             return count.toString();
         }
 
+        // Load funds data and populate list
+        function loadFundsData() {
+            fetch('data/cbpf-country-reports.json')
+                .then(response => response.json())
+                .then(data => {
+                    fundsData = data.countries;
+                    populateFundsList();
+                })
+                .catch(error => {
+                    console.error('Error loading funds data:', error);
+                    // Fallback to inline data if JSON fails to load
+                    fundsData = [
+                        { name: "Afghanistan", allocation: 245000000, contributed: 5200000, link: "country-report.html?fund=afghanistan", coverImage: "https://images.unsplash.com/photo-1589652717521-10c0d092dea9?w=400&h=600&fit=crop&auto=format" },
+                        { name: "Burkina Faso (RhPF-WCA)", allocation: 38000000, contributed: 850000, link: "country-report.html?fund=burkina-faso", coverImage: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format" },
+                        { name: "CAR", allocation: 42000000, contributed: 1200000, link: "country-report.html?fund=car", coverImage: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=600&fit=crop&auto=format" },
+                        { name: "Chad (RhPF-WCA)", allocation: 52000000, contributed: 2100000, link: "country-report.html?fund=chad", coverImage: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format" },
+                        { name: "DRC", allocation: 185000000, contributed: 6800000, link: "country-report.html?fund=drc", coverImage: "https://images.unsplash.com/photo-1586528116495-e6d0b4b7b7b8?w=400&h=600&fit=crop&auto=format" },
+                        { name: "Ethiopia", allocation: 125000000, contributed: 4200000, link: "country-report.html?fund=ethiopia", coverImage: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format" },
+                        { name: "Haiti (RhPF-LAC)", allocation: 28000000, contributed: 650000, link: "country-report.html?fund=haiti", coverImage: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=600&fit=crop&auto=format" },
+                        { name: "Lebanon", allocation: 68000000, contributed: 1800000, link: "country-report.html?fund=lebanon", coverImage: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format" },
+                        { name: "Mali (RhPF-WCA)", allocation: 45000000, contributed: 1100000, link: "country-report.html?fund=mali", coverImage: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=600&fit=crop&auto=format" },
+                        { name: "Mozambique (RhPF)", allocation: 32000000, contributed: 920000, link: "country-report.html?fund=mozambique", coverImage: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format" },
+                        { name: "Myanmar", allocation: 165000000, contributed: 5800000, link: "country-report.html?fund=myanmar", coverImage: "https://images.unsplash.com/photo-1586528116495-e6d0b4b7b7b8?w=400&h=600&fit=crop&auto=format" },
+                        { name: "Niger (RhPF-WCA)", allocation: 48000000, contributed: 1400000, link: "country-report.html?fund=niger", coverImage: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format" },
+                        { name: "Nigeria", allocation: 95000000, contributed: 3200000, link: "country-report.html?fund=nigeria", coverImage: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=600&fit=crop&auto=format" },
+                        { name: "oPt", allocation: 142000000, contributed: 2100000, link: "country-report.html?fund=opt", coverImage: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format" },
+                        { name: "Pakistan (AP-RHPF)", allocation: 58000000, contributed: 1750000, link: "country-report.html?fund=pakistan", coverImage: "https://images.unsplash.com/photo-1586528116495-e6d0b4b7b7b8?w=400&h=600&fit=crop&auto=format" },
+                        { name: "Somalia", allocation: 158000000, contributed: 3900000, link: "country-report.html?fund=somalia", coverImage: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format" },
+                        { name: "South Sudan", allocation: 192000000, contributed: 6100000, link: "country-report.html?fund=south-sudan", coverImage: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=600&fit=crop&auto=format" },
+                        { name: "Sudan", allocation: 245000000, contributed: 7200000, link: "country-report.html?fund=sudan", coverImage: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format" },
+                        { name: "Syria", allocation: 135000000, contributed: 3400000, link: "country-report.html?fund=syria", coverImage: "https://images.unsplash.com/photo-1586528116495-e6d0b4b7b7b8?w=400&h=600&fit=crop&auto=format" },
+                        { name: "Syria Cross border", allocation: 112000000, contributed: 2800000, link: "country-report.html?fund=syria-crossborder", coverImage: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format" },
+                        { name: "Ukraine", allocation: 195000000, contributed: 8100000, link: "country-report.html?fund=ukraine", coverImage: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=600&fit=crop&auto=format" },
+                        { name: "Venezuela", allocation: 42000000, contributed: 1500000, link: "country-report.html?fund=venezuela", coverImage: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format" },
+                        { name: "Yemen", allocation: 268000000, contributed: 9500000, link: "country-report.html?fund=yemen", coverImage: "https://images.unsplash.com/photo-1586528116495-e6d0b4b7b7b8?w=400&h=600&fit=crop&auto=format" }
+                    ];
+                    populateFundsList();
+                });
+        }
+
         // Populate funds list
         function populateFundsList() {
             const container = document.getElementById('funds-list');
@@ -665,17 +793,23 @@
                 col.className = 'col-md-4';
                 col.innerHTML = `
                     <div class="fund-card">
-                        <h4>${fund.name}</h4>
-                        <div class="fund-stat">
-                            <span class="fund-stat-label">Total Allocated:</span>
-                            <span class="fund-stat-value">${formatCurrency(fund.allocation)}</span>
+                        <div class="fund-report-image">
+                            <img src="${fund.coverImage || 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format'}" alt="${fund.name} Humanitarian Report Cover" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px 4px 0 0;">
+                            <div class="report-year">2025</div>
                         </div>
-                        <div class="fund-stat">
-                            <span class="fund-stat-label">People Reached:</span>
-                            <span class="fund-stat-value">${formatPeople(fund.people)}</span>
-                        </div>
-                        <div class="fund-link">
-                            <a href="${fund.link}">View Country Report →</a>
+                        <div class="fund-content">
+                            <h4>${fund.name}</h4>
+                            <div class="fund-stat">
+                                <span class="fund-stat-label" title="The total amount of humanitarian funding distributed through Country-Based Pooled Funds (CBPF) mechanisms in 2025, representing direct financial support for life-saving and recovery interventions">Total Allocated*:</span>
+                                <span class="fund-stat-value">${formatCurrency(fund.allocation)}</span>
+                            </div>
+                            <div class="fund-stat">
+                                <span class="fund-stat-label" title="The total number of contributions and donations made to humanitarian assistance through CBPF allocations, representing the collective support from donors and partners in 2025">Total Contributed*:</span>
+                                <span class="fund-stat-value">${formatPeople(fund.contributed)}</span>
+                            </div>
+                            <div class="fund-link">
+                                <a href="${fund.link}">View Annual Report →</a>
+                            </div>
                         </div>
                     </div>
                 `;
@@ -710,7 +844,7 @@
 
         // Initialize on page load
         $(document).ready(function(){
-            populateFundsList();
+            loadFundsData();
             
             // OCHA Services dropdown
             $(".cd-ocha-btn").click(function(){

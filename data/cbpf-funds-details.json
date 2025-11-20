@@ -1,0 +1,309 @@
+{
+  "metadata": {
+    "title": "CBPF Country and Regional Funds Details 2025",
+    "description": "Detailed information for Country-Based Pooled Funds including reports, allocations, and impact metrics",
+    "year": 2025,
+    "lastUpdated": "2025-11-20"
+  },
+  "funds": [
+    {
+      "name": "Afghanistan",
+      "region": "Asia",
+      "reportDownloadUrl": "https://www.unocha.org/publications/report/afghanistan/afghanistan-humanitarian-fund-annual-report-2024",
+      "previousReportsUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "coverImage": "https://images.unsplash.com/photo-1589652717521-10c0d092dea9?w=400&h=600&fit=crop&auto=format",
+      "impact2025": {
+        "totalAllocated": "$245M",
+        "totalContributed": "5.2M",
+        "projectsFunded": 156
+      },
+      "countryReportLink": "country-report.html?fund=afghanistan"
+    },
+    {
+      "name": "Burkina Faso (RhPF-WCA)",
+      "region": "West and Central Africa",
+      "reportDownloadUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "previousReportsUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "coverImage": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format",
+      "impact2025": {
+        "totalAllocated": "$38M",
+        "totalContributed": "850K",
+        "projectsFunded": 67
+      },
+      "countryReportLink": "country-report.html?fund=burkina-faso"
+    },
+    {
+      "name": "CAR",
+      "region": "West and Central Africa",
+      "reportDownloadUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "previousReportsUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "coverImage": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=600&fit=crop&auto=format",
+      "impact2025": {
+        "totalAllocated": "$42M",
+        "totalContributed": "1.2M",
+        "projectsFunded": 89
+      },
+      "countryReportLink": "country-report.html?fund=car"
+    },
+    {
+      "name": "Chad (RhPF-WCA)",
+      "region": "West and Central Africa",
+      "reportDownloadUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "previousReportsUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "coverImage": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format",
+      "impact2025": {
+        "totalAllocated": "$52M",
+        "totalContributed": "2.1M",
+        "projectsFunded": 94
+      },
+      "countryReportLink": "country-report.html?fund=chad"
+    },
+    {
+      "name": "DRC",
+      "region": "West and Central Africa",
+      "reportDownloadUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "previousReportsUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "coverImage": "https://images.unsplash.com/photo-1586528116495-e6d0b4b7b7b8?w=400&h=600&fit=crop&auto=format",
+      "impact2025": {
+        "totalAllocated": "$185M",
+        "totalContributed": "6.8M",
+        "projectsFunded": 234
+      },
+      "countryReportLink": "country-report.html?fund=drc"
+    },
+    {
+      "name": "Ethiopia",
+      "region": "East and Southern Africa",
+      "reportDownloadUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "previousReportsUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "coverImage": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format",
+      "impact2025": {
+        "totalAllocated": "$125M",
+        "totalContributed": "4.2M",
+        "projectsFunded": 178
+      },
+      "countryReportLink": "country-report.html?fund=ethiopia"
+    },
+    {
+      "name": "Haiti (RhPF-LAC)",
+      "region": "Latin America and Caribbean",
+      "reportDownloadUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "previousReportsUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "coverImage": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=600&fit=crop&auto=format",
+      "impact2025": {
+        "totalAllocated": "$28M",
+        "totalContributed": "650K",
+        "projectsFunded": 45
+      },
+      "countryReportLink": "country-report.html?fund=haiti"
+    },
+    {
+      "name": "Lebanon",
+      "region": "Middle East",
+      "reportDownloadUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "previousReportsUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "coverImage": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format",
+      "impact2025": {
+        "totalAllocated": "$68M",
+        "totalContributed": "1.8M",
+        "projectsFunded": 112
+      },
+      "countryReportLink": "country-report.html?fund=lebanon"
+    },
+    {
+      "name": "Mali (RhPF-WCA)",
+      "region": "West and Central Africa",
+      "reportDownloadUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "previousReportsUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "coverImage": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=600&fit=crop&auto=format",
+      "impact2025": {
+        "totalAllocated": "$45M",
+        "totalContributed": "1.1M",
+        "projectsFunded": 78
+      },
+      "countryReportLink": "country-report.html?fund=mali"
+    },
+    {
+      "name": "Mozambique (RhPF)",
+      "region": "East and Southern Africa",
+      "reportDownloadUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "previousReportsUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "coverImage": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format",
+      "impact2025": {
+        "totalAllocated": "$32M",
+        "totalContributed": "920K",
+        "projectsFunded": 56
+      },
+      "countryReportLink": "country-report.html?fund=mozambique"
+    },
+    {
+      "name": "Myanmar",
+      "region": "Asia",
+      "reportDownloadUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "previousReportsUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "coverImage": "https://images.unsplash.com/photo-1586528116495-e6d0b4b7b7b8?w=400&h=600&fit=crop&auto=format",
+      "impact2025": {
+        "totalAllocated": "$165M",
+        "totalContributed": "5.8M",
+        "projectsFunded": 203
+      },
+      "countryReportLink": "country-report.html?fund=myanmar"
+    },
+    {
+      "name": "Niger (RhPF-WCA)",
+      "region": "West and Central Africa",
+      "reportDownloadUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "previousReportsUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "coverImage": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format",
+      "impact2025": {
+        "totalAllocated": "$48M",
+        "totalContributed": "1.4M",
+        "projectsFunded": 82
+      },
+      "countryReportLink": "country-report.html?fund=niger"
+    },
+    {
+      "name": "Nigeria",
+      "region": "West and Central Africa",
+      "reportDownloadUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "previousReportsUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "coverImage": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=600&fit=crop&auto=format",
+      "impact2025": {
+        "totalAllocated": "$95M",
+        "totalContributed": "3.2M",
+        "projectsFunded": 147
+      },
+      "countryReportLink": "country-report.html?fund=nigeria"
+    },
+    {
+      "name": "oPt",
+      "region": "Middle East",
+      "reportDownloadUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "previousReportsUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "coverImage": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format",
+      "impact2025": {
+        "totalAllocated": "$142M",
+        "totalContributed": "2.1M",
+        "projectsFunded": 189
+      },
+      "countryReportLink": "country-report.html?fund=opt"
+    },
+    {
+      "name": "Pakistan (AP-RHPF)",
+      "region": "Asia",
+      "reportDownloadUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "previousReportsUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "coverImage": "https://images.unsplash.com/photo-1586528116495-e6d0b4b7b7b8?w=400&h=600&fit=crop&auto=format",
+      "impact2025": {
+        "totalAllocated": "$58M",
+        "totalContributed": "1.75M",
+        "projectsFunded": 98
+      },
+      "countryReportLink": "country-report.html?fund=pakistan"
+    },
+    {
+      "name": "Somalia",
+      "region": "East and Southern Africa",
+      "reportDownloadUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "previousReportsUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "coverImage": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format",
+      "impact2025": {
+        "totalAllocated": "$158M",
+        "totalContributed": "3.9M",
+        "projectsFunded": 212
+      },
+      "countryReportLink": "country-report.html?fund=somalia"
+    },
+    {
+      "name": "South Sudan",
+      "region": "East and Southern Africa",
+      "reportDownloadUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "previousReportsUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "coverImage": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=600&fit=crop&auto=format",
+      "impact2025": {
+        "totalAllocated": "$192M",
+        "totalContributed": "6.1M",
+        "projectsFunded": 267
+      },
+      "countryReportLink": "country-report.html?fund=south-sudan"
+    },
+    {
+      "name": "Sudan",
+      "region": "East and Southern Africa",
+      "reportDownloadUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "previousReportsUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "coverImage": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format",
+      "impact2025": {
+        "totalAllocated": "$245M",
+        "totalContributed": "7.2M",
+        "projectsFunded": 298
+      },
+      "countryReportLink": "country-report.html?fund=sudan"
+    },
+    {
+      "name": "Syria",
+      "region": "Middle East",
+      "reportDownloadUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "previousReportsUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "coverImage": "https://images.unsplash.com/photo-1586528116495-e6d0b4b7b7b8?w=400&h=600&fit=crop&auto=format",
+      "impact2025": {
+        "totalAllocated": "$135M",
+        "totalContributed": "3.4M",
+        "projectsFunded": 176
+      },
+      "countryReportLink": "country-report.html?fund=syria"
+    },
+    {
+      "name": "Syria Cross border",
+      "region": "Middle East",
+      "reportDownloadUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "previousReportsUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "coverImage": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format",
+      "impact2025": {
+        "totalAllocated": "$112M",
+        "totalContributed": "2.8M",
+        "projectsFunded": 145
+      },
+      "countryReportLink": "country-report.html?fund=syria-crossborder"
+    },
+    {
+      "name": "Ukraine",
+      "region": "Europe",
+      "reportDownloadUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "previousReportsUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "coverImage": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=600&fit=crop&auto=format",
+      "impact2025": {
+        "totalAllocated": "$195M",
+        "totalContributed": "8.1M",
+        "projectsFunded": 312
+      },
+      "countryReportLink": "country-report.html?fund=ukraine"
+    },
+    {
+      "name": "Venezuela",
+      "region": "Latin America and Caribbean",
+      "reportDownloadUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "previousReportsUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "coverImage": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format",
+      "impact2025": {
+        "totalAllocated": "$42M",
+        "totalContributed": "1.5M",
+        "projectsFunded": 73
+      },
+      "countryReportLink": "country-report.html?fund=venezuela"
+    },
+    {
+      "name": "Yemen",
+      "region": "Middle East",
+      "reportDownloadUrl": "https://www.unocha.org/sites/default/files/styles/small/public/previews/e8/12/e812d8f8-e5de-49a8-a83b-6dcc85e094d6.png?2659876-1-0",
+      "previousReportsUrl": "https://reliefweb.int/updates?advanced-search=%28S1503%29_%28T4589%29_%28F9%29",
+      "coverImage": "https://images.unsplash.com/photo-1586528116495-e6d0b4b7b7b8?w=400&h=600&fit=crop&auto=format",
+      "impact2025": {
+        "totalAllocated": "$268M",
+        "totalContributed": "9.5M",
+        "projectsFunded": 345
+      },
+      "countryReportLink": "country-report.html?fund=yemen"
+    }
+  ]
+}
