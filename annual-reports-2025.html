@@ -206,6 +206,51 @@
             color: #146eb4;
             margin-bottom: 20px;
         }
+        .leader-photo {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            margin-bottom: 10px;
+        }
+        .leader-name {
+            text-align: center;
+            font-weight: 600;
+            color: #146eb4;
+            font-size: 2.2rem;
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+        .leader-title {
+            text-align: center;
+            font-weight: 400;
+            color: #666;
+            font-size: 0.95rem;
+            margin-top: 0;
+            margin-bottom: 0;
+            line-height: 1.4;
+        }
+        .foreword-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 30px;
+        }
+        .foreword-photo-container {
+            flex-shrink: 0;
+        }
+        .foreword-text {
+            flex: 1;
+        }
+        @media (max-width: 768px) {
+            .foreword-content {
+                flex-direction: column;
+            }
+            .leader-photo {
+                max-width: 250px;
+                margin: 0 auto 20px;
+            }
+        }
         .highlights-section {
             padding: 50px 0;
             margin-bottom: 50px;
@@ -500,9 +545,18 @@
             <div class="row">
                 <div class="col-md-10 offset-md-1">
                     <h2>Foreword</h2>
-                    <p class="lead">the forward section of the webpage could serve multiple purposes, such as a traditional forward, a summary, or even a video recording, and recommended keeping this section flexible to accommodate future decisions.</p>
-                    <p>These annual reports capture the collective efforts of humanitarian actors across 23 CBPF operations, showcasing how flexible, rapid funding has enabled life-saving interventions and long-term recovery in some of the world's most challenging environments. From providing essential services to displaced communities to supporting local resilience, this report highlights the tangible impact of CBPF investments in human dignity and hope.</p>
-                    <p>As we present these comprehensive reports, we acknowledge the valuable contributions of our donors, partners, and implementing organizations whose dedication makes these achievements possible.</p>
+                    <div class="foreword-content">
+                        <div class="foreword-photo-container">
+                            <img src="assets/img/USG_Thomas_Fletcher_square.jpg" alt="Thomas Fletcher, Under-Secretary-General for Humanitarian Affairs" class="leader-photo">
+                            <p class="leader-name">Tom Fletcher</p>
+                            <p class="leader-title">Under-Secretary-General OCHA</p>
+                        </div>
+                        <div class="foreword-text">
+                            
+                            <p>These annual reports capture the collective efforts of humanitarian actors across 23 CBPF operations, showcasing how flexible, rapid funding has enabled life-saving interventions and long-term recovery in some of the world's most challenging environments. From providing essential services to displaced communities to supporting local resilience, this report highlights the tangible impact of CBPF investments in human dignity and hope.</p>
+                            <p>As we present these comprehensive reports, we acknowledge the valuable contributions of our donors, partners, and implementing organizations whose dedication makes these achievements possible.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -574,8 +628,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="impact-stat">
-                        <h3>23</h3>
-                        <p>CBPF Operations</p>
+                        <h3>1K+</h3>
+                        <p>CBPF Projects</p>
                     </div>
                 </div>
             </div>
@@ -636,7 +690,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h2 class="section-title">CBPF Country and Regional Funds Annual Reports</h2>
+                    <h2 class="section-title">Country and Regional Funds Annual Reports</h2>
                 </div>
             </div>
             <div class="row" id="funds-list">
@@ -795,7 +849,7 @@
                     <div class="fund-card">
                         <div class="fund-report-image">
                             <img src="${fund.coverImage || 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&auto=format'}" alt="${fund.name} Humanitarian Report Cover" style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px 4px 0 0;">
-                            <div class="report-year">2025</div>
+                            
                         </div>
                         <div class="fund-content">
                             <h4>${fund.name}</h4>
@@ -805,7 +859,7 @@
                             </div>
                             <div class="fund-stat">
                                 <span class="fund-stat-label" title="The total number of contributions and donations made to humanitarian assistance through CBPF allocations, representing the collective support from donors and partners in 2025">Total Contributed*:</span>
-                                <span class="fund-stat-value">${formatPeople(fund.contributed)}</span>
+                                <span class="fund-stat-value">${formatCurrency(fund.contributed)}</span>
                             </div>
                             <div class="fund-link">
                                 <a href="${fund.link}">View Annual Report →</a>
