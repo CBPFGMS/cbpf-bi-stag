@@ -104,10 +104,14 @@
                         <li class="breadcrumb-item"><a href="index.html" title="Home">Home</a></li>
                         <li class="breadcrumb-item">Allocations Overview</li>
                     </ol>
+					<div class="realoadButtonDiv mt-4 mb-3 d-flex align-items-center">
+						<button id="liveDataButton" class="btn btn-primary btn-sm">Get latest data</button>
+						<span id="liveDataSpan" class="pl-3" style="display:none;">Click for reloading the visualisation with the latest available data</span>
+					</div>
                     <h1 class="text-center"><strong>Allocations Overview</strong><button class="video-btn" data-toggle="modal" data-src="https://embed.fleeq.io/l/6mbwuy8kbe-zswvhd17f0" data-target="#myModal"><span class="video-info"><i class="fa fa-play-circle" aria-hidden="true"></i></span>
                                                 </button></h1>
 					<div class="allocations-overview-chart">
-                    	<div id="d3chartcontainerpbimap" data-title=" " data-year="2025" data-cbpf="all" data-partner="all" data-cluster="all" data-adminlevel="all" data-minpercentage="3" data-responsive="true" data-lazyload="true" data-showhelp="false"></div>
+                    	<div id="d3chartcontainerpbimap" data-title=" " data-year="2025" data-cbpf="all" data-partner="all" data-cluster="all" data-adminlevel="all" data-minpercentage="3" data-responsive="true" data-lazyload="true" data-showhelp="false" data-static="true"></div>
 						<p class="text-center" style="font-size:11px; color:#aaa; padding-top: 5px; margin:0"><b>Disclaimer:</b> Figures for people targeted and reached may include double counting as individuals often receive aid from multiple cluster/sectors</p>
 					</div>
                 </div>
@@ -236,10 +240,10 @@
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'UA-1884029-23');
-		$.getScript("https://cbpfgms.github.io/pbimap/src/d3chartpbimap.js", function() {});
+		$.getScript("https://cbpfgms.github.io/pbimap_static/src/d3chartpbimap_static.js", function() {});
     } 
 	else{
-		$.getScript("https://cbpfgms.github.io/pbimap/src/d3chartpbimap-stg.js", function() {});
+		$.getScript("https://cbpfgms.github.io/pbimap_static/src/d3chartpbimap_static-stg.js", function() {});
 	}
 		
 	</script>
@@ -250,6 +254,44 @@
 		$("#cd-ocha-dropdown").toggle();
 	  });
 	});
+	</script>
+		<script>
+		const liveDataButton = document
+			.getElementById("liveDataButton"),
+			liveDataSpan = document.getElementById(
+				"liveDataSpan"
+			);
+
+		function showSpan() {
+			liveDataSpan.style.display = "block";
+		}
+
+		function hideSpan() {
+			liveDataSpan.style.display = "none";
+		}
+
+		// Add the event listeners
+		liveDataButton.addEventListener("mouseover", showSpan);
+		liveDataButton.addEventListener("mouseout", hideSpan);
+
+		liveDataButton
+			.addEventListener("click", function () {
+				const container = document.getElementById(
+					"d3chartcontainerpbimap"
+				);
+				container.setAttribute("data-static", "false");
+
+				if (window.reloadD3chart) {
+					window.reloadD3chart();
+				}
+
+				hideSpan();
+				liveDataButton.disabled = true;
+				liveDataButton.removeEventListener("mouseover", showSpan);
+				liveDataButton.removeEventListener("mouseout", hideSpan);
+				liveDataButton.classList.add("disabled","btn-secondary");
+				liveDataButton.innerHTML = "Latest data fetched";
+			});
 	</script>
 </body>
 

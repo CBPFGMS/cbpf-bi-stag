@@ -1,3 +1,6 @@
+const isProdSite =
+	document.location.hostname.search("cbpf.data.unocha.org") !== -1;
+
 // Async script loader
 function loadScript(src) {
 	return new Promise((resolve, reject) => {
@@ -97,83 +100,93 @@ window.addEventListener("load", function () {
 // Chart configuration with lazy loading
 const chartConfig = {
 	cbsank: {
-		styles: ["https://cbpfgms.github.io/css/d3chartstylescbsank.css"],
-		script:
-			document.location.hostname.search("cbpf.data.unocha.org") !== -1
-				? "https://cbpfgms.github.io/cbsank/src/d3chartcbsank.js"
-				: "https://cbpfgms.github.io/cbsank/src/d3chartcbsank-stg.js",
+		style: isProdSite
+			? "./assets/css/charts/d3chartstylescbsank.css"
+			: "./assets/css/charts/d3chartstylescbsank-stg.css",
+		script: isProdSite
+			? "https://cbpfgms.github.io/cbsank/src/d3chartcbsank.js"
+			: "./assets/js/charts/d3chartcbsank-stg.min.js",
 		container: "#d3chartcontainercbsank",
 	},
 	pbiclc: {
-		styles: ["https://cbpfgms.github.io/css/d3chartstylespbiclc.css"],
-		script:
-			document.location.hostname.search("cbpf.data.unocha.org") !== -1
-				? "https://cbpfgms.github.io/pbiclc/src/d3chartpbiclc.js"
-				: "https://cbpfgms.github.io/pbiclc/src/d3chartpbiclc-stg.js",
+		style: isProdSite
+			? "./assets/css/charts/d3chartstylespbiclc.css"
+			: "./assets/css/charts/d3chartstylespbiclc-stg.css",
+		script: isProdSite
+			? "https://cbpfgms.github.io/pbiclc/src/d3chartpbiclc.js"
+			: "./assets/js/charts/d3chartpbiclc-stg.min.js",
 		container: "#d3chartcontainerpbiclc",
 	},
 	pbicli: {
-		styles: ["https://cbpfgms.github.io/css/d3chartstylespbicli.css"],
-		script:
-			document.location.hostname.search("cbpf.data.unocha.org") !== -1
-				? "https://cbpfgms.github.io/pbicli/src/d3chartpbicli.js"
-				: "https://cbpfgms.github.io/pbicli/src/d3chartpbicli-stg.js",
+		style: isProdSite
+			? "./assets/css/charts/d3chartstylespbicli.css"
+			: "./assets/css/charts/d3chartstylespbicli-stg.css",
+		script: isProdSite
+			? "https://cbpfgms.github.io/pbicli/src/d3chartpbicli.js"
+			: "./assets/js/charts/d3chartpbicli-stg.min.js",
 		container: "#d3chartcontainerpbicli",
 	},
 	pbialp: {
-		styles: ["https://cbpfgms.github.io/css/d3chartstylespbialp.css"],
-		script:
-			document.location.hostname.search("cbpf.data.unocha.org") !== -1
-				? "https://cbpfgms.github.io/pbialp/src/d3chartpbialp.js"
-				: "https://cbpfgms.github.io/pbialp/src/d3chartpbialp-stg.js",
+		style: isProdSite
+			? "./assets/css/charts/d3chartstylespbialp.css"
+			: "./assets/css/charts/d3chartstylespbialp-stg.css",
+		script: isProdSite
+			? "https://cbpfgms.github.io/pbialp/src/d3chartpbialp.js"
+			: "./assets/js/charts/d3chartpbialp-stg.min.js",
 		container: "#d3chartcontainerpbialp",
 	},
 	pbifdc: {
-		styles: ["https://cbpfgms.github.io/css/d3chartstylespbifdc.css"],
-		script:
-			document.location.hostname.search("cbpf.data.unocha.org") !== -1
-				? "https://cbpfgms.github.io/pbifdc/src/d3chartpbifdc.js"
-				: "https://cbpfgms.github.io/pbifdc/src/d3chartpbifdc-stg.js",
+		style: isProdSite
+			? "./assets/css/charts/d3chartstylespbifdc.css"
+			: "./assets/css/charts/d3chartstylespbifdc-stg.css",
+		script: isProdSite
+			? "https://cbpfgms.github.io/pbifdc/src/d3chartpbifdc.js"
+			: "./assets/js/charts/d3chartpbifdc-stg.min.js",
 		container: "#d3chartcontainerpbifdc",
 	},
 	pbiolc: {
-		styles: ["https://cbpfgms.github.io/css/d3chartstylespbiolc.css"],
-		script:
-			document.location.hostname.search("cbpf.data.unocha.org") !== -1
-				? "https://cbpfgms.github.io/pbiolc/src/d3chartpbiolc.js"
-				: "https://cbpfgms.github.io/pbiolc/src/d3chartpbiolc-stg.js",
+		style: isProdSite
+			? "./assets/css/charts/d3chartstylespbiolc.css"
+			: "./assets/css/charts/d3chartstylespbiolc-stg.css",
+		script: isProdSite
+			? "https://cbpfgms.github.io/pbiolc/src/d3chartpbiolc.js"
+			: "./assets/js/charts/d3chartpbiolc-stg.min.js",
 		container: "#d3chartcontainerpbiolc",
 	},
 	pbiobe: {
-		styles: ["https://cbpfgms.github.io/css/d3chartstylespbiobe.css"],
-		script:
-			document.location.hostname.search("cbpf.data.unocha.org") !== -1
-				? "https://cbpfgms.github.io/pbiobe/src/d3chartpbiobe.js"
-				: "https://cbpfgms.github.io/pbiobe/src/d3chartpbiobe-stg.js",
+		style: isProdSite
+			? "./assets/css/charts/d3chartstylespbiobe.css"
+			: "./assets/css/charts/d3chartstylespbiobe-stg.css",
+		script: isProdSite
+			? "https://cbpfgms.github.io/pbiobe/src/d3chartpbiobe.js"
+			: "./assets/js/charts/d3chartpbiobe-stg.min.js",
 		container: "#d3chartcontainerpbiobe",
 	},
 	pbiuac: {
-		styles: ["https://cbpfgms.github.io/css/d3chartstylespbiuac.css"],
-		script:
-			document.location.hostname.search("cbpf.data.unocha.org") !== -1
-				? "https://cbpfgms.github.io/pbiuac/src/d3chartpbiuac.js"
-				: "https://cbpfgms.github.io/pbiuac/src/d3chartpbiuac-stg.js",
+		style: isProdSite
+			? "./assets/css/charts/d3chartstylespbiuac.css"
+			: "./assets/css/charts/d3chartstylespbiuac-stg.css",
+		script: isProdSite
+			? "https://cbpfgms.github.io/pbiuac/src/d3chartpbiuac.js"
+			: "./assets/js/charts/d3chartpbiuac-stg.min.js",
 		container: "#d3chartcontainerpbiuac",
 	},
 	pbigam: {
-		styles: ["https://cbpfgms.github.io/css/d3chartstylespbigam.css"],
-		script:
-			document.location.hostname.search("cbpf.data.unocha.org") !== -1
-				? "https://cbpfgms.github.io/pbigam/src/d3chartpbigam.js"
-				: "https://cbpfgms.github.io/pbigam/src/d3chartpbigam-stg.js",
+		style: isProdSite
+			? "./assets/css/charts/d3chartstylespbigam.css"
+			: "./assets/css/charts/d3chartstylespbigam-stg.css",
+		script: isProdSite
+			? "https://cbpfgms.github.io/pbigam/src/d3chartpbigam.js"
+			: "./assets/js/charts/d3chartpbigam-stg.min.js",
 		container: "#d3chartcontainerpbigam",
 	},
 	pbinad: {
-		styles: ["https://cbpfgms.github.io/css/d3chartstylespbinad.css"],
-		script:
-			document.location.hostname.search("cbpf.data.unocha.org") !== -1
-				? "https://cbpfgms.github.io/pbinad/src/d3chartpbinad.js"
-				: "https://cbpfgms.github.io/pbinad/src/d3chartpbinad-stg.js",
+		style: isProdSite
+			? "./assets/css/charts/d3chartstylespbinad.css"
+			: "./assets/css/charts/d3chartstylespbinad-stg.css",
+		script: isProdSite
+			? "https://cbpfgms.github.io/pbinad/src/d3chartpbinad.js"
+			: "./assets/js/charts/d3chartpbinad-stg.min.js",
 		container: "#d3chartcontainerpbinad",
 	},
 };
@@ -238,24 +251,22 @@ function loadChart(chartType) {
 		waitForChartData()
 			.then(() => {
 				// Load chart styles first with idle callbacks
-				const loadStyles = config.styles.map(styleUrl => {
-					return new Promise(resolve => {
-						scheduleWork(
-							() => {
-								const link = document.createElement("link");
-								link.rel = "stylesheet";
-								link.href = styleUrl;
-								link.onload = resolve;
-								link.onerror = resolve; // Continue even if style fails
-								document.head.appendChild(link);
-							},
-							{ fallbackDelay: 50 }
-						);
-					});
+				const loadStyle = new Promise(resolve => {
+					scheduleWork(
+						() => {
+							const link = document.createElement("link");
+							link.rel = "stylesheet";
+							link.href = config.style;
+							link.onload = resolve;
+							link.onerror = resolve; // Continue even if style fails
+							document.head.appendChild(link);
+						},
+						{ fallbackDelay: 50 }
+					);
 				});
 
 				// Load chart script after styles and data are ready, with main-thread protection
-				return Promise.all(loadStyles).then(() => {
+				return loadStyle.then(() => {
 					return new Promise((resolve, reject) => {
 						scheduleWork(
 							() => {
