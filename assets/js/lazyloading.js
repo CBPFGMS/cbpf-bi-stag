@@ -104,7 +104,7 @@ const chartConfig = {
 			? "./assets/css/charts/d3chartstylescbsank.css"
 			: "./assets/css/charts/d3chartstylescbsank-stg.css",
 		script: isProdSite
-			? "https://cbpfgms.github.io/cbsank/src/d3chartcbsank.js"
+			? "./assets/js/charts/d3chartcbsank.min.js"
 			: "./assets/js/charts/d3chartcbsank-stg.min.js",
 		container: "#d3chartcontainercbsank",
 	},
@@ -113,7 +113,7 @@ const chartConfig = {
 			? "./assets/css/charts/d3chartstylespbiclc.css"
 			: "./assets/css/charts/d3chartstylespbiclc-stg.css",
 		script: isProdSite
-			? "https://cbpfgms.github.io/pbiclc/src/d3chartpbiclc.js"
+			? "./assets/js/charts/d3chartpbiclc.min.js"
 			: "./assets/js/charts/d3chartpbiclc-stg.min.js",
 		container: "#d3chartcontainerpbiclc",
 	},
@@ -122,7 +122,7 @@ const chartConfig = {
 			? "./assets/css/charts/d3chartstylespbicli.css"
 			: "./assets/css/charts/d3chartstylespbicli-stg.css",
 		script: isProdSite
-			? "https://cbpfgms.github.io/pbicli/src/d3chartpbicli.js"
+			? "./assets/js/charts/d3chartpbicli.min.js"
 			: "./assets/js/charts/d3chartpbicli-stg.min.js",
 		container: "#d3chartcontainerpbicli",
 	},
@@ -131,7 +131,7 @@ const chartConfig = {
 			? "./assets/css/charts/d3chartstylespbialp.css"
 			: "./assets/css/charts/d3chartstylespbialp-stg.css",
 		script: isProdSite
-			? "https://cbpfgms.github.io/pbialp/src/d3chartpbialp.js"
+			? "./assets/js/charts/d3chartpbialp.min.js"
 			: "./assets/js/charts/d3chartpbialp-stg.min.js",
 		container: "#d3chartcontainerpbialp",
 	},
@@ -140,7 +140,7 @@ const chartConfig = {
 			? "./assets/css/charts/d3chartstylespbifdc.css"
 			: "./assets/css/charts/d3chartstylespbifdc-stg.css",
 		script: isProdSite
-			? "https://cbpfgms.github.io/pbifdc/src/d3chartpbifdc.js"
+			? "./assets/js/charts/d3chartpbifdc.min.js"
 			: "./assets/js/charts/d3chartpbifdc-stg.min.js",
 		container: "#d3chartcontainerpbifdc",
 	},
@@ -149,7 +149,7 @@ const chartConfig = {
 			? "./assets/css/charts/d3chartstylespbiolc.css"
 			: "./assets/css/charts/d3chartstylespbiolc-stg.css",
 		script: isProdSite
-			? "https://cbpfgms.github.io/pbiolc/src/d3chartpbiolc.js"
+			? "./assets/js/charts/d3chartpbiolc.min.js"
 			: "./assets/js/charts/d3chartpbiolc-stg.min.js",
 		container: "#d3chartcontainerpbiolc",
 	},
@@ -158,7 +158,7 @@ const chartConfig = {
 			? "./assets/css/charts/d3chartstylespbiobe.css"
 			: "./assets/css/charts/d3chartstylespbiobe-stg.css",
 		script: isProdSite
-			? "https://cbpfgms.github.io/pbiobe/src/d3chartpbiobe.js"
+			? "./assets/js/charts/d3chartpbiobe.min.js"
 			: "./assets/js/charts/d3chartpbiobe-stg.min.js",
 		container: "#d3chartcontainerpbiobe",
 	},
@@ -167,7 +167,7 @@ const chartConfig = {
 			? "./assets/css/charts/d3chartstylespbiuac.css"
 			: "./assets/css/charts/d3chartstylespbiuac-stg.css",
 		script: isProdSite
-			? "https://cbpfgms.github.io/pbiuac/src/d3chartpbiuac.js"
+			? "./assets/js/charts/d3chartpbiuac.min.js"
 			: "./assets/js/charts/d3chartpbiuac-stg.min.js",
 		container: "#d3chartcontainerpbiuac",
 	},
@@ -176,7 +176,7 @@ const chartConfig = {
 			? "./assets/css/charts/d3chartstylespbigam.css"
 			: "./assets/css/charts/d3chartstylespbigam-stg.css",
 		script: isProdSite
-			? "https://cbpfgms.github.io/pbigam/src/d3chartpbigam.js"
+			? "./assets/js/charts/d3chartpbigam.min.js"
 			: "./assets/js/charts/d3chartpbigam-stg.min.js",
 		container: "#d3chartcontainerpbigam",
 	},
@@ -185,7 +185,7 @@ const chartConfig = {
 			? "./assets/css/charts/d3chartstylespbinad.css"
 			: "./assets/css/charts/d3chartstylespbinad-stg.css",
 		script: isProdSite
-			? "https://cbpfgms.github.io/pbinad/src/d3chartpbinad.js"
+			? "./assets/js/charts/d3chartpbinad.min.js"
 			: "./assets/js/charts/d3chartpbinad-stg.min.js",
 		container: "#d3chartcontainerpbinad",
 	},
