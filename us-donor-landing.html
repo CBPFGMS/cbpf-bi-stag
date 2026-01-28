@@ -124,6 +124,163 @@
             text-align: center;
             font-size: 2rem;
         }
+        .map-section {
+            padding: 60px 0;
+            background-color: #f8f9fa;
+        }
+        .map-placeholder {
+            background: white;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .map-placeholder i {
+            font-size: 5rem;
+            color: #146eb4;
+            margin-bottom: 20px;
+        }
+        .map-placeholder p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        .region-section {
+            padding: 60px 0;
+            background-color: white;
+        }
+        .region-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-left: 4px solid #146eb4;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .region-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .region-card h3 {
+            color: #146eb4;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .region-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .region-stat {
+            flex: 1;
+            min-width: 150px;
+        }
+        .region-stat .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #146eb4;
+            display: block;
+        }
+        .region-stat .label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+        .country-grid {
+            padding: 60px 0;
+            background-color: #f8f9fa;
+        }
+        .country-card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .country-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .country-card h4 {
+            color: #146eb4;
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        .country-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .country-metric {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+        .country-metric .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #146eb4;
+            display: block;
+        }
+        .country-metric .label {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 5px;
+        }
+        .sector-breakdown {
+            padding: 60px 0;
+            background-color: white;
+        }
+        .sector-item {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .sector-icon {
+            width: 60px;
+            height: 60px;
+            background: #146eb4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        .sector-info {
+            flex: 1;
+        }
+        .sector-info h4 {
+            color: #146eb4;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .sector-info p {
+            color: #666;
+            margin: 0;
+            font-size: 0.9rem;
+        }
+        .sector-amount {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #146eb4;
+            margin-left: 20px;
+        }
     </style>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-1884029-23"></script>
@@ -301,6 +458,223 @@
                                         <h3>Allocation Overview</h3>
                                         <p>Comprehensive overview of allocation distributions</p>
                                     </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Map Section -->
+                    <section class="map-section">
+                        <div class="container">
+                            <div class="map-placeholder">
+                                <i class="fas fa-globe-americas"></i>
+                                <h3 style="color: #146eb4; margin-bottom: 15px;">Interactive Global Map</h3>
+                                <p>Interactive map showing all 23 CBPF operations worldwide<br>Click on any country to see detailed funding and impact data</p>
+                                <p style="margin-top: 20px; font-size: 0.9rem; color: #999;"><em>Map visualization can be integrated with existing CBPF map components</em></p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Regional Breakdown -->
+                    <section class="region-section">
+                        <div class="container">
+                            <h2 style="color: #146eb4; font-weight: 700; margin-bottom: 40px; text-align: center; font-size: 2.5rem;">Impact by Region</h2>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="region-card">
+                                        <h3><i class="fas fa-globe-africa"></i> West & Central Africa</h3>
+                                        <p>Supporting humanitarian response across 8 countries in the region, addressing conflict, displacement, and food insecurity.</p>
+                                        <div class="region-stats">
+                                            <div class="region-stat">
+                                                <span class="value">$850M</span>
+                                                <span class="label">Total Allocated</span>
+                                            </div>
+                                            <div class="region-stat">
+                                                <span class="value">8</span>
+                                                <span class="label">Countries</span>
+                                            </div>
+                                            <div class="region-stat">
+                                                <span class="value">12M+</span>
+                                                <span class="label">People Reached</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="region-card">
+                                        <h3><i class="fas fa-globe-asia"></i> Middle East & Asia</h3>
+                                        <p>Providing critical assistance in complex emergencies, supporting refugees, IDPs, and host communities.</p>
+                                        <div class="region-stats">
+                                            <div class="region-stat">
+                                                <span class="value">$1.2B</span>
+                                                <span class="label">Total Allocated</span>
+                                            </div>
+                                            <div class="region-stat">
+                                                <span class="value">7</span>
+                                                <span class="label">Countries</span>
+                                            </div>
+                                            <div class="region-stat">
+                                                <span class="value">18M+</span>
+                                                <span class="label">People Reached</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="region-card">
+                                        <h3><i class="fas fa-globe-europe"></i> Eastern Europe</h3>
+                                        <p>Rapid response to large-scale displacement and conflict, ensuring life-saving assistance reaches those most in need.</p>
+                                        <div class="region-stats">
+                                            <div class="region-stat">
+                                                <span class="value">$450M</span>
+                                                <span class="label">Total Allocated</span>
+                                            </div>
+                                            <div class="region-stat">
+                                                <span class="value">2</span>
+                                                <span class="label">Countries</span>
+                                            </div>
+                                            <div class="region-stat">
+                                                <span class="value">8M+</span>
+                                                <span class="label">People Reached</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="region-card">
+                                        <h3><i class="fas fa-globe"></i> Other Regions</h3>
+                                        <p>Supporting humanitarian operations across additional regions, addressing diverse crises and needs.</p>
+                                        <div class="region-stats">
+                                            <div class="region-stat">
+                                                <span class="value">$300M</span>
+                                                <span class="label">Total Allocated</span>
+                                            </div>
+                                            <div class="region-stat">
+                                                <span class="value">6</span>
+                                                <span class="label">Countries</span>
+                                            </div>
+                                            <div class="region-stat">
+                                                <span class="value">5M+</span>
+                                                <span class="label">People Reached</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Top Countries -->
+                    <section class="country-grid">
+                        <div class="container">
+                            <h2 style="color: #146eb4; font-weight: 700; margin-bottom: 40px; text-align: center; font-size: 2.5rem;">Top Funded Countries</h2>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="country-card">
+                                        <h4>Afghanistan</h4>
+                                        <p style="color: #666; margin-bottom: 15px;">Supporting millions affected by conflict and natural disasters with multi-sectoral assistance.</p>
+                                        <div class="country-metrics">
+                                            <div class="country-metric">
+                                                <span class="value">$245M</span>
+                                                <span class="label">Allocated</span>
+                                            </div>
+                                            <div class="country-metric">
+                                                <span class="value">156</span>
+                                                <span class="label">Projects</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="country-card">
+                                        <h4>Syria</h4>
+                                        <p style="color: #666; margin-bottom: 15px;">Providing critical humanitarian assistance to conflict-affected populations across the country.</p>
+                                        <div class="country-metrics">
+                                            <div class="country-metric">
+                                                <span class="value">$180M</span>
+                                                <span class="label">Allocated</span>
+                                            </div>
+                                            <div class="country-metric">
+                                                <span class="value">142</span>
+                                                <span class="label">Projects</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="country-card">
+                                        <h4>DRC</h4>
+                                        <p style="color: #666; margin-bottom: 15px;">Addressing complex humanitarian needs including displacement, health crises, and food insecurity.</p>
+                                        <div class="country-metrics">
+                                            <div class="country-metric">
+                                                <span class="value">$185M</span>
+                                                <span class="label">Allocated</span>
+                                            </div>
+                                            <div class="country-metric">
+                                                <span class="value">128</span>
+                                                <span class="label">Projects</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Sector Breakdown -->
+                    <section class="sector-breakdown">
+                        <div class="container">
+                            <h2 style="color: #146eb4; font-weight: 700; margin-bottom: 40px; text-align: center; font-size: 2.5rem;">Funding by Sector</h2>
+                            <div class="row">
+                                <div class="col-md-8 offset-md-2">
+                                    <div class="sector-item">
+                                        <div class="sector-icon"><i class="fas fa-heart"></i></div>
+                                        <div class="sector-info">
+                                            <h4>Health</h4>
+                                            <p>Medical services, nutrition programs, and disease prevention</p>
+                                        </div>
+                                        <div class="sector-amount">28%</div>
+                                    </div>
+                                    <div class="sector-item">
+                                        <div class="sector-icon"><i class="fas fa-utensils"></i></div>
+                                        <div class="sector-info">
+                                            <h4>Food Security</h4>
+                                            <p>Emergency food assistance and agricultural support</p>
+                                        </div>
+                                        <div class="sector-amount">22%</div>
+                                    </div>
+                                    <div class="sector-item">
+                                        <div class="sector-icon"><i class="fas fa-home"></i></div>
+                                        <div class="sector-info">
+                                            <h4>Shelter & NFI</h4>
+                                            <p>Emergency shelter and non-food items for displaced populations</p>
+                                        </div>
+                                        <div class="sector-amount">18%</div>
+                                    </div>
+                                    <div class="sector-item">
+                                        <div class="sector-icon"><i class="fas fa-shield-alt"></i></div>
+                                        <div class="sector-info">
+                                            <h4>Protection</h4>
+                                            <p>Child protection, GBV prevention, and human rights support</p>
+                                        </div>
+                                        <div class="sector-amount">15%</div>
+                                    </div>
+                                    <div class="sector-item">
+                                        <div class="sector-icon"><i class="fas fa-tint"></i></div>
+                                        <div class="sector-info">
+                                            <h4>WASH</h4>
+                                            <p>Water, sanitation, and hygiene programs</p>
+                                        </div>
+                                        <div class="sector-amount">12%</div>
+                                    </div>
+                                    <div class="sector-item">
+                                        <div class="sector-icon"><i class="fas fa-graduation-cap"></i></div>
+                                        <div class="sector-info">
+                                            <h4>Education</h4>
+                                            <p>Emergency education and learning opportunities</p>
+                                        </div>
+                                        <div class="sector-amount">5%</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
