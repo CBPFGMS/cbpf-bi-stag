@@ -53,31 +53,6 @@
             color: #666;
             margin-bottom: 0;
         }
-        .year-filter-section {
-            padding: 30px 0;
-            background-color: white;
-        }
-        .year-filter {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-        .year-filter label {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 0;
-        }
-        .year-filter select {
-            padding: 10px 20px;
-            font-size: 1rem;
-            border: 2px solid #146eb4;
-            border-radius: 5px;
-            background-color: white;
-            color: #146eb4;
-            cursor: pointer;
-        }
         .dashboard-icons-section {
             padding: 50px 0;
             background-color: #f8f9fa;
@@ -124,30 +99,366 @@
             text-align: center;
             font-size: 2rem;
         }
-        .map-section {
+        .global-indicators-section {
             padding: 60px 0;
             background-color: #f8f9fa;
         }
-        .map-placeholder {
+        .global-indicators-header {
             background: white;
             border-radius: 8px;
             padding: 40px;
-            text-align: center;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            min-height: 500px;
+            margin-bottom: 30px;
+        }
+        .global-indicators-header h2 {
+            color: #146eb4;
+            font-weight: 700;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        .global-indicators-header p {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        .indicators-nav {
+            background: white;
+            border-radius: 8px;
+            padding: 20px 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-link-back {
+            color: #146eb4;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .nav-link-back:hover {
+            text-decoration: underline;
+        }
+        .sector-icons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+            flex: 1;
+            margin: 0 20px;
+        }
+        .sector-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-direction: column;
-        }
-        .map-placeholder i {
-            font-size: 5rem;
-            color: #146eb4;
-            margin-bottom: 20px;
-        }
-        .map-placeholder p {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid #e0e0e0;
+            background: white;
             color: #666;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+        }
+        .sector-icon.active {
+            background-color: #146eb4;
+            color: white;
+            border-color: #146eb4;
+        }
+        .sector-icon:hover {
+            transform: scale(1.1);
+        }
+        .nav-link-next {
+            color: #146eb4;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-right: 15px;
+        }
+        .nav-link-next:hover {
+            text-decoration: underline;
+        }
+        .download-icon {
+            color: #146eb4;
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+        .indicators-panel {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .indicators-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .indicators-panel-title h3 {
+            color: #146eb4;
+            font-weight: 700;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+        .indicators-panel-title p {
+            color: #666;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+        .panel-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .show-total-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .show-total-toggle label {
+            color: #666;
+            font-size: 0.95rem;
+            margin: 0;
+            cursor: pointer;
+        }
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 24px;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 24px;
+        }
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+        .toggle-switch input:checked + .toggle-slider {
+            background-color: #146eb4;
+        }
+        .toggle-switch input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+        .expand-btn {
+            background-color: #146eb4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .expand-btn:hover {
+            background-color: #0d5a8f;
+        }
+        .indicators-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .indicators-table thead {
+            background-color: #f8f9fa;
+        }
+        .indicators-table th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+            border-bottom: 2px solid #dee2e6;
+            font-size: 0.95rem;
+        }
+        .indicators-table th i {
+            margin-left: 5px;
+            color: #146eb4;
+            cursor: help;
+        }
+        .indicators-table td {
+            padding: 15px;
+            border-bottom: 1px solid #dee2e6;
+            color: #666;
+        }
+        .indicators-table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+        .indicator-name {
+            color: #333;
+            font-weight: 500;
+        }
+        .projects-count {
+            text-align: center;
+            font-weight: 600;
+            color: #146eb4;
+        }
+        .targeted-value, .reached-value {
+            text-align: center;
+            font-weight: 600;
+        }
+        .targeted-value {
+            color: #666;
+        }
+        .reached-value {
+            color: #28a745;
+        }
+        .person-icon {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background-color: #146eb4;
+            border-radius: 50%;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+        .implementing-partners-section {
+            padding: 60px 0;
+            background-color: white;
+        }
+        .partners-table-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .partners-table-title {
+            text-align: center;
+            color: #146eb4;
+            font-weight: 700;
+            font-size: 2rem;
+            padding: 30px 0 20px 0;
+            margin: 0;
+        }
+        .partners-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .partners-table thead {
+            background-color: #f8f9fa;
+        }
+        .partners-table th {
+            padding: 15px 20px;
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+            border-bottom: 2px solid #dee2e6;
+            font-size: 0.95rem;
+        }
+        .partners-table th.sortable {
+            cursor: pointer;
+            user-select: none;
+        }
+        .partners-table th.sortable:hover {
+            background-color: #e9ecef;
+        }
+        .partners-table th i {
+            margin-left: 5px;
+            color: #146eb4;
+        }
+        .partners-table tbody tr {
+            border-bottom: 1px solid #e9ecef;
+        }
+        .partners-table tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        .partners-table tbody tr:nth-child(odd) {
+            background-color: white;
+        }
+        .partners-table tbody tr:hover {
+            background-color: #e9ecef;
+        }
+        .partners-table td {
+            padding: 15px 20px;
+            vertical-align: middle;
+        }
+        .organization-name {
+            color: #333;
+            font-weight: 500;
+            position: relative;
+            padding-left: 5px;
+        }
+        .organization-name::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: #146eb4;
+        }
+        .sector-icon-cell {
+            text-align: center;
+        }
+        .sector-icon-display {
+            display: inline-flex;
+            width: 40px;
+            height: 40px;
+            background-color: #146eb4;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+        .allocation-cell {
+            min-width: 280px;
+            width: 280px;
+        }
+        .allocation-bar-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+        }
+        .allocation-bar {
+            flex: 1;
+            height: 24px;
+            background-color: #dc3545;
+            border-radius: 3px;
+            min-width: 30px;
+            max-width: 180px;
+        }
+        .allocation-amount {
+            color: #333;
+            font-weight: 600;
+            font-size: 0.95rem;
+            width: 70px;
+            text-align: right;
+            flex-shrink: 0;
+            white-space: nowrap;
+            display: inline-block;
+        }
+        .cbpf-count-cell, .projects-count-cell {
+            text-align: center;
+            color: #333;
+            font-weight: 600;
+            font-size: 0.95rem;
         }
         .region-section {
             padding: 60px 0;
@@ -414,18 +725,6 @@
                         </div>
                     </section>
 
-                    <!-- Year Filter Section -->
-                    <section class="year-filter-section">
-                        <div class="container">
-                            <div class="year-filter">
-                                <label for="year-select">Select Year:</label>
-                                <select id="year-select" class="form-control" style="width: auto; display: inline-block;">
-                                    <option value="2025" selected>2025</option>
-                                </select>
-                            </div>
-                        </div>
-                    </section>
-
                     <!-- Dashboard Icons Section -->
                     <section class="dashboard-icons-section">
                         <div class="container">
@@ -463,14 +762,387 @@
                         </div>
                     </section>
 
-                    <!-- Map Section -->
-                    <section class="map-section">
+                    <!-- Global Indicators Section -->
+                    <section class="global-indicators-section">
                         <div class="container">
-                            <div class="map-placeholder">
-                                <i class="fas fa-globe-americas"></i>
-                                <h3 style="color: #146eb4; margin-bottom: 15px;">Interactive Global Map</h3>
-                                <p>Interactive map showing all 23 CBPF operations worldwide<br>Click on any country to see detailed funding and impact data</p>
-                                <p style="margin-top: 20px; font-size: 0.9rem; color: #999;"><em>Map visualization can be integrated with existing CBPF map components</em></p>
+                            <div class="global-indicators-header">
+                                <h2>Global Indicators</h2>
+                                <p>
+                                    These indicators are metrics used to assess the performance and impact of OCHA-funded projects. 
+                                    They cover various aspects such as beneficiary reach, funding allocation, response time, and intervention effectiveness. 
+                                    The goal is to provide better accountability and transparency in humanitarian operations.
+                                </p>
+                            </div>
+
+                            <!-- Navigation Bar -->
+                            <div class="indicators-nav">
+                                <a href="#" class="nav-link-back">&lt; BACK</a>
+                                <div class="sector-icons">
+                                    <div class="sector-icon active" title="All Sectors">
+                                        <i class="fas fa-th"></i>
+                                    </div>
+                                    <div class="sector-icon" title="Water & Sanitation">
+                                        <i class="fas fa-tint"></i>
+                                    </div>
+                                    <div class="sector-icon" title="Health">
+                                        <i class="fas fa-heart"></i>
+                                    </div>
+                                    <div class="sector-icon" title="Shelter">
+                                        <i class="fas fa-home"></i>
+                                    </div>
+                                    <div class="sector-icon" title="Food Security">
+                                        <i class="fas fa-utensils"></i>
+                                    </div>
+                                    <div class="sector-icon" title="Education">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="sector-icon" title="Protection">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                </div>
+                                <div style="display: flex; align-items: center;">
+                                    <a href="#" class="nav-link-next">NEXT &gt;</a>
+                                    <i class="fas fa-download download-icon" title="Download"></i>
+                                </div>
+                            </div>
+
+                            <!-- Indicators Panel -->
+                            <div class="indicators-panel">
+                                <div class="indicators-panel-header">
+                                    <div class="indicators-panel-title">
+                                        <h3>All Sectors</h3>
+                                        <p>From a total of 930 projects</p>
+                                    </div>
+                                    <div class="panel-controls">
+                                        <div class="show-total-toggle">
+                                            <label for="show-total">Show Total</label>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="show-total">
+                                                <span class="toggle-slider"></span>
+                                            </label>
+                                        </div>
+                                        <button class="expand-btn">EXPAND</button>
+                                    </div>
+                                </div>
+
+                                <div style="overflow-x: auto;">
+                                    <table class="indicators-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Indicators (251) <i class="fas fa-sort-up"></i></th>
+                                                <th>Projects <i class="fas fa-info-circle" title="Number of projects using this indicator"></i></th>
+                                                <th>Targeted <i class="fas fa-bullseye"></i></th>
+                                                <th>✓ Reached <i class="fas fa-check"></i></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="indicator-name">(Global) AP.1b - AAP - Percentage of affected people who state that they are aware of their rights and entitlements.</td>
+                                                <td class="projects-count">7</td>
+                                                <td class="targeted-value">
+                                                    <span class="person-icon"></span>85%
+                                                </td>
+                                                <td class="reached-value">0%</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="indicator-name">(Global) AP.1b - AAP - Percentage of affected people who state that they are aware of their rights and entitlements.</td>
+                                                <td class="projects-count">6</td>
+                                                <td class="targeted-value">
+                                                    <span class="person-icon"></span>79.2%
+                                                </td>
+                                                <td class="reached-value">11.7%</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="indicator-name">(Global) AP.1b - AAP - Percentage of affected people who state that they are aware of their rights and entitlements.</td>
+                                                <td class="projects-count">5</td>
+                                                <td class="targeted-value">
+                                                    <span class="person-icon"></span>84%
+                                                </td>
+                                                <td class="reached-value">18%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Implementing Partners Section -->
+                    <section class="implementing-partners-section">
+                        <div class="container">
+                            <div class="partners-table-container">
+                                <h2 class="partners-table-title">Implementing Partners</h2>
+                                <div style="overflow-x: auto;">
+                                    <table class="partners-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Organization Name</th>
+                                                <th>Sector</th>
+                                                <th class="sortable">Approved Amount in USD (Millions)<i class="fas fa-sort-down"></i></th>
+                                                <th># of Projects</th>
+                                                <th># of CBPFs</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="organization-name">International Organization for Migration</td>
+                                                <td class="sector-icon-cell">
+                                                    <div class="sector-icon-display">
+                                                        <i class="fas fa-hands-helping"></i>
+                                                    </div>
+                                                </td>
+                                                <td class="cbpf-count-cell">14</td>
+                                                <td class="allocation-cell">
+                                                    <div class="allocation-bar-container">
+                                                        <div class="allocation-bar" style="width: 100%;"></div>
+                                                        <span class="allocation-amount">2.0M</span>
+                                                    </div>
+                                                </td>
+                                                <td class="projects-count-cell">10</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="organization-name">Organization for Coordination of Humanitarian Relief</td>
+                                                <td class="sector-icon-cell">
+                                                    <div class="sector-icon-display">
+                                                        <i class="fas fa-tint"></i>
+                                                    </div>
+                                                </td>
+                                                <td class="cbpf-count-cell">9</td>
+                                                <td class="allocation-cell">
+                                                    <div class="allocation-bar-container">
+                                                        <div class="allocation-bar" style="width: 85%;"></div>
+                                                        <span class="allocation-amount">1.7M</span>
+                                                    </div>
+                                                </td>
+                                                <td class="projects-count-cell">8</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="organization-name">United Nations High Commissioner for Refugees</td>
+                                                <td class="sector-icon-cell">
+                                                    <div class="sector-icon-display">
+                                                        <i class="fas fa-users"></i>
+                                                    </div>
+                                                </td>
+                                                <td class="cbpf-count-cell">15</td>
+                                                <td class="allocation-cell">
+                                                    <div class="allocation-bar-container">
+                                                        <div class="allocation-bar" style="width: 75%;"></div>
+                                                        <span class="allocation-amount">1.5M</span>
+                                                    </div>
+                                                </td>
+                                                <td class="projects-count-cell">9</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="organization-name">Afghani Community and Health Rehabilitation Organization</td>
+                                                <td class="sector-icon-cell">
+                                                    <div class="sector-icon-display">
+                                                        <i class="fas fa-heart"></i>
+                                                    </div>
+                                                </td>
+                                                <td class="cbpf-count-cell">2</td>
+                                                <td class="allocation-cell">
+                                                    <div class="allocation-bar-container">
+                                                        <div class="allocation-bar" style="width: 65%;"></div>
+                                                        <span class="allocation-amount">1.3M</span>
+                                                    </div>
+                                                </td>
+                                                <td class="projects-count-cell">3</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="organization-name">Islamic Relief Worldwide</td>
+                                                <td class="sector-icon-cell">
+                                                    <div class="sector-icon-display">
+                                                        <i class="fas fa-home"></i>
+                                                    </div>
+                                                </td>
+                                                <td class="cbpf-count-cell">7</td>
+                                                <td class="allocation-cell">
+                                                    <div class="allocation-bar-container">
+                                                        <div class="allocation-bar" style="width: 60%;"></div>
+                                                        <span class="allocation-amount">1.2M</span>
+                                                    </div>
+                                                </td>
+                                                <td class="projects-count-cell">7</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="organization-name">Asia Community Development Organization</td>
+                                                <td class="sector-icon-cell">
+                                                    <div class="sector-icon-display">
+                                                        <i class="fas fa-tint"></i>
+                                                    </div>
+                                                </td>
+                                                <td class="cbpf-count-cell">1</td>
+                                                <td class="allocation-cell">
+                                                    <div class="allocation-bar-container">
+                                                        <div class="allocation-bar" style="width: 50%;"></div>
+                                                        <span class="allocation-amount">1.0M</span>
+                                                    </div>
+                                                </td>
+                                                <td class="projects-count-cell">2</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="organization-name">Save the Children Fund</td>
+                                                <td class="sector-icon-cell">
+                                                    <div class="sector-icon-display">
+                                                        <i class="fas fa-tint"></i>
+                                                    </div>
+                                                </td>
+                                                <td class="cbpf-count-cell">11</td>
+                                                <td class="allocation-cell">
+                                                    <div class="allocation-bar-container">
+                                                        <div class="allocation-bar" style="width: 45%;"></div>
+                                                        <span class="allocation-amount">900K</span>
+                                                    </div>
+                                                </td>
+                                                <td class="projects-count-cell">6</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="organization-name">Deutsche Welthungerhilfe e. V.</td>
+                                                <td class="sector-icon-cell">
+                                                    <div class="sector-icon-display">
+                                                        <i class="fas fa-seedling"></i>
+                                                    </div>
+                                                </td>
+                                                <td class="cbpf-count-cell">5</td>
+                                                <td class="allocation-cell">
+                                                    <div class="allocation-bar-container">
+                                                        <div class="allocation-bar" style="width: 40%;"></div>
+                                                        <span class="allocation-amount">800K</span>
+                                                    </div>
+                                                </td>
+                                                <td class="projects-count-cell">5</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="organization-name">Islamic Relief Worldwide</td>
+                                                <td class="sector-icon-cell">
+                                                    <div class="sector-icon-display">
+                                                        <i class="fas fa-tint"></i>
+                                                    </div>
+                                                </td>
+                                                <td class="cbpf-count-cell">4</td>
+                                                <td class="allocation-cell">
+                                                    <div class="allocation-bar-container">
+                                                        <div class="allocation-bar" style="width: 35%;"></div>
+                                                        <span class="allocation-amount">700K</span>
+                                                    </div>
+                                                </td>
+                                                <td class="projects-count-cell">4</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="organization-name">Organization for Afghan Women Capacity & Knowledge</td>
+                                                <td class="sector-icon-cell">
+                                                    <div class="sector-icon-display">
+                                                        <i class="fas fa-tint"></i>
+                                                    </div>
+                                                </td>
+                                                <td class="cbpf-count-cell">1</td>
+                                                <td class="allocation-cell">
+                                                    <div class="allocation-bar-container">
+                                                        <div class="allocation-bar" style="width: 30%;"></div>
+                                                        <span class="allocation-amount">600K</span>
+                                                    </div>
+                                                </td>
+                                                <td class="projects-count-cell">1</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="organization-name">Afghanistan National Urban and Rural Development Organization</td>
+                                                <td class="sector-icon-cell">
+                                                    <div class="sector-icon-display">
+                                                        <i class="fas fa-tint"></i>
+                                                    </div>
+                                                </td>
+                                                <td class="cbpf-count-cell">3</td>
+                                                <td class="allocation-cell">
+                                                    <div class="allocation-bar-container">
+                                                        <div class="allocation-bar" style="width: 25%;"></div>
+                                                        <span class="allocation-amount">500K</span>
+                                                    </div>
+                                                </td>
+                                                <td class="projects-count-cell">2</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="organization-name">Norwegian Refugee Council</td>
+                                                <td class="sector-icon-cell">
+                                                    <div class="sector-icon-display">
+                                                        <i class="fas fa-hands-helping"></i>
+                                                    </div>
+                                                </td>
+                                                <td class="cbpf-count-cell">13</td>
+                                                <td class="allocation-cell">
+                                                    <div class="allocation-bar-container">
+                                                        <div class="allocation-bar" style="width: 15%;"></div>
+                                                        <span class="allocation-amount">300K</span>
+                                                    </div>
+                                                </td>
+                                                <td class="projects-count-cell">9</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="organization-name">World Food Programme</td>
+                                                <td class="sector-icon-cell">
+                                                    <div class="sector-icon-display">
+                                                        <i class="fas fa-utensils"></i>
+                                                    </div>
+                                                </td>
+                                                <td class="cbpf-count-cell">12</td>
+                                                <td class="allocation-cell">
+                                                    <div class="allocation-bar-container">
+                                                        <div class="allocation-bar" style="width: 12.5%;"></div>
+                                                        <span class="allocation-amount">250K</span>
+                                                    </div>
+                                                </td>
+                                                <td class="projects-count-cell">10</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="organization-name">Action Against Hunger</td>
+                                                <td class="sector-icon-cell">
+                                                    <div class="sector-icon-display">
+                                                        <i class="fas fa-heart"></i>
+                                                    </div>
+                                                </td>
+                                                <td class="cbpf-count-cell">8</td>
+                                                <td class="allocation-cell">
+                                                    <div class="allocation-bar-container">
+                                                        <div class="allocation-bar" style="width: 10%;"></div>
+                                                        <span class="allocation-amount">200K</span>
+                                                    </div>
+                                                </td>
+                                                <td class="projects-count-cell">6</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="organization-name">International Medical Corps</td>
+                                                <td class="sector-icon-cell">
+                                                    <div class="sector-icon-display">
+                                                        <i class="fas fa-heart"></i>
+                                                    </div>
+                                                </td>
+                                                <td class="cbpf-count-cell">6</td>
+                                                <td class="allocation-cell">
+                                                    <div class="allocation-bar-container">
+                                                        <div class="allocation-bar" style="width: 7.5%;"></div>
+                                                        <span class="allocation-amount">150K</span>
+                                                    </div>
+                                                </td>
+                                                <td class="projects-count-cell">4</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="organization-name">Mercy Corps</td>
+                                                <td class="sector-icon-cell">
+                                                    <div class="sector-icon-display">
+                                                        <i class="fas fa-hands-helping"></i>
+                                                    </div>
+                                                </td>
+                                                <td class="cbpf-count-cell">10</td>
+                                                <td class="allocation-cell">
+                                                    <div class="allocation-bar-container">
+                                                        <div class="allocation-bar" style="width: 5%;"></div>
+                                                        <span class="allocation-amount">100K</span>
+                                                    </div>
+                                                </td>
+                                                <td class="projects-count-cell">3</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -556,63 +1228,6 @@
                                             <div class="region-stat">
                                                 <span class="value">5M+</span>
                                                 <span class="label">People Reached</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- Top Countries -->
-                    <section class="country-grid">
-                        <div class="container">
-                            <h2 style="color: #146eb4; font-weight: 700; margin-bottom: 40px; text-align: center; font-size: 2.5rem;">Top Funded Countries</h2>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="country-card">
-                                        <h4>Afghanistan</h4>
-                                        <p style="color: #666; margin-bottom: 15px;">Supporting millions affected by conflict and natural disasters with multi-sectoral assistance.</p>
-                                        <div class="country-metrics">
-                                            <div class="country-metric">
-                                                <span class="value">$245M</span>
-                                                <span class="label">Allocated</span>
-                                            </div>
-                                            <div class="country-metric">
-                                                <span class="value">156</span>
-                                                <span class="label">Projects</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="country-card">
-                                        <h4>Syria</h4>
-                                        <p style="color: #666; margin-bottom: 15px;">Providing critical humanitarian assistance to conflict-affected populations across the country.</p>
-                                        <div class="country-metrics">
-                                            <div class="country-metric">
-                                                <span class="value">$180M</span>
-                                                <span class="label">Allocated</span>
-                                            </div>
-                                            <div class="country-metric">
-                                                <span class="value">142</span>
-                                                <span class="label">Projects</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="country-card">
-                                        <h4>DRC</h4>
-                                        <p style="color: #666; margin-bottom: 15px;">Addressing complex humanitarian needs including displacement, health crises, and food insecurity.</p>
-                                        <div class="country-metrics">
-                                            <div class="country-metric">
-                                                <span class="value">$185M</span>
-                                                <span class="label">Allocated</span>
-                                            </div>
-                                            <div class="country-metric">
-                                                <span class="value">128</span>
-                                                <span class="label">Projects</span>
                                             </div>
                                         </div>
                                     </div>
@@ -752,13 +1367,6 @@
 	  });
 		$(window).on('click', function () {
      		$( '#cd-ocha-dropdown' ).css( 'display','none' );
-   		});
-
-		// Year filter change handler
-		$('#year-select').on('change', function() {
-			var selectedYear = $(this).val();
-			// Update KPIs based on selected year
-			loadKPIData(selectedYear);
 		});
 
 		// Load KPI data from API
@@ -798,6 +1406,91 @@
 
 		// Load initial data for 2025
 		loadKPIData(2025);
+
+		// Sector icon click handler
+		$('.sector-icon').on('click', function() {
+			$('.sector-icon').removeClass('active');
+			$(this).addClass('active');
+			// TODO: Filter indicators by selected sector
+			// You can add API call here to fetch filtered data
+		});
+
+		// Expand button handler
+		$('.expand-btn').on('click', function() {
+			// TODO: Implement expand/collapse functionality
+			var $table = $('.indicators-table');
+			if ($table.hasClass('expanded')) {
+				$table.removeClass('expanded');
+				$(this).text('EXPAND');
+			} else {
+				$table.addClass('expanded');
+				$(this).text('COLLAPSE');
+			}
+		});
+
+		// Show total toggle handler
+		$('#show-total').on('change', function() {
+			// TODO: Show/hide total rows in table
+			if ($(this).is(':checked')) {
+				// Show total rows
+			} else {
+				// Hide total rows
+			}
+		});
+
+		// Partners table sorting
+		$('.partners-table th.sortable').on('click', function() {
+			var $table = $('.partners-table');
+			var $tbody = $table.find('tbody');
+			var $rows = $tbody.find('tr').toArray();
+			var columnIndex = $(this).index();
+			var isAscending = $(this).find('i').hasClass('fa-sort-down');
+			
+			// Toggle sort direction
+			$('.partners-table th.sortable i').removeClass('fa-sort-down fa-sort-up');
+			$(this).find('i').addClass(isAscending ? 'fa-sort-up' : 'fa-sort-down');
+			
+			// Sort rows
+			$rows.sort(function(a, b) {
+				var aVal, bVal;
+				
+				if (columnIndex === 0) {
+					// Organization Name
+					aVal = $(a).find('td').eq(0).text().trim();
+					bVal = $(b).find('td').eq(0).text().trim();
+				} else if (columnIndex === 2) {
+					// # of CBPFs - numeric sorting
+					aVal = parseInt($(a).find('.cbpf-count-cell').text().trim());
+					bVal = parseInt($(b).find('.cbpf-count-cell').text().trim());
+				} else if (columnIndex === 3) {
+					// Approved Amount - handle both M and K formats
+					var aText = $(a).find('.allocation-amount').text().trim();
+					var bText = $(b).find('.allocation-amount').text().trim();
+					
+					// Convert to numeric value (millions)
+					aVal = parseFloat(aText.replace('M', '').replace('K', ''));
+					if (aText.indexOf('K') !== -1) {
+						aVal = aVal / 1000; // Convert K to M
+					}
+					
+					bVal = parseFloat(bText.replace('M', '').replace('K', ''));
+					if (bText.indexOf('K') !== -1) {
+						bVal = bVal / 1000; // Convert K to M
+					}
+				} else {
+					return 0;
+				}
+				
+				if (isAscending) {
+					return aVal > bVal ? 1 : -1;
+				} else {
+					return aVal < bVal ? 1 : -1;
+				}
+			});
+			
+			// Re-append sorted rows
+			$tbody.empty().append($rows);
+		});
 	});
 	</script>
 </body>
