@@ -101,44 +101,94 @@ $(".next__d5jll").click(function () {
 	}
 });
 
-function LoadCBPFSummary(allocYear) {
-	showLoader();
-	fetch(
-		"https://cbpfapi.unocha.org/vo2/odata/CBPFSummary?allocationYear=" +
-			allocYear,
+function fetchAllocationTotalByYear(allocYear) {
+	function sumFromRows(rows) {
+		var sum = 0;
+		(rows || []).forEach(function (row) {
+			var year =
+				typeof row.AllocationYear === "number"
+					? row.AllocationYear
+					: parseInt(row.AllocationYear, 10);
+			if (year === allocYear && row.TotalUSDPlanned != null) {
+				sum +=
+					typeof row.TotalUSDPlanned === "number"
+						? row.TotalUSDPlanned
+						: parseFloat(row.TotalUSDPlanned) || 0;
+			}
+		});
+		return sum;
+	}
+
+	// Use cached AllocationTypes data from chartsdata.js (same data used by cbsank chart)
+	var cachedData =
+		window.cbpfbiDataObject &&
+		window.cbpfbiDataObject.launchedAllocationsData;
+	if (cachedData) {
+		return Promise.resolve(cachedData).then(sumFromRows);
+	}
+
+	// Fallback: fetch if chartsdata not loaded yet
+	return fetch(
+		"https://cbpfapi.unocha.org/vo2/odata/AllocationTypes?FundTypeId=1&$format=csv",
 	)
 		.then(function (response) {
-			if (response.ok) {
-				response.json().then(function (data) {
-					//$div1_.textContent = JSON.stringify(data);
-					var obj = data;
-					if ($donors_ != null) $donors_.textContent = obj.donors;
+			if (!response.ok) return Promise.resolve(0);
+			return response.text();
+		})
+		.then(function (csvText) {
+			var rows = d3.csvParse(csvText);
+			return sumFromRows(rows);
+		})
+		.catch(function (error) {
+			console.log("AllocationTypes fetch error: ", error);
+			return 0;
+		});
+}
 
-					if ($partnersFunded_ != null)
-						$partnersFunded_.textContent = obj.partnersFunded;
+function LoadCBPFSummary(allocYear) {
+	showLoader();
+	Promise.all([
+		fetch(
+			"https://cbpfapi.unocha.org/vo2/odata/CBPFSummary?allocationYear=" +
+				allocYear,
+		).then(function (response) {
+			if (response.ok) return response.json();
+			return null;
+		}),
+		fetchAllocationTotalByYear(allocYear),
+	])
+		.then(function (results) {
+			var obj = results[0];
+			var allocationTotal = results[1];
 
-					if ($projects_ != null)
-						$projects_.textContent = obj.projectsFunded;
+			if (obj != null) {
+				if ($donors_ != null) $donors_.textContent = obj.donors;
 
-					if ($contributions_ != null)
-						$contributions_.textContent =
-							"$" + formatNumber(obj.contribTotalAmt);
+				if ($partnersFunded_ != null)
+					$partnersFunded_.textContent = obj.partnersFunded;
 
-					if ($allocations_ != null)
-						$allocations_.textContent =
-							"$" + formatNumber(obj.allocAmt);
+				if ($projects_ != null)
+					$projects_.textContent = obj.projectsFunded;
 
-					if ($underApproval_ != null)
-						$underApproval_.textContent =
-							"$" + formatNumber(obj.underApprovalAmt);
-				});
-			} else console.log("Network response was not ok.");
+				if ($contributions_ != null)
+					$contributions_.textContent =
+						"$" + formatNumber(obj.contribTotalAmt);
 
+				if ($underApproval_ != null)
+					$underApproval_.textContent =
+						"$" + formatNumber(obj.underApprovalAmt);
+			}
+
+			if ($allocations_ != null)
+				$allocations_.textContent =
+					"$" + formatNumber(allocationTotal);
+		})
+		.finally(function () {
 			hideLoader();
 		})
 		.catch(function (error) {
 			hideLoader();
-			console.log("Fetch error: ");
+			console.log("Fetch error: ", error);
 		});
 }
 

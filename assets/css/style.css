@@ -216,6 +216,11 @@ span[class*="tag-"] {
     line-height: 22px;
 }
 
+.figure-box-panel-wrapper {
+    min-height: 120px;
+    position: relative;
+}
+
 .figure-box-panel {
     margin: 0;
 }
