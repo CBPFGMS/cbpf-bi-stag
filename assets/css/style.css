@@ -1967,7 +1967,7 @@ td:nth-of-type(6) {
 
 .loading-panel {
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.05);
     display: flex;
     justify-content: center;
     height: 100%;

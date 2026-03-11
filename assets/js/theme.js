@@ -10,7 +10,24 @@ var yearToShowDataOnLoad = 2026;
 $(function () {
 	$(".annualHeading__2uJLv").text(yearToShowDataOnLoad);
 
-	LoadCBPFSummary(yearToShowDataOnLoad);
+	// Wait for cbpfbiDataObject (preloaded by chartsdata.js) before loading summary
+	function runWhenAllocationDataReady(fn) {
+		var dataPromise =
+			window.cbpfbiDataObject &&
+			window.cbpfbiDataObject.launchedAllocationsData;
+		if (dataPromise && typeof dataPromise.then === "function") {
+			dataPromise.then(fn);
+		} else if (window.cbpfbiDataObject) {
+			fn();
+		} else {
+			setTimeout(function () {
+				runWhenAllocationDataReady(fn);
+			}, 50);
+		}
+	}
+	runWhenAllocationDataReady(function () {
+		LoadCBPFSummary(yearToShowDataOnLoad);
+	});
 	changedYear = yearToShowDataOnLoad;
 
 	$(window).scroll(function () {
@@ -119,30 +136,15 @@ function fetchAllocationTotalByYear(allocYear) {
 		return sum;
 	}
 
-	// Use cached AllocationTypes data from chartsdata.js (same data used by cbsank chart)
-	var cachedData =
+	// Use preloaded data from cbpfbiDataObject (populated by chartsdata.js)
+	var dataPromise =
 		window.cbpfbiDataObject &&
 		window.cbpfbiDataObject.launchedAllocationsData;
-	if (cachedData) {
-		return Promise.resolve(cachedData).then(sumFromRows);
+	if (dataPromise && typeof dataPromise.then === "function") {
+		return dataPromise.then(sumFromRows);
 	}
-
-	// Fallback: fetch if chartsdata not loaded yet
-	return fetch(
-		"https://cbpfapi.unocha.org/vo2/odata/AllocationTypes?FundTypeId=1&$format=csv",
-	)
-		.then(function (response) {
-			if (!response.ok) return Promise.resolve(0);
-			return response.text();
-		})
-		.then(function (csvText) {
-			var rows = d3.csvParse(csvText);
-			return sumFromRows(rows);
-		})
-		.catch(function (error) {
-			console.log("AllocationTypes fetch error: ", error);
-			return 0;
-		});
+	// Data not yet available (e.g. chartsdata.js not loaded)
+	return Promise.resolve(0);
 }
 
 function LoadCBPFSummary(allocYear) {
