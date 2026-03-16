@@ -53,11 +53,10 @@ window.addEventListener("load", function () {
 					"https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js",
 				],
 
-				// Batch 3: Theme and utilities (after plugins)
+				// Batch 3: Theme and utilities (Font Awesome Kit removed - triggers Chrome local network prompt; icons use static CSS in index.html)
 				[
 					"assets/js/respond.js",
 					"assets/js/theme.js",
-					"https://kit.fontawesome.com/d5d759e566.js",
 				],
 				// Batch 4: Heavy libraries
 				[
