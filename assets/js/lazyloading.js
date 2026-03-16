@@ -53,14 +53,17 @@ window.addEventListener("load", function () {
 					"https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js",
 				],
 
-				// Batch 3: Theme and utilities (Font Awesome Kit removed - triggers Chrome local network prompt; icons use static CSS in index.html)
+				// Batch 3: Theme and utilities (after plugins)
 				[
 					"assets/js/respond.js",
 					"assets/js/theme.js",
+					"https://kit.fontawesome.com/d5d759e566.js",
 				],
-				// Batch 4: Heavy libraries (html2canvas/jspdf omitted - trigger Chrome local network prompt; chart scripts load on-demand for PDF export)
+				// Batch 4: Heavy libraries
 				[
 					"https://cdn.jsdelivr.net/npm/@ungap/url-search-params@0.1.2/min.min.js",
+					"https://cbpfgms.github.io/libraries/html2canvas.min.js",
+					"https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js",
 					"https://cdnjs.cloudflare.com/ajax/libs/d3-sankey/0.12.3/d3-sankey.min.js",
 				],
 			];

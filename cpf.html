@@ -14,14 +14,16 @@
 	<style>
 		svg{background-color: transparent}
 	</style>
-	<!-- Google Analytics - DISABLED to prevent Chrome local network prompt -->
-    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-1884029-23"></script>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-1884029-23"></script>
     <script type="text/javascript">
     if (document.location.hostname.search("pfbi.unocha.org") !== -1) {
-        window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date()); gtag('config', 'UA-1884029-23');
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-1884029-23');
     }
-    </script> -->
+    </script>
 </head>
 
 <body>
@@ -200,9 +202,10 @@
    	<script type="text/javascript">
 		
     if (document.location.hostname.search("cbpf.data.unocha.org") !== -1) {
-        /* gtag DISABLED to prevent Chrome local network prompt
-        window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date()); gtag('config', 'UA-1884029-23'); */
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-1884029-23');
 		$.getScript("https://cbpfgms.github.io/pbigam/src/d3chartpbigam.js", function() {});
     } 
 	else{

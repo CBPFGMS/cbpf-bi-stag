@@ -13,8 +13,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 	<link rel="preconnect" href="https://cbpfgms.github.io" />
 	<link rel="preconnect" href="https://cdnjs.cloudflare.com" />
-	<!-- Font Awesome: use static CSS only (kit can trigger Chrome local network prompt) -->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous" />
+	<link rel="dns-prefetch" href="//kit.fontawesome.com" />
 
 	<!-- Critical CSS -->
 	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
@@ -43,9 +42,11 @@
 		integrity="sha512-FHsFVKQ/T1KWJDGSbrUhTJyS1ph3eRrxI228ND0EGaEp6v4a/vGwPWd3Dtd/+9cI7ccofZvl/wulICEurHN1pg=="
 		crossorigin="anonymous" defer></script>
 
-	<!-- Deferred third-party scripts (html2canvas/jspdf removed from initial load - they trigger Chrome local network prompt; chart scripts load them on-demand for PDF export) -->
+	<!-- Deferred third-party scripts -->
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@ungap/url-search-params@0.1.2/min.min.js"
 		defer></script>
+	<script type="text/javascript" src="https://cbpfgms.github.io/libraries/html2canvas.min.js" defer></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js" defer></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3-sankey/0.12.3/d3-sankey.min.js"
 		defer></script>
 
@@ -56,23 +57,36 @@
 		<link rel="stylesheet" href="https://cbpfgms.github.io/css/d3chartstyles.css" />
 	</noscript>
 
-	<!-- Google Tag Manager - DISABLED to prevent Chrome "Allow other devices on your local network" prompt (LNA). Re-enable after auditing GTM container for tags that request local/private URLs. -->
-	<!--
+	<!-- Google Tag Manager - Deferred to reduce main-thread blocking -->
 	<script>
+		// Defer GTM initialization to avoid blocking main thread
 		function initGTM() {
 			(function (w, d, s, l, i) {
 				w[l] = w[l] || [];
-				w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-				var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != "dataLayer" ? "&l=" + l : "";
-				j.async = true; j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+				w[l].push({
+					"gtm.start": new Date().getTime(),
+					event: "gtm.js",
+				});
+				var f = d.getElementsByTagName(s)[0],
+					j = d.createElement(s),
+					dl = l != "dataLayer" ? "&l=" + l : "";
+				j.async = true;
+				j.src =
+					"https://www.googletagmanager.com/gtm.js?id=" + i + dl;
 				f.parentNode.insertBefore(j, f);
 			})(window, document, "script", "dataLayer", "GTM-MFQ9DZ9");
 		}
+
+		// Initialize GTM after critical rendering
 		if (document.readyState === "loading") {
-			document.addEventListener("DOMContentLoaded", function () { setTimeout(initGTM, 1000); });
-		} else { setTimeout(initGTM, 1000); }
+			document.addEventListener("DOMContentLoaded", function () {
+				setTimeout(initGTM, 1000);
+			});
+		} else {
+			setTimeout(initGTM, 1000);
+		}
 	</script>
-	-->
+	<!-- End Google Tag Manager -->
 	<style>
 		.bn-news {
 			font-size: 11px;
@@ -113,8 +127,10 @@
 </head>
 
 <body style="font-family: Montserrat, sans-serif" data-spy="scroll" data-target="#toc">
-	<!-- Google Tag Manager (noscript) - DISABLED to prevent local network prompt -->
-	<!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MFQ9DZ9" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> -->
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MFQ9DZ9" height="0" width="0"
+			style="display: none; visibility: hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
 	<div class="notification-bar">
 		<div class="alert alert-warning fade in alert-dismissible show">
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -1397,9 +1413,8 @@
 		});
 	</script>
 
-	<!-- Cookie consent - temporarily disabled to test local network prompt; re-enable if prompt persists and you need the banner -->
-	<!-- <script type="text/javascript" id="cookieinfo" src="assets/js/cookieinfo.min.js" data-bg="#002856" data-fg="#FFF"
-		data-link="#FFF" data-cookie="CookieInfoScript" data-text-align="left" data-close-text="OK" async></script> -->
+	<script type="text/javascript" id="cookieinfo" src="assets/js/cookieinfo.min.js" data-bg="#002856" data-fg="#FFF"
+		data-link="#FFF" data-cookie="CookieInfoScript" data-text-align="left" data-close-text="OK" async></script>
 </body>
 
 </html>
