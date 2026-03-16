@@ -149,12 +149,11 @@ function fetchAllocationTotalByYear(allocYear) {
 
 function LoadCBPFSummary(allocYear) {
 	showLoader();
-	var summaryUrl =
-		"https://cbpfapi.unocha.org/vo2/odata/CBPFSummary?allocationYear=" +
-		allocYear;
-	if (window.cbpfResolveApiUrl) summaryUrl = window.cbpfResolveApiUrl(summaryUrl);
 	Promise.all([
-		fetch(summaryUrl).then(function (response) {
+		fetch(
+			"https://cbpfapi.unocha.org/vo2/odata/CBPFSummary?allocationYear=" +
+				allocYear,
+		).then(function (response) {
 			if (response.ok) return response.json();
 			return null;
 		}),
@@ -292,9 +291,7 @@ let $underApproval_ = document.querySelector("#underApprovalFig");
 let $updatedOn_ = document.querySelector("#updatedOn");
 let $allocationYear = document.querySelector(".annualHeading__2uJLv");
 
-var lastModifiedUrl = "https://cbpfapi.unocha.org/vo2/odata/LastModified";
-if (window.cbpfResolveApiUrl) lastModifiedUrl = window.cbpfResolveApiUrl(lastModifiedUrl);
-fetch(lastModifiedUrl)
+fetch("https://cbpfapi.unocha.org/vo2/odata/LastModified")
 	.then(function (response) {
 		if (response.ok) {
 			response.json().then(function (data) {

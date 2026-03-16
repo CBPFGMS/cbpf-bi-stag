@@ -47,25 +47,6 @@ const localStorageTime = 600000,
 	isPfbiSite = window.location.hostname === "cbpf.data.unocha.org",
 	consoleStyle = "background-color: #0d6cb6; color: white; padding: 2px;";
 
-// Use CORS proxy when page is on a different origin than the API (e.g. GitHub Pages).
-// Set window.CBPF_CORS_PROXY to a proxy base URL (e.g. "https://corsproxy.io/?") to override.
-// Set window.CBPF_CORS_PROXY = "" to disable proxy even on GitHub Pages.
-function resolveApiUrl(url) {
-	if (typeof url !== "string" || !url) return url;
-	const useProxy =
-		window.CBPF_CORS_PROXY !== undefined
-			? window.CBPF_CORS_PROXY
-			: window.location.hostname === "cbpfgms.github.io" &&
-			  url.indexOf("https://cbpfapi.unocha.org/") === 0;
-	if (!useProxy) return url;
-	const proxyBase =
-		typeof window.CBPF_CORS_PROXY === "string" && window.CBPF_CORS_PROXY
-			? window.CBPF_CORS_PROXY
-			: "https://corsproxy.io/?";
-	return proxyBase + encodeURIComponent(url);
-}
-window.cbpfResolveApiUrl = resolveApiUrl;
-
 const filesURLs = [
 	{
 		name: "masterDonors",
@@ -735,8 +716,7 @@ function fetchFile(fileName, url, method, autoType, dataFilter) {
 			method === "csv"
 				? d => verifyRow(d, dataFilter, url, autoType)
 				: null;
-		const urlToFetch = resolveApiUrl(url);
-		return fetchMethod(urlToFetch, rowFunctionWrapper).then(fetchedData => {
+		return fetchMethod(url, rowFunctionWrapper).then(fetchedData => {
 			try {
 				localStorage.setItem(
 					fileName,
