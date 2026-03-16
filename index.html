@@ -43,11 +43,9 @@
 		integrity="sha512-FHsFVKQ/T1KWJDGSbrUhTJyS1ph3eRrxI228ND0EGaEp6v4a/vGwPWd3Dtd/+9cI7ccofZvl/wulICEurHN1pg=="
 		crossorigin="anonymous" defer></script>
 
-	<!-- Deferred third-party scripts -->
+	<!-- Deferred third-party scripts (html2canvas/jspdf removed from initial load - they trigger Chrome local network prompt; chart scripts load them on-demand for PDF export) -->
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@ungap/url-search-params@0.1.2/min.min.js"
 		defer></script>
-	<script type="text/javascript" src="https://cbpfgms.github.io/libraries/html2canvas.min.js" defer></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js" defer></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3-sankey/0.12.3/d3-sankey.min.js"
 		defer></script>
 
@@ -1399,8 +1397,9 @@
 		});
 	</script>
 
-	<script type="text/javascript" id="cookieinfo" src="assets/js/cookieinfo.min.js" data-bg="#002856" data-fg="#FFF"
-		data-link="#FFF" data-cookie="CookieInfoScript" data-text-align="left" data-close-text="OK" async></script>
+	<!-- Cookie consent - temporarily disabled to test local network prompt; re-enable if prompt persists and you need the banner -->
+	<!-- <script type="text/javascript" id="cookieinfo" src="assets/js/cookieinfo.min.js" data-bg="#002856" data-fg="#FFF"
+		data-link="#FFF" data-cookie="CookieInfoScript" data-text-align="left" data-close-text="OK" async></script> -->
 </body>
 
 </html>

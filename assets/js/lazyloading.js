@@ -58,11 +58,9 @@ window.addEventListener("load", function () {
 					"assets/js/respond.js",
 					"assets/js/theme.js",
 				],
-				// Batch 4: Heavy libraries
+				// Batch 4: Heavy libraries (html2canvas/jspdf omitted - trigger Chrome local network prompt; chart scripts load on-demand for PDF export)
 				[
 					"https://cdn.jsdelivr.net/npm/@ungap/url-search-params@0.1.2/min.min.js",
-					"https://cbpfgms.github.io/libraries/html2canvas.min.js",
-					"https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js",
 					"https://cdnjs.cloudflare.com/ajax/libs/d3-sankey/0.12.3/d3-sankey.min.js",
 				],
 			];
