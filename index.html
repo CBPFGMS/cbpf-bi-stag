@@ -554,10 +554,32 @@
 												shelter and other
 												life-saving assistance.
 											</p>
+											<div class="form-check" style="margin-bottom: 1em; display: flex; flex-direction:column;align-items: flex-start;justify-content: center;">
+											<div class="form-check">
+											<input class="form-check-input" type="radio" name="allocRadio" id="allocRadio1" value="total" checked>
+											<label class="form-check-label" for="allocRadio1">
+												Total Allocations (including US)
+											</label>
+											</div>
+
+											<div class="form-check">
+											<input class="form-check-input" type="radio" name="allocRadio" id="allocRadio2" value="without-us">
+											<label class="form-check-label" for="allocRadio2">
+												Allocations (excluding US)
+											</label>
+											</div>
+
+											<div class="form-check">
+											<input class="form-check-input" type="radio" name="allocRadio" id="allocRadio3" value="us-only">
+											<label class="form-check-label" for="allocRadio3">
+												US only allocations
+											</label>
+											</div>
+											</div>
 											<div id="d3chartcontainerpbialp" data-title="Allocations by Organization Type" data-year="2026"
 												data-partner="total" data-showaverage="true" data-selectedcbpfs="none" data-netfunding="true"
 												data-minpercentage="3" data-showhelp="false" data-showlink="true" data-responsive="true"
-												data-lazyload="true"></div>
+												data-lazyload="true" data-type="total"></div>
 										</div>
 									</div>
 									<p class="text-center" style="
@@ -1411,6 +1433,24 @@
 				$("#cd-ocha-dropdown").css("display", "none");
 			});
 		});
+
+		const allocRadioButtons = document.querySelectorAll('input[name="allocRadio"]');
+
+		const allocContainer = document.getElementById(
+					"d3chartcontainerpbialp"
+				);
+
+		allocRadioButtons.forEach(radio => {
+		radio.addEventListener('change', (event) => {
+			if (event.target.checked) {
+				allocContainer.setAttribute("data-type", event.target.value);
+
+				if (window.reloadAllocChart) {
+					window.reloadAllocChart();
+				}
+			}
+		});
+});
 	</script>
 
 	<script type="text/javascript" id="cookieinfo" src="assets/js/cookieinfo.min.js" data-bg="#002856" data-fg="#FFF"
