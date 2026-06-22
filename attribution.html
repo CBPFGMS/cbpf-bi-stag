@@ -1,0 +1,959 @@
+<!doctype html>
+<html style="font-family: &quot;Roboto Slab&quot;, serif">
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+		/>
+		<title>Australia | CBPF donor attribution</title>
+		<link
+			rel="stylesheet"
+			crossorigin="anonymous"
+			href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i"
+		/>
+		<link
+			rel="stylesheet"
+			crossorigin="anonymous"
+			href="https://fonts.googleapis.com/css?family=Lora"
+		/>
+		<link
+			rel="stylesheet"
+			crossorigin="anonymous"
+			href="https://fonts.googleapis.com/css?family=Montserrat"
+		/>
+		<link
+			rel="stylesheet"
+			crossorigin="anonymous"
+			href="https://fonts.googleapis.com/css?family=Roboto+Slab"
+		/>
+		<link
+			rel="stylesheet"
+			href="assets/css/style.css"
+		/>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+			crossorigin="anonymous"
+		/>
+		<style>
+			.breadcrumb {
+				display: -ms-flexbox;
+				display: flex;
+				-ms-flex-wrap: wrap;
+				flex-wrap: wrap;
+				padding: 0.75rem 1rem;
+				margin-bottom: 1rem;
+				list-style: none;
+				background-color: #e9ecef;
+				border-radius: 0.25rem;
+			}
+			.breadcrumb-item + .breadcrumb-item {
+				padding-left: 0.5rem;
+			}
+			.breadcrumb-item + .breadcrumb-item:before {
+				display: inline-block;
+				padding-right: 0.5rem;
+				color: #6c757d;
+				content: "/";
+			}
+			.breadcrumb-item + .breadcrumb-item:hover:before {
+				text-decoration: underline;
+				text-decoration: none;
+			}
+			.breadcrumb-item.active {
+				color: #6c757d;
+			}
+			.section-divider {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				margin-bottom: 14px;
+				margin-top: 6px;
+				font-family: "Roboto", sans-serif;
+			}
+			.dl-amber {
+				color: #854f0b;
+			}
+			.dl-blue {
+				color: #185fa5;
+			}
+			.divider-label {
+				font-size: 18px;
+				font-weight: 500;
+				white-space: nowrap;
+			}
+			.divider-line {
+				flex: 1;
+				height: 1px;
+			}
+			.dline-amber {
+				background: #fac775;
+			}
+			.dline-blue {
+				background: #b5d4f4;
+			}
+			.row-3 {
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+			}
+			.section-row {
+				display: grid;
+				gap: 16px;
+				margin-bottom: 14px;
+				font-family: "Roboto", sans-serif;
+			}
+			.card-amber {
+				background: #fffdf8;
+				border: 1px solid #fac775;
+			}
+			.card-blue {
+				background: #f7fbff;
+				border: 1px solid #b5d4f4;
+			}
+			.card {
+				border-radius: 8px;
+				padding: 18px 20px 16px;
+			}
+			.card-top {
+				display: flex;
+				align-items: flex-start;
+				justify-content: space-between;
+				margin-bottom: 14px;
+			}
+			.cl-amber {
+				color: #854f0b;
+			}
+			.cl-blue {
+				color: #185fa5;
+			}
+			.card-label {
+				font-size: 16px;
+				font-weight: 500;
+				display: flex;
+				align-items: center;
+				gap: 6px;
+			}
+			.info-dot {
+				width: 16px;
+				height: 16px;
+				border-radius: 50%;
+				border: 1.5px solid #ccc;
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 10px;
+				color: #fff;
+				background-color: #666;
+				cursor: default;
+			}
+			.rb-amber {
+				color: #854f0b;
+				border-color: #fac775 !important;
+				background: #fef6ec;
+			}
+			.rb-blue {
+				color: #185fa5;
+				border-color: #b5d4f4 !important;
+				background: #edf5fd;
+			}
+			.remove-btn {
+				font-size: 14px;
+				font-weight: normal;
+				padding: 4px 14px;
+				border-radius: 20px;
+				border: 1px solid;
+				cursor: pointer;
+			}
+			.cv-amber {
+				color: #412402;
+			}
+			.cv-blue {
+				color: #042c53;
+			}
+			.card-value {
+				font-size: 43px;
+				font-weight: 500;
+			}
+			.card-footer {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				background: none;
+				border: none;
+				padding: 0;
+			}
+			.pt-amber {
+				background: #fac775;
+			}
+			.pt-blue {
+				background: #b5d4f4;
+			}
+			.prog-track {
+				flex: 1;
+				height: 10px;
+				border-radius: 5px;
+				overflow: hidden;
+			}
+			.pf-amber {
+				background: #ba7517;
+			}
+			.pf-blue {
+				background: #185fa5;
+			}
+			.prog-fill {
+				height: 100%;
+				border-radius: 5px;
+			}
+			.pct-amber {
+				color: #633806;
+			}
+			.pct-blue {
+				color: #0c447c;
+			}
+			.pct {
+				font-size: 16px;
+				font-weight: 500;
+				white-space: nowrap;
+			}
+			.legend {
+				display: flex;
+				flex-direction: row;
+				gap: 16px;
+				align-items: flex-end;
+				justify-content: flex-end;
+			}
+			.lp-amber {
+				background: #faeeda;
+				color: #633806;
+				border: 1px solid #fac775;
+			}
+			.legend-pill {
+				font-size: 12px;
+				font-weight: normal;
+				padding: 3px 12px;
+				border-radius: 20px;
+				display: flex;
+				align-items: center;
+				gap: 8px;
+			}
+			.lpd-amber {
+				background: #ef9f27;
+			}
+			.lp-dot {
+				width: 10px;
+				height: 10px;
+				border-radius: 50%;
+			}
+			.lp-blue {
+				background: #e6f1fb;
+				color: #0c447c;
+				border: 1px solid #b5d4f4;
+			}
+			.lpd-blue {
+				background: #378add;
+			}
+			/* Position the parent wrapper */
+			.bs-pure-css-tooltip {
+				position: relative;
+				display: inline-block; /* Keeps it tight around the text */
+			}
+
+			/* Hide the tooltip by default and position it above the text */
+			.bs-pure-css-tooltip .bs-tooltip-box {
+				visibility: hidden;
+				position: absolute;
+				bottom: 130%; /* Places it safely above the text */
+				left: 50%;
+				transform: translateX(-50%);
+				width: max-content;
+				max-width: 250px;
+				opacity: 0;
+				transition: opacity 0.2s ease-in-out;
+				z-index: 1050; /* Matches Bootstrap's tooltip depth */
+			}
+
+			/* Show the tooltip box on hover */
+			.bs-pure-css-tooltip:hover .bs-tooltip-box {
+				visibility: visible;
+				opacity: 1;
+			}
+			/* Container sizing for standard MUI fields */
+			.mui-dropdown {
+				min-width: 180px;
+			}
+
+			/* Base button styled as an outlined MUI text field */
+			.mui-dropdown-toggle {
+				background-color: transparent !important;
+				border: 1px solid rgba(0, 0, 0, 0.23) !important;
+				border-radius: 4px !important;
+				padding: 8px 14px 6px 14px !important;
+				font-family: inherit;
+				color: rgba(0, 0, 0, 0.87) !important;
+				transition:
+					border-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+					box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+			}
+
+			/* Hover effect */
+			.mui-dropdown-toggle:hover {
+				border-color: rgba(0, 0, 0, 0.87) !important;
+			}
+
+			/* Active / Focused state (MUI primary color) */
+			.mui-dropdown-toggle:focus,
+			.mui-dropdown-toggle[aria-expanded="true"] {
+				border-color: #1976d2 !important; /* MUI Primary Blue */
+				box-shadow: 0 0 0 1px #1976d2 !important;
+			}
+
+			/* Tiny label mimicking the floating label position */
+			.mui-label {
+				display: block;
+				font-size: 0.75rem;
+				color: rgba(0, 0, 0, 0.6);
+				line-height: 1;
+				margin-bottom: 2px;
+				text-transform: none;
+				letter-spacing: normal;
+			}
+
+			/* Current selection text style */
+			.mui-selected-value {
+				font-size: 0.95rem;
+				font-weight: 400;
+			}
+
+			/* Chevron arrow adjustment */
+			.mui-arrow {
+				font-size: 0.8rem;
+				color: rgba(0, 0, 0, 0.54);
+				pointer-events: none;
+			}
+
+			/* MUI Style Dropdown Menus */
+			.mui-dropdown-menu {
+				border-radius: 4px !important;
+				margin-top: 4px !important;
+				background-color: #fff;
+			}
+
+			/* Dropdown list items */
+			.mui-dropdown-menu .dropdown-item {
+				padding: 8px 16px;
+				font-size: 0.9rem;
+				color: rgba(0, 0, 0, 0.87);
+			}
+
+			.mui-dropdown-menu .dropdown-item:hover {
+				background-color: rgba(0, 0, 0, 0.04);
+			}
+
+			/* Selected item styling in the list */
+			.mui-dropdown-menu .dropdown-item.active {
+				background-color: rgba(25, 118, 210, 0.08) !important;
+				color: #1976d2 !important;
+				font-weight: 600;
+			}
+
+			/* Removes standard Bootstrap caret arrow */
+			.mui-dropdown-toggle::after {
+				display: none !important;
+			}
+		</style>
+	</head>
+
+	<body style="display: flex; min-height: 100vh; flex-direction: column">
+		<header class="cd-header">
+			<div class="cd-global-header">
+				<div class="container">
+					<div class="cd-ocha">
+						<button
+							type="button"
+							class="cd-ocha-btn cd-global-header__dropdown-btn"
+							data-toggle="dropdown"
+							id="cd-ocha-dropdown-toggle"
+							aria-expanded="false"
+							aria-label="OCHA Services"
+						>
+							<span
+								class="cd-ocha-btn__logo"
+								aria-hidden="true"
+							></span>
+							<span class="cd-ocha-btn__label"
+								>OCHA Services</span
+							>
+							<svg
+								class="icon icon--arrow-down"
+								style="background-color: transparent"
+							>
+								<use xlink:href="#arrow-down"></use>
+							</svg>
+						</button>
+						<div
+							class="cd-global-header__dropdown cd-ocha-dropdown cd-dropdown"
+							role="menu"
+							id="cd-ocha-dropdown"
+							aria-labelledby="cd-ocha-dropdown-toggle"
+						>
+							<div class="cd-ocha-dropdown__inner">
+								<div class="cd-ocha-dropdown__section">
+									<p class="cd-ocha-dropdown__heading">
+										Related Platforms
+									</p>
+									<ul class="cd-ocha-dropdown__list">
+										<li class="cd-ocha-dropdown__link">
+											<a href="https://gms.unocha.org/"
+												>CBPF GMS Portal</a
+											>
+										</li>
+										<li class="cd-ocha-dropdown__link">
+											<a
+												href="https://gms-blog.unocha.org"
+												>CBPF GMS Blog</a
+											>
+										</li>
+										<li class="cd-ocha-dropdown__link">
+											<a
+												href="https://gms.unocha.org/support"
+												>GMS Help Portal</a
+											>
+										</li>
+										<li class="cd-ocha-dropdown__link">
+											<a
+												href="https://www.unocha.org/our-work/humanitarian-financing/country-based-pooled-funds-cbpf"
+												>About CBPF</a
+											>
+										</li>
+									</ul>
+								</div>
+								<div class="cd-ocha-dropdown__section">
+									<p class="cd-ocha-dropdown__heading">
+										Other OCHA Services
+									</p>
+									<ul class="cd-ocha-dropdown__list">
+										<li class="cd-ocha-dropdown__link">
+											<a href="https://fts.unocha.org/"
+												>Financial Tracking Service</a
+											>
+										</li>
+										<li class="cd-ocha-dropdown__link">
+											<a href="https://data.humdata.org/"
+												>Humanitarian Data Exchange</a
+											>
+										</li>
+										<li class="cd-ocha-dropdown__link">
+											<a href="https://humanitarian.id/"
+												>Humanitarian ID</a
+											>
+										</li>
+										<li class="cd-ocha-dropdown__link">
+											<a
+												href="https://humanitarianresponse.info/"
+												>Humanitarian Response</a
+											>
+										</li>
+									</ul>
+								</div>
+								<div class="cd-ocha-dropdown__section">
+									<p
+										class="cd-ocha-dropdown__heading"
+										aria-hidden="true"
+									>
+										&nbsp;
+									</p>
+									<ul class="cd-ocha-dropdown__list">
+										<li class="cd-ocha-dropdown__link">
+											<a
+												href="https://interagencystandingcommittee.org/"
+												>Inter-Agency Standing
+												Committee</a
+											>
+										</li>
+										<li class="cd-ocha-dropdown__link">
+											<a href="https://unocha.org/"
+												>OCHA website</a
+											>
+										</li>
+										<li class="cd-ocha-dropdown__link">
+											<a href="https://reliefweb.int/"
+												>ReliefWeb</a
+											>
+										</li>
+										<li class="cd-ocha-dropdown__link">
+											<a href="https://vosocc.unocha.org/"
+												>Virtual OSOCC</a
+											>
+										</li>
+									</ul>
+								</div>
+								<div class="cd-ocha-dropdown__section">
+									<a
+										class="cd-ocha-dropdown__see-all"
+										href="https://www.unocha.org/ocha-digital-services"
+										target="_blank"
+										rel="noopener"
+										>See all</a
+									>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="cd-global-header__user-menu">
+						<div
+							id="block-hr-layout-hr-layout-login"
+							class="block block-hr-layout"
+						>
+							<ul class="menu">
+								<li>
+									<a href="https://pfdata.unocha.org/"
+										>Pooled Funds Data Hub</a
+									>
+								</li>
+								<li>
+									<a href="https://cerf.data.unocha.org"
+										>CERF Data Hub</a
+									>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		<nav
+			class="navbar navbar-light navbar-expand-lg bg-white clean-navbar"
+			style="
+				background-color: #fff;
+				color: rgb(254, 254, 254);
+				box-shadow: 0 2px 3px 0 #eee;
+				-webkit-box-shadow: 0 2px 3px 0 #eee;
+				-moz-box-shadow: 0 2px 3px 0 #eee;
+			"
+		>
+			<div class="container">
+				<a
+					class="navbar-brand logo"
+					href="index.html"
+					style="
+						background-repeat: no-repeat;
+						background-size: contain;
+						color: rgba(255, 255, 255, 0);
+						background-position: center;
+						background-image: url(&quot;assets/img/bi-logo.svg&quot;);
+					"
+					>CBPF DAT &nbsp; A P O</a
+				>
+			</div>
+		</nav>
+		<div style="flex: 1">
+			<div class="container h-100">
+				<div class="row h-100 mb-5">
+					<div class="col-md-12 d-flex flex-column">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item">
+								<a
+									href="./index.html"
+									title="Home"
+									>Home</a
+								>
+							</li>
+							<li class="breadcrumb-item">
+								Choose another donor
+							</li>
+						</ol>
+					</div>
+				</div>
+				<div
+					class="d-flex flex-column align-items-center justify-content-center py-2 text-center"
+				>
+					<img
+						src="https://flagcdn.com/w80/au.png"
+						srcset="https://flagcdn.com/w160/au.png 2x"
+						width="64"
+						alt="Australia Flag"
+						class="mb-2 shadow-sm rounded-1"
+					/>
+					<h1 class="display-4 text-uppercase tracking-wide mb-0">
+						Australia
+					</h1>
+					<p
+						class="text-muted fw-light text-uppercase tracking-wider small mb-0"
+					>
+						donor attribution overview
+					</p>
+				</div>
+				<div class="row justify-content-center mt-5">
+					<div class="col-md-6">
+						<div class="card card-blue">
+							<div class="card-top">
+								<div class="card-label cl-blue">
+									Allocation attribution
+								</div>
+								<div
+									class="remove-btn rb-blue bs-pure-css-tooltip"
+								>
+									Info
+									<span
+										class="bs-tooltip-box bg-dark text-white rounded p-2 shadow text-wrap"
+									>
+										Australia attributed allocation for the
+										selected funds and years is 14.7% of the
+										total 259.8 million allocated for the
+										selection, which corresponds to 38.2
+										million.
+									</span>
+								</div>
+							</div>
+							<div class="card-value cv-blue">$38.2M</div>
+							<div class="card-footer">
+								<div class="prog-track pt-blue">
+									<div
+										class="prog-fill pf-blue"
+										style="width: 14.7%"
+									></div>
+								</div>
+								<div class="pct pct-blue">14.7%</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="section-divider mt-4 pt-2">
+					<div class="divider-label">Make your selection</div>
+					<div class="divider-line dline-blue"></div>
+				</div>
+				<!-- MUI-Style Filter Row -->
+				<div class="d-flex flex-wrap gap-3 justify-content-flex-start py-4">
+					<!-- Fund Filter -->
+					<div class="dropdown mui-dropdown" style="width: 40%;">
+						<button
+							class="btn mui-dropdown-toggle text-start d-flex justify-content-between align-items-center w-100"
+							type="button"
+							id="fundDropdown"
+							data-bs-toggle="dropdown"
+							aria-expanded="false"
+						>
+							<div>
+								<span class="mui-label">Fund</span>
+								<span class="mui-selected-value d-block"
+									>All Funds</span
+								>
+							</div>
+							<i class="bi bi-chevron-down mui-arrow ms-3"></i>
+						</button>
+						<ul
+							class="dropdown-menu mui-dropdown-menu shadow shadow-sm border-0 py-1"
+							aria-labelledby="fundDropdown"
+						>
+							<li>
+								<a
+									class="dropdown-item active"
+									href="#"
+									>All Funds</a
+								>
+							</li>
+							<li>
+								<a
+									class="dropdown-item"
+									href="#"
+									>Afghanistan</a
+								>
+							</li>
+							<li>
+								<a
+									class="dropdown-item"
+									href="#"
+									>Ethiopia</a
+								>
+							</li>
+							<li>
+								<a
+									class="dropdown-item"
+									href="#"
+									>DRC</a
+								>
+							</li>
+							<li>
+								<a
+									class="dropdown-item"
+									href="#"
+									>Myanmar</a
+								>
+							</li>
+							<li>
+								<a
+									class="dropdown-item"
+									href="#"
+									>Yemen</a
+								>
+							</li>
+						</ul>
+					</div>
+
+					<!-- Year Filter -->
+					<div class="dropdown mui-dropdown">
+						<button
+							class="btn mui-dropdown-toggle text-start d-flex justify-content-between align-items-center w-100"
+							type="button"
+							id="yearDropdown"
+							data-bs-toggle="dropdown"
+							aria-expanded="false"
+						>
+							<div>
+								<span class="mui-label">Year</span>
+								<span class="mui-selected-value d-block"
+									>2026</span
+								>
+							</div>
+							<i class="bi bi-chevron-down mui-arrow ms-3"></i>
+						</button>
+						<ul
+							class="dropdown-menu mui-dropdown-menu shadow shadow-sm border-0 py-1"
+							aria-labelledby="yearDropdown"
+						>
+							<li>
+								<a
+									class="dropdown-item active"
+									href="#"
+									>2026</a
+								>
+							</li>
+							<li>
+								<a
+									class="dropdown-item"
+									href="#"
+									>2025</a
+								>
+							</li>
+							<li>
+								<a
+									class="dropdown-item"
+									href="#"
+									>2024</a
+								>
+							</li>
+						</ul>
+					</div>
+
+					<!-- Status Filter -->
+					<div class="dropdown mui-dropdown">
+						<button
+							class="btn mui-dropdown-toggle text-start d-flex justify-content-between align-items-center w-100"
+							type="button"
+							id="statusDropdown"
+							data-bs-toggle="dropdown"
+							aria-expanded="false"
+						>
+							<div>
+								<span class="mui-label">Status</span>
+								<span class="mui-selected-value d-block"
+									>All Statuses</span
+								>
+							</div>
+							<i class="bi bi-chevron-down mui-arrow ms-3"></i>
+						</button>
+						<ul
+							class="dropdown-menu mui-dropdown-menu shadow shadow-sm border-0 py-1"
+							aria-labelledby="statusDropdown"
+						>
+							<li>
+								<a
+									class="dropdown-item active"
+									href="#"
+									>All Statuses</a
+								>
+							</li>
+							<li>
+								<a
+									class="dropdown-item"
+									href="#"
+									>Under implementation</a
+								>
+							</li>
+							<li>
+								<a
+									class="dropdown-item"
+									href="#"
+									>Under approval</a
+								>
+							</li>
+							<li>
+								<a
+									class="dropdown-item"
+									href="#"
+									>Closed</a
+								>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="section-divider mt-4 pt-2">
+					<div class="divider-label">At a glance</div>
+					<div class="divider-line dline-blue"></div>
+				</div>
+				<!-- end of container -->
+			</div>
+		</div>
+		<footer
+			class="cd-footer"
+			role="contentinfo"
+		>
+			<div class="container cd-footer__inner">
+				<div class="cd-footer__section cd-footer__section--menu">
+					<ul class="cd-footer-menu">
+						<li class="menu-326 first">
+							<a
+								href="https://www.unocha.org/our-work/humanitarian-financing/country-based-pooled-funds-cbpf"
+								title=""
+								>About</a
+							>
+						</li>
+						<li class="menu-355">
+							<a
+								href="privacy-policy.html"
+								title=""
+								>Privacy</a
+							>
+						</li>
+						<li class="menu-327 last">
+							<a
+								href="privacy-policy.html"
+								title=""
+								>Terms of use</a
+							>
+						</li>
+					</ul>
+				</div>
+				<div class="cd-footer__section cd-footer__section--social">
+					<a
+						href="https://twitter.com/cbpfs?lang=en"
+						class="cd-footer-social__link"
+					>
+						<span class="element-invisible">Twitter</span>
+						<svg class="icon icon--twitter">
+							<use xlink:href="#sm-tt-def"></use>
+						</svg>
+
+						<svg class="icon icon--twitter hover-style">
+							<use xlink:href="#sm-tt-full"></use>
+						</svg>
+					</a>
+
+					<a
+						href="https://www.youtube.com/user/ochafilms"
+						class="cd-footer-social__link"
+					>
+						<span class="element-invisible">YouTube</span>
+
+						<svg class="icon icon--youtube">
+							<use xlink:href="#sm-yt-def"></use>
+						</svg>
+
+						<svg class="icon icon--youtube hover-style">
+							<use xlink:href="#sm-yt-full"></use>
+						</svg>
+					</a>
+				</div>
+				<div class="cd-footer__section cd-footer__section--mandate">
+					<div class="cd-mandate">
+						<span class="cd-mandate__heading"
+							>Service provided by</span
+						>
+						<span class="cd-mandate__logo">
+							<span class="element-invisible">UN-OCHA</span>
+						</span>
+						<span class="cd-mandate__text">
+							<p>
+								OCHA coordinates the global emergency response
+								to save lives and protect people in humanitarian
+								crises. We advocate for effective and principled
+								humanitarian action by all, for all.
+							</p>
+						</span>
+					</div>
+				</div>
+				<div class="cd-footer__section cd-footer__section--copyright">
+					<div class="cd-footer-copyright">
+						<span class="cd-footer-copyright__text"
+							>Except where otherwise noted, content on this site
+							is licensed under a
+							<a
+								href="https://creativecommons.org/licenses/by/4.0/"
+								>Creative Commons Attribution 4.0</a
+							>
+							International license.</span
+						>
+						<a
+							class="cd-footer-copyright__link"
+							href="https://creativecommons.org/licenses/by/4.0/"
+						>
+							<span class="element-invisible"
+								>Creative Commons BY 4.0</span
+							>
+							<svg class="icon icon--cc">
+								<use xlink:href="#creative-commons"></use>
+							</svg>
+						</a>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<div style="display: none">
+			<svg
+				class="icons-sprite"
+				xmlns="http://www.w3.org/2000/svg"
+				xmlns:xlink="http://www.w3.org/1999/xlink"
+			>
+				<symbol
+					viewBox="0 0 48 48"
+					id="sm-tt-def"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path
+						d="M24 5A19 19 0 1 1 5 24 19 19 0 0 1 24 5m0-3a22 22 0 1 0 22 22A22 22 0 0 0 24 2z"
+					></path>
+					<path
+						d="M36 16.56a9.83 9.83 0 0 1-2.83.78 4.94 4.94 0 0 0 2.16-2.72 9.84 9.84 0 0 1-3.13 1.19 4.93 4.93 0 0 0-8.52 3.37 5 5 0 0 0 .13 1.12 14 14 0 0 1-10.15-5.14 4.93 4.93 0 0 0 1.52 6.57 4.9 4.9 0 0 1-2.18-.62v.06A4.93 4.93 0 0 0 16.91 26a4.9 4.9 0 0 1-1.3.17 5 5 0 0 1-.93-.09 4.93 4.93 0 0 0 4.6 3.42 9.91 9.91 0 0 1-7.29 2 14 14 0 0 0 21.57-11.76v-.64A10 10 0 0 0 36 16.56z"
+					></path>
+				</symbol>
+				<symbol
+					viewBox="0 0 48 48"
+					id="sm-tt-full"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path
+						d="M24 2a22 22 0 1 0 22 22A22 22 0 0 0 24 2zm9.54 17.11v.64A14 14 0 0 1 12 31.54a9.92 9.92 0 0 0 7.29-2 4.93 4.93 0 0 1-4.6-3.42 5 5 0 0 0 .93.09 4.9 4.9 0 0 0 1.3-.17A4.93 4.93 0 0 1 13 21.17v-.06a4.9 4.9 0 0 0 2.23.62 4.93 4.93 0 0 1-1.52-6.57 14 14 0 0 0 10.15 5.14 5 5 0 0 1-.13-1.12 4.93 4.93 0 0 1 8.52-3.37 9.83 9.83 0 0 0 3.13-1.19 4.94 4.94 0 0 1-2.16 2.72 9.83 9.83 0 0 0 2.78-.78 10 10 0 0 1-2.46 2.55z"
+					></path>
+				</symbol>
+				<symbol
+					viewBox="0 0 48 48"
+					id="sm-yt-def"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path
+						d="M32.58 16.83c-1.72-.45-8.59-.45-8.59-.45s-6.75 0-8.46.42a3 3 0 0 0-2.11 2A26.77 26.77 0 0 0 13 24a26.77 26.77 0 0 0 .42 5.24 3 3 0 0 0 2.11 2c1.72.46 8.46.42 8.46.42s6.75 0 8.46-.42a3 3 0 0 0 2.08-2A27.91 27.91 0 0 0 35 24a28.42 28.42 0 0 0-.47-5.24 2.74 2.74 0 0 0-1.95-1.93zM21.26 27.38v-6.76L26.74 24z"
+					></path>
+					<path
+						d="M24 2a22 22 0 1 0 22 22A22 22 0 0 0 24 2zm0 41a19 19 0 1 1 19-19 19 19 0 0 1-19 19z"
+					></path>
+				</symbol>
+				<symbol
+					viewBox="0 0 48 48"
+					id="sm-yt-full"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path
+						d="M24 2a22 22 0 1 0 22 22A22 22 0 0 0 24 2zm10.54 27.24a3 3 0 0 1-2.08 2c-1.72.45-8.46.42-8.46.42s-6.75 0-8.46-.42a3 3 0 0 1-2.11-2A26.77 26.77 0 0 1 13 24a26.77 26.77 0 0 1 .42-5.24 3 3 0 0 1 2.11-2c1.72-.45 8.46-.42 8.46-.42s6.87 0 8.59.45a2.74 2.74 0 0 1 1.94 1.93A28.42 28.42 0 0 1 35 24a27.91 27.91 0 0 1-.46 5.24z"
+					></path>
+					<path d="M21.25 27.38l5.5-3.38-5.5-3.38v6.76z"></path>
+				</symbol>
+			</svg>
+		</div>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+			crossorigin="anonymous"
+		></script>
+	</body>
+</html>
