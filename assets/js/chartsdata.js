@@ -685,7 +685,7 @@ const filesURLs = [
 const filesURLsAllocationNSFTOption = [
 	{
 		name: "allocationsDataNSFTOption",
-		url: "https://cbpfapi.unocha.org/vo2/odata/AllocationBudgetTotalsByYearAndFund?&FundingType=3&ShowNSFT=",
+		url: "https://cbpfapi.unocha.org/vo3/odata/GlobalGenericDataExtract?SPCode=ALLOCATION_TOTAL_V2&PoolfundCodeAbbrv=&AllocationYearFrom=&ShowAllPooledFunds=0&AllocationYearTo=&FundingType=3&ShowNSFT=",
 		autoType: true,
 		format: "csv",
 		usedBy: ["pbialp"],
@@ -832,7 +832,7 @@ const filesURLsAllocationNSFTOption = [
 				filterFunction: null,
 			},
 			{
-				name: "TotalProjectsUnderApproval",
+				name: "TotalProjectsunderApproval",
 				type: "number",
 				filterFunction: n => n >= 0, //the dollar value must not be negative
 			},
@@ -865,7 +865,6 @@ filesURLs.forEach(file => {
 	);
 });
 
-//Keep working here
 filesURLsAllocationNSFTOption.forEach(file => {
 	["", 0, 1].forEach(nsftOption => {
 		const optionName =
@@ -873,7 +872,7 @@ filesURLsAllocationNSFTOption.forEach(file => {
 				? "Total"
 				: nsftOption === 0
 					? "WithoutUS"
-					: "UsOnly";
+					: "USOnly";
 
 		window.cbpfbiDataObject[file.name + optionName] = fetchFile(
 			file.name + optionName,
