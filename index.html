@@ -229,7 +229,7 @@
 							</li>
 							<li>
 								<a href="https://cerf.data.unocha.org">CERF Data Hub</a>
-							</li>							
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -1441,16 +1441,16 @@
 				);
 
 		allocRadioButtons.forEach(radio => {
-		radio.addEventListener('change', (event) => {
-			if (event.target.checked) {
-				allocContainer.setAttribute("data-type", event.target.value);
+			radio.addEventListener('change', (event) => {
+				if (event.target.checked) {
+					allocContainer.setAttribute("data-type", event.target.value);
 
-				if (window.reloadAllocChart) {
-					window.reloadAllocChart();
+					if (window.reloadAllocChart) {
+						window.reloadAllocChart();
+					}
 				}
-			}
+			});
 		});
-});
 	</script>
 
 	<script type="text/javascript" id="cookieinfo" src="assets/js/cookieinfo.min.js" data-bg="#002856" data-fg="#FFF"
