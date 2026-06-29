@@ -765,7 +765,7 @@ const filesURLsAllocationNSFTOption = [
 	},
 	{
 		name: "launchedAllocationsDataNSFTOption",
-		url: "https://cbpfapi.unocha.org/vo3/odata/GlobalGenericDataExtract?SPCode=ALLOCATION_V2&PoolfundCodeAbbrv=&ShowAllPooledFunds=0&AllocationYear=&FundTypeId=&ShowNSFT=",
+		url: "https://cbpfapi.unocha.org/vo3/odata/GlobalGenericDataExtract?SPCode=ALLOCATION_V2&PoolfundCodeAbbrv=&ShowAllPooledFunds=0&AllocationYear=&FundTypeId=1&ShowNSFT=",
 		autoType: true,
 		format: "csv",
 		usedBy: ["pbialp"],
