@@ -2,11 +2,6 @@
 //using a global object for sharing data
 window.cbpfbiDataObject = {};
 
-// New stage API URLs:
-// https://fieldwebapps.unocha.org/vo1
-// https://fieldwebapps.unocha.org/vo2/
-// https://fieldwebapps.unocha.org/vo3
-
 //constants used by the filters
 const ipNames = ["ingo", "ngo", "o", "un"],
 	subIpNames = ["ingo", "ngo", "o", "un", "og", "pc"],
@@ -689,79 +684,7 @@ const filesURLsAllocationNSFTOption = [
 		autoType: true,
 		format: "csv",
 		usedBy: ["pbialp"],
-		dataFilters: [
-			{
-				name: "AllocationYear",
-				type: "number",
-				filterFunction: null,
-			},
-			{
-				name: "OrganizationType",
-				type: "string",
-				filterFunction: str =>
-					partnerLongNames.includes(str.toLocaleLowerCase()),
-			},
-			{
-				name: "PooledFundName",
-				type: "string",
-				filterFunction: null,
-			},
-			{
-				name: "ApprovedReserveBudgetPercentage",
-				type: "number",
-				filterFunction: n => n >= 0 && n <= 100, //the percentage must be between 0 and 100
-			},
-			{
-				name: "ApprovedStandardBudgetPercentage",
-				type: "number",
-				filterFunction: n => n >= 0 && n <= 100, //the percentage must be between 0 and 100
-			},
-			{
-				name: "ApprovedBudget",
-				type: "number",
-				filterFunction: n => n >= 0, //the dollar value must not be negative
-			},
-			{
-				name: "ApprovedReserveBudget",
-				type: "number",
-				filterFunction: n => n >= 0, //the dollar value must not be negative
-			},
-			{
-				name: "ApprovedStandardBudget",
-				type: "number",
-				filterFunction: n => n >= 0, //the dollar value must not be negative
-			},
-			{
-				name: "PipelineReserveBudgetPercentage",
-				type: "number",
-				filterFunction: n => n >= 0 && n <= 100, //the percentage must be between 0 and 100
-			},
-			{
-				name: "PipelineStandardBudgetPercentage",
-				type: "number",
-				filterFunction: n => n >= 0 && n <= 100, //the percentage must be between 0 and 100
-			},
-			{
-				name: "PipelineBudget",
-				type: "number",
-				filterFunction: n => n >= 0, //the dollar value must not be negative
-			},
-			{
-				name: "PipelineReserveBudget",
-				type: "number",
-				filterFunction: n => n >= 0, //the dollar value must not be negative
-			},
-			{
-				name: "PipelineStandardBudget",
-				type: "number",
-				filterFunction: n => n >= 0, //the dollar value must not be negative
-			},
-			{
-				name: "FundingType",
-				type: "number",
-				filterFunction: n => n === 1 || n === 2, //the funding type must be either 1 or 2
-			},
-		],
+		dataFilters: null,
 	},
 	{
 		name: "launchedAllocationsDataNSFTOption",
@@ -769,89 +692,7 @@ const filesURLsAllocationNSFTOption = [
 		autoType: true,
 		format: "csv",
 		usedBy: ["pbialp"],
-		dataFilters: [
-			{
-				name: "AllocationTitle",
-				type: "string",
-				filterFunction: null,
-			},
-			{
-				name: "AllocationSummary",
-				type: t => t === null || typeof t === "string",
-				filterFunction: null,
-			},
-			{
-				name: "AllocationSource",
-				type: "string",
-				filterFunction: str =>
-					allocationTypes.includes(str.toLowerCase()), //the allocation type must be one of the allocation types in the allocationTypes array
-			},
-			{
-				name: "TotalUSDPlanned",
-				type: "number",
-				filterFunction: n => n >= 0, //the dollar value must not be negative
-			},
-			{
-				name: "PlannedStartDate",
-				type: "string",
-				filterFunction: null,
-			},
-			{
-				name: "PlannedEndDate",
-				type: "string",
-				filterFunction: null,
-			},
-			{
-				name: "Documents",
-				type: null,
-				filterFunction: null,
-			},
-			{
-				name: "PooledFundId",
-				type: "number",
-				filterFunction: n => n > 0 && n <= maxFundId, //currently the max ID in the funds master table
-			},
-			{
-				name: "PooledFundName",
-				type: "string",
-				filterFunction: null,
-			},
-			{
-				name: "AllocationYear",
-				type: "number",
-				filterFunction: null,
-			},
-			{
-				name: "HRPPlans",
-				type: t => typeof t === "string" || t === null,
-				filterFunction: null,
-			},
-			{
-				name: "AllocationHCLastProjectApprovalDate",
-				type: "string",
-				filterFunction: null,
-			},
-			{
-				name: "TotalProjectsunderApproval",
-				type: "number",
-				filterFunction: n => n >= 0, //the dollar value must not be negative
-			},
-			{
-				name: "TotalUnderApprovalBudget",
-				type: "number",
-				filterFunction: n => n >= 0, //the dollar value must not be negative
-			},
-			{
-				name: "TotalProjectsApproved",
-				type: "number",
-				filterFunction: n => n >= 0, //the dollar value must not be negative
-			},
-			{
-				name: "TotalApprovedBudget",
-				type: "number",
-				filterFunction: n => n >= 0, //the dollar value must not be negative
-			},
-		],
+		dataFilters: null,
 	},
 ];
 
