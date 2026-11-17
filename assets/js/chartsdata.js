@@ -317,12 +317,12 @@ const filesURLs = [
 			{
 				name: "ApprovedReserveBudgetPercentage",
 				type: "number",
-				filterFunction: n => n >= 0 && n <= 100, //the percentage must be between 0 and 100
+				filterFunction: null,
 			},
 			{
 				name: "ApprovedStandardBudgetPercentage",
 				type: "number",
-				filterFunction: n => n >= 0 && n <= 100, //the percentage must be between 0 and 100
+				filterFunction: null,
 			},
 			{
 				name: "ApprovedBudget",
@@ -342,12 +342,12 @@ const filesURLs = [
 			{
 				name: "PipelineReserveBudgetPercentage",
 				type: "number",
-				filterFunction: n => n >= 0 && n <= 100, //the percentage must be between 0 and 100
+				filterFunction: null,
 			},
 			{
 				name: "PipelineStandardBudgetPercentage",
 				type: "number",
-				filterFunction: n => n >= 0 && n <= 100, //the percentage must be between 0 and 100
+				filterFunction: null,
 			},
 			{
 				name: "PipelineBudget",
