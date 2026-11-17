@@ -93,7 +93,7 @@ const filesURLs = [
 		dataFilters: null,
 	},
 	{
-		name: "bdt2Sectors",
+		name: "bdt2SectorsData",
 		url: "https://pfbi-eastus2-api-site.azurewebsites.net/bdt2/api/public/v1/beneficiaryByCluster/?%24format=csv&process_status=all",
 		autoType: true,
 		format: "csv",
